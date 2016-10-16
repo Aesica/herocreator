@@ -20,10 +20,12 @@ html {
 }
 
 body {
-    background-color: #0D3E5F;          /* dark blue */
-    /* background-color: #0D3E7F;          /\* dark blue *\/ */
-    /* background-color: #0E162B;          /\* dark blue *\/ */
-    color: #FEC530;                     /* yellow */
+	background-color: #111;                /* dark gray */
+    /* background-color: #0D3E5F;         */ /* dark blue */
+    /* background-color: #0D3E7F;         */ /* dark blue */
+    /* background-color: #0E162B;         */ /* dark blue */
+    /* color: #FEC530;                    */ /* yellow */
+	color: #caf;                          /* purple */
     font-family: Lexia, Verdana, Arial, sans-serif;
     /* font-size: 1.1em; */
     font-size: 100%;
@@ -56,13 +58,15 @@ div#viewAbout {
 }
 
 a, a:link, a:visited {
-    color: #CE6C10;                     /* dark orange */
+	color: #8af;							/* light blue */ 
+    /* color: #CE6C10;                    */ /* dark orange */
     cursor: pointer;
     font-weight: bold;
     text-decoration: none;
 }
 a:hover, a:active {
-    color: #F78132;                     /* light orange */
+	color: #fff;						/* white */
+    /* color: #F78132;                     */ /* light orange */
     cursor: pointer;
     font-weight: bold;
     text-decoration: none;
@@ -97,23 +101,27 @@ img {
 }
 
 .shadow {
-    border: 1px solid #000000;
-    -moz-box-shadow: 3px 3px 4px #000;
-    -webkit-box-shadow: 3px 3px 4px #000;
     box-shadow: 3px 3px 4px #000;
 }
 
 .popup {
-    background-color: #FEF5C0;          /* light yellow */
-    color: #000000;                     /* black */
+	background-color: #000;					/* black */
+    /* background-color: #FEF5C0;         */ /* light yellow */
+	color: #bbb;							/* light gray* /
+    /* color: #000000;                    */ /* black */
     border: 1px solid #000000;
     font-family: Verdana, Arial, sans-serif;
     font-size: 0.8em;
     margin: 1em 0 0 0;
     max-width: 480px;
-    padding: 0.2em;
+	padding: 5px;
+    /* padding: 0.2em; */
     position: absolute;
-    -moz-box-shadow: 3px 3px 4px #000;
+	border-radius: 10px;
+	border-width: 1px;
+	border-color: #888;
+	box-shadow: 3px 3px 4px #000;
+    /* -moz-box-shadow: 3px 3px 4px #000; */
     -webkit-box-shadow: 3px 3px 4px #000;
     box-shadow: 3px 3px 4px #000;
     z-index: 10;
@@ -147,14 +155,33 @@ img {
     padding: 0.2em;
 }
 
+input, textarea {
+	background-color: #222;
+	border-radius: 10px;
+	color: #fac;
+	border: 1px solid #888;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+textarea {
+	width: 50em;
+	height: 55em;
+}
+
 .selection {
-    background-color: #0D3E7F;          /* dark blue */
+	background-color: #222;          /* dark gray, slightly brighter than background */
+    /* background-color: #0D3E7F;        */  /* dark blue */
     border: 1px solid #000000;
     margin: 1em 0 0 0;
-    padding: 0.2em;
+	padding: 5px;
+    /* padding: 0.2em; */
     position: absolute;
     /* width: -moz-max-content; */
-    -moz-box-shadow: 3px 3px 4px #000;
+	border-radius: 10px;
+	border-width: 1px;
+	border-color: #888;
+    /* -moz-box-shadow: 3px 3px 4px #000; */
     -webkit-box-shadow: 3px 3px 4px #000;
     box-shadow: 3px 3px 4px #000;
     z-index: 1;
@@ -169,11 +196,13 @@ img {
 }
 
 .selectionNormal {
-    border: 2px solid #0D3E7F;          /* dark blue (background color) */
+	border: 2px solid #222;                 /* dark gray (background color) */
+    /* border: 2px solid #0D3E7F;         */ /* dark blue (background color) */
 }
 
 .selectionHighlighted {
-    border: 2px solid #CE6C10;          /* dark orange */
+	border: 2px solid #8f8;					/* light gray */
+    /* border: 2px solid #CE6C10;           /\* dark orange */
 }
 
 #selectFramework img {
@@ -247,19 +276,21 @@ td {
 }
 
 .button {
-    color: #CE6C10;                     /* dark orange */
+    /* color: #CE6C10;                    */ /* dark orange */
     font-weight: bold;
     text-decoration: none;
 }
 .selectedButton, a.selectedButton, a.selectedButton:link,
 a.selectedButton:visited, a.selectedButton:hover, a.selectedButton:active {
-    color: #F78132;                     /* light orange */
+	color: #8f8;
+    /* color: #F78132;                    */ /* light orange */
     font-weight: bold;
     text-decoration: none;
 }
 
 .takenButton {
-    color: #AE4C00;                   /* darker orange */
+	color: #46b;						/* darker blue */
+    /* color: #AE4C00;                  */ /* darker orange */
     /* color: #6CCE10;                   /\* dark green *\/ */
     font-weight: bold;
     text-decoration: none;
@@ -274,7 +305,8 @@ a.selectedButton:visited, a.selectedButton:hover, a.selectedButton:active {
 
 .disabledButton, a.disabledButton, a.disabledButton:link,
 a.disabledButton:visited, a.disabledButton:hover, a.disabledButton:active {
-    color: #5C5C5C;                     /* dark gray */
+	color: #555;							/* dark gray */
+    /* color: #5C5C5C;                     /\* dark gray */
     /* color: #CE3C3C;                     /\* dark red *\/ */
     font-weight: bold;
     text-decoration: none;
@@ -282,41 +314,48 @@ a.disabledButton:visited, a.disabledButton:hover, a.disabledButton:active {
 
 .lockedButton, a.lockedButton, a.lockedButton:link,
 a.lockedButton:visited, a.lockedButton:hover, a.lockedButton:active {
-    color: #AE4C00;                     /* darker orange */
+	color: #46b;							/* dark blue */
+    /* color: #AE4C00;                     /\* darker orange */
     /* color: #FEC530;                     /\* yellow *\/ */
     font-weight: bold;
     text-decoration: none;
 }
 
 .buttonNote {
-    color: #FEC530;                     /* yellow */
+	color: #88b;                           /* bluish gray */
+    /*color: #FEC530;                     /\* yellow */
     font-size: smaller;
 }
 a.buttonNote, a.buttonNote:link, a.buttonNote:visited {
-    color: #FEC530;                     /* yellow */
+	color: #88b;                          /* bluish gray */
+    /* color: #FEC530;                     /\* yellow */
     font-size: smaller;
     font-weight: bold;
     text-decoration: none;
 }
 a.buttonNote:hover, a.buttonNote:active {
-    color: #FEF550;                     /* light yellow */
+	color: #fff;                           /* white */
+	/* color: #FEF550;                     /\* light yellow */
     font-size: smaller;
     font-weight: bold;
     text-decoration: none;
 }
 .selectedButtonNote, a.selectedButtonNote, a.selectedButtonNote:link,
 a.selectedButtonNote:visited, a.selectedButtonNote:hover, a.selectedButtonNote:active {
-    color: #FEF550;                     /* light yellow */
+	color: #afa;
+    /* color: #FEF550;                     /\* light yellow */
     font-size: smaller;
     font-weight: bold;
     text-decoration: none;
 }
 
 .buttonText {
-    color: #FEC530;                     /* yellow */
+	color: #88b;                        /* bluish gray */
+    /* color: #FEC530;                     /\* yellow */
 }
 .disabledButtonText {
-    color: #5C5C5C;                     /* dark gray */
+	color: #555;						/* dark gray */
+    /* color: #5C5C5C;                     /\* dark gray */
 }
 a.buttonText, a.buttonText:link, a.buttonText:visited {
     color: #FEC530;                     /* yellow */
@@ -342,7 +381,8 @@ a.disabledButtonText:visited, a.disabledButtonText:hover, a.disabledButtonText:a
 }
 
 .note {
-    color: #FEC530;                     /* yellow */
+	color: #ccc;							/* light gray */
+    /* color: #FEC530;                     /\* yellow */
     font-size: smaller;
     font-weight: normal;
 }
@@ -353,7 +393,8 @@ a.disabledButtonText:visited, a.disabledButtonText:hover, a.disabledButtonText:a
 }
 
 .spec {
-    color: #FEC530;                     /* yellow */
+	color: #bbb;						/* purple */
+    /* color: #FEC530;                     /\* yellow */
     font-size: x-small;
     font-weight: normal;
 }
@@ -364,13 +405,15 @@ a.disabledButtonText:visited, a.disabledButtonText:hover, a.disabledButtonText:a
 }
 
 .selectSpec {
-    color: #FEC530;                     /* yellow */
+	color: #666;                          /* gray */
+    /*color: #FEC530;                     /\* yellow */
     font-size: small;
     font-weight: normal;
 }
 
 .specHighlight {
-    color: #FEF550;                     /* light yellow */
+	color: #fff;                          /* white! mother of god, as bright as possible!) */
+    /*color: #FEF550;                     /\* light yellow */
     font-weight: bold;
 }
 
@@ -388,38 +431,32 @@ a.disabledButtonText:visited, a.disabledButtonText:hover, a.disabledButtonText:a
 }
 
 .specializationPoints td {
-    valign: top;
+    vertical-align: top; 
 }
 
 .link {
-    color: #FEC530;                     /* yellow */
+	color: #fac;                           /* purple */
+    /* color: #FEC530;                     /\* yellow */
     /* font-size: small; */
 }
 
 .linkRef {
-    color: #FEC530;                     /* yellow */
+	color: #fac;                           /* purple */
+    /* color: #FEC530;                     /\* yellow */
     font-size: xx-small;
 }
 
-textarea {
-    border: 1px solid black;
-    /* font-family: monospace; */
-    height: 44em;
-    margin: 0 1em;
-    padding: .2em;
-    /* white-space: pre; */
-    overflow: auto;
-    width: 97%;
-}
-
 .preview {
-    border: 1px solid black;
+    border: 1px solid #555;
+	background-color: #0f0402;
+	width: 35em;
+	border-radius: 10px;
     font-family: Verdana, Arial, sans-serif;
     /* font-family: comic-font, sans-serif; */
     font-size: 1em;
     /* height: 44em; */
     margin: 0 1em;
-    padding: .2em;
+    padding: .5em;
     /* overflow: auto; */
     /* width: 97%; */
 }
@@ -430,23 +467,24 @@ textarea {
 }
 
 .forumHeader {
-    color: #F78112;                     /* lighter dark orange */
+    /* color: #F78112;                     /\* lighter dark orange */
 }
 
 .forumLink {
-    color: #8DCDFF;                     /* light blue */
+    /*color: #8DCDFF;                     /\* light blue */
 }
 
 .forumFirst {
-    color: #F78112;                     /* lighter dark orange */
+    /* color: #F78112;                     /\* lighter dark orange */
 }
 
 .forumSecond {
-    color: #FEC530;                     /* yellow */
+    /* color: #FEC530;                     /\* yellow */
 }
 
 .forumThird {
-    color: #CE6C10;                     /* dark orange */
+	color: #88b;
+    /* color: #CE6C10;                     /\* dark orange */
     font-size: small;
 }
 

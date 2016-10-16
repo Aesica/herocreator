@@ -1,0 +1,683 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <title>HeroCreator</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="powerhouse.css" />
+    <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> -->
+    <script type="text/javascript" src="powerhouse-aes-extender.js"></script>
+    <script type="text/javascript" src="powerhouse-data.js"></script>
+    <script type="text/javascript" src="powerhouse-version.js"></script>
+    <script type="text/javascript" src="powerhouse.js"></script>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-55064869-1']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="body" class="main">
+      <div id="header" style="display:none">
+        <span class="title"><a href="powerhouse.html">HeroCreator</a></span>
+        <span class="menu">
+          <a id="showViewEdit" class="button" onclick="showView('Edit')">Edit</a>
+          &nbsp;&nbsp;
+          <a id="showViewPreview" class="button" onclick="showView('Preview')">Preview</a>
+          &nbsp;&nbsp;
+          <a id="showViewExport" class="button" onclick="showView('Export')">Export</a>
+          &nbsp;&nbsp;
+          <a id="showViewPrefs" class="button" onclick="showView('Prefs')">Prefs</a>
+          &nbsp;&nbsp;
+          <a id="showViewHelp" class="button" onclick="showView('Help')">Help</a>
+          &nbsp;&nbsp;
+          <a id="showViewAbout" class="button" onclick="showView('About')">About</a>
+        </span>
+      </div>
+	
+	  <div>
+        <div id="link">
+          <div class="left">
+			<p>
+				<!-- <div class="link"><a id="buildLinkBookmark" class="right" onclick="void(0)">Add Bookmark</a></div> -->
+				<span class="link"><a id="buildLink" class="button" href=".">Link to this build</a></span>
+				<input id="buildLinkRef" style="margin-left: 15px; width: 300px;" type="text" onclick="autoHighlight('buildLinkRef');" />
+			</p>
+          </div>
+          <div class="right">
+            <span class="link"><a id="restorePrevBuild" class="button" style="display:none" onclick="restorePrevBuild()">Restore previous build</a></span>
+          </div>
+          <div style="clear:both"></div>
+        </div>
+	  </div>	
+
+      <noscript>Javascript must be enabled for this page to work.</noscript>
+
+      <div id="popup" class="popup" style="display:none">
+      </div>
+
+      <div id="selectionSuperStat" class="selection" style="display:none">
+        <div id="selectSuperStat">
+        </div>
+      </div>
+
+      <div id="selectionInnateTalent" class="selection" style="display:none">
+        <div id="selectInnateTalent">
+        </div>
+        <div id="selectInnateTalentLeft" class="leftSelection">
+        </div>
+        <div id="selectInnateTalentRight" class="rightSelection">
+        </div>
+      </div>
+
+      <div id="selectionTalent" class="selection" style="display:none">
+        <div id="selectTalent">
+        </div>
+        <div id="selectTalentLeft" class="leftSelection">
+        </div>
+        <div id="selectTalentRight" class="rightSelection">
+        </div>
+      </div>
+
+      <div id="selectionTravelPower" class="selection" style="display:none">
+        <div id="selectTravelPower">
+        </div>
+        <div id="selectTravelPowerLeft" class="leftSelection">
+        </div>
+        <div id="selectTravelPowerRight" class="rightSelection">
+        </div>
+      </div>
+
+      <div>
+        <div id="selectionTravelPowerAdvantage" class="selection" style="display:none">
+          <div id="selectTravelPowerAdvantage">
+            <form id="formTravelPowerAdvantage">
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div id="selectionPower" class="selection" style="display:none">
+        <div id="selectFramework">
+        </div>
+        <div id="selectPower" style="clear:both">
+        </div>
+        <div id="selectPowerLeft" class="leftSelection">
+        </div>
+        <div id="selectPowerRight" class="rightSelection">
+        </div>
+      </div>
+
+      <div id="selectionPowerAdvantage" class="selection" style="display:none">
+        <div id="selectPowerAdvantage">
+          <form id="formPowerAdvantage">
+          </form>
+        </div>
+      </div>
+
+      <div id="selectionArchetype" class="selection" style="display:none">
+        <div id="selectArchetype">
+        </div>
+        <div id="selectArchetypeLeft" class="leftSelection">
+        </div>
+        <div id="selectArchetypeRight" class="rightSelection">
+        </div>
+      </div>
+
+      <div id="selectionArchetypePower" class="selection" style="display:none">
+        <div id="selectArchetypePower">
+        </div>
+      </div>
+
+      <div id="selectionSpecialization" class="selection" style="display:none">
+        <div id="selectSpecializationRole">
+        </div>
+        <div id="selectSpecialization">
+        </div>
+      </div>
+
+      <div id="selectionPref" class="selection" style="display:none">
+      </div>
+
+      <div id="selectionConfirmation" class="selection" style="display:none">
+        <div id="selectConfirmation">
+        </div>
+      </div>
+
+      <div id="viewEdit" class="edit" style="display:none">
+        <div class="section">
+          <div id="leftName" class="left">
+            <div id="sectionDisplayName">
+              <a id="displayName" class="button" onclick="editName()">Name:&nbsp; <span id="fieldName" class="buttonText"> </span></a>
+            </div>
+            <div id="sectionEditName" style="display:none">
+              <form id="formName" onsubmit="changeName(); return false;">
+                <a id="cancelName" class="selectedButton" onclick="cancelName()">Name:</a>&nbsp; <input id="editName" type="text" size="40" value="" />
+              </form>
+            </div>
+          </div>
+          <div id="rightArchetype" class="right">
+            <div id="sectionArchetype">
+              <a id="archetype" class="button" onclick="selectArchetype()">Archetype:&nbsp; <span id="fieldArchetype" class="buttonText"> </span></a>
+            </div>
+          </div>
+          <div style="clear:both"></div>
+        </div>
+
+        <div>
+          <div id="leftBody" class="left">
+            <div id="sectionSuperStat" class="section">
+              <table>
+                <tr>
+                  <td><span id="fieldSuperStatNote1" class="note">6&nbsp;</span></td>
+                  <td><a id="fieldSuperStat1" class="button" onclick="selectSuperStat(1)"><span><img src="img/blank.png" />&nbsp;Primary Super Stat</span></a></td>
+                </tr>
+                <tr>
+                  <td><span id="fieldSuperStatNote2" class="note">10&nbsp;</span></td>
+                  <td><a id="fieldSuperStat2" class="button" onclick="selectSuperStat(2)"><span><img src="img/blank.png" />&nbsp;Secondary Super Stat 1</span></a></td>
+                </tr>
+                <tr>
+                  <td><span id="fieldSuperStatNote3" class="note">15&nbsp;</span></td>
+                  <td><a id="fieldSuperStat3" class="button" onclick="selectSuperStat(3)"><span><img src="img/blank.png" />&nbsp;Secondary Super Stat 2</span></a></td>
+                </tr>
+              </table>
+            </div>
+
+            <div id="sectionInnateTalent" class="section">
+              <table>
+                <tr>
+                  <td><span id="fieldInnateTalentNote1" class="note">1&nbsp;</span></td>
+                  <td><a id="fieldInnateTalent1" class="button" onclick="selectInnateTalent(1)"><span><img src="img/blank.png" />&nbsp;Innate Talent</span></a></td>
+                </tr>
+              </table>
+            </div>
+
+            <div id="sectionTalent" class="section">
+              <table>
+                <tr>
+                  <td><span id="fieldTalentNote1" class="note">6&nbsp;</span></td>
+                  <td><a id="fieldTalent1" class="button" onclick="selectTalent(1)"><span><img src="img/blank.png" />&nbsp;Talent 1</span></a></td>
+                </tr>
+                <tr>
+                  <td><span id="fieldTalentNote2" class="note">9&nbsp;</span></td>
+                  <td><a id="fieldTalent2" class="button" onclick="selectTalent(2)"><span><img src="img/blank.png" />&nbsp;Talent 2</span></a></td>
+                </tr>
+                <tr>
+                  <td><span id="fieldTalentNote3" class="note">12&nbsp;</span></td>
+                  <td><a id="fieldTalent3" class="button" onclick="selectTalent(3)"><span><img src="img/blank.png" />&nbsp;Talent 3</span></a></td>
+                </tr>
+                <tr>
+                  <td><span id="fieldTalentNote4" class="note">15&nbsp;</span></td>
+                  <td><a id="fieldTalent4" class="button" onclick="selectTalent(4)"><span><img src="img/blank.png" />&nbsp;Talent 4</span></a></td>
+                </tr>
+                <tr>
+                  <td><span id="fieldTalentNote5" class="note">18&nbsp;</span></td>
+                  <td><a id="fieldTalent5" class="button" onclick="selectTalent(5)"><span><img src="img/blank.png" />&nbsp;Talent 5</span></a></td>
+                </tr>
+                <tr>
+                  <td><span id="fieldTalentNote6" class="note">21&nbsp;</span></td>
+                  <td><a id="fieldTalent6" class="button" onclick="selectTalent(6)"><span><img src="img/blank.png" />&nbsp;Talent 6</span></a></td>
+                </tr>
+              </table>
+            </div>
+
+            <div id="sectionTravelPower" class="section">
+              <table>
+                <tr>
+                  <td><span id="fieldTravelPowerNote1" class="note">6&nbsp;</span></td>
+                  <td>
+                    <a id="fieldTravelPower1" class="button" onclick="selectTravelPower(1)"><span><img src="img/blank.png" />&nbsp;Travel Power 1</span></a>
+                    <a id="fieldTravelPowerAdvantage1" class="buttonNote" onclick="selectTravelPowerAdvantage(1)" style="display:none"> </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span id="fieldTravelPowerNote2" class="note">35&nbsp;</span></td>
+                  <td>
+                    <a id="fieldTravelPower2" class="button" onclick="selectTravelPower(2)"><span><img src="img/blank.png" />&nbsp;Travel Power 2</span></a>
+                    <a id="fieldTravelPowerAdvantage2" class="buttonNote" onclick="selectTravelPowerAdvantage(2)" style="display:none"> </a>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div id="rightBody" class="right">
+            <div id="sectionPower" class="section">
+              <table>
+                <tr id="rowPower1">
+                  <td><span id="fieldPowerNote1" class="note">1&nbsp;</span></td>
+                  <td>
+                    <a id="fieldPower1" class="button" onclick="selectPower(1)"><span><img src="img/blank.png" />&nbsp;Power 1</span></a>
+                    <a id="fieldPowerAdvantage1" class="buttonNote" onclick="selectPowerAdvantage(1)" style="display:none"> </a><br />
+                  </td>
+                </tr>
+                <tr id="rowPower2">
+                  <td><span id="fieldPowerNote2" class="note">1&nbsp;</span></td>
+                  <td>
+                    <a id="fieldPower2" class="button" onclick="selectPower(2)"><span><img src="img/blank.png" />&nbsp;Power 2</span></a>
+                    <a id="fieldPowerAdvantage2" class="buttonNote" onclick="selectPowerAdvantage(2)" style="display:none"> </a><br />
+                  </td>
+                </tr>
+                <tr id="rowPower3">
+                  <td><span id="fieldPowerNote3" class="note">6&nbsp;</span></td>
+                  <td>
+                    <a id="fieldPower3" class="button" onclick="selectPower(3)"><span><img src="img/blank.png" />&nbsp;Power 3</span></a>
+                    <a id="fieldPowerAdvantage3" class="buttonNote" onclick="selectPowerAdvantage(3)" style="display:none"> </a><br />
+                  </td>
+                </tr>
+                <tr id="rowPower4">
+                  <td><span id="fieldPowerNote4" class="note">8&nbsp;</span></td>
+                  <td>
+                    <a id="fieldPower4" class="button" onclick="selectPower(4)"><span><img src="img/blank.png" />&nbsp;Power 4</span></a>
+                    <a id="fieldPowerAdvantage4" class="buttonNote" onclick="selectPowerAdvantage(4)" style="display:none"> </a><br />
+                  </td>
+                </tr>
+                <tr id="rowPower5">
+                  <td><span id="fieldPowerNote5" class="note">11&nbsp;</span></td>
+                  <td>
+                    <a id="fieldPower5" class="button" onclick="selectPower(5)"><span><img src="img/blank.png" />&nbsp;Power 5</span></a>
+                    <a id="fieldPowerAdvantage5" class="buttonNote" onclick="selectPowerAdvantage(5)" style="display:none"> </a><br />
+                  </td>
+                </tr>
+                <tr id="rowPower6">
+                  <td><span id="fieldPowerNote6" class="note">14&nbsp;</span></td>
+                  <td>
+                    <a id="fieldPower6" class="button" onclick="selectPower(6)"><span><img src="img/blank.png" />&nbsp;Power 6</span></a>
+                    <a id="fieldPowerAdvantage6" class="buttonNote" onclick="selectPowerAdvantage(6)" style="display:none"> </a><br />
+                  </td>
+                </tr>
+                <tr id="rowPower7">
+                  <td><span id="fieldPowerNote7" class="note">17&nbsp;</span></td>
+                  <td>
+                    <a id="fieldPower7" class="button" onclick="selectPower(7)"><span><img src="img/blank.png" />&nbsp;Power 7</span></a>
+                    <a id="fieldPowerAdvantage7" class="buttonNote" onclick="selectPowerAdvantage(7)" style="display:none"> </a><br />
+                  </td>
+                </tr>
+                <tr id="rowPower8">
+                  <td><span id="fieldPowerNote8" class="note">20&nbsp;</span></td>
+                  <td>
+                    <a id="fieldPower8" class="button" onclick="selectPower(8)"><span><img src="img/blank.png" />&nbsp;Power 8</span></a>
+                    <a id="fieldPowerAdvantage8" class="buttonNote" onclick="selectPowerAdvantage(8)" style="display:none"> </a><br />
+                  </td>
+                </tr>
+                <tr id="rowPower9">
+                  <td><span id="fieldPowerNote9" class="note">23&nbsp;</span></td>
+                  <td>
+                    <a id="fieldPower9" class="button" onclick="selectPower(9)"><span><img src="img/blank.png" />&nbsp;Power 9</span></a>
+                    <a id="fieldPowerAdvantage9" class="buttonNote" onclick="selectPowerAdvantage(9)" style="display:none"> </a><br />
+                  </td>
+                </tr>
+                <tr id="rowPower10">
+                  <td><span id="fieldPowerNote10" class="note">26&nbsp;</span></td>
+                  <td>
+                    <a id="fieldPower10" class="button" onclick="selectPower(10)"><span><img src="img/blank.png" />&nbsp;Power 10</span></a>
+                    <a id="fieldPowerAdvantage10" class="buttonNote" onclick="selectPowerAdvantage(10)" style="display:none"> </a><br />
+                  </td>
+                </tr>
+                <tr id="rowPower11">
+                  <td><span id="fieldPowerNote11" class="note">29&nbsp;</span></td>
+                  <td>
+                    <a id="fieldPower11" class="button" onclick="selectPower(11)"><span><img src="img/blank.png" />&nbsp;Power 11</span></a>
+                    <a id="fieldPowerAdvantage11" class="buttonNote" onclick="selectPowerAdvantage(11)" style="display:none"> </a><br />
+                  </td>
+                </tr>
+                <tr id="rowPower12">
+                  <td><span id="fieldPowerNote12" class="note">32&nbsp;</span></td>
+                  <td>
+                    <a id="fieldPower12" class="button" onclick="selectPower(12)"><span><img src="img/blank.png" />&nbsp;Power 12</span></a>
+                    <a id="fieldPowerAdvantage12" class="buttonNote" onclick="selectPowerAdvantage(12)" style="display:none"> </a><br />
+                  </td>
+                </tr>
+                <tr id="rowPower13">
+                  <td><span id="fieldPowerNote13" class="note">35&nbsp;</span></td>
+                  <td>
+                    <a id="fieldPower13" class="button" onclick="selectPower(13)"><span><img src="img/blank.png" />&nbsp;Power 13</span></a>
+                    <a id="fieldPowerAdvantage13" class="buttonNote" onclick="selectPowerAdvantage(13)" style="display:none"> </a><br />
+                  </td>
+                </tr>
+                <tr id="rowPower14">
+                  <td><span id="fieldPowerNote14" class="note">38&nbsp;</span></td>
+                  <td>
+                    <a id="fieldPower14" class="button" onclick="selectPower(14)"><span><img src="img/blank.png" />&nbsp;Power 14</span></a>
+                    <a id="fieldPowerAdvantage14" class="buttonNote" onclick="selectPowerAdvantage(14)" style="display:none"> </a><br />
+                  </td>
+                </tr>
+              </table>
+            </div>
+			<div class="section note">Advantage points: <span id="advantagePoints">0</span></div>
+          </div>
+
+          <div style="clear:both"></div>
+        </div>
+
+        <div>
+          <div id="specialization1" class="leftSelection">
+            <div id="sectionSpecialization1" class="section">
+              <a id="headerSpecialization1" class="disabledButton" onclick="return false"><span><img src="img/blank.png" />&nbsp;Stat Tree</span></a>
+              <table id="tableSpecialization1" class="specialization">
+              </table>
+            </div>
+          </div>
+
+          <div id="specialization2" class="leftSelection">
+            <div id="sectionSpecialization2" class="section">
+              <a id="headerSpecialization2" class="button" onclick="selectSpecialization(2)"><span><img src="img/blank.png" />&nbsp;Role Tree</span></a>
+              <table id="tableSpecialization2" class="specialization">
+              </table>
+            </div>
+          </div>
+
+          <div id="specialization3" class="leftSelection">
+            <div id="sectionSpecialization3" class="section">
+              <a id="headerSpecialization3" class="button" onclick="selectSpecialization(3)"><span><img src="img/blank.png" />&nbsp;Role Tree</span></a>
+              <table id="tableSpecialization3" class="specialization">
+              </table>
+            </div>
+          </div>
+
+          <div id="specialization4" class="leftSelection">
+            <div id="sectionSpecialization4" class="section">
+              <a id="headerSpecialization4" class="button" onclick="selectSpecialization(4)"><span><img src="img/blank.png" />&nbsp;Mastery</span></a>
+              <table id="tableSpecialization4" class="specialization">
+              </table>
+            </div>
+          </div>
+
+          <div style="clear:both"></div>
+
+        </div>
+      </div>
+
+      <div id="viewPreview" style="display:none">
+        <h3>Forum Preview</h3>
+        <div id="forumPreview" class="preview shadow">
+        </div>
+      </div>
+
+      <div id="viewExport" style="display:none">
+        <div id="leftName" class="left">
+          <h3>Forum Export</h3>
+        </div>
+        <div id="rightType" class="right" style="padding-top: 1.2em">
+          <span class="note">
+            Export Type:&nbsp;
+            <a id="exportType_co" class="button" onclick="selectForumExportType('co')">HTML</a> -
+            <a id="exportType_phpbbs" class="button" onclick="selectForumExportType('phpbbs')">BBCode</a> -
+            <a id="exportType_markdown" class="button" onclick="selectForumExportType('markdown')">Markdown</a> -
+            <a id="exportType_txt" class="button" onclick="selectForumExportType('txt')">Plain Text</a>
+          </span>
+        </div>
+        <div style="clear:both"></div>
+        <textarea id="forumText" class="shadow" readonly="readonly" onclick="autoHighlight('forumText');">
+        </textarea>
+      </div>
+
+      <div id="viewPrefs" class="prefs" style="display:none">
+		<div class="selection" style="width: 35em; position: static; margin-left: 20px;">
+			<h3>Preferences:</h3>
+			<p>
+				<a id="prefFontFamily" class="button" onclick="selectPrefFontFamily()">Font:&nbsp; <span id="prefFontFamilyName" class="buttonText"> </span></a>
+				&nbsp;&nbsp;
+				<a id="prefFontSmaller" class="button" onclick="selectPrefFontSize(-1)"><span><img src="img/Gadgeteering_MiniaturizationDrive.png" alt="Decrease Font Size" /></span></a>
+				&nbsp;
+				<span id="prefFontSize" class="buttonText"> </span>
+				&nbsp;
+				<a id="prefFontLarger" class="button" onclick="selectPrefFontSize(1)"><span><img src="img/Brick_Enrage.png" alt="Increase Font Size" /></span></a>
+			</p>
+			<p>
+				<a id="prefPopupTips" class="button" onclick="selectPrefPopupTips()">Popup tips:&nbsp; <span id="prefPopupTipsValue" class="buttonText"> </span></a>
+				<br />
+				<span class="note">(Set this to 'Off' for touch screens.)</span>
+			</p>
+			<p>
+				<a id="prefConfirmSelections" class="button" onclick="selectPrefConfirmSelections()">Show confirmation dialog for selections:&nbsp; <span id="prefConfirmSelectionsValue" class="buttonText"> </span></a>
+				<br />
+				<span class="note">(Set this to 'On' for touch screens, if you want to see descriptions.)</span>
+			</p>
+			<p>
+				<a id="prefAnalytics" class="button" onclick="selectPrefAnalytics()">Submit usage statistics to Google Analytics:&nbsp; <span id="prefAnalyticsValue" class="buttonText"> </span></a>
+			</p>
+		</div>
+      </div>
+
+      <div id="viewHelp" style="display:none">
+		<div class="selection" style="width: 35em; position: static; margin-left: 20px;">
+			<p>
+				<h3>Quick Start Guide:</h3>
+			</p>
+			<ul>
+				<li><a onclick="document.getElementById('help-views').scrollIntoView(true)">Menu Options</a></li>
+				<li><a onclick="document.getElementById('help-name').scrollIntoView(true)">Name Character</a></li>
+				<li><a onclick="document.getElementById('help-archetype').scrollIntoView(true)">Select Archetype</a></li>
+				<li><a onclick="document.getElementById('help-abilities').scrollIntoView(true)">Select Abilities</a></li>
+				<li><a onclick="document.getElementById('help-save').scrollIntoView(true)">Save Character</a></li>
+				<li><a onclick="document.getElementById('help-export').scrollIntoView(true)">Forum Preview and Export</a></li>
+				<li><a onclick="document.getElementById('help-prefs').scrollIntoView(true)">Preferences</a></li>
+				<li><a onclick="document.getElementById('help-reset').scrollIntoView(true)">Reset</a></li>
+			</ul>
+		</div>
+		<div class="selection" style="width: 35em; position: static; margin-left: 20px;">
+			<h3 id="help-views">Menu Options</h3>
+			<p>
+			There are five menu options at the top of the page:
+			</p>
+			<ul>
+			<li><b>Edit</b> is where you build your character.</li>
+			<li><b>Preview</b> shows you how it will look in a forum post.</li>
+			<li><b>Export</b> displays the text to paste in a forum post.</li>
+			<li><b>Prefs</b> is where you can set a few preferences.</li>
+			<li><b>Help</b> is where you are now.</li>
+			<li><b>About</b> contains author, background, and legal information.</li>
+			</ul>
+		</div>
+		<div class="selection" style="width: 35em; position: static; margin-left: 20px;">
+			<h3 id="help-name">Name Character</h3>
+			<p>
+				To give your character a name, click on "<b>Name</b>" in the upper left and type
+				a name in the box.  Press return or click outside of the box when you are
+				done.
+			</p>
+			<p>
+				The name you give your character will be added to the default bookmark
+				name to make it easy to keep track of your saved characters.
+			</p>
+		</div>
+		<div class="selection" style="width: 35em; position: static; margin-left: 20px;">
+			<h3 id="help-archetype">Select Archetype</h3>
+			<p>
+				Archetype defaults to <b>Freeform</b>.  If you would like to change it to one of
+				the archetypes found in the game, click on "<b>Archetype</b>" in the upper
+				right and make your selection.
+			</p>
+			<p>
+				The Super Stats, Innate Talent, and Powers will be set for you.  The
+				powers that you can change will be lighter in color and you can select
+				them to pick the alternative powers.
+			</p>
+			<p>
+				If you switch back to <b>Freeform</b> the selections will remain, but you
+				can now change them.
+			</p>
+			<p>
+				Note:  Changing your Archetype will overwrite most of your selections, so
+				make sure you have saved a bookmark of any work you would like to keep.
+			</p>
+		</div>
+		<div class="selection" style="width: 35em; position: static; margin-left: 20px;">
+			<h3 id="help-abilities">Select Abilities</h3>
+			<p>
+				Click on the Super Stat, Innate Talent, or Talent you want to set or
+				modify on the left side of the page.  A pop-up window will appear with
+				your options.  Make your selection.
+			</p>
+			<p>
+				The Travel Powers are found on the lower left side of the page.  The
+				regular Powers are found on the right right side of the page.  Click on
+				the power you want to set or modify.  A pop-up window will appear with
+				your options.  Make your selection.
+			</p>
+			<p>
+				Once you have selected a Power you can click the "<b>(advantages)</b>" link to
+				the right of it to set the advantages for that power.  Advantages can be
+				toggled on and off from the pop-up window.
+			</p>
+			<p>
+				Selections that are darker in color have already been taken, however,
+				clicking on them will swap them with the currently selected field.
+			</p>
+			<p>
+				Selections that are invalid choices, due to the game rules, are gray in
+				color and you cannot select them.
+			</p>
+			<p>
+				Specializations are found at bottom of the page.  The first one is
+				automatically set based on your Primary Super Stat.  The next two are
+				chosen by you when you click on them.  Just like the other abilities, use
+				the pop-up window to set your options.
+			</p>
+			<p>
+				The options for the Mastery Specialization will be populated when the
+				other trees have be set.  Just click on the one you want from the pop-up
+				window.
+			</p>
+			<p>
+				On the pop-up windows, clicking "<b>Clear</b>" will deselect that item.  "<b>Cancel</b>"
+				or clicking outside of the box will cancel the selection.  "<b>Insert</b>" will insert
+				a power at that location (moving all powers below it down a level), and
+				"<b>Delete</b>" will remove the selected power (moving all powers below it up a
+				level).
+			</p>
+				<p>
+				The number to the left of an attribute is the level needed to take it.
+			</p>
+		</div>
+		<div class="selection" style="width: 35em; position: static; margin-left: 20px;">
+			<h3 id="help-save">Save Character</h3>
+			<p>
+				To save your character click "<b>Link to this build</b>" found at the bottom of<br />
+				every view.
+			</p>
+			<p>
+				This will bring up this URL with the parameters filled in to initialize your
+				character to the values you have set.  Now you can simply save this page
+				as a bookmark in your browser in order to save a permanent link.
+			</p>
+			<p>
+				Please note that no progress is automatically saved for you, so if you
+				navigate away from this page you might loose your work.  If, after
+				returning to the page, you find your selections have cleared, click
+				"<b>Restore previous build</b>" found at the bottom right.  This will restore
+				the last known state.
+			</p>
+		</div>
+		<div class="selection" style="width: 35em; position: static; margin-left: 20px;">
+			<h3 id="help-export">Forum Preview and Export</h3>
+			<p>
+				To see what the forum export will look like, select the "<b>Preview</b>" view at
+				the top of the page.
+			</p>
+			<p>
+				To generate the forum export text, first select the "<b>Export</b>" view at the
+				top of the page.  Then pick the type of export: "<b>CO</b>" (Champions Online),
+				"<b>phpBBS</b>", or "<b>Text</b>".  Finally, just copy and paste the text found in the
+				text box onto a forum page.
+			</p>
+		</div>
+		<div class="selection" style="width: 35em; position: static; margin-left: 20px;">
+			<h3 id="help-prefs">Preferences</h3>
+			<p>
+				There are a couple of preferences you can set that persist via browser
+				cookies.  Select the "<b>Prefs</b>" view at the top of the page.  Then modify the
+				preferences however you like.
+			</p>
+		</div>
+		<div class="selection" style="width: 35em; position: static; margin-left: 20px;">
+			<h3 id="help-reset">Reset</h3>
+			<p>
+				To reset (clear) your edits, just click on the "<b>HeroCreator</b>" text in the
+				upper left corner.  If you change your mind, click "<b>Restore previous build</b>"
+				in the lower right before making any selections.
+			</p>
+		</div>
+      </div>
+
+      <div id="viewAbout" style="display: none;">
+		<div class="selection" style="width: 35em; position: static; margin-left: 20px;">
+			<p>
+				<h2><a href="http://aesica.net/co/herocreator.htm">HeroCreator</a></h2>
+				<div id="version" style="font-size: 75%;">Version: </div>
+			</p>
+		</div>
+		<div class="selection" style="width: 35em; position: static; margin-left: 20px;">
+			<p>
+				HeroCreator is an open-source HTML/Javascript character planner for
+				<a href="http://www.champions-online.com/" target="_blank">Champions Online</a>&#0153;
+				that is updated and maintained by Aesica.
+				It is a fork of the much-beloved PowerHouse originally created by 
+				Kyle W. T. Sherman.  
+			</p>
+			<p>
+				Text descriptions and graphics are Copyright ©2009 Cryptic Studios, Inc.
+				and are used as per their terms of service.
+			</p>
+			<p>
+				<a href="http://fonts.simplythebest.net/fonts/lexia.html" target="_blank">Lexia
+				Font</a> is Copyright ©2004 Keith Bates and is used in accordance
+				with the license.
+			</p>
+			<p>
+				This program is free software: you can redistribute it and/or modify
+				it under the terms of the GNU General Public License as published by
+				the Free Software Foundation, either version 3 of the License, or (at
+				your option) any later version.<br />
+			</p>
+			<p>
+				This program is distributed in the hope that it will be useful, but
+				WITHOUT ANY WARRANTY; without even the implied warranty of
+				MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+				See the <a href="http://www.gnu.org/licenses/" target="_blank">GNU General Public
+				License</a> for more details.
+			</p>
+			<p>
+				Champions Online is a registered trademark of Cryptic Studios, Inc.
+				Champions Online and all related content is ©2009 Cryptic Studios, Inc.
+				All Rights Reserved.
+				For information regarding the rights reserved by Cryptic Studios,
+				please read the full <a
+				href="http://www.champions-online.com/terms_of_service">Terms of
+				Service</a>, specifically (but not limited to)
+				section 3. Champions Online game content and materials are trademarks
+				and copyrights of Cryptic Studios, Inc. or its licensors and used with
+				permission. All rights reserved.
+			</p>
+			<p>
+				Special thanks to <a
+				href="http://champions-online-wiki.com/wiki/User:Lohr">Lohr</a> and
+				all of the contributors at
+				<a href="http://champions-online-wiki.com/" target="_blank">Champions Online Wiki</a>
+				for their hard work, and of course to
+				<a href="http://nullware.com/" target="_blank">Kyle Sherman/Nullware</a> for
+				creating  the amazing PowerHouse character planner and making it open source.
+			</p>
+		</div>
+        <!-- <span class="invisible"><a onclick="dataDump()">Data Dump</a></span> -->
+      </div>
+
+      <div id="footer" class="footer" style="display:none">
+
+        <span class="note"><a href="http://aesica.net/co/herocreator.htm">HeroCreator</a> is a character planner for <a href="http://www.champions-online.com/" target="_blank">Champions Online</a>&#0153; based on Kyle Sherman's <a href="powerhouse.nullware.com/" target="_blank">PowerHouse</a></span>
+
+        <div id="linkref" class="footer">
+          <!-- <div class="linkRef"><span id="buildLinkRef"> </span></div> -->
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

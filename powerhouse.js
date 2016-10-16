@@ -9,13 +9,13 @@
  *============================================================================*/
 
 var debug = false;
-var version = '0.9.33';
-var releaseDate = '2016-02-17';
-var buildVersion = 13;
+var version = '1.0.0a';
+var releaseDate = '10/15/2016';
+var buildVersion = 14;
 
-var siteName = 'PowerHouse';
-var siteUrl = 'http://powerhouse.nullware.com/';
-var buildUrl = siteUrl + 'powerhouse.html';
+var siteName = 'HeroCreator';
+var siteUrl = 'http://aesica.net/co/';
+var buildUrl = siteUrl + 'herocreator.htm';
 var mouseX = 0;
 var mouseY = 0;
 var clickableClasses = [];
@@ -36,6 +36,13 @@ var prefPopupTipsList = ['Off', 'When Selecting', 'On'];
 var prefPopupTips = parseInt(2);
 var prefConfirmSelections = false;
 var prefAnalytics = true;
+
+// colors and appearances
+var titleColor = "#8844dd";
+var linkColor = "#aaccee";
+var previewEntryFontColor = "#88aaff";
+var previewPowerFontColor = "#aaddff";
+var previewAdvantageFontColor = "#8888bb";
 
 // escape quotes
 function escapeQuotes(str) {
@@ -448,8 +455,11 @@ function updatePositionSection(id) {
     if (y > height - section.offsetHeight - margin) y = height - section.offsetHeight - margin;
     if (x < 0) x = 0;
     if (y < 0) y = 0;
-    section.style.left = x + 'px';
-    section.style.top = y + 'px';
+	if (section.style.top && section.style.left)
+	{
+		section.style.left = x + 'px';
+		section.style.top = y + 'px';
+	}
 }
 window['updatePositionSection'] = updatePositionSection;
 
@@ -2787,7 +2797,8 @@ function buildLink(submit) {
     //field.setAttribute('onclick', 'return submitBuild()');
     //field.innerHTML = name;
     ////fieldBookmark.setAttribute('onclick', 'addBookmark(\'' + name + '\',\'' + url + '\')');
-    fieldRef.innerHTML = url;
+    //fieldRef.innerHTML = url;
+	fieldRef.value = url;
     if (prevBuildLink != undefined) setCookie('buildLink', prevBuildLink, cookieExpireDays);
     prevBuildLink = url;
     var restore = document.getElementById('restorePrevBuild');
@@ -2795,6 +2806,14 @@ function buildLink(submit) {
     else restore.style.display = '';
 }
 window['buildLink'] = buildLink;
+
+// auto-highlight link in textfield if clicked
+function autoHighlight(elementID)
+{
+	document.getElementById(elementID).focus();
+	document.getElementById(elementID).select();
+}
+//window['autoHighlight'] = autoHighlight;
 
 // restore previous build (if saved to cookie)
 function restorePrevBuild() {
@@ -2820,10 +2839,37 @@ function forumNewline(type) {
     case 2:
     case 3:
     case 4:
+    case 5:
         result += '\n';
         break;
     }
     return result;
+}
+
+function forumHeader(type, text, isBold=true)
+{
+    var result = '';
+	
+    switch (type)
+	{
+		case 1:
+			result += (isBold ? '<b>' : '') + '<span class="forumFirst"><font color="' + previewEntryFontColor + '">' + text + '</font></span>' + (isBold ? '</b>' : '');
+			break;
+		case 2:
+			result += (isBold ? '<b>' : '') + '<font color="' + previewEntryFontColor + '">' + text + '</font>' + (isBold ? '</b>' : '');
+			break;
+		case 3:
+			result += text;
+			break;
+		case 4:
+			result += (isBold ? '[b]' : '') + '[color=' + previewEntryFontColor + ']' + text + '[/color]' + (isBold ? '[/b]' : '');
+			break;
+		case 5:
+			result += (isBold ? '__**' : '') + text + (isBold ? '**__' : '');
+			break;
+	}
+    result += forumNewline(type);
+    return result;	
 }
 
 // generate forum entries
@@ -2831,24 +2877,22 @@ function forumEntry(type, first, second, third) {
     var result = '';
     switch (type) {
     case 1:
-        result += '<b><span class="forumFirst">' + first + '</span></b>';
+        result += '<span class="forumFirst"><font color="' + previewEntryFontColor + '">' + first + '</font></span>';
         if (second) {
-            result += ' <b><span class="forumSecond">' + second + '</span></b>';
+            result += ' <span class="forumSecond"><font color="' + previewPowerFontColor + '">' + second + '</font></span>';
             if (third) {
-                result += ' <b><span class="forumThird">' + third + '</span></b>';
+                result += ' <span class="forumThird"><font color="' + previewAdvantageFontColor + '">' + third + '</font></span>';
             }
         }
         break;
     case 2:
-        result += '<b>';
-        result += '<font color=#f78112>' + first + '</font>';
+        result += '<font color="' + previewEntryFontColor + '">' + first + '</font>';
         if (second) {
-            result += ' <font color=#fec530>' + second + '</font>';
+            result += ' <font color="' + previewPowerFontColor + '">' + second + '</font>';
             if (third) {
-                result += ' <font color=#ce6c10 size=-1>' + third + '</font>';
+                result += ' <font color="' + previewAdvantageFontColor + '" size="-1">' + third + '</font>';
             }
         }
-        result += '</b>';
         break;
     case 3:
         result += first;
@@ -2860,12 +2904,20 @@ function forumEntry(type, first, second, third) {
         }
         break;
     case 4:
-        result += '[b][color=#f78112]' + first + '[/color][/b]';
+        result += '[color=' + previewEntryFontColor + ']' + first + '[/color]';
         if (second) {
-            result += ' [b][color=#fec530]' + second + '[/color][/b]';
+            result += ' [color=' + previewPowerFontColor + ']' + second + '[/color]';
             if (third) {
-                //result += ' [b][size=85][color=#ce6c10]' + third + '[/color][/size][/b]';
-                result += ' [color=#ce6c10]' + third + '[/color]';
+                result += ' [color=' + previewAdvantageFontColor + ']' + third + '[/color]';
+            }
+        }
+        break;
+    case 5:
+        result += first;
+        if (second) {
+            result += ' **' + second + '**';
+            if (third) {
+                result += ' *' + third + '*';
             }
         }
         break;
@@ -2891,19 +2943,21 @@ window['forumAdvantageText'] = forumAdvantageText;
 function forumPreview() {
     var forumPreview = document.getElementById('forumPreview');
     var result = [];
-    result.push('<b><a href="' + siteUrl + '"><span class="forumHeader">' + siteName + '</span></a></b> &nbsp; ');
-    result.push('<b><a href="' + phBuildLink + '"><span class="forumLink">(Link to this build)</span></a></b>' + forumNewline(1));
+	var buildName = (phName == "") ? "(Unnamed Build)" : phName;
+	
+    //result.push('<b><a href="' + siteUrl + '"><span class="forumHeader">' + siteName + '</span></a></b> &nbsp; ');
+    result.push('<b><a href="' + phBuildLink + '"><span class="forumLink"><u>' + buildName + ' - ' + phArchetype.name + '</u></span></a></b>' + forumNewline(1));
     result.push(forumNewline(1));
-    result.push(forumEntry(1, 'Name:', phName));
-    result.push(forumNewline(1));
-    result.push(forumEntry(1, 'Archetype:', phArchetype.name));
-    result.push(forumNewline(1));
-    result.push(forumEntry(1, 'Super Stats:'));
+    //result.push(forumEntry(1, 'Name:', phName));
+    //result.push(forumNewline(1));
+    //result.push(forumHeader(1, phArchetype.name));
+    //result.push(forumNewline(1));
+    result.push(forumHeader(1, 'Super Stats'));
     result.push(forumEntry(1, 'Level 6:', forumName(phSuperStat[1].name), '(Primary)'));
     result.push(forumEntry(1, 'Level 10:', forumName(phSuperStat[2].name), '(Secondary)'));
     result.push(forumEntry(1, 'Level 15:', forumName(phSuperStat[3].name), '(Secondary)'));
     result.push(forumNewline(1));
-    result.push(forumEntry(1, 'Talents:'));
+    result.push(forumHeader(1, 'Talents'));
     result.push(forumEntry(1, 'Level 1:', forumName(phInnateTalent[1].name)));
     if (phArchetype.id > 1) {
         result.push(forumEntry(1, 'Level 7:', forumName(phTalent[1].name)));
@@ -2922,7 +2976,7 @@ function forumPreview() {
         result.push(forumEntry(1, 'Level 21:', forumName(phTalent[6].name)));
         result.push(forumNewline(1));
     }
-    result.push(forumEntry(1, 'Powers:'));
+    result.push(forumHeader(1, 'Powers'));
     result.push(forumEntry(1, 'Level 1:', forumName(phPower[1].name), forumAdvantageText(1, 1, phPowerAdvantage[1])));
     result.push(forumEntry(1, 'Level 1:', forumName(phPower[2].name), forumAdvantageText(1, 2, phPowerAdvantage[2])));
     result.push(forumEntry(1, 'Level 6:', forumName(phPower[3].name), forumAdvantageText(1, 3, phPowerAdvantage[3])));
@@ -2945,13 +2999,14 @@ function forumPreview() {
         result.push(forumEntry(1, 'Level 32:', forumName(phPower[12].name), forumAdvantageText(1, 12, phPowerAdvantage[12])));
         result.push(forumEntry(1, 'Level 35:', forumName(phPower[13].name), forumAdvantageText(1, 13, phPowerAdvantage[13])));
         result.push(forumEntry(1, 'Level 38:', forumName(phPower[14].name), forumAdvantageText(1, 14, phPowerAdvantage[14])));
+		result.push(forumEntry(1, 'Adv. Points:', statAdvantagePoints + '/' + maxAdvantagePointsTotal));
         result.push(forumNewline(1));
     }
-    result.push(forumEntry(1, 'Travel Powers:'));
+    result.push(forumHeader(1, 'Travel Powers'));
     result.push(forumEntry(1, 'Level 6:', forumName(phTravelPower[1].name), forumAdvantageText(2, 1, phTravelPowerAdvantage[1])));
     result.push(forumEntry(1, 'Level 35:', forumName(phTravelPower[2].name), forumAdvantageText(2, 2, phTravelPowerAdvantage[2])));
     result.push(forumNewline(1));
-    result.push(forumEntry(1, 'Specializations:'));
+    result.push(forumHeader(1, 'Specializations'));
     for (var i = 1; i <= 3; i++) {
         var specializationTree = phSpecializationTree[i];
         var mask = phSpecialization[i];
@@ -2988,38 +3043,44 @@ function forumExport() {
     var forumTypeNum;
     if (forumType == undefined) forumType = forumExportType;
     setForumExportType(forumType);
-    if (forumType == 'co') forumTypeNum = 2;
-    else if (forumType == 'txt') forumTypeNum = 3;
-    else forumTypeNum = 4;
+    if (forumType == 'co') forumTypeNum = 2;			// html <b><font color="#ff0000">Bold Red</font></b>
+    else if (forumType == 'txt') forumTypeNum = 3;		// plain text
+	else if (forumType == 'phpbbs') forumTypeNum = 4;	// phpbb [b][color=#ff0000]Bold Red[/color][/b]
+    else if (forumType == 'markdown') forumTypeNum = 5;	// markdown **bold**
+	else forumTypeNum = 3;
     document.getElementById('exportType_' + forumType).setAttribute('class', 'selectedButton');
     var forumText = document.getElementById('forumText');
     var result = [];
+	var buildName = (phName == "") ? "(Unnamed Build)" : phName;
+	
     switch (forumTypeNum) {
     case 2:
-        result.push('<b><a href="' + siteUrl + '"><font color=#f78112>' + siteName + '</font></a></b> &nbsp; ');
-        result.push('<b><a href="' + phBuildLink + '"><font color=#8dcdff>(Link to this build)</font></a></b>' + forumNewline(forumTypeNum));
+        result.push('<b><a href="' + phBuildLink + '"><font color=' + linkColor + '><u>' + buildName + ' - ' + phArchetype.name + '</u></font></a></b>' + forumNewline(forumTypeNum));
         break;
     case 3:
-        result.push(siteName + ' ' + siteUrl + forumNewline(forumTypeNum));
-        result.push(forumNewline(forumTypeNum));
+		result.push(buildName + ' - ' + phArchetype.name + forumNewline(forumTypeNum) + forumNewline(forumTypeNum));
         result.push('Link to this build: ' + phBuildLink + forumNewline(forumTypeNum));
         break;
     case 4:
-        result.push('[b][url=' + siteUrl + '][color=#f78112]' + siteName + '[/color][/url][/b] ');
-        result.push('[b][url=' + phBuildLink + '][color=#8dcdff](Link to this build)[/color][/url][/b]' + forumNewline(forumTypeNum));
+        //result.push('[b][url=' + siteUrl + '][color=' + titleColor + ']' + siteName + '[/color][/url][/b] ');
+        result.push('[b][url=' + phBuildLink + '][color=' + linkColor + '][u]' + phName + '[/u][/color][/url][/b]' + forumNewline(forumTypeNum));
+        break;
+    case 5:
+		result.push('__**' + buildName + ' - ' + phArchetype.name + '**__' + forumNewline(forumTypeNum) + forumNewline(forumTypeNum));
+        result.push('Link to this build: __' + phBuildLink + '__' + forumNewline(forumTypeNum));
         break;
     }
     result.push(forumNewline(forumTypeNum));
-    result.push(forumEntry(forumTypeNum, 'Name:', phName));
-    result.push(forumNewline(forumTypeNum));
-    result.push(forumEntry(forumTypeNum, 'Archetype:', phArchetype.name));
-    result.push(forumNewline(forumTypeNum));
-    result.push(forumEntry(forumTypeNum, 'Super Stats:'));
+    //result.push(forumEntry(forumTypeNum, 'Name:', phName));
+    //result.push(forumNewline(forumTypeNum));
+    //result.push(forumHeader(forumTypeNum, phArchetype.name));
+    //result.push(forumNewline(forumTypeNum));
+    result.push(forumHeader(forumTypeNum, 'Super Stats'));
     result.push(forumEntry(forumTypeNum, 'Level 6:', forumName(phSuperStat[1].name), '(Primary)'));
     result.push(forumEntry(forumTypeNum, 'Level 10:', forumName(phSuperStat[2].name), '(Secondary)'));
     result.push(forumEntry(forumTypeNum, 'Level 15:', forumName(phSuperStat[3].name), '(Secondary)'));
     result.push(forumNewline(forumTypeNum));
-    result.push(forumEntry(forumTypeNum, 'Talents:'));
+    result.push(forumHeader(forumTypeNum, 'Talents'));
     result.push(forumEntry(forumTypeNum, 'Level 1:', forumName(phInnateTalent[1].name)));
     if (phArchetype.id > 1) {
         result.push(forumEntry(forumTypeNum, 'Level 7:', forumName(phTalent[1].name)));
@@ -3038,7 +3099,7 @@ function forumExport() {
         result.push(forumEntry(forumTypeNum, 'Level 21:', forumName(phTalent[6].name)));
         result.push(forumNewline(forumTypeNum));
     }
-    result.push(forumEntry(forumTypeNum, 'Powers:'));
+    result.push(forumHeader(forumTypeNum, 'Powers'));
     result.push(forumEntry(forumTypeNum, 'Level 1:', forumName(phPower[1].name), forumAdvantageText(1, 1, phPowerAdvantage[1])));
     result.push(forumEntry(forumTypeNum, 'Level 1:', forumName(phPower[2].name), forumAdvantageText(1, 2, phPowerAdvantage[2])));
     result.push(forumEntry(forumTypeNum, 'Level 6:', forumName(phPower[3].name), forumAdvantageText(1, 3, phPowerAdvantage[3])));
@@ -3052,7 +3113,6 @@ function forumExport() {
         result.push(forumEntry(forumTypeNum, 'Level 30:', forumName(phPower[10].name), forumAdvantageText(1, 10, phPowerAdvantage[10])));
         result.push(forumEntry(forumTypeNum, 'Level 35:', forumName(phPower[11].name), forumAdvantageText(1, 11, phPowerAdvantage[11])));
         result.push(forumEntry(forumTypeNum, 'Level 40:', forumName(phPower[12].name), forumAdvantageText(1, 12, phPowerAdvantage[12])));
-        result.push(forumNewline(forumTypeNum));
     } else {
         result.push(forumEntry(forumTypeNum, 'Level 20:', forumName(phPower[8].name), forumAdvantageText(1, 8, phPowerAdvantage[8])));
         result.push(forumEntry(forumTypeNum, 'Level 23:', forumName(phPower[9].name), forumAdvantageText(1, 9, phPowerAdvantage[9])));
@@ -3061,13 +3121,16 @@ function forumExport() {
         result.push(forumEntry(forumTypeNum, 'Level 32:', forumName(phPower[12].name), forumAdvantageText(1, 12, phPowerAdvantage[12])));
         result.push(forumEntry(forumTypeNum, 'Level 35:', forumName(phPower[13].name), forumAdvantageText(1, 13, phPowerAdvantage[13])));
         result.push(forumEntry(forumTypeNum, 'Level 38:', forumName(phPower[14].name), forumAdvantageText(1, 14, phPowerAdvantage[14])));
-        result.push(forumNewline(forumTypeNum));
     }
-    result.push(forumEntry(forumTypeNum, 'Travel Powers:'));
+	
+	result.push(forumEntry(forumTypeNum, 'Adv. Points:', statAdvantagePoints + '/' + maxAdvantagePointsTotal));
+	result.push(forumNewline(forumTypeNum));
+	
+    result.push(forumHeader(forumTypeNum, 'Travel Powers'));
     result.push(forumEntry(forumTypeNum, 'Level 6:', forumName(phTravelPower[1].name), forumAdvantageText(2, 1, phTravelPowerAdvantage[1])));
     result.push(forumEntry(forumTypeNum, 'Level 35:', forumName(phTravelPower[2].name), forumAdvantageText(2, 2, phTravelPowerAdvantage[2])));
     result.push(forumNewline(forumTypeNum));
-    result.push(forumEntry(forumTypeNum, 'Specializations:'));
+    result.push(forumHeader(forumTypeNum, 'Specializations'));
     for (var i = 1; i <= 3; i++) {
         var specializationTree = phSpecializationTree[i];
         var mask = phSpecialization[i];
@@ -3082,7 +3145,8 @@ function forumExport() {
     if (phSpecializationTree[4].id != 0) {
         result.push(forumEntry(forumTypeNum, 'Mastery:', forumName(phSpecializationTree[4].name) + ' Mastery', '(1/1)'));
     }
-    forumText.innerHTML = result.join('');
+	
+	forumText.innerHTML = result.join('');
 }
 window['forumExport'] = forumExport;
 
@@ -3225,7 +3289,7 @@ window['showView'] = showView;
 
 // data dump
 function dataDump() {
-    var win = window.open('', 'PowerHouse Data Dump');
+    var win = window.open('', 'Data Dump');
     win.document.write('<h3><a onclick="document.getElementById(\'super-stat\').scrollIntoView();">Super Stat Data</a></h3>');
     win.document.write('<h3><a onclick="document.getElementById(\'innate-talent\').scrollIntoView();">Innate Talent Data</a></h3>');
     win.document.write('<h3><a onclick="document.getElementById(\'talent\').scrollIntoView();">Talent Data</a></h3>');
