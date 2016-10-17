@@ -1,0 +1,12 @@
+Changelog for HeroCreator
+
+10/16/2016 - Aesica
+ - Added and updated a crapton of powers and advantages, bringing the data inline with everything on the current live server.
+ - Added more detailed tooltips for several powers (mainly the newer/more recently revised ones) and advantages to help give a clearer indication of what they do.  This is still ongoing.
+ - Added an export option for Markdown (Discord, certain forums, etc).
+ - Added fuctionality to auto-highlight the build link on the main page as well as the export textarea.
+ - Added The Rockstar, The Predator, The Penitent, and The Hexslinger archetypes.
+ - Updated The Specialist and The Grimoire archetypes.
+ - Updated the layout and style a bit to distinguish this project from its parent, the PowerHouse.
+ - Updated the export formatting slightly, most notably with the inclusion of advantage points spent and the way the build name, framework, and link are presented.
+ - A few minor fixes most people won't even notice.
