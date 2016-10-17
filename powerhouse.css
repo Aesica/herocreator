@@ -25,7 +25,7 @@ body {
     /* background-color: #0D3E7F;         */ /* dark blue */
     /* background-color: #0E162B;         */ /* dark blue */
     /* color: #FEC530;                    */ /* yellow */
-	color: #caf;                          /* purple */
+	color: #ccc;                          /* purple */
     font-family: Lexia, Verdana, Arial, sans-serif;
     /* font-size: 1.1em; */
     font-size: 100%;
@@ -422,6 +422,7 @@ a.disabledButtonText:visited, a.disabledButtonText:hover, a.disabledButtonText:a
 }
 
 .specialization {
+	color: #88c;
     width: 100%;
 }
 
