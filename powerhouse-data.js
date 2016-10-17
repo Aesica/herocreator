@@ -1662,7 +1662,6 @@ dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, nul
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPowerAlias['R2EB'].name, dataPowerAlias['R2EB'].desc, 2, null, dataPowerAlias['R2EB'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3EB'].name, dataPowerAlias['R3EB'].desc, 2, 1, dataPowerAlias['R3EB'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(3, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
-dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(4, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
 
 dataPower[dataPower.length] = new Power(dataPower.length, 'Boomerang Toss', '<img src="img/Gadgeteering_BoomerangToss.png" />&nbsp;Boomerang Toss', 2, 7, pow++, -1, 'Gadgeteering, Energy Builder, 50 foot Ranged Single Target Damage<br /><br />Use Boomerang Toss to throw a small projectile at your enemy.');
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, null, null, null, null));
