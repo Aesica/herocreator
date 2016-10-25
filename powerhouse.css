@@ -165,7 +165,7 @@ input, textarea {
 }
 
 textarea {
-	width: 50em;
+	width: 80%;
 	height: 55em;
 }
 
@@ -305,7 +305,7 @@ a.selectedButton:visited, a.selectedButton:hover, a.selectedButton:active {
 
 .disabledButton, a.disabledButton, a.disabledButton:link,
 a.disabledButton:visited, a.disabledButton:hover, a.disabledButton:active {
-	color: #555;							/* dark gray */
+	color: #777;							/* dark gray */
     /* color: #5C5C5C;                     /\* dark gray */
     /* color: #CE3C3C;                     /\* dark red *\/ */
     font-weight: bold;
@@ -354,7 +354,7 @@ a.selectedButtonNote:visited, a.selectedButtonNote:hover, a.selectedButtonNote:a
     /* color: #FEC530;                     /\* yellow */
 }
 .disabledButtonText {
-	color: #555;						/* dark gray */
+	color: #777;						/* dark gray */
     /* color: #5C5C5C;                     /\* dark gray */
 }
 a.buttonText, a.buttonText:link, a.buttonText:visited {
@@ -405,7 +405,7 @@ a.disabledButtonText:visited, a.disabledButtonText:hover, a.disabledButtonText:a
 }
 
 .selectSpec {
-	color: #666;                          /* gray */
+	color: #999;                          /* gray */
     /*color: #FEC530;                     /\* yellow */
     font-size: small;
     font-weight: normal;
@@ -484,7 +484,7 @@ a.disabledButtonText:visited, a.disabledButtonText:hover, a.disabledButtonText:a
 }
 
 .forumThird {
-	color: #88b;
+	/* color: #88b; */
     /* color: #CE6C10;                     /\* dark orange */
     font-size: small;
 }
@@ -514,29 +514,6 @@ a.disabledButtonText:visited, a.disabledButtonText:hover, a.disabledButtonText:a
     }
     .preview {
         font-family: Calibri, Tahoma, Verdana, Arial, sans-serif;
-        font-size: 0.8em;
-    }
-    .forumHeader {
-        color: #000000;                 /* black */
-        font-weight: bold;
-        font-size: 1.2em;
-    }
-    .forumLink {
-        display: none;
-    }
-    .forumFirst {
-        color: #000000;                 /* black */
-        font-weight: normal;
-        font-size: 1.0em;
-    }
-    .forumSecond {
-        color: #000000;                 /* black */
-        font-weight: bold;
-        font-size: 1.0em;
-    }
-    .forumThird {
-        color: #000000;                 /* black */
-        font-weight: normal;
         font-size: 0.8em;
     }
 }
