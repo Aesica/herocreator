@@ -1,5 +1,14 @@
 Changelog for HeroCreator
 
+10/24/2016 - Aesica
+ - Updated the Devastator, Void, Savage, and (this time for real!) Specialist archetypes to properly reflect what's in the game.
+ - Added tooltip text for each archetype explaining how it's obtained as well as which role it gets assigned.
+ - Added the rest of the missing icons.
+ - Lightened the shade of gray used to denote unavailable powers, or talent stats that don't correspond with chosen superstats.
+ - Added some advantages I overlooked in the initial pass, namely those associated with Skarn's Bane, Thundering Kicks, and a few others.
+ - Removed export text coloring entirely, instead opting for combinations of bold, italic, and underlining to set things apart.  This allows the text to be more easily shown on a wider variety of forums--both light-themed and dark-themed.
+ - Removed the on-click autoselect that happens when clicking the export textarea, allowing those who want to copy only a portion of the export to do so more easily.  The whole export can still be quickly selected for copy/pasta via the newly-added 'Quick Select' button.  It's the best of both worlds!
+
 10/16/2016 - Aesica
  - Added and updated a crapton of powers and advantages, bringing the data inline with everything on the current live server.
  - Added more detailed tooltips for several powers (mainly the newer/more recently revised ones) and advantages to help give a clearer indication of what they do.  This is still ongoing.
