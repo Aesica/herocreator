@@ -2,6 +2,7 @@ Changelog for HeroCreator
 
 10/24/2016 - Aesica
  - Updated the Devastator, Void, Savage, and (this time for real!) Specialist archetypes to properly reflect what's in the game.
+ - Added the Automaton back in. (Yeah, my bad!)
  - Added tooltip text for each archetype explaining how it's obtained as well as which role it gets assigned.
  - Added the rest of the missing icons.
  - Lightened the shade of gray used to denote unavailable powers, or talent stats that don't correspond with chosen superstats.
