@@ -8,6 +8,11 @@
  * Time-stamp: <2016-02-17 22:55:12 (kyle)>
  *============================================================================*/
 
+const EXPORT_TYPE_NONE = 0;
+const EXPORT_TYPE_HTML = 1;
+const EXPORT_TYPE_BBCODE = 2;
+const EXPORT_TYPE_MARKDOWN = 3;
+
 var debug = false;
 var version = '1.0.3b';
 var releaseDate = '10/24/2016';
@@ -44,6 +49,7 @@ var previewEntryFontColor = "#88aaff";
 var previewPowerFontColor = "#aaddff";
 var previewAdvantageFontColor = "#8888bb";
 var closeButtonColor = "#f33";
+var exportTips = ["Plain text contains no special formatting.", "HTML is the formatting used by websites and some forums.<br /><br /><b><u>The official Champions Online forums use this for post formatting.</u></b>", "BBCode is a formatting system used by many forums based on Invision, phpBB, vBulletin, etc", "Markdown is a basic text formatting system used by Reddit, Discord, etc."];
 
 // escape quotes
 function escapeQuotes(str) {
@@ -2354,6 +2360,7 @@ function selectArchetype() {
     showPositionSection('selectionArchetype', true);
 }
 window['selectArchetype'] = selectArchetype;
+// xxx
 function setArchetype(id) {
     var archetype = dataArchetype[id];
     if (id == 1) {
@@ -2469,6 +2476,9 @@ function setArchetype(id) {
         document.getElementById('rowPower13').style.display = 'none';
         document.getElementById('rowPower14').style.display = 'none';
     }
+	// update talent highlights when selecting an AT
+	setupTalents();
+	setupInnateTalents();
     phArchetype = archetype;
     document.getElementById('fieldArchetype').innerHTML = archetype.desc;
     selectClear();
