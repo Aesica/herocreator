@@ -5,6 +5,7 @@ Changelog for HeroCreator
  - Added tooltips to the export formatting options to help users decide which best suits their needs.
  - Fixed a bug that was causing talents to not update their superstat highlighting when selecting an archetype.
  - Fixed a bug that was causing Magician's Dust to not be selectable.
+ - The Tempest now correctly offers Storm Summoner instead of Invocation of Storm Calling.
 
 10/24/2016 - Aesica
  - Updated the Devastator, Void, Savage, and (this time for real!) Specialist archetypes to properly reflect what's in the game.
