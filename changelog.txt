@@ -1,5 +1,12 @@
 Changelog for HeroCreator
 
+IMPORTANT NOTE - Aesica:
+Adding new powers to frameworks all the time may break existing builds which use powers from said frameworks.  This is because the order the powers appear in is determined by their place in the data.  The data in a linked build's query string  also relies on a specific order in the data to display certain powers.
+
+This has left me with the hard choice between making sure similar powers and similar tiers remain grouped together vs adding them to the end of the data as they get added to the game.  The former can, as mentioned, break older builds, but ensures that everything is grouped together and easy to find.  (all tier 1, tier 2, tier 3, ultimates, etc together) The latter would preserve existing build structures, but over time, would result in a disorganized lump of powers (including ultimates) from various tiers all heaped together in a mess.  For now, I'm choosing to go with organization.
+
+Sorry for any inconveniences, but I do believe it's better for the long term.
+
 11/10/2016 - Aesica
  - Added the Witch archetype and new infernal powers associated with it.
  - Fixed several minor things involving tooltips, removed a few incorrect advantages, etc.
