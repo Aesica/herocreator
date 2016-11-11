@@ -67,6 +67,32 @@ function PetTip(petName, rank1desc, rank2desc, rank3desc, other=null)
 	return sReturn;
 }
 
+function ArchetypeUnlock(bGoldUnlock=false, sSpecialEvent=null, ...aOtherMethods)
+{
+	var sReturn = "<br /><br />";
+	var iLength = aOtherMethods.length;
+	var i;
+	
+	if (!bGoldUnlock && sSpecialEvent == null && iLength == 0)
+	{
+		sReturn += "This archetype is freely accessible to all players.";
+	}
+	else
+	{
+		sReturn += "This archetype can be unlocked the following ways:<ul>";
+		
+		if (bGoldUnlock) sReturn += "<li>Gold/Lifetime subscription</li>";
+		
+		if (sSpecialEvent) sReturn += "<li>" + sSpecialEvent + " event reward</li>";
+		
+		for (i = 0; i < iLength; i++)
+		{
+			sReturn += "<li>" + aOtherMethods[i] + "</li>";
+		}
+	}
+	return sReturn;
+}
+
 //==============================================================================
 // powerhouse-version.js ends here
 //==============================================================================
