@@ -1,5 +1,12 @@
 Changelog for HeroCreator
 
+11/10/2016 - Aesica
+ - Added the Witch archetype and new infernal powers associated with it.
+ - Fixed several minor things involving tooltips, removed a few incorrect advantages, etc.
+ - Premium ATs available from events now state which event they're obtained in plus other improvements.
+ - Rebirth's icon matches the new green version seen ingame.  How boring. :(
+ - A few other very minor things that I don't even remember, but I don't think they broke anything.  I hope. ^^
+
 10/28/2016 - Aesica
  - Added the missing icon for the Sorcery form "Spellcaster."  Seems it wasn't uploaded for some reason.
  - Added tooltips to the export formatting options to help users decide which best suits their needs.
