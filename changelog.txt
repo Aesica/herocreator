@@ -2,7 +2,7 @@ Changelog for HeroCreator
 
 Sorry guys, builds broke again.  I'm going to need to fix the way data is organized in this thing to prevent this from happening in the future--specifically, every time the devs add or remove frameworksfs. :(
 
-12/8/2016
+12/8/2016 - Aesica
  - Added the Laser Sword framework.
  - Added the Cybernetic Warrior archtype.
  - Misc Minor fixes.
