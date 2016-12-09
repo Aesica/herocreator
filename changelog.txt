@@ -1,5 +1,12 @@
 Changelog for HeroCreator
 
+Sorry guys, builds broke again.  I'm going to need to fix the way data is organized in this thing to prevent this from happening in the future--specifically, every time the devs add or remove frameworksfs. :(
+
+12/8/2016
+ - Added the Laser Sword framework.
+ - Added the Cybernetic Warrior archtype.
+ - Misc Minor fixes.
+
 IMPORTANT NOTE - Aesica:
 Adding new powers to frameworks all the time may break existing builds which use powers from said frameworks.  This is because the order the powers appear in is determined by their place in the data.  The data in a linked build's query string  also relies on a specific order in the data to display certain powers.
 
