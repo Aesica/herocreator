@@ -81,7 +81,7 @@ function ArchetypeUnlock(bGoldUnlock=false, sSpecialEvent=null, ...aOtherMethods
 	{
 		sReturn += "This archetype can be unlocked the following ways:<ul>";
 		
-		if (bGoldUnlock) sReturn += "<li>Gold/Lifetime subscription</li>";
+		if (bGoldUnlock) sReturn += "<li>Gold/Lifetime subscription</li><li>C-Store purchase</li>";
 		
 		if (sSpecialEvent) sReturn += "<li>" + sSpecialEvent + " event reward</li>";
 		
