@@ -14,9 +14,9 @@ const EXPORT_TYPE_BBCODE = 2;
 const EXPORT_TYPE_MARKDOWN = 3;
 
 var debug = false;
-var version = '1.0.5';
-var releaseDate = '12/8/2016';
-var buildVersion = 17;
+var version = '1.0.6';
+var releaseDate = '12/10/2016';
+var buildVersion = 18;
 
 var siteName = 'HeroCreator';
 var siteUrl = 'http://aesica.net/co/';
