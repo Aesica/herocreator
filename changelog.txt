@@ -1,5 +1,11 @@
 Changelog for HeroCreator
 
+12/10/2016
+ - Added description to the Laser Sword framework (does anyone even read/use those?)
+ - Updated descriptions for other frameworks to include the newer ATs
+ - Updated the Power Armor framework changes (oops!)
+ - Updated The Invincible and The Automaton
+
 Sorry guys, builds broke again.  I'm going to need to fix the way data is organized in this thing to prevent this from happening in the future--specifically, every time the devs add or remove frameworksfs. :(
 
 12/8/2016 - Aesica
