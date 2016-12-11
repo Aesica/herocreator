@@ -1,24 +1,16 @@
 Changelog for HeroCreator
 
-12/10/2016
+12/10/2016 - Aesica
  - Added description to the Laser Sword framework (does anyone even read/use those?)
  - Updated descriptions for other frameworks to include the newer ATs
- - Updated the Power Armor framework changes (oops!)
- - Updated The Invincible and The Automaton
-
-Sorry guys, builds broke again.  I'm going to need to fix the way data is organized in this thing to prevent this from happening in the future--specifically, every time the devs add or remove frameworksfs. :(
+ - Updated the Power Armor framework changes (my bad on that!)
+ - Updated The Invincible and The Automaton changes
 
 12/8/2016 - Aesica
  - Added the Laser Sword framework.
  - Added the Cybernetic Warrior archtype.
  - Misc Minor fixes.
-
-IMPORTANT NOTE - Aesica:
-Adding new powers to frameworks all the time may break existing builds which use powers from said frameworks.  This is because the order the powers appear in is determined by their place in the data.  The data in a linked build's query string  also relies on a specific order in the data to display certain powers.
-
-This has left me with the hard choice between making sure similar powers and similar tiers remain grouped together vs adding them to the end of the data as they get added to the game.  The former can, as mentioned, break older builds, but ensures that everything is grouped together and easy to find.  (all tier 1, tier 2, tier 3, ultimates, etc together) The latter would preserve existing build structures, but over time, would result in a disorganized lump of powers (including ultimates) from various tiers all heaped together in a mess.  For now, I'm choosing to go with organization.
-
-Sorry for any inconveniences, but I do believe it's better for the long term.
+ - Sorry guys, builds broke again.  I'm going to need to fix the way data is organized in this thing to prevent this from happening in the future--specifically, every time the devs add or remove frameworksfs. :(
 
 11/10/2016 - Aesica
  - Added the Witch archetype and new infernal powers associated with it.
@@ -26,6 +18,13 @@ Sorry for any inconveniences, but I do believe it's better for the long term.
  - Premium ATs available from events now state which event they're obtained in plus other improvements.
  - Rebirth's icon matches the new green version seen ingame.  How boring. :(
  - A few other very minor things that I don't even remember, but I don't think they broke anything.  I hope. ^^
+
+IMPORTANT NOTE
+Adding new powers to frameworks all the time may break existing builds which use powers from said frameworks.  This is because the order the powers appear in is determined by their place in the data.  The data in a linked build's query string  also relies on a specific order in the data to display certain powers.
+
+This has left me with the hard choice between making sure similar powers and similar tiers remain grouped together vs adding them to the end of the data as they get added to the game.  The former can, as mentioned, break older builds, but ensures that everything is grouped together and easy to find.  (all tier 1, tier 2, tier 3, ultimates, etc together) The latter would preserve existing build structures, but over time, would result in a disorganized lump of powers (including ultimates) from various tiers all heaped together in a mess.  For now, I'm choosing to go with organization.
+
+Sorry for any inconveniences, but I do believe it's better for the long term.
 
 10/28/2016 - Aesica
  - Added the missing icon for the Sorcery form "Spellcaster."  Seems it wasn't uploaded for some reason.
