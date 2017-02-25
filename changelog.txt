@@ -1,5 +1,27 @@
 Changelog for HeroCreator
 
+2/25/2017 - Aesica (These changes won't show up right away for the github version)
+ - Updated powers to reflect the recent munitions and martial arts changes.
+ - Added The Gunslinger AT and Innate.
+ - Saved data (user prefs) now uses html5 storage instead of cookies.  Browsers that don't support html5 storage (omg it's 2017 please update) will fall back on cookies which only managed to store some of the data in the original Powerhouse.  Note that html5 storage is cleaner, more durable, easier to work with, and allows for a larger amount of data to be saved for future enhancements, such as...
+ - Added the ability to load and save builds.  This feature is only available on devices that support html5 storage.
+ - Updated tooltips for passives, forms, and blocks to provide more useful info.
+ - Suppressed the google analytics code because I really don't have any interest in using it beyond page access counts.
+ - Removed the google analytics submission option from the user preferences menu since it's no longer relevant.
+ - Cleaned up the popup/selection windows, both in terms of aesthetics and internal redundancies.
+ - Added the option to use any font available on your device (not just the presets) provided you know the name of it.
+ - Modernized the preset font list by adding fonts commonly installed on windows machines while removing older, lesser-used fonts
+ - Preset fonts now display in their native typeface for preview purposes.
+ - Note:  I may remove the Lexia font in the future, so if you currently like it and use it, I suggest saving it to your computer so you can continue using it via the newly-added custom font feature.
+ - Updated icons to use a single image file rather than 640+ different image files for significantly faster loading and better overall performance.
+ - Updated the help section to cover the newer changes
+ - Selected font now affects certain tabs that were previously unaffected.
+ - Moving forward, there will be support (although limited) for keeping older builds up to date as new updates shuffle powers and frameworks around.
+ - Resetting a role specialization or the mastery no longer also forces the stat specialization to reset.
+ - Reorganized the file structure to something cleaner
+ - Skinning a bear should now aggro every bears in a 40 yard radius.  It makes sense, you are actually skinning their best friend.
+ - Squashed several other minor, insignificant bugs that nobody cares about. :D
+
 12/10/2016 - Aesica
  - Added description to the Laser Sword framework (does anyone even read/use those?)
  - Updated descriptions for other frameworks to include the newer ATs
