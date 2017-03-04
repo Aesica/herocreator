@@ -1,0 +1,534 @@
+/*
+ * powerhouse.css
+ *
+ * PowerHouse CSS
+ *
+ * Author: Kyle W T Sherman
+ *
+ * Time-stamp: <2016-01-30 11:47:59 (kyle)>
+ */
+
+@font-face {
+    font-family: Lexia;
+    src: url('lexia.ttf');
+}
+
+html {
+    margin: 0;
+    overflow-y: scroll;    /* force scroll bar to appear to prevent jumping */
+    padding: 0;
+}
+
+body {
+	background-color: #111;                /* dark gray */
+    /* background-color: #0D3E5F;         */ /* dark blue */
+    /* background-color: #0D3E7F;         */ /* dark blue */
+    /* background-color: #0E162B;         */ /* dark blue */
+    /* color: #FEC530;                    */ /* yellow */
+	color: #ccc;                          /* purple */
+    font-family: Lexia, Verdana, Arial, sans-serif;
+    /* font-size: 1.1em; */
+    font-size: 100%;
+    /* margin: 0 1em 0 1em; */
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1280px;
+    min-height: 100%;
+    padding: 0 2em;
+}
+
+div#viewHelp {
+    font-family: Verdana, Arial, sans-serif;
+}
+
+div#viewAbout {
+    font-family: Verdana, Arial, sans-serif;
+}
+
+.main {
+}
+
+.title {
+    font-size: xx-large;
+    margin: 0.5em 0 0 0;
+}
+
+.menu {
+    margin: 0.5em 0 0 5.0em;
+}
+
+a, a:link, a:visited {
+	color: #8af;							/* light blue */ 
+    /* color: #CE6C10;                    */ /* dark orange */
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+}
+a:hover, a:active {
+	color: #fff;						/* white */
+    /* color: #F78132;                     */ /* light orange */
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+img {
+    border: 0;
+    height: auto;
+    padding: 1em;
+    width: auto;
+}
+
+.image {
+}
+
+.image img {
+    border: 0;
+    height: auto;
+    padding: 1em;
+    width: auto;
+}
+
+.right-img {
+}
+
+.right-img img {
+    border: 0;
+    float: right;
+    max-width: 30%;
+    padding: 0em 1em;
+    width: auto;
+}
+
+.shadow {
+    box-shadow: 3px 3px 4px #000;
+}
+
+.popup {
+	background-color: #000;					/* black */
+    /* background-color: #FEF5C0;         */ /* light yellow */
+	color: #bbb;							/* light gray* /
+    /* color: #000000;                    */ /* black */
+    border: 1px solid #000000;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 0.8em;
+    margin: 1em 0 0 0;
+    max-width: 480px;
+	padding: 5px;
+    /* padding: 0.2em; */
+    position: absolute;
+	border-radius: 10px;
+	border-width: 1px;
+	border-color: #888;
+	box-shadow: 3px 3px 4px #000;
+    /* -moz-box-shadow: 3px 3px 4px #000; */
+    -webkit-box-shadow: 3px 3px 4px #000;
+    box-shadow: 3px 3px 4px #000;
+    z-index: 10;
+}
+
+.left {
+    float: left;
+    min-width: 49%;
+    padding: 0;
+    text-align: left;
+    width: 49%;
+}
+
+.right {
+    float: right;
+    min-width: 49%;
+    padding: 0;
+    text-align: left;
+    width: 49%;
+}
+
+.footer {
+    margin: 0;
+    padding: 1em 0 0 0;
+    text-align: left;
+    width: 98%;
+}
+
+.section {
+    margin: 1em 0 0 0;
+    padding: 0.2em;
+}
+
+input, textarea {
+	background-color: #222;
+	border-radius: 10px;
+	color: #fac;
+	border: 1px solid #888;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+textarea {
+	width: 80%;
+	height: 55em;
+}
+
+.selection {
+	background-color: #222;          /* dark gray, slightly brighter than background */
+    /* background-color: #0D3E7F;        */  /* dark blue */
+    border: 1px solid #000000;
+    margin: 1em 0 0 0;
+	padding: 5px;
+    /* padding: 0.2em; */
+    position: absolute;
+    /* width: -moz-max-content; */
+	border-radius: 10px;
+	border-width: 1px;
+	border-color: #888;
+    /* -moz-box-shadow: 3px 3px 4px #000; */
+    -webkit-box-shadow: 3px 3px 4px #000;
+    box-shadow: 3px 3px 4px #000;
+    z-index: 1;
+}
+
+.selection img {
+    border: 0;
+    height: auto;
+    padding: 1px;
+    vertical-align: middle;
+    width: 24px;
+}
+
+.selectionNormal {
+	border: 2px solid #222;                 /* dark gray (background color) */
+    /* border: 2px solid #0D3E7F;         */ /* dark blue (background color) */
+}
+
+.selectionHighlighted {
+	border: 2px solid #8f8;					/* light gray */
+    /* border: 2px solid #CE6C10;           /\* dark orange */
+}
+
+#selectFramework img {
+    border: 0;
+    height: auto;
+    padding: 1px;
+    vertical-align: middle;
+    width: 24px;
+}
+
+.leftSelection {
+    float: left;
+    padding: 0 1em 0 0;
+    text-align: left;
+}
+
+.rightSelection {
+    float: right;
+    padding: 0 0 0 1em;
+    text-align: left;
+}
+
+/* .leftSelection { */
+/*     border: 1px solid #000000; */
+/*     float: right; */
+/*     margin: 1em 0 0 0; */
+/*     padding: 0.2em; */
+/*     position: absolute; */
+/*     width: -moz-max-content; */
+/*     -moz-box-shadow: 3px 3px 4px #000; */
+/*     -webkit-box-shadow: 3px 3px 4px #000; */
+/*     box-shadow: 3px 3px 4px #000; */
+/* } */
+
+/* .rightSelection { */
+/*     border: 1px solid #000000; */
+/*     float: left; */
+/*     margin: 1em 0 0 0; */
+/*     padding: 0.2em; */
+/*     position: absolute; */
+/*     width: -moz-max-content; */
+/*     -moz-box-shadow: 3px 3px 4px #000; */
+/*     -webkit-box-shadow: 3px 3px 4px #000; */
+/*     box-shadow: 3px 3px 4px #000; */
+/* } */
+
+td {
+    min-width: 1.5em;
+}
+
+.edit {
+}
+
+.edit img {
+    border: 0;
+    height: auto;
+    padding: 1px;
+    vertical-align: middle;
+    width: 24px;
+}
+
+.prefs {
+}
+
+.prefs img {
+    border: 0;
+    height: auto;
+    padding: 1px;
+    vertical-align: middle;
+    width: 24px;
+}
+
+.button {
+    /* color: #CE6C10;                    */ /* dark orange */
+    font-weight: bold;
+    text-decoration: none;
+}
+.selectedButton, a.selectedButton, a.selectedButton:link,
+a.selectedButton:visited, a.selectedButton:hover, a.selectedButton:active {
+	color: #8f8;
+    /* color: #F78132;                    */ /* light orange */
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.takenButton {
+	color: #46b;						/* darker blue */
+    /* color: #AE4C00;                  */ /* darker orange */
+    /* color: #6CCE10;                   /\* dark green *\/ */
+    font-weight: bold;
+    text-decoration: none;
+}
+/* .selectedTakenButton, a.selectedTakenButton, a.selectedTakenButton:link, */
+/* a.selectedTakenButton:visited, a.selectedTakenButton:hover, a.selectedTakenButton:active { */
+/*     color: #81F732; /\* light green *\/ */
+/*     cursor: pointer; */
+/*     font-weight: bold; */
+/*     text-decoration: none; */
+/* } */
+
+.disabledButton, a.disabledButton, a.disabledButton:link,
+a.disabledButton:visited, a.disabledButton:hover, a.disabledButton:active {
+	color: #777;							/* dark gray */
+    /* color: #5C5C5C;                     /\* dark gray */
+    /* color: #CE3C3C;                     /\* dark red *\/ */
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.lockedButton, a.lockedButton, a.lockedButton:link,
+a.lockedButton:visited, a.lockedButton:hover, a.lockedButton:active {
+	color: #46b;							/* dark blue */
+    /* color: #AE4C00;                     /\* darker orange */
+    /* color: #FEC530;                     /\* yellow *\/ */
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.buttonNote {
+	color: #88b;                           /* bluish gray */
+    /*color: #FEC530;                     /\* yellow */
+    font-size: smaller;
+}
+a.buttonNote, a.buttonNote:link, a.buttonNote:visited {
+	color: #88b;                          /* bluish gray */
+    /* color: #FEC530;                     /\* yellow */
+    font-size: smaller;
+    font-weight: bold;
+    text-decoration: none;
+}
+a.buttonNote:hover, a.buttonNote:active {
+	color: #fff;                           /* white */
+	/* color: #FEF550;                     /\* light yellow */
+    font-size: smaller;
+    font-weight: bold;
+    text-decoration: none;
+}
+.selectedButtonNote, a.selectedButtonNote, a.selectedButtonNote:link,
+a.selectedButtonNote:visited, a.selectedButtonNote:hover, a.selectedButtonNote:active {
+	color: #afa;
+    /* color: #FEF550;                     /\* light yellow */
+    font-size: smaller;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.buttonText {
+	color: #88b;                        /* bluish gray */
+    /* color: #FEC530;                     /\* yellow */
+}
+.disabledButtonText {
+	color: #777;						/* dark gray */
+    /* color: #5C5C5C;                     /\* dark gray */
+}
+a.buttonText, a.buttonText:link, a.buttonText:visited {
+    color: #FEC530;                     /* yellow */
+    font-weight: bold;
+    text-decoration: none;
+}
+a.buttonText:hover, a.buttonText:active {
+    color: #FEF550;                     /* light yellow */
+    font-weight: bold;
+    text-decoration: none;
+}
+.selectedButtonText, a.selectedButtonText, a.selectedButtonText:link,
+a.selectedButtonText:visited, a.selectedButtonText:hover, a.selectedButtonText:active {
+    color: #FEF550;                     /* light yellow */
+    font-weight: bold;
+    text-decoration: none;
+}
+a.disabledButtonText, a.disabledButtonText:link,
+a.disabledButtonText:visited, a.disabledButtonText:hover, a.disabledButtonText:active {
+    color: #5C5C5C;                     /* dark gray */
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.note {
+	color: #ccc;							/* light gray */
+    /* color: #FEC530;                     /\* yellow */
+    font-size: smaller;
+    font-weight: normal;
+}
+.disabledNote {
+    color: #5C5C5C;                     /* dark gray */
+    font-size: smaller;
+    font-weight: normal;
+}
+
+.spec {
+	color: #bbb;						/* purple */
+    /* color: #FEC530;                     /\* yellow */
+    font-size: x-small;
+    font-weight: normal;
+}
+.disabledSpec {
+    color: #5C5C5C;                     /* dark gray */
+    font-size: x-small;
+    font-weight: normal;
+}
+
+.selectSpec {
+	color: #999;                          /* gray */
+    /*color: #FEC530;                     /\* yellow */
+    font-size: small;
+    font-weight: normal;
+}
+
+.specHighlight {
+	color: #fff;                          /* white! mother of god, as bright as possible!) */
+    /*color: #FEF550;                     /\* light yellow */
+    font-weight: bold;
+}
+
+.advantage {
+    font-size: smaller;
+}
+
+.specialization {
+	color: #88c;
+    width: 100%;
+}
+
+.specialization img {
+    height: 20px;
+    width: auto;
+}
+
+.specializationPoints td {
+    vertical-align: top; 
+}
+
+.link {
+	color: #fac;                           /* purple */
+    /* color: #FEC530;                     /\* yellow */
+    /* font-size: small; */
+}
+
+.linkRef {
+	color: #fac;                           /* purple */
+    /* color: #FEC530;                     /\* yellow */
+    font-size: xx-small;
+}
+
+.preview {
+    border: 1px solid #555;
+	background-color: #0f0402;
+	width: 35em;
+	border-radius: 10px;
+    font-family: Verdana, Arial, sans-serif;
+    /* font-family: comic-font, sans-serif; */
+    font-size: 1em;
+    /* height: 44em; */
+    margin: 0 1em;
+    padding: .5em;
+    /* overflow: auto; */
+    /* width: 97%; */
+}
+
+.invisible a {
+    color: #0D3E5F;                     /* dark blue */
+    font-size: small;
+}
+
+.forumHeader {
+    /* color: #F78112;                     /\* lighter dark orange */
+}
+
+.forumLink {
+    /*color: #8DCDFF;                     /\* light blue */
+}
+
+.forumFirst {
+    /* color: #F78112;                     /\* lighter dark orange */
+}
+
+.forumSecond {
+    /* color: #FEC530;                     /\* yellow */
+}
+
+.forumThird {
+	/* color: #88b; */
+    /* color: #CE6C10;                     /\* dark orange */
+    font-size: small;
+}
+
+/*
+ * Print
+ */
+
+@media print {
+    .title, .menu, .link, .invisible {
+        display: none;
+    }
+    html {
+        font-family: Calibri, Tahoma, Verdana, Arial, sans-serif;
+        font-size: 0.8em;
+    }
+    body {
+        background-color: #FFFFFF;      /* white */
+        color: #000000;                 /* black */
+    }
+    a, a:link, a:visited, .button, a.button, .buttonNote, a.buttonNote, .buttonText, a.buttonText, .note, .spec, .advantage, .linkRef {
+        color: #000000;                 /* black */
+        font-weight: normal;
+    }
+    .spec {
+        font-size: smaller;
+    }
+    .preview {
+        font-family: Calibri, Tahoma, Verdana, Arial, sans-serif;
+        font-size: 0.8em;
+    }
+}
+
+/*
+ * Mobile Devices
+ */
+
+@media handheld, only screen and (max-width: 800px) {
+    .left, .right, .leftSelection, .rightSelection {
+        float: none;
+        padding: 0;
+    }
+}
+
+/*
+ * powerhouse.css ends here
+ */
