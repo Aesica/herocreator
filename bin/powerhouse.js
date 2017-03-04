@@ -21,7 +21,7 @@ const SPECIALIZATION_MASTERY = 4;
 
 var debug = false;
 var appVersion = "2.1.0";
-var releaseDate = "12/10/2016";
+var releaseDate = "3/3/2017";
 var buildVersion = 20;
 
 var siteName = "HeroCreator 2";
