@@ -1,6 +1,13 @@
 Changelog for HeroCreator
 
-2/25/2017 - Aesica (These changes won't show up right away for the github version)
+3/3/2017 - Aesica
+ - Increased the maximum travel power and innate talent counts allowed by the engine from 61 to 3721.  This adds approximately total characters to the url size.
+ - Added some checks to ensure (hopefully!) that existing builds are unaffected.
+ - Added Tricolor Flight (hor/ver), Arcane Flight, Tricolor Superspeed (hor/ver), Frost Speed, Cold Snap Speed, Rainbow Acrobatics, Prism Athletics, Blazing Acrobatics, Scorching Athletics, and Rainbow Jump to the travel power list.  Not all icons are up to date yet, though.
+ - Improved tooltips for all travel powers
+ - Improved a few Energy Unlock tooltips as well.  Both forms and energy unlocks now display their relevant stats in the first line for easy identification.
+
+2/25/2017 - Aesica
  - Updated powers to reflect the recent munitions and martial arts changes.
  - Added The Gunslinger AT and Innate.
  - Saved data (user prefs) now uses html5 storage instead of cookies.  Browsers that don't support html5 storage (omg it's 2017 please update) will fall back on cookies which only managed to store some of the data in the original Powerhouse.  Note that html5 storage is cleaner, more durable, easier to work with, and allows for a larger amount of data to be saved for future enhancements, such as...
@@ -21,7 +28,7 @@ Changelog for HeroCreator
  - Reorganized the file structure to something cleaner
  - Skinning a bear should now aggro every bears in a 40 yard radius.  It makes sense, you are actually skinning their best friend.
  - Squashed several other minor, insignificant bugs that nobody cares about. :D
-
+ 
 12/10/2016 - Aesica
  - Added description to the Laser Sword framework (does anyone even read/use those?)
  - Updated descriptions for other frameworks to include the newer ATs
