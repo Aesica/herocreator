@@ -1,5 +1,16 @@
 Changelog for HeroCreator
+v2.2.0.21
+5/6/2017 - Aesica
+ - Added powers:   Aurora, Mental Impact
+ - Updated powers/advantages to reflect recent changes:  Ebon Ruin, Holy Water, Illumination, Celestial Conduit
+ - Added Dark Transfusion to The Void's progression list
+ - Listed The Inventor as a reward from Foxbatcon
+ - Fixed some bugs:  Missing Wall of Bullets on SMG Burst/Bullet Hail, fixed cost of Fractal Aegis & Showdown's advantages, etc.
+ - Clicking on the "Herocreator" logo as a means to reset your build now lets you optionally reset only select parts 
+ - Fixed Showdown's icon - it's been using a placeholder for too long now :3
+ - Added more detailed tooltip info for a few more abilities, like dark transfusion
 
+v2.1.0.20
 3/3/2017 - Aesica
  - Increased the maximum travel power and innate talent counts allowed by the engine from 61 to 3721.  This adds approximately total characters to the url size.
  - Added some checks to ensure (hopefully!) that existing builds are unaffected.
@@ -7,6 +18,7 @@ Changelog for HeroCreator
  - Improved tooltips for all travel powers
  - Improved a few Energy Unlock tooltips as well.  Both forms and energy unlocks now display their relevant stats in the first line for easy identification.
 
+v2.0.0.19
 2/25/2017 - Aesica
  - Updated powers to reflect the recent munitions and martial arts changes.
  - Added The Gunslinger AT and Innate.
