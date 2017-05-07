@@ -20,11 +20,11 @@ const SPECIALIZATION_ROLE2 = 3;
 const SPECIALIZATION_MASTERY = 4;
 
 var debug = false;
-var appVersion = "2.1.0";
+var appVersion = "2.2.0";
 var releaseDate = "3/3/2017";
-var buildVersion = 20;
+var buildVersion = 21;
 
-var siteName = "HeroCreator 2";
+var siteName = "HeroCreator";
 var siteUrl = window.location.href.split("?")[0];
 var mouseX = 0;
 var mouseY = 0;

@@ -96,6 +96,11 @@ function DebugOutputFromInput(fFunction)
 	}
 }
 
+function PowerUnlocksFrom(sUnlockSource)
+{
+	return "<br /><br /><b>This power can be obtained from the " + sUnlockSource + "</b>";
+}
+
 function DebugOutput(sText)
 {
 	var txtOutput = document.getElementById("debugoutput");
@@ -581,6 +586,142 @@ function NullFix(sText, sReplaceNullWith="")
 {
 	var sReturn = (sText) ? sText : sReplaceNullWith;
 	return sReturn;
+}
+
+function ShowResetDataOptions()
+{
+	ResetDialogBox();
+	SetDialogBoxHeader("Reset Options");
+	var mLabel = document.createElement("div");
+	mLabel.innerHTML = "I want to reset...";
+	AddItemToDialogBoxMenu(mLabel);
+	
+	var mAll = CreateCheckbox("<b>Everything</b>", "resetAll", "resetGroup", false, true);
+	var mSelective = CreateCheckbox("<b>Selective</b>", "resetSome", "resetGroup", false);
+	mAll.setAttribute("onclick", "ResetAllClicked(true);");
+	mSelective.setAttribute("onclick", "ResetAllClicked(false);");
+	setOnmouseoverPopupL1(mAll, "This option will clear all selected fields.  If working with an archetype, it will be reset back to freeform as well.");
+	setOnmouseoverPopupL1(mSelective, "Allows you to pick and choose which fields to reset.  Note that archetypes cannot reset certain things.");
+	
+	var mStats = CreateCheckbox("Super Stats", "resetBox0");
+	var mTalents = CreateCheckbox("Innate Talent & Talents", "resetBox1");
+	var mTravelPowers = CreateCheckbox("Travel Powers", "resetBox2");
+	var mSpecs = CreateCheckbox("Specializations", "resetBox3");
+	var mPowers = CreateCheckbox("Powers", "resetBox4");
+	var mResetButton = CreateButton("Yes, reset all selected fields", "", "selectConfirmButton", "ResetBuild();");
+	
+	AddItemToDialogBoxMenu(document.createElement("br"));
+	AddItemToDialogBoxMenu(mAll);
+	AddItemToDialogBoxMenu(mSelective);
+	AddItemToDialogBoxMenu(mStats);
+	AddItemToDialogBoxMenu(mTalents);
+	AddItemToDialogBoxMenu(mTravelPowers);
+	AddItemToDialogBoxMenu(mSpecs);
+	AddItemToDialogBoxMenu(mPowers);
+	AddItemToDialogBoxMenu(document.createElement("br"));
+	AddItemToDialogBoxMenu(mResetButton);
+	
+	ResetAllClicked();
+	
+	showPositionSection("selectionWindow");
+}
+
+function ResetAllClicked(bHideSelective=true)
+{
+	var i;
+	var iLength = 5;
+	var mElement;
+	var bHide;
+	for (i = 0; i < iLength; i++)
+	{
+		mElement = document.getElementById("resetBox" + i);
+		bHide = bHideSelective;
+		if (phArchetype.id != 1 && (i == 0 || i == 3 || i == 4)) // no resetting superstats, specs, or powers as non-freeform
+			bHide = true;
+		
+		mElement.disabled = bHide;
+		mElement.parentElement.setAttribute("class", bHide ? "disabledCheckField" : "");
+	}
+}
+
+function CreateCheckbox(sLabel, sID, sRadioGroup=null, bUseLineBreak=true, bChecked=false)
+{
+	var mReturn = bUseLineBreak ? document.createElement("div") : document.createElement("span");
+	var mLabel = document.createElement("label");
+	var mBox = document.createElement("input");
+	mLabel.innerHTML = sLabel;
+	mLabel.setAttribute("for", sID);
+	mBox.setAttribute("type", ((sRadioGroup) ? "radio" : "checkbox"));
+	mBox.setAttribute("id", sID);
+	mBox.checked = bChecked;
+	if (sRadioGroup) mBox.setAttribute("name", sRadioGroup);
+	mReturn.appendChild(mBox);
+	mReturn.appendChild(mLabel);
+	
+	return mReturn;
+}
+
+function ResetBuild()
+{
+	var bEverything = document.getElementById("resetAll").checked;
+	var bStats = document.getElementById("resetBox0").checked;
+	var bTalents = document.getElementById("resetBox1").checked;
+	var bTravelPowers = document.getElementById("resetBox2").checked;
+	var bSpecs = document.getElementById("resetBox3").checked;
+	var bPowers = document.getElementById("resetBox4").checked;
+	var i;
+	var iLength;
+	if (bEverything)
+	{
+		selectArchetype();
+		setArchetype(1);
+	}
+	if (bStats || bEverything)
+	{
+		iLength = 4;
+		for (i = 1; i < iLength; i++)
+		{
+			selectSuperStat(i);
+			setSuperStat(0);
+		}
+	}
+	if (bTalents || bEverything)
+	{
+		if (phArchetype.id == 1)
+		{
+			selectInnateTalent(1);
+			setInnateTalent(0);
+		}
+		iLength = 7;
+		for (i = 1; i < iLength; i++)
+		{
+			selectTalent(i);
+			setTalent(0);
+		}
+	}
+	if (bTravelPowers || bEverything)
+	{
+		iLength = 3;
+		for (i = 1; i < iLength; i++)
+		{
+			selectTravelPower(i);
+			setTravelPower(0);
+		}
+	}
+	if (bSpecs || bEverything)
+	{
+		// TODO reset specs
+	}
+	if (bPowers || bEverything)
+	{
+		iLength = 15;
+		for (i = 1; i < iLength; i++)
+		{
+			selectFramework(0);
+			selectPower(i);
+			setPower(0);
+		}
+	}
 }
 
 ///////////////// Data functions /////////////////////////////

@@ -919,7 +919,7 @@ dataVersionUpdate[dataVersionUpdate.length] = new VersionUpdate(
         }
     });
 
-// version 18 => 19 (Munition rifle revamp - PENDING)
+// version 18 => 19 (Munition rifle revamp)
 dataVersionUpdate[dataVersionUpdate.length] = new VersionUpdate(
     dataVersionUpdate.length, 12,
     function(thing, value) {
@@ -968,6 +968,7 @@ dataVersionUpdate[dataVersionUpdate.length] = new VersionUpdate(
     });
 	
 // version 19 => 20 (increased max possible value for innate talent and travel power ids
+// Note:  This had to be done inside powerhouse.js.  Existing builds are adjusted there.
 dataVersionUpdate[dataVersionUpdate.length] = new VersionUpdate(
     dataVersionUpdate.length, 12,
     function(thing, value) {
@@ -996,6 +997,40 @@ dataVersionUpdate[dataVersionUpdate.length] = new VersionUpdate(
         case 'specialization': return value['specialization'];
         }
     });	
+
+// version 20 => 21 (Added Aurora)
+dataVersionUpdate[dataVersionUpdate.length] = new VersionUpdate(
+    dataVersionUpdate.length, 12,
+    function(thing, value) {
+        var codeNum1 = (value['code1'] == undefined) ? 0 : urlCodeToNum(value['code1']); // framework
+        var codeNum2 = (value['code2'] == undefined) ? 0 : urlCodeToNum(value['code2']); // power
+        // var codeNum3 = (value['code3'] == undefined) ? 0 : urlCodeToNum(value['code3']);
+        // var codeNum4 = (value['code4'] == undefined) ? 0 : urlCodeToNum(value['code4']);
+        switch (thing) {
+        case 'data': return value['data'];
+        case 'pos': return value['pos'];
+        case 'i': return value['i'];
+        case 'inc': return value['inc'];
+        case 'code1': return value['code1'];
+        case 'code2': return value['code2'];
+        case 'code3': return value['code3'];
+        case 'code4': return value['code4'];
+        case 'archetype': return value['archetype'];
+        case 'superStat': return value['superStat'];
+        case 'innateTalent': return value['innateTalent'];
+        case 'talent': return value['talent'];
+        case 'travelPower': return value['travelPower'];
+        case 'framework': return value['framework'];
+        case 'power':
+			var power = value['power'];
+			// add aurora to ice right after arctic beast
+            if (codeNum1 == 5 && codeNum2 > 17) power++;
+            return power;		
+		case 'mask': return value['mask'];
+        case 'specializationTree': return value['specializationTree'];
+        case 'specialization': return value['specialization'];
+        }
+    });		
 
 //==============================================================================
 // Get Methods
