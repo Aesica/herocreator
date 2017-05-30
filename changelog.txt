@@ -1,4 +1,13 @@
 Changelog for HeroCreator
+
+v2.2.1.22
+5/29/2017 - Aesica
+ - Updated tooltips for all powers gated behind an unlock mechanism with where the unlock is obtained and (if applicable) how much it costs.  If I missed anything or got anything wrong on these, let me know.
+ - Added Shade Storm.  Note that it's still using a placeholder icon; I'll add the proper icon sometime in the future when a bigger lump of new powers get added.
+ - Added Phase Out and Upload to travel powers.
+ - Updated the herpderp placeholder tooltips used by the variant travel powers.  Yeah I forgot about those, and I suppose "Help!  My feet are on fire!" or "This power will probably kill you" isn't too useful.  Okay, maybe the latter is, but you get the idea.
+ - Assorted minor fixes nobody cares about but me. :3
+
 v2.2.0.21
 5/6/2017 - Aesica
  - Added powers:   Aurora, Mental Impact
