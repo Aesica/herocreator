@@ -96,9 +96,12 @@ function DebugOutputFromInput(fFunction)
 	}
 }
 
-function PowerUnlocksFrom(sUnlockSource)
+function PowerUnlocksFrom(sUnlockSource, sCost=null, sCurrencyName=null)
 {
-	return "<br /><br /><b>This power can be obtained from the " + sUnlockSource + "</b>";
+	var sReturn = "<br /><br /><b>Unlock via:  " + sUnlockSource;
+	if (sCost) sReturn += " for " + sCost + ((sCurrencyName) ? " " + sCurrencyName : "");
+	sReturn += "</b>";
+	return sReturn;
 }
 
 function DebugOutput(sText)

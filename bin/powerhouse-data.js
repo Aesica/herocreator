@@ -14,6 +14,11 @@
 // Super Stats
 //==============================================================================
 
+const UNLOCK_COLLECTOR = "Collectors Store";
+const UNLOCK_PURPLE_FOIL = "Purple Foil Special Item Voucher";
+const UNLOCK_RECOGNITION = "Recognition Vendor";
+const UNLOCK_ONSLAUGHT = "Onslaught Vendor";
+
 const TRAVEL_POWER_NONE = 0;
 const TRAVEL_POWER_FLIGHT = 1;
 const TRAVEL_POWER_JUMP = 2;
@@ -30,9 +35,7 @@ const TP_UNLOCK_CSTORE = 2;
 const TP_UNLOCK_CSTORE_GOLD = 3;
 const TP_UNLOCK_QSTORE = 4;
 const TP_UNLOCK_LEGACY = 5;
-const TP_UNLOCK_TYPES = ["", "Freely available", "C-Store purchase", "C-STore purchase or Gold/LTS", "Questionite store", "Legacy crafting - no longer available"];
-
-const GCR_UNLOCK = "<br /><br /><b>This power can be obtained from the SCR/GCR store</b>";
+const TP_UNLOCK_TYPES = ["", "Freely available", "C-Store", "Free for Gold/LTS<br />C-Store", "Questionite Store", "Legacy crafting - no longer available"];
 
 // super stat class
 /**@constructor*/
@@ -268,10 +271,11 @@ TravelPower = function(iTravelPowerType=null, iUnlockType=null, sName=null, sAlt
     this.id = dataTravelPower.length;
     this.name = sName;
     this.desc = null;
-	this.isVariant = (sOverrideTip != null);
+	this.isVariant = (sOverrideTip !== null || sExtra !== null);
 	this.type = iTravelPowerType;
 	this.tip = sOverrideTip;
 	this.unlockType = iUnlockType;
+	this.ingameCost = null;
     this.advantageList = [];
 	
 	if (sName)
@@ -279,6 +283,9 @@ TravelPower = function(iTravelPowerType=null, iUnlockType=null, sName=null, sAlt
 		if (sAltIcon) this.desc = "<div class=\"Sprite TravelPower_" + sAltIcon + "\"></div>" + sName;
 		else this.desc = "<div class=\"Sprite TravelPower_" + sName.replace(/[^A-Za-z0-9_]+/g, "") + "\"></div>" + sName;
 	}
+	
+	if (iUnlockType == TP_UNLOCK_CSTORE || iUnlockType == TP_UNLOCK_CSTORE_GOLD) this.ingameCost = "525 Zen";
+	else if (iUnlockType == TP_UNLOCK_QSTORE) this.ingameCost = "250000 Questionite";
 	
 	if (iTravelPowerType != null)
 	{
@@ -289,18 +296,20 @@ TravelPower = function(iTravelPowerType=null, iUnlockType=null, sName=null, sAlt
 		if (!sOverrideTip) this.tip = dataPowerAlias[TRAVEL_POWER_TYPES[iTravelPowerType]].tip;
 		if (sExtra) this.tip += "<br /><br />" + sExtra;
 		
-		this.tip = "<b>" + sName + "</b><br /><br />Travel Power - " + TRAVEL_POWER_TYPES[iTravelPowerType] + "<br /><br />" + this.tip;
+		this.tip = "<b>" + sName + "</b><br /><br />Travel Power - " + TRAVEL_POWER_TYPES[iTravelPowerType] + (this.isVariant ? " (Variant)" : "") + "<br /><br />" + this.tip;
 	}
 	
-	var i;
-	var iLength = aOtherSources.length;
-	this.tip += "<ul>";
-	if (iUnlockType && iUnlockType > 0) this.tip += "<li>" + TP_UNLOCK_TYPES[iUnlockType] + "</li>";
-	for (i = 0; i < iLength; i++)
+	this.tip += "<br />";
+	var i, iLength;
+	if (iUnlockType && iUnlockType > 0) this.tip += "<br /><b>" + TP_UNLOCK_TYPES[iUnlockType] + (this.ingameCost ? " for " + this.ingameCost : "") + "</b>";
+	if (aOtherSources)
 	{
-		this.tip += "<li>" + aOtherSources[i] + "</li>";
+		iLength = aOtherSources.length;
+		for (i = 0; i < iLength; i++)
+		{
+			this.tip += "<br /><b>" + aOtherSources[i] + "</b>";
+		}
 	}
-	this.tip += "</ul>";
 	
 	this.insertAdvantage = function(sName, iCost, sTip, iDependency=null)
 	{
@@ -373,7 +382,7 @@ var dataTravelPower = [];
 // Travel Power Aliases
 //------------------------------------------------------------------------------
 
-dataPowerAlias['Flight'] = new PowerAlias('Flight', 'Flight', '<div class="Sprite TravelPower_Flight"></div>Flight', 'Grants +20 Flight Speed while active.  Outside of combat, you build up speed over time.  After 4 seconds, you gain +17 Flight Speed.  After 10 seconds, ou gain an additional +17 Flight Speed.<br /><br />While active, you suffer a -12% penalty to Power Cost Discount and your Energy Building strength is reduced by 15%.');
+dataPowerAlias['Flight'] = new PowerAlias('Flight', 'Flight', '<div class="Sprite TravelPower_Flight"></div>Flight', 'Grants +20 Flight Speed while active.  Outside of combat, you build up speed over time.  After 4 seconds, you gain +17 Flight Speed.  After 10 seconds, you gain an additional +17 Flight Speed.<br /><br />While active, you suffer a -12% penalty to Power Cost Discount and your Energy Building strength is reduced by 15%.');
 dataPowerAlias['Jump'] = new PowerAlias('Jump', 'Superjump', '<div class="Sprite TravelPower_Superjump"></div>Superjump', 'Grants +35 Jump Speed and +60 Jump Height while active.  Outside of combat, you build up speed and height over time.  After 4 seconds, you gain +30 Jump Speed and +34 Jump Height.  After 10 seconds, you gain an additional +17 Jump Speed and +34 Jump Height.<br /><br />While active, you suffer a -6.2% penalty to Power Cost Discount and your Energy Building strength is reduced by 15%.');
 dataPowerAlias['Speed'] = new PowerAlias('Speed', 'Superspeed', '<div class="Sprite TravelPower_Superspeed"></div>Superspeed', 'Grants 100% Run Speed while active.  Outside of Combat, you build up speed over time.  After 4 seconds, you gain +85% Run Speed.  After 10 seconds, you gain an additional +85% Run Speed.<br /><br />While moving quickly, your jump speed is slightly increases and foes are less likely to notice you.<br /><br />While active, you suffer a -9.4% penalty to Power Cost Discount and your Energy Building strength is reduced by 15%.');
 dataPowerAlias['Athletics'] = new PowerAlias('Athletics', 'Athletics', '<div class="Sprite TravelPower_Athletics"></div>Athletics', 'Grants +75% Run Speed, +10 Jump Speed, and +10 Jump Height while active.  Outside of combat, you build up speed and height over time.  After 4 seconds, you gain +50% Run Speed, +8.5 Jump Speed, and +8.5 Jump Height.  After 10 seconds, you gain an additional +50% Run Speed, +8.5 Jump Speed, and +8.5 Jump Height.<br /><br />While active, you suffer a -3.1% penalty to Power Cost Discount and your Energy Building strength is reduced by 15%.');
@@ -414,7 +423,7 @@ dataTravelPower[dataTravelPower.length-1].insertAdvantage(dataPowerAlias['Versat
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TELEPORT,  TP_UNLOCK_FREE, dataPowerAlias['Teleport'].name);
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE_GOLD, 'Ice Slide', null, null, 'This power will probably end up killing you.');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE_GOLD, 'Ice Slide', null, 'This power is less maneuverable than standard Flight.', 'Grants +20 Flight Speed while active.  Outside of combat, you build up speed over time.  After 4 seconds, you gain +17 Flight Speed.  After 10 seconds, you gain an additional +21 Flight Speed.<br /><br />While active, you suffer a -9.4% penalty to Power Cost Discount and your Energy Building strength is reduced by 15%.');
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SWINGING, TP_UNLOCK_CSTORE_GOLD, dataPowerAlias['Swinging'].name);
 dataTravelPower[dataTravelPower.length-1].insertAdvantage(dataPowerAlias['Flippin'].name, 2, dataPowerAlias['Flippin'].tip);
@@ -422,13 +431,13 @@ dataTravelPower[dataTravelPower.length-1].insertAdvantage(dataPowerAlias['Flippi
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TUNNELING, TP_UNLOCK_CSTORE_GOLD, dataPowerAlias['Tunneling'].name);
 dataTravelPower[dataTravelPower.length-1].insertAdvantage(dataPowerAlias['Earthen Embrace'].name, 2, dataPowerAlias['Earthen Embrace'].tip);
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE_GOLD, 'Jet Boots', null, null, 'Help!  My feet are on fire! T___T');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE_GOLD, 'Jet Boots', null, 'Somewhat less maneuverable than standard Flight, but faster.', 'Grants +30 Flight Speed while active.  Outside of combat, you build up speed over time.  After 4 seconds, you gain +17 Flight Speed.  After 10 seconds, you gain an additional +17 Flight Speed.<br /><br />While active, you suffer a -12% penalty to Power Cost Discount and your Energy Building strength is reduced by 15%.');
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_JUMP, TP_UNLOCK_CSTORE_GOLD, 'Rocket Jump');
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE_GOLD, 'Fire Flight');
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE_GOLD, 'Hover Disk', null, null, 'Does not work over water.');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE_GOLD, 'Hover Disk', null, 'Somewhat less maneuverable than standard Flight.', 'Grants +20 Flight Speed while active.  Outside of combat, you build up speed over time.  After 4 seconds, you gain +17 Flight Speed.  After 10 seconds, you gain an additional +21 Flight Speed.<br /><br />While active, you suffer a -11% penalty to Power Cost Discount and your Energy Building strength is reduced by 15%.');
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE_GOLD, 'Earth Flight');
 
@@ -445,7 +454,7 @@ dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, T
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE, 'Magic Carpet');
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE, 'Jet Pack', null, null, 'Jet pack!  whee!');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE, 'Jet Pack', null, 'Somewhat less maneuverable than standard Flight, but faster.', 'Grants +30 Flight Speed while active.  Outside of combat, you build up speed over time.  After 4 seconds, you gain +17 Flight Speed.  After 10 seconds, you gain an additional +17 Flight Speed.<br /><br />While active, you suffer a -12% penalty to Power Cost Discount and your Energy Building strength is reduced by 15%.');
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE, 'Heroic Flight');
 dataTravelPower[dataTravelPower.length-1].insertAdvantage('Fanfare', 0, 'Adds fanfare music to the activation of the power.');
@@ -515,7 +524,7 @@ dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, TP
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_LEGACY, 'Aethyric Incantation', 'MysticFlight');
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, TP_UNLOCK_CSTORE, 'Energy Slide', null, null, 'Alternate speed power');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_ATHLETICS, TP_UNLOCK_CSTORE, 'Energy Slide', null, null, 'Grants +20 Run Speed and +3 Jump Height while active.  Outside of combat, you build up speed and height over time.  After 4 seconds, you gain 17 Run Speed and +2.6 Jump Height.  After 10 seconds, you gain an additional 21 Run Speed and +2.6 Jump Height.<br /><br />While active, you suffer a -12% penalty to Power Cost Discount and your Energy Building strength is reduced by 15%.');
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, null, 'Flag Speed', null, null, null, ["Patriot event unlock"]);
 dataTravelPower[dataTravelPower.length-1].insertAdvantage(dataPowerAlias['Impact'].name, 2, dataPowerAlias['Impact'].tip);
@@ -525,7 +534,7 @@ dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, n
 // TODO: get proper image
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TELEPORT, TP_UNLOCK_CSTORE, 'Ninja Vanish', 'Teleportation');
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE, 'Cape Glide', null, null, 'Alternate flight power');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE, 'Cape Glide', null, 'You may only only use powers which target yourself while this is active.', 'Grants +30 Flight Speed while active.  Outside of combat, you build up speed over time.  After 4 seconds, you gain +26 Flight Speed.  After 10 seconds, you gain an additional +26 Flight Speed.<br /><br />While active, you suffer a -12% penalty to Power Cost Discount and your Energy Building strength is reduced by 15%.');
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE,  'Shadow Wings');
 
@@ -533,11 +542,11 @@ dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, T
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TELEPORT, TP_UNLOCK_CSTORE, 'Ninja Leaves');
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TELEPORT, null, 'Flag Flight', 'Flight');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TELEPORT, null, 'Flag Flight', 'Flight', null, null, ['Patriot event reward']);
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TELEPORT, null, 'Canadian Flag Flight', 'Flight', null, null, ['Patriot event reward']);
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE, 'Hoverboard', null, null, 'Alternate flight power');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE, 'Hoverboard', null, 'This power is less maneuverable than standard Flight.', 'Grants +20 Flight Speed while active.  Outside of combat, you build up speed over time.  After 4 seconds, you gain +17 Flight Speed.  After 10 seconds, you gain an additional +21 Flight Speed.<br /><br />While active, you suffer a -9.4% penalty to Power Cost Discount and your Energy Building strength is reduced by 15%.');
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE, 'Tricolor Flight (Vertical)', 'Flight');
 
@@ -566,6 +575,10 @@ dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_ATHLETICS
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_ATHLETICS, TP_UNLOCK_CSTORE, 'Scorching Athletics', 'Athletics');
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_JUMP, TP_UNLOCK_CSTORE, 'Rainbow Jump', 'Superjump');
+
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TELEPORT, TP_UNLOCK_CSTORE, 'Phase Out', 'Teleportation');
+
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TELEPORT, null, 'Upload', 'Teleportation', null, null, ['Cybernetic Lockbox']	);
 
 
 //==============================================================================
@@ -762,8 +775,8 @@ dataRequireGroup['energy projector'] = [];
 
 dataPowerAlias['Energy Storm'] = new PowerAlias('Energy Storm', 'Energy Storm', '<div class="Sprite EnergyProjector_EnergyStorm"></div>&nbsp;Energy Storm', 'Energy Projector, Single Target Damage and Cone Debuff<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />Absorb power from your enemies and send it back at them with cataclysmic fury.<br /><br />Consume Energy<br />MAINTAIN<br />+ All enemies in a forward arc are slowed.<br />+ For each enemy slowed, you will gain a stack of the Infused Energy Buff, which increases all damage you deal for a short duration.<br />+ While you are affect by Infused Energy, this power becomes Unleashed Tempest.<br />+ If an affected enemy is under the effect of Clinging Flames, Negative Ions, or Chill, that effect will be consumed, and grant you an appropriate type of Energy Charge.<br />+ If an affected enemy is protected by a force field type effect, such as Containment Field, that effect will be significantly degraded, and you will be granted Energy Charge - Force.<br />- This power has a 30 second cooldown that begins when the Infused Energy buffs expire.<br /><br />Unleashed Tempest<br />CLICK<br />+ Extremely powerful single target Particle attack.<br />+ If enhanced by Energy Charge - Fire, this attack will detonate in an area of effect on contact with the target.<br />+ If enhanced by Energy Charge - Ice, this attack gains a significant bonus to critical severity.<br />+ If enhanced by Energy Charge - Electricity, this attack will chain to a second target.<br />+ If enhanced by Energy Charge - Force, this attack will significantly reduce the target\\\'s damage for a short duration.<br />+ In addition, each type of Energy Charge increases the damage done by your Unleashed Tempest, and reduces its energy cost.<br />- Activating Unleashed Tempest consumes all instances of the Infused Energy buff and triggers the cooldown on Consume Energy.');
 dataPowerAlias['Weather the Storm'] = new PowerAlias('Weather the Storm', 'Weather the Storm', 'Weather the Storm', 'Secondary Energy Effects, such as Clinging Flames, have a chance to not be consumed when you use Energy Storm.');
-dataPowerAlias['Gravity Driver'] = new PowerAlias('Gravity Driver', 'Gravity Driver', '<div class="Sprite EnergyProjector_GravityDriver"></div>&nbsp;Gravity Driver', 'Energy Projector, 80 foot Ranged 40 foot Sphere AoE Damage and Damage Resistance Debuff<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />Gravity Driver causes a mass of force to form, and brings it crashing down on your foes with nuclear levels of destructive power.<br /><br /><b>This power can be unlocked from a Ravenswood Lockbox drop.</b><br /><br />CHARGE<br />+ Deals Crushing damage to targets caught in the blast radius as well as knocking nearby foes prone.<br />+ Foes further than 20\\\' from the impact point take half damage and are not knocked prone.');
-dataPowerAlias['Fractal Aegis'] = new PowerAlias('Fractal Aegis', 'Fractal Aegis', '<div class="Sprite EnergyProjector_FractalAegis"></div>&nbsp;Fractal Aegis', 'Energy Projector, 20 foot Sphere PBAoE Damage and Knock Up and Defense Buff<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />Forces ice spikes to erupt beneath your opponents, then coalesces the icy bits around you for additional protection.<br /><br /><b>This power can be unlocked from a Frozen Lockbox drop.</b><br /><br />CHARGE<br />+ Damage and Knockup surrounding targets.<br />+ Gain a Defense Buff based on number of targets hit.');
+dataPowerAlias['Gravity Driver'] = new PowerAlias('Gravity Driver', 'Gravity Driver', '<div class="Sprite EnergyProjector_GravityDriver"></div>&nbsp;Gravity Driver', 'Energy Projector, 80 foot Ranged 40 foot Sphere AoE Damage and Damage Resistance Debuff<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />Gravity Driver causes a mass of force to form, and brings it crashing down on your foes with nuclear levels of destructive power.<br /><br />CHARGE<br />+ Deals Crushing damage to targets caught in the blast radius as well as knocking nearby foes prone.<br />+ Foes further than 20\\\' from the impact point take half damage and are not knocked prone.' + PowerUnlocksFrom("Ravenswood Lockbox or " + UNLOCK_COLLECTOR, 1, UNLOCK_PURPLE_FOIL));
+dataPowerAlias['Fractal Aegis'] = new PowerAlias('Fractal Aegis', 'Fractal Aegis', '<div class="Sprite EnergyProjector_FractalAegis"></div>&nbsp;Fractal Aegis', 'Energy Projector, 20 foot Sphere PBAoE Damage and Knock Up and Defense Buff<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />Forces ice spikes to erupt beneath your opponents, then coalesces the icy bits around you for additional protection.<br /><br />CHARGE<br />+ Damage and Knockup surrounding targets.<br />+ Gain a Defense Buff based on number of targets hit.' + PowerUnlocksFrom("Frozen Lockbox or " + UNLOCK_COLLECTOR, 1, UNLOCK_PURPLE_FOIL));
 dataPowerAlias['Chilling Reminder'] = new PowerAlias('Chilling Reminder', 'Chilling Reminder', 'Chilling Reminder', '+ This advantage causes this attack to generate additional Threat against all affected targets, making them more likely to attack you.<br />+ This advantage inflicts a 5% damage Debuff against all affected targets. If an affected enemy attacks you, it will quickly reduce this Debuff\\\'s strength. Conversely, any damage you inflict restores the Debuff\\\'s strength.');
 dataPowerAlias['Mystic Transference'] = new PowerAlias('Mystic Transference', 'Mystic Transference', 'Mystic Transference', 'You now only summon two of these Sigils, but they can be summoned alongside your other Sigils. This also lowers the base recharge time for these Sigils to 10 seconds, and reduces the charge time and cost of these Sigils.');
 
@@ -857,7 +870,7 @@ dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(3, 'Supercon
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(4, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(5, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
 
-dataPower[dataPower.length] = new Power(dataPower.length, 'Neuroelectric Pulse', '<div class="Sprite Electricity_NeuroelectricPulse"></div>&nbsp;Neuroelectric Pulse', 1, 1, pow++, 2, 'Electricity, 15 foot Sphere PBAoE Damage and Energy Gain and Energy Siphon and Root<br /><br />Requires 3 powers from Electricity or 4 non-Energy Building powers from any framework.<br /><br />When activated, an electrical pulse will damage and Root most adjacent foes. Leaves behind a Static Field that grants nearby players Energy and siphons power from foes. The amount it grants scales off of your Recovery. Many enemies are not affected by Power Siphon.<br /><br /><b>This power unlock can be purchased from a Quartermaster at UNTIL HQ.</b>');
+dataPower[dataPower.length] = new Power(dataPower.length, 'Neuroelectric Pulse', '<div class="Sprite Electricity_NeuroelectricPulse"></div>&nbsp;Neuroelectric Pulse', 1, 1, pow++, 2, 'Electricity, 15 foot Sphere PBAoE Damage and Energy Gain and Energy Siphon and Root<br /><br />Requires 3 powers from Electricity or 4 non-Energy Building powers from any framework.<br /><br />When activated, an electrical pulse will damage and Root most adjacent foes. Leaves behind a Static Field that grants nearby players Energy and siphons power from foes. The amount it grants scales off of your Recovery. Many enemies are not affected by Power Siphon.' + PowerUnlocksFrom(UNLOCK_RECOGNITION, "350/175", "SCR/GCR"));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, null, null, null, null));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
@@ -1031,7 +1044,7 @@ dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPower
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(3, 'Trail Blazer', 'Trail Blazer', 2, null, 'Increases the movement speed of your Fire Snake.'));
 
-dataPower[dataPower.length] = new Power(dataPower.length, 'Hydra', '<div class="Sprite Fire_Hydra"></div>&nbsp;Hydra', 1, 2, pow++, 3, PowerTip(2, 3, '50 Foot range Summon and AoE', '+ You summon terrifying hydra heads to rain fiery justice down on your foes.<br />+ Each rank increases the number of hydra heads spawned.<br />+ This power also summons a lava pit which damages foes and can apply Clinging Flames.'));
+dataPower[dataPower.length] = new Power(dataPower.length, 'Hydra', '<div class="Sprite Fire_Hydra"></div>&nbsp;Hydra', 1, 2, pow++, 3, PowerTip(2, 3, '50 Foot range Summon and AoE', '+ You summon terrifying hydra heads to rain fiery justice down on your foes.<br />+ Each rank increases the number of hydra heads spawned.<br />+ This power also summons a lava pit which damages foes and can apply Clinging Flames.' + PowerUnlocksFrom(UNLOCK_RECOGNITION, "500/250", "SCR/GCR")));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, null, null, null, null));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
@@ -1152,7 +1165,7 @@ dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, nul
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
 
-dataPower[dataPower.length] = new Power(dataPower.length, 'Gravitic Ripple', '<div class="Sprite Force_FieldSurge"></div>&nbsp;Gravitic Ripple', 1, 3, pow++, 3, 'Force, 25 foot Sphere PBAoE Damage and Gravity Control<br /><br />Requires 5 powers from Force or 6 non-Energy Building powers from any framework.<br /><br />You distort the local gravity, causing nearby foes to become nexuses of gravitic force.<br /><br /><b>This power unlock can be purchased from an Onslaught Agent.</b><br /><br />MAINTAIN<br />+ Deals Crushing damage to targets around you.<br />+ Applies Gravity Well to all targets, causing them to pull all their nearby allies in.');
+dataPower[dataPower.length] = new Power(dataPower.length, 'Gravitic Ripple', '<div class="Sprite Force_FieldSurge"></div>&nbsp;Gravitic Ripple', 1, 3, pow++, 3, 'Force, 25 foot Sphere PBAoE Damage and Gravity Control<br /><br />Requires 5 powers from Force or 6 non-Energy Building powers from any framework.<br /><br />You distort the local gravity, causing nearby foes to become nexuses of gravitic force.<br /><br />MAINTAIN<br />+ Deals Crushing damage to targets around you.<br />+ Applies Gravity Well to all targets, causing them to pull all their nearby allies in.' + PowerUnlocksFrom(UNLOCK_ONSLAUGHT, 10000, "Villain Tokens"));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, null, null, null, null));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
@@ -1433,7 +1446,7 @@ dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, nul
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
 
-dataPower[dataPower.length] = new Power(dataPower.length, 'Aurora', '<div class="Sprite Ice_Aurora"></div>&nbsp;Aurora', 1, 5, pow++, 3, 'Ice, Self-Resurrect and Heal<br /><br />Requires 5 powers from Ice or 6 non-Energy Building powers from any framework.<br /><br />Can be used while dead to resurrect with 50% of your maximum health and grants you the following:<br /><br />+ For the next 20 seconds, killing foes will restore additional health<br />+ For the next 20 seconds, you apply Chill to any foe that attacks you, which slows their movement by 50% for 16 seconds and occasionall traps them in an Ice Cage.<br />+ For the next 10 seconds, you are affected by Cold Snap.<br />- Shares a cooldown with similar powers.' + GCR_UNLOCK);
+dataPower[dataPower.length] = new Power(dataPower.length, 'Aurora', '<div class="Sprite Ice_Aurora"></div>&nbsp;Aurora', 1, 5, pow++, 3, 'Ice, Self-Resurrect and Heal<br /><br />Requires 5 powers from Ice or 6 non-Energy Building powers from any framework.<br /><br />Can be used while dead to resurrect with 50% of your maximum health and grants you the following:<br /><br />+ For the next 20 seconds, killing foes will restore additional health<br />+ For the next 20 seconds, you apply Chill to any foe that attacks you, which slows their movement by 50% for 16 seconds and occasionall traps them in an Ice Cage.<br />+ For the next 10 seconds, you are affected by Cold Snap.<br />- Shares a cooldown with similar powers.' + PowerUnlocksFrom(UNLOCK_RECOGNITION, 350, "SCR"));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, null, null, null, null));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
@@ -1464,10 +1477,10 @@ dataRequireGroup['technology'] = [];
 dataPowerAlias['Implosion Engine'] = new PowerAlias('Implosion Engine', 'Implosion Engine', '<div class="Sprite Technology_ImplosionEngine"></div>&nbsp;Implosion Engine', 'Technology, 100 foot Ranged AoE Damage and Reverse Repel and Snare<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />You throw an Implosion Engine, a device that generates a massive gravitational vortex in a very small area, sucking in nearby matter, and dealing significant Dimensional damage.<br /><br />CLICK<br />+ Create and throw an Implosion Engine at your target, dealing Crushing damage from the massive gravity waves, pulling them toward the Engine.<br />- This power is incapable of getting a Critical Hit.');
 dataPowerAlias['Inverse Polarization Field'] = new PowerAlias('Inverse Polarization Field', 'Inverse Polarization Field', 'Inverse Polarization Field', 'Just before self-destructing, the polarity of the gravitational field created by Implosion Engine will reverse, sending all affected enemies flying.');
 dataPowerAlias['Concentration'] = new PowerAlias('Concentration', 'Concentration', '<div class="Sprite Technology_Concentration"></div>&nbsp;Concentration', 'Technology, Form (Intelligence or Ego)<br /><br />Requires 1 power from Technology or 2 non-Energy Building powers from any framework.<br /><br />Gives you a stacking buff that increases your ranged damage, as well as your melee damage to a lesser degree.<br /><br />+ You gain a stack each time you maintain or charge a ranged power at least halfway, or when you hit a target at least 25 feet away.<br />+ Each time you gain a stack, existing stacks are refreshed and you gain energy.<br />+ Stacks up to 8 times, lasts 20 seconds, and can only gain 1 stack every 4 seconds.<br />- Increases energy costs by 10%.');
-dataPowerAlias['Mechanical Monstrosity'] = new PowerAlias('Mechanical Monstrosity', 'Mechanical Monstrosity', '<div class="Sprite Technology_MechanicalMonstrosity"></div>&nbsp;Mechcanical Monstrosity', 'Technology, Uncontrolled Pet<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />Summons a Mechanical Spider.<br /><br />+ Deals heavy Slashing, Electrical, and Poison damage.<br />+ Attacks have increased threat.<br />+ Can apply Debilitating Poison to foes.<br /><br /><b>This power can be found inside the Spider Lockbox.</b>');
-dataPowerAlias['Meltdown'] = new PowerAlias('Meltdown', 'Meltdown', '<div class="Sprite Technology_Meltdown"></div>&nbsp;Meltdown', 'Technology, 15 foot PBAoE Sphere<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />Deals Particle damage to nearby targets and knocks them down.  The initial strike applies Plasma Burn immediately, with additional stacks being applied over 5 seconds.<br /><br /><b>This power can be found inside the Toybox.</b>');
+dataPowerAlias['Mechanical Monstrosity'] = new PowerAlias('Mechanical Monstrosity', 'Mechanical Monstrosity', '<div class="Sprite Technology_MechanicalMonstrosity"></div>&nbsp;Mechcanical Monstrosity', 'Technology, Uncontrolled Pet<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />Summons a Mechanical Spider.<br /><br />+ Deals heavy Slashing, Electrical, and Poison damage.<br />+ Attacks have increased threat.<br />+ Can apply Debilitating Poison to foes.' + PowerUnlocksFrom("Spider Lockbox or " + UNLOCK_COLLECTOR, 1, UNLOCK_PURPLE_FOIL));
+dataPowerAlias['Meltdown'] = new PowerAlias('Meltdown', 'Meltdown', '<div class="Sprite Technology_Meltdown"></div>&nbsp;Meltdown', 'Technology, 15 foot PBAoE Sphere<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />Deals Particle damage to nearby targets and knocks them down.  The initial strike applies Plasma Burn immediately, with additional stacks being applied over 5 seconds.' + PowerUnlocksFrom("Toybox"));
 dataPowerAlias['Fire All Weapons'] = new PowerAlias('Fire All Weapons', 'Fire All Weapons', '<div class="Sprite Technology_FireAllWeapons"></div>&nbsp;Fire All Weapons', 'Technology, 50 foot 120 degree Cone AoE Damage<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />Hand Slot - Shoulder Slot - Chest Slot<br /><br />Deals Particle damage to all targets.');
-dataPowerAlias['Showdown'] = new PowerAlias('Showdown', 'Showdown', '<div class="Sprite Technology_Showdown"></div>&nbsp;Showdown', 'Technology, 50 foot 180 degree PBAoE Cone<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />Deals Piercing damage and Roots targets for 8 seconds.  Each hit refreshes the Root duration.<br /><br /><b>This power can be found inside the Western Lockbox.</b>');
+dataPowerAlias['Showdown'] = new PowerAlias('Showdown', 'Showdown', '<div class="Sprite Technology_Showdown"></div>&nbsp;Showdown', 'Technology, 50 foot 180 degree PBAoE Cone<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />Deals Piercing damage and Roots targets for 8 seconds.  Each hit refreshes the Root duration.' + PowerUnlocksFrom("Western Lockbox"));
 dataPowerAlias['Burn Through'] = new PowerAlias('Burn Through', 'Burn Through', 'Burn Through', '+ Burn Through reduces your target\\\'s resistance to Crushing and Particle damage by -15% for 12 seconds.<br />+ Burn Through is a type of Radiation.');
 dataPowerAlias['Melta Cannon'] = new PowerAlias('Melta Cannon', 'Melta Cannon', 'Melta Cannon', '+ This power gains a 10% chance to apply Plasma Burn, which deals Particle damage every second for 16 seconds per stack.<br />+ Plasma Burn is a type of Radiation.');
 dataPowerAlias['YCWS'] = new PowerAlias('YCWS', 'You Clean, We\'ll Sweep', 'You Clean, We\'ll Sweep', '+ Applies a large threat over time effect to your target.<br />+ This effect stacks with the Challenge! effect.');
@@ -2527,7 +2540,7 @@ dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(3, dataPower
 dataRequireGroup['martial arts'] = [];
 
 dataPowerAlias['Fury of the Dragon'] = new PowerAlias('Fury of the Dragon', 'Fury of the Dragon', '<div class="Sprite MartialArts_FuryOfTheDragon"></div>&nbsp;Fury of the Dragon', 'Martial Arts, 25 foot Melee 60 degree Cone AoE Damage<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />Fury of the Dragon causes a chaotic attack of claws and fire, dealing damage to nearby foes.<br /><br />MAINTAINED<br />+ Deals Slashing and Fire damage to targets in front of you.<br />+ The damage dealt by this power is considered melee damage for effects such as the Brawler Role. Note that the damage is not modified by Strength, however.<br />+ If you are affected by Focus, this attack also Snares your foes.<br />+ Deals additional damage for each stack of Focus you have.<br />+ You are immune to Control effects while channeling this power.');
-dataPowerAlias['Vorpal Blade'] = new PowerAlias('Vorpal Blade', 'Vorpal Blade', '<div class="Sprite MartialArts_VorpalBlade"></div>&nbsp;Vorpal Blade', 'Martial Arts, 25 foot Melee 60 degree Cone AoE Damage<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />+ AoE Slashing damage.<br />+ Hits multiple times, each strike inflicting Bleed on foes over time.<br />+ Damage is increased by the number of Focus stacks you have.');
+dataPowerAlias['Vorpal Blade'] = new PowerAlias('Vorpal Blade', 'Vorpal Blade', '<div class="Sprite MartialArts_VorpalBlade"></div>&nbsp;Vorpal Blade', 'Martial Arts, 25 foot Melee 60 degree Cone AoE Damage<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />+ AoE Slashing damage.<br />+ Hits multiple times, each strike inflicting Bleed on foes over time.<br />+ Damage is increased by the number of Focus stacks you have.' + PowerUnlocksFrom("XXX Lockbox or " + UNLOCK_COLLECTOR, 1, UNLOCK_PURPLE_FOIL));
 dataPowerAlias['Real Ultimate Power'] = new PowerAlias('Real Ultimate Power', 'Real Ultimate Power', 'Real Ultimate Power', 'The purpose of this advantage is to flip out and make people Bleed. Your Fury of the Dragon has multiple chances to cause a Bleed effect on the target.');
 dataPowerAlias['Shuriken Throw'] = new PowerAlias('Shuriken Throw', 'Shuriken Throw', '<div class="Sprite MartialArts_ShurikenThrow"></div>&nbsp;Shuriken Throw', 'Martial Arts, 100 foot Ranged Single Target Damage and Knock Down<br /><br />Requires 1 power from Martial Arts or 2 non-Energy Building powers from any framework.<br /><br />Shuriken Throw allows you to throw shuriken with deadly precision.');
 dataPowerAlias['Chained Kunai'] = new PowerAlias('Chained Kunai', 'Chained Kunai', '<div class="Sprite MartialArts_ChainedKunai"></div>&nbsp;Chained Kunai', '+ Single target Slashing damage.<br />+ Knocks the target toward you.<br />+ Has a 28%-100% (based on charge) chance to apply Bleed to your target.');
@@ -3507,7 +3520,7 @@ dataPowerAlias['Aggression Inhibitor'] = new PowerAlias('Aggression Inhibitor', 
 // TODO: get correct description
 // TODO: does not count towards unlocking in-framework power tiers
 dataPowerAlias['Manipulator'] = new PowerAlias('Manipulator', 'Manipulator', '<div class="Sprite Mentalist_Manipulation"></div>&nbsp;Manipulator', 'Mentalist, Form (Intelligence or Presence)<br /><br />Requires 1 power from Mentalist or 2 non-Energy Building powers from any framework.<br /><br />Gives you a stacking buff that increases the magnitude of Stuns, Incapacitates, Paralyzes, Roots, Sleeps, and Confuses.  It also increases your ranged and melee damage by a lesser amount.<br /><br />+ You gain a stack each time you Stun, Incapacitate, Paralyze, Root, Sleep, or Confuse a target.<br />+ Each time you gain a stack, existing stacks are refreshed and you gain energy.<br />+ Stacks up to 8 times, lasts 20 seconds, and can only gain 1 stack every 4 seconds.<br />- Increases energy costs by 10%.');
-dataPowerAlias['Mental Impact'] = new PowerAlias('Mental Impact', 'Mental Impact', '<div class="Sprite Mentalist_MentalImpact"></div>&nbsp;Mental Impact', 'Mentalist, 100 foot 20 foot Sphere AoE Damage - Damage Resistance Debuff - Knockdown<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />Deals Ego damage to foes.  Any foe damaged by this attack is Knocked Down and suffers 20% reduced damage resistance against all damage types for 12 seconds.  Gives you a atack of Ego Leech for every foe hit.  This power must be fully charged.' + PowerUnlocksFrom('Cybernetic Lockbox'));
+dataPowerAlias['Mental Impact'] = new PowerAlias('Mental Impact', 'Mental Impact', '<div class="Sprite Mentalist_MentalImpact"></div>&nbsp;Mental Impact', 'Mentalist, 100 foot 20 foot Sphere AoE Damage - Damage Resistance Debuff - Knockdown<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />Deals Ego damage to foes.  Any foe damaged by this attack is Knocked Down and suffers 20% reduced damage resistance against all damage types for 12 seconds.  Gives you a atack of Ego Leech for every foe hit.  This power must be fully charged.' + PowerUnlocksFrom("Cybernetic Lockbox"));
 dataPowerAlias['LaM'] = new PowerAlias('LaM', 'Leave a Mark', 'Leave a Mark', '+ Applies a large threat over time effect to your target.<br />+ This effect stacks with the Challenge! effect.');
 
 //------------------------------------------------------------------------------
@@ -3689,7 +3702,7 @@ dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(4, 'Inner Pe
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(5, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(6, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
 
-dataPower[dataPower.length] = new Power(dataPower.length, 'Lance Rain', '<div class="Sprite Telekinesis_TelekineticLance"></div>&nbsp;Lance Rain', 4, 15, pow++, 3, 'Telekinesis, 100 foot Ranged 15 foot Sphere AoE Damage<br /><br />Requires 5 powers from Telekinesis or 6 non-Energy Building powers from any framework.<br /><br /><b>This power unlock can be purchased from an Onslaught Agent.</b><br /><br />TAP<br />+ Single target Ego damage.<br /><br />CHARGE<br />+ Increases the damage and Energy cost of the Tap action.<br />+ This power strikes all targets in a 15 foot radius around your primary targets, and each of the following effects is duplicated on each target in range.<br />+ When fully charged, this power consumes all of your stacks of Ego Leech, causing an eruption of Telekinetic Energy that deals additional damage to your target and AoE splash damage in a 10 foot radius around your target.<br />+ When consuming Ego Leech, this power grants you the Ego Infusion Buff. The length of the Buff is increased for each stack consumed. Ego Infusion grants you stacks of Ego Leech over time.');
+dataPower[dataPower.length] = new Power(dataPower.length, 'Lance Rain', '<div class="Sprite Telekinesis_TelekineticLance"></div>&nbsp;Lance Rain', 4, 15, pow++, 3, 'Telekinesis, 100 foot Ranged 15 foot Sphere AoE Damage<br /><br />Requires 5 powers from Telekinesis or 6 non-Energy Building powers from any framework.<br /><br />TAP<br />+ Single target Ego damage.<br /><br />CHARGE<br />+ Increases the damage and Energy cost of the Tap action.<br />+ This power strikes all targets in a 15 foot radius around your primary targets, and each of the following effects is duplicated on each target in range.<br />+ When fully charged, this power consumes all of your stacks of Ego Leech, causing an eruption of Telekinetic Energy that deals additional damage to your target and AoE splash damage in a 10 foot radius around your target.<br />+ When consuming Ego Leech, this power grants you the Ego Infusion Buff. The length of the Buff is increased for each stack consumed. Ego Infusion grants you stacks of Ego Leech over time.' + PowerUnlocksFrom(UNLOCK_ONSLAUGHT, 10000, "Villain Tokens"));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, null, null, null, null));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
@@ -3829,7 +3842,7 @@ dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPower
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(3, 'Psionic Emanation', 'Psionic Emanation', 2, null, 'Grants your Psionic Healing a chance to perform an AoE heal around the target.'));
 
-dataPower[dataPower.length] = new Power(dataPower.length, 'Mind Drain', '<div class="Sprite Telepathy_MindDrain"></div>&nbsp;Mind Drain', 4, 16, pow++, 2, 'Telepathy, 50 foot Ranged Single Target Damage and Self Heal<br /><br />Requires 3 powers from Telepathy or 4 non-Energy Building powers from any framework.<br /><br />Deals Ego damage to the target, healing you as you deal damage.');
+dataPower[dataPower.length] = new Power(dataPower.length, 'Mind Drain', '<div class="Sprite Telepathy_MindDrain"></div>&nbsp;Mind Drain', 4, 16, pow++, 2, 'Telepathy, 50 foot Ranged Single Target Damage and Self Heal<br /><br />Requires 3 powers from Telepathy or 4 non-Energy Building powers from any framework.<br /><br />Deals Ego damage to the target, healing you as you deal damage.' + PowerUnlocksFrom(UNLOCK_RECOGNITION, 350, "SCR"));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, null, null, null, null));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
@@ -3893,7 +3906,7 @@ dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(3, dataPower
 dataRequireGroup['brick'] = [];
 
 dataPowerAlias['Unleashed Rage'] = new PowerAlias('Unleashed Rage', 'Unleashed Rage', '<div class="Sprite Brick_UnleashedRage"></div>&nbsp;Unleashed Rage', 'Brick, 10 foot Melee 15 foot Sphere AoE Damage and Knock Down and Fear<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />Unleashed Rage lets forth a deafening shout, terrifying and damaging nearby foes.<br /><br />CLICK<br />+ Deals Sonic damage to nearby targets.<br />+ The damage dealt by this power is considered melee damage for effects such as the Brawler Role. Note that the damage is not modified by Strength, however.<br />+ Knocks Down affected targets.<br />+ Fears affected targets, causing the enemy to cower in your presence and reducing the damage they deal.<br />+ Deals additional damage for each stack of Enrage you have.');
-dataPowerAlias['Power Chord'] = new PowerAlias('Power Chord', 'Power Chord', '<div class="Sprite Brick_PowerChord"></div>&nbsp;Power Chord', 'Brick, 25 foot PBAoE Sphere - Maintain<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />Blow your enemies away with the awesome power of music!<br />+ Deals Sonic damage to nearby foes.<br />+ As you maintain this power, you gain a damage boost.<br />+ After you stop maintaining, affected targets are Knocked Back.<br />+ Disorients affected targets, causing them to move slower and deal less damage.');
+dataPowerAlias['Power Chord'] = new PowerAlias('Power Chord', 'Power Chord', '<div class="Sprite Brick_PowerChord"></div>&nbsp;Power Chord', 'Brick, 25 foot PBAoE Sphere - Maintain<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />Blow your enemies away with the awesome power of music!<br />+ Deals Sonic damage to nearby foes.<br />+ As you maintain this power, you gain a damage boost.<br />+ After you stop maintaining, affected targets are Knocked Back.<br />+ Disorients affected targets, causing them to move slower and deal less damage.' + PowerUnlocksFrom("The Rockbox " + UNLOCK_COLLECTOR, 1, UNLOCK_PURPLE_FOIL));
 dataPowerAlias['Defiance'] = new PowerAlias('Defiance', 'Defiance', '<div class="Sprite Brick_Defiance"></div>&nbsp;Defiance', 'Brick, Defensive Passive (Constitution)<br /><br />Requires 1 power from Brick or 2 non-Energy Building powers from any framework.<br /><br />Allows you to build stacks of Defiant! when hit.<br /><br />+ Each stack of Defiant! increases your damage resistance.<br />+ Each time you take damage, you recover energy.<br />+ Stacks up to 6 times and lasts 20 seconds.<br />- Scales specifically with Constitution instead of super stats in general.');
 dataPowerAlias['Force of Will'] = new PowerAlias('Force of Will', 'Force of Will', 'Force of Will', 'Adds increasing Knock Back and Stun resistance as your Health gets lower.');
 dataPowerAlias['Unstoppable'] = new PowerAlias('Unstoppable', 'Unstoppable', '<div class="Sprite Brick_Unstoppable"></div>&nbsp;Unstoppable', 'Brick, Slotted Offensive Passive<br /><br />Requires 1 power from Brick or 2 non-Energy Building powers from any framework.<br /><br />+ Increases your Melee and Bleed damage.<br />+ Increases other damage by a lesser amount.<br />+ Increases your Knock resistance.<br />+ Each time you take damage, a small, flat amount is absorbed.<br />+ Generates energy each time you Knock a target.  This energy scales with Recovery.');
@@ -4412,7 +4425,7 @@ dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(3, 'Leg Rumb
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(4, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(5, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
 
-dataPower[dataPower.length] = new Power(dataPower.length, 'Nuclear Shockwave', '<div class="Sprite Might_Shockwave"></div>&nbsp;Nuclear Shockwave', 5, 19, pow++, 3, 'Might, 75 foot Ranged 20 foot Cylinder AoE Damage<br /><br />Requires 5 powers from Might or 6 non-Energy Building powers from any framework.<br /><br />You unleash a wave of nuclear energy, decimating foes in front of you.<br /><br /><b>This power unlock can be purchased from an Onslaught Agent.</b><br /><br />CHARGE<br />+ Deals heavy Crushing and Particle damage to targets in front of you.');
+dataPower[dataPower.length] = new Power(dataPower.length, 'Nuclear Shockwave', '<div class="Sprite Might_Shockwave"></div>&nbsp;Nuclear Shockwave', 5, 19, pow++, 3, 'Might, 75 foot Ranged 20 foot Cylinder AoE Damage<br /><br />Requires 5 powers from Might or 6 non-Energy Building powers from any framework.<br /><br />You unleash a wave of nuclear energy, decimating foes in front of you.<br /><br />CHARGE<br />+ Deals heavy Crushing and Particle damage to targets in front of you.' + PowerUnlocksFrom(UNLOCK_ONSLAUGHT, 10000, "Villain Tokens"));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, null, null, null, null));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
@@ -4437,8 +4450,8 @@ dataRequireGroup['mystic'] = [];
 
 dataPowerAlias['Planar Fracture'] = new PowerAlias('Planar Fracture', 'Planar Fracture', '<div class="Sprite Mystic_PlanarFracture"></div>&nbsp;Planar Fracture', 'Mystic, 50 foot Ranged Single Target Damage and DoT and Debuff<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />Planar Fracture creates a tear in time and space, linking this plane with another. Chaotic energy pours forth from the fracture, causing random damage and status effects on your foes.<br /><br />CHARGE<br />+ Creates a Planar Fracture near your target.<br />+ Planar Fracture deals Dimensional damage to targets close to it.<br />+ The chaotic energies flowing from the Planar Fracture create random status effects on nearby enemies.<br />- Must be fully charged.<br />- This power is incapable of getting a Critical Hit.');
 dataPowerAlias['Double Vortex'] = new PowerAlias('Double Vortex', 'Double Vortex', 'Double Vortex', 'Your Planar Fracture now causes 2 random Debuffs on each target instead of 1.');
-dataPowerAlias['Endbringers Grasp'] = new PowerAlias('Endbringer\'s Grasp', 'Endbringer\'s Grasp', '<div class="Sprite Mystic_EndbringersGrasp"></div>&nbsp;Endbringer\'s Grasp', 'Mystic, 50 foot Ranged AoE Damage and Darkness<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />Open a Qliphotic portal, its horrifying power eating away at the sanity of your foes.<br /><br /><b>This power can be unlocked from a Villain Lockbox drop.</b><br /><br />CHARGE<br />+ Open a portal that deals dimensional damage to foes.<br />+ Foes are periodically afflicted with Fear.<br />+ Foes who are afflicted by Fear are periodically corrupted and forced to fight for you.');
-dataPowerAlias['Crashing Incantation'] = new PowerAlias('Crashing Incantation', 'Crashing Incantation', '<div class="Sprite Mystic_CrashingIncantation"></div>&nbsp;Crashing Incantation', 'Mystic, 50 foot Ranged AoE Damage and Curse<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />+ Deals Magic damage to targets within a 20 foot radius.<br />+ Applies Jinx to the target, reducing their movement by 15% for 8 seconds.  When the effect expires, affected foes are Knocked Down.<br />+ Jinx is a type of Curse.<br />+ Applies Overpower to affected foes, which reduces their damage resistance by 20% for 12 seconds.' + PowerUnlocksFrom('Arcane Lockbox'));
+dataPowerAlias['Endbringers Grasp'] = new PowerAlias('Endbringer\'s Grasp', 'Endbringer\'s Grasp', '<div class="Sprite Mystic_EndbringersGrasp"></div>&nbsp;Endbringer\'s Grasp', 'Mystic, 50 foot Ranged AoE Damage and Darkness<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />Open a Qliphotic portal, its horrifying power eating away at the sanity of your foes.<br /><br />CHARGE<br />+ Open a portal that deals dimensional damage to foes.<br />+ Foes are periodically afflicted with Fear.<br />+ Foes who are afflicted by Fear are periodically corrupted and forced to fight for you.' + PowerUnlocksFrom("Villain Lockbox " + UNLOCK_COLLECTOR, 1, UNLOCK_PURPLE_FOIL));
+dataPowerAlias['Crashing Incantation'] = new PowerAlias('Crashing Incantation', 'Crashing Incantation', '<div class="Sprite Mystic_CrashingIncantation"></div>&nbsp;Crashing Incantation', 'Mystic, 50 foot Ranged AoE Damage and Curse<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />+ Deals Magic damage to targets within a 20 foot radius.<br />+ Applies Jinx to the target, reducing their movement by 15% for 8 seconds.  When the effect expires, affected foes are Knocked Down.<br />+ Jinx is a type of Curse.<br />+ Applies Overpower to affected foes, which reduces their damage resistance by 20% for 12 seconds.' + PowerUnlocksFrom("Arcane Lockbox"));
 // TODO: does not count towards unlocking in-framework power tiers
 dataPowerAlias['Compassion'] = new PowerAlias('Compassion', 'Compassion', '<div class="Sprite Mystic_Compassion"></div>&nbsp;Compassion', 'Mystic, Form (Presence or Recovery)<br /><br />Requires 1 power from Mystic or 2 non-Energy Building powers from any framework.<br /><br />Gives you a stacking buff that increases your healing, as well as your ranged and melee damage to a lesser degree.<br /><br />+ You gain a stack each time you heal a target.<br />+ Each time you gain a stack, existing stacks are refreshed and you gain energy.<br />+ Stacks up to 8 times, lasts 20 seconds, and can only gain 1 stack every 4 seconds.<br />- Increases energy costs by 10%.');
 
@@ -4541,7 +4554,7 @@ dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPower
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(3, 'Absolve', 'Absolve', 2, null, 'The target of Palliate has their threat wiped and gains stealth for 10 seconds.'));
 
-dataPower[dataPower.length] = new Power(dataPower.length, 'Holy Water', '<div class="Sprite Celestial_HolyWater"></div>&nbsp;Holy Water', 6, 20, pow++, 3, 'Celestial, 25 foot 90 Degree Cone Damage or Heal<br /><br />Requires 5 powers from Celestial or 6 non-Energy Building powers from any framework.<br /><br />+ If Targeting foes, deals Dimensional damage to affected targets every 1 sec for 10 sec.  Illuminated foes will also become Disoriented.<br />+ If Targeting allies, heals affected targets once every 2 sec for 10 sec.' + PowerUnlocksFrom('Nightmare Invasion Store'));
+dataPower[dataPower.length] = new Power(dataPower.length, 'Holy Water', '<div class="Sprite Celestial_HolyWater"></div>&nbsp;Holy Water', 6, 20, pow++, 3, 'Celestial, 25 foot 90 Degree Cone Damage or Heal<br /><br />Requires 5 powers from Celestial or 6 non-Energy Building powers from any framework.<br /><br />+ If Targeting foes, deals Dimensional damage to affected targets every 1 sec for 10 sec.  Illuminated foes will also become Disoriented.<br />+ If Targeting allies, heals affected targets once every 2 sec for 10 sec.' + PowerUnlocksFrom('Nightmare Invasion Store', 650, 'Elysium Coins'));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, null, null, null, null));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
@@ -4550,7 +4563,7 @@ dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(4, 'Impure W
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(5, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(6, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
 
-dataPower[dataPower.length] = new Power(dataPower.length, 'Celestial Cleansing', '<div class="Sprite Celestial_CelestialCleansing"></div>&nbsp;Celestial Cleansing', 6, 20, pow++, 3, 'Celestial, 100 foot Ranged Single Friend Cleanse<br /><br />Requires 5 powers from Celestial or 6 non-Energy Building powers from any framework.<br /><br />Purge a target, banishing an undesirable effect to far off dimensions.<br /><br /><b>Unlockable Power</b>');
+dataPower[dataPower.length] = new Power(dataPower.length, 'Celestial Cleansing', '<div class="Sprite Celestial_CelestialCleansing"></div>&nbsp;Celestial Cleansing', 6, 20, pow++, 3, 'Celestial, 100 foot Ranged Single Friend Cleanse<br /><br />Requires 5 powers from Celestial or 6 non-Energy Building powers from any framework.<br /><br />Purge a target, banishing an undesirable effect to far off dimensions.');
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, null, null, null, null));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
@@ -4673,7 +4686,7 @@ dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(3, 'Soul Dra
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(4, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(5, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
 
-dataPower[dataPower.length] = new Power(dataPower.length, 'Dark Transfusion', '<div class="Sprite Darkness_DarkTransfusion"></div>&nbsp;Dark Transfusion', 6, 21, pow++, 2, 'Darkness, Self Energy Gain and Self Damage (Endurance, Recovery)<br /><br />Requires 3 powers from Darkness or 4 non-Energy Building powers from any framework.<br /><br />Lose 400 health points in exchange for a large initial energy boost that scales with the maximum size of your energy pool as well as your Recovery, as well as the following effects that last for 15 seconds:<br /><br />+ Sets your energy equilibrium to the maximum.<br />+ Increases your energy regeneration.<br />- You lose 75 health every second.<br />- Reduces the effectiveness of healing effects used on you.  Healing from Life Drain and percent-of-max-health effects are not affected by this reduction.<br /><br />Life Drain effects include:  Life Drain, Mind Drain, Life Essence, Despondency (Soul Vortex, Mental Leech), Devouring Darkness (Summon Shadows), Consumption (Grasping Shadows), Devour Essence, Siphoning Strikes (Ego Weaponry), Back to the Darkness (Ebon Ruin), etc');
+dataPower[dataPower.length] = new Power(dataPower.length, 'Dark Transfusion', '<div class="Sprite Darkness_DarkTransfusion"></div>&nbsp;Dark Transfusion', 6, 21, pow++, 2, 'Darkness, Self Energy Gain and Self Damage (Endurance, Recovery)<br /><br />Requires 3 powers from Darkness or 4 non-Energy Building powers from any framework.<br /><br />Lose 400 health points in exchange for a large initial energy boost that scales with the maximum size of your energy pool as well as your Recovery, as well as the following effects that last for 15 seconds:<br /><br />+ Sets your energy equilibrium to the maximum.<br />+ Increases your energy regeneration.<br />- You lose 75 health every second.<br />- Reduces the effectiveness of healing effects used on you.  Healing from Life Drain and percent-of-max-health effects are not affected by this reduction.<br /><br />Life Drain effects include:  Life Drain, Mind Drain, Life Essence, Despondency (Soul Vortex, Mental Leech), Devouring Darkness (Summon Shadows), Consumption (Grasping Shadows), Devour Essence, Siphoning Strikes (Ego Weaponry), Back to the Darkness (Ebon Ruin), Void Feast (Shade Storm), etc');
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, null, null, null, null));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
@@ -4695,7 +4708,7 @@ dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(5, 'Back to 
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(6, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(7, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
 
-dataPower[dataPower.length] = new Power(dataPower.length, 'Ebon Rift', '<div class="Sprite Darkness_EbonRift"></div>&nbsp;Ebon Rift', 6, 21, pow++, 3, 'Darkness, 50 foot Ranged 15 foot Sphere AoE Damage and Snare<br /><br />Requires 5 powers from Darkness or 6 non-Energy Building powers from any framework.<br /><br />Ebon Rift opens a hole to another dimension in front of you, drawing your enemies and their life force towards it.');
+dataPower[dataPower.length] = new Power(dataPower.length, 'Ebon Rift', '<div class="Sprite Darkness_EbonRift"></div>&nbsp;Ebon Rift', 6, 21, pow++, 3, 'Darkness, 50 foot Ranged 15 foot Sphere AoE Damage and Snare<br /><br />Requires 5 powers from Darkness or 6 non-Energy Building powers from any framework.<br /><br />Deals Dimensional Damage every 0.5 sec to all targets.  Foes within 20 feet are pulled toward the center of the rift.  Has a 10% chance to apply Fear to affected targets.<br /><br />The longer you maintain this power, the longer the rift will linger afterward.');
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, null, null, null, null));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
@@ -4703,7 +4716,17 @@ dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(3, 'Vengeful
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(4, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(5, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
 
-dataPower[dataPower.length] = new Power(dataPower.length, 'Shadow Eruption', '<div class="Sprite Darkness_ShadowEruption"></div>&nbsp;Shadow Eruption', 6, 21, pow++, 3, 'Darkness, 25 foot PbAoE Damage and Knockback<br /><br />Requires 5 powers from Darkness or 6 non-Energy Building powers from any framework.<br /><br />Deals shadow damage and knocks all affected enemies away from you.' + GCR_UNLOCK);
+dataPower[dataPower.length] = new Power(dataPower.length, 'Shade Storm', '<div class="Sprite Any_Generic"></div>&nbsp;Shade Storm', 6, 21, pow++, 3, 'Darkness, 50 foot Ranged 15 foot Sphere AoE Damage - Fear - Knockdown<br /><br />Requires 5 powers from Darkness or 6 non-Energy Building powers from any framework.<br /><br />Deals Dimensional Damage every 0.5 sec to all targets.  Has a 10% chance to apply Fear to targets and a 10% chance to Knock Down targets already affected by Fear.' + PowerUnlocksFrom(UNLOCK_RECOGNITION, "350/175", "SCR/GCR"));
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, null, null, null, null));
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(3, 'Horrifying Shadows', 'Horrifying Shadows', 2, null, 'When fully maintained, Stuns all affected targets for 2 seconds.'));
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(4, 'Splatter', 'Splatter', 2, null, 'Instead of Knocking Down targets, has a 25% chance to Knock Up targets affected by Fear.'));
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(5, 'Void Feast', 'Void Feast', 2, null, 'Consumes all Fear effects on affected targets, healing you for each effect consumed.  This heal counts as a Life Drain.'));
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(6, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(7, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
+
+dataPower[dataPower.length] = new Power(dataPower.length, 'Shadow Eruption', '<div class="Sprite Darkness_ShadowEruption"></div>&nbsp;Shadow Eruption', 6, 21, pow++, 3, 'Darkness, 25 foot PbAoE Damage and Knockback<br /><br />Requires 5 powers from Darkness or 6 non-Energy Building powers from any framework.<br /><br />Deals shadow damage and knocks all affected enemies away from you.' + PowerUnlocksFrom(UNLOCK_RECOGNITION, "500/250", "SCR/GCR"));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, null, null, null, null));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
