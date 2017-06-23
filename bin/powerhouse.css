@@ -155,7 +155,11 @@ img {
     padding: 0.2em;
 }
 
-.spacedTable tr td{
+.disabledCheckField {
+	opacity: 0.65;
+}
+
+.spacedTable tr td {
     padding-bottom: 1em;
 }
 

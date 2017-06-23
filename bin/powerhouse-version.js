@@ -1065,6 +1065,51 @@ dataVersionUpdate[dataVersionUpdate.length] = new VersionUpdate(
         case 'specialization': return value['specialization'];
         }
     });
+// version 22 => 23 (TK blades revamp)
+dataVersionUpdate[dataVersionUpdate.length] = new VersionUpdate(
+    dataVersionUpdate.length, 12,
+    function(thing, value) {
+        var codeNum1 = (value['code1'] == undefined) ? 0 : urlCodeToNum(value['code1']); // framework
+        var codeNum2 = (value['code2'] == undefined) ? 0 : urlCodeToNum(value['code2']); // power
+        // var codeNum3 = (value['code3'] == undefined) ? 0 : urlCodeToNum(value['code3']);
+        // var codeNum4 = (value['code4'] == undefined) ? 0 : urlCodeToNum(value['code4']);
+        switch (thing) {
+        case 'data': return value['data'];
+        case 'pos': return value['pos'];
+        case 'i': return value['i'];
+        case 'inc': return value['inc'];
+        case 'code1': return value['code1'];
+        case 'code2': return value['code2'];
+        case 'code3': return value['code3'];
+        case 'code4': return value['code4'];
+        case 'archetype': return value['archetype'];
+        case 'superStat': return value['superStat'];
+        case 'innateTalent': return value['innateTalent'];
+        case 'talent': return value['talent'];
+        case 'travelPower': return value['travelPower'];
+        case 'framework': return value['framework'];
+        case 'power':
+			var power = value['power'];
+            if (codeNum1 == 15) // tk blades framework
+			{
+				if (codeNum2 == 3) power = 28; // tk assault moved to t3
+				if (codeNum2 == 4) power += 2; // telekinesis bumped down 2 slots
+				if (codeNum2 >= 6 && codeNum2 <= 8) power += 2; // tk burst, ego form, id mastery bumped down 2 slots
+				if (codeNum2 >= 9 && codeNum2 <= 12) power += 4; // manip, tk shield, ego dash, tk reverb bumped down 4 slots
+				if (codeNum2 == 13 || codeNum2 == 14) power += 5; // tk eruption, tk wave bumped down 5 slots
+				if (codeNum2 == 15 || codeNum2 == 16) power += 7; // ego choke, ego hold bumped down 7 slots
+				if (codeNum2 == 17) power = 11; // mental disc moved to tier 1
+				if (codeNum2 == 18) power += 6; // ego surge bumped down 6 slots
+				if (codeNum2 == 19) power = 17; // ego blade breach moved to t2
+				if (codeNum2 >= 20 && codeNum2 <= 22) power += 5; // ego annihilation, tk lance, tk maelstrom bumped down 5 slots
+				if (codeNum2 >= 23 && codeNum2 <= 25) power += 6; // lance rain, mind link, mental impact bumped down 6 slots
+			}
+            return power;		
+		case 'mask': return value['mask'];
+        case 'specializationTree': return value['specializationTree'];
+        case 'specialization': return value['specialization'];
+        }
+    });
 
 //==============================================================================
 // Get Methods

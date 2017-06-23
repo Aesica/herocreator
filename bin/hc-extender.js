@@ -713,7 +713,11 @@ function ResetBuild()
 	}
 	if (bSpecs || bEverything)
 	{
-		// TODO reset specs
+		iLength = 4;
+		for (i = 1; i < iLength; i++)
+		{
+			selectSpecializationClear(i);
+		}
 	}
 	if (bPowers || bEverything)
 	{
@@ -729,17 +733,31 @@ function ResetBuild()
 
 ///////////////// Data functions /////////////////////////////
 
+function EchoVersion()
+{
+	return "Version: " + appVersion + "-" + buildVersion;
+}
+
 function ListPowersFromFramework(iFramework)
 {
-	var i, iLength, sReturn;
+	var i, iLength, iCurrentFramework, sReturn;
 	if (!isNaN(iFramework))
 	{
-		sReturn = (iFramework > 0) ? dataFramework[iFramework].name : "All Powers";
+		sReturn = EchoVersion();
 		sReturn += "\npower id tier name advantageList.length";
 		iLength = dataPower.length;
+		iCurrentFramework = (iFramework < 0) ?  0 : iFramework;
 		for (i = 0; i < iLength; i++)
 		{
-			if (dataPower[i].framework == iFramework || iFramework == -1) sReturn += "\n[" + dataPower[i].power + "][" + dataPower[i].id + "][" + dataPower[i].tier + "] " + dataPower[i].name + " (" + dataPower[i].advantageList.length + ")";
+			if (dataPower[i].framework == iFramework || iFramework == -1)
+			{
+				if (dataPower[i].power == 0)
+				{
+					sReturn += "\n" + dataFramework[iCurrentFramework].name + " [" + iCurrentFramework + "]";
+					iCurrentFramework++;
+				}
+				sReturn += "\n[" + dataPower[i].power + "][" + dataPower[i].id + "][" + dataPower[i].tier + "] " + dataPower[i].name + " (" + dataPower[i].advantageList.length + ")";
+			}
 		}
 	}
 	return sReturn;
@@ -750,7 +768,8 @@ function ListTravelPowers(iType)
 	var i, iLength, sReturn;
 	if (!isNaN(iType))
 	{
-		sReturn = "Travel Powers of type [" + ((iType > -1 && iType < TRAVEL_POWER_TYPES.length) ? TRAVEL_POWER_TYPES[iType] : "All") + "]\nid isvar name advantageList.length";
+		sReturn = EchoVersion() + "\n";
+		sReturn += "Travel Powers of type [" + ((iType > -1 && iType < TRAVEL_POWER_TYPES.length) ? TRAVEL_POWER_TYPES[iType] : "All") + "]\nid isvar name advantageList.length";
 		iLength = dataTravelPower.length;
 		for (i = 0; i < iLength; i++)
 		{
@@ -766,7 +785,7 @@ function ListTalents(iType=0)
 	var aList = (iType == 0) ? dataInnateTalent : dataTalent;
 	var i;
 	var iLength = aList.length;
-	var sReturn = "Innate Talents\nid name extra";
+	var sReturn = EchoVersion() + "\n" + "Innate Talents\nid name extra";
 	for (i = 0; i < iLength; i++)
 	{
 		sReturn += "\n[" + aList[i].id + "] " + aList[i].name + " (" + aList[i].extra + ")";
@@ -778,7 +797,7 @@ function ListArchetypes()
 {
 	var i;
 	var iLength = dataArchetype.length;
-	var sReturn = "Archetypes\nid name";
+	var sReturn = EchoVersion() + "\nArchetypes\nid name";
 	for (i = 0; i < iLength; i++)
 	{
 		sReturn += "\n[" + dataArchetype[i].id + "] " + dataArchetype[i].name;

@@ -8,767 +8,127 @@
 	vertical-align: middle;
 	margin: 1px;
 }
-.SuperStat_Strength {
-   background-position: -290px -250px;
-   width: 24px;
-   height: 32px;
-}
-.Talent {
-   background-position: -314px -250px;
-   width: 24px;
-   height: 32px;
-}
-.Technology_Concentration {
+.Any_Generic {
    background-position: -0px -300px;
    width: 24px;
    height: 32px;
 }
-.Technology_FireAllWeapons {
+.Archery_EvasiveManeuvers {
    background-position: -24px -300px;
    width: 24px;
    height: 32px;
 }
-.Technology_ImplosionEngine {
+.Archery_ExplosiveArrow {
    background-position: -48px -300px;
    width: 24px;
    height: 32px;
 }
-.Technology_MechanicalMonstrosity {
+.Archery_FocusedShot {
    background-position: -72px -300px;
    width: 24px;
    height: 32px;
 }
-.Technology_Meltdown {
+.Archery_GasArrow {
    background-position: -96px -300px;
    width: 24px;
    height: 32px;
 }
-.Technology_Showdown {
+.Archery_HuntersInstinct {
    background-position: -120px -300px;
    width: 24px;
    height: 32px;
 }
-.Telekinesis_EgoBlade {
+.Archery_SnapShot {
    background-position: -144px -300px;
    width: 24px;
    height: 32px;
 }
-.Telekinesis_EgoBladeAnnihilation {
+.Archery_Quarry {
    background-position: -168px -300px;
    width: 24px;
    height: 32px;
 }
-.Telekinesis_EgoBladeBreach {
+.Archery_SonicArrow {
    background-position: -192px -300px;
    width: 24px;
    height: 32px;
 }
-.Telekinesis_EgoBladeDash {
+.Archery_StormOfArrows {
    background-position: -216px -300px;
    width: 24px;
    height: 32px;
 }
-.Telekinesis_EgoBladeFrenzy {
+.Archery_Strafe {
    background-position: -240px -300px;
    width: 24px;
    height: 32px;
 }
-.Telekinesis_EgoChoke {
+.Archery_TaserArrow {
    background-position: -264px -300px;
    width: 24px;
    height: 32px;
 }
-.Telekinesis_EgoReverberation {
+.Archery_StraightShot {
    background-position: -288px -300px;
    width: 24px;
    height: 32px;
 }
-.Telekinesis_EgoForm {
+.Archery_TorrentOfArrows {
    background-position: -312px -300px;
    width: 24px;
    height: 32px;
 }
-.Telekinesis_EgoHold {
-   background-position: -0px -332px;
-   width: 24px;
-   height: 32px;
-}
-.Telekinesis_EgoSurge {
-   background-position: -24px -332px;
-   width: 24px;
-   height: 32px;
-}
-.Telekinesis_EgoWeaponary {
-   background-position: -48px -332px;
-   width: 24px;
-   height: 32px;
-}
-.Telekinesis_IdMastery {
-   background-position: -72px -332px;
-   width: 24px;
-   height: 32px;
-}
-.Telekinesis_KineticDarts {
-   background-position: -96px -332px;
-   width: 24px;
-   height: 32px;
-}
-.Telekinesis_MentalDiscipline {
-   background-position: -120px -332px;
-   width: 24px;
-   height: 32px;
-}
-.Telekinesis_Telekinesis {
-   background-position: -144px -332px;
-   width: 24px;
-   height: 32px;
-}
-.Telekinesis_TelekineticAssault {
-   background-position: -168px -332px;
-   width: 24px;
-   height: 32px;
-}
-.Sorcery_StarBarrage {
-   background-position: -192px -332px;
-   width: 24px;
-   height: 32px;
-}
-.Telekinesis_TelekineticBurst {
-   background-position: -216px -332px;
-   width: 24px;
-   height: 32px;
-}
-.Telekinesis_TelekineticEruption {
-   background-position: -240px -332px;
-   width: 24px;
-   height: 32px;
-}
-.Telekinesis_TelekineticLance {
-   background-position: -264px -332px;
-   width: 24px;
-   height: 32px;
-}
-.Telekinesis_TelekineticMaelstrom {
-   background-position: -288px -332px;
-   width: 24px;
-   height: 32px;
-}
-.Telekinesis_TelekineticShield {
-   background-position: -312px -332px;
-   width: 24px;
-   height: 32px;
-}
-.Telekinesis_TelekineticWave {
-   background-position: -348px -0px;
-   width: 24px;
-   height: 32px;
-}
-.Telepathy_CollectiveWill {
-   background-position: -348px -32px;
-   width: 24px;
-   height: 32px;
-}
-.Telepathy_CongressOfSelves {
-   background-position: -348px -64px;
-   width: 24px;
-   height: 32px;
-}
-.Telepathy_EgoSleep {
-   background-position: -348px -96px;
-   width: 24px;
-   height: 32px;
-}
-.Telepathy_EgoPlacate {
-   background-position: -348px -128px;
-   width: 24px;
-   height: 32px;
-}
-.Telepathy_EgoBlast {
-   background-position: -348px -160px;
-   width: 24px;
-   height: 32px;
-}
-.Telepathy_EgoSprites {
-   background-position: -348px -192px;
-   width: 24px;
-   height: 32px;
-}
-.Telepathy_EgoStorm {
-   background-position: -348px -224px;
-   width: 24px;
-   height: 32px;
-}
-.Telepathy_EmpathicHealing {
-   background-position: -348px -256px;
-   width: 24px;
-   height: 32px;
-}
-.Telepathy_MasterOfTheMind {
-   background-position: -348px -288px;
-   width: 24px;
-   height: 32px;
-}
-.Telepathy_MentalLeech {
-   background-position: -348px -320px;
-   width: 24px;
-   height: 32px;
-}
-.Telepathy_MentalStorm {
-   background-position: -0px -364px;
-   width: 24px;
-   height: 32px;
-}
-.Telepathy_MindControl {
-   background-position: -24px -364px;
-   width: 24px;
-   height: 32px;
-}
-.Telepathy_MindBreak {
-   background-position: -48px -364px;
-   width: 24px;
-   height: 32px;
-}
-.Telepathy_MindDrain {
-   background-position: -72px -364px;
-   width: 24px;
-   height: 32px;
-}
-.Telepathy_MindfulReinforcement {
-   background-position: -96px -364px;
-   width: 24px;
-   height: 32px;
-}
-.Telepathy_MindLock {
-   background-position: -120px -364px;
-   width: 24px;
-   height: 32px;
-}
-.Telepathy_MindWipe {
-   background-position: -144px -364px;
-   width: 24px;
-   height: 32px;
-}
-.Specialization_ExhaustingStrikes {
-   background-position: -168px -364px;
-   width: 24px;
-   height: 32px;
-}
-.Telepathy_PsiLash {
-   background-position: -192px -364px;
-   width: 24px;
-   height: 32px;
-}
-.Telepathy_PsionicHealing {
-   background-position: -216px -364px;
-   width: 24px;
-   height: 32px;
-}
-.Telepathy_PsychicVortex {
-   background-position: -240px -364px;
-   width: 24px;
-   height: 32px;
-}
-.Telepathy_ShadowOfDoubt {
-   background-position: -264px -364px;
-   width: 24px;
-   height: 32px;
-}
-.Telepathy_SummonNightmare {
-   background-position: -288px -364px;
-   width: 24px;
-   height: 32px;
-}
-.Telepathy_TelepathicReverberation {
-   background-position: -312px -364px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_Acrobatics {
-   background-position: -336px -364px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_Athletics {
-   background-position: -372px -0px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_BlazingSpeed {
-   background-position: -372px -32px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_DisplacementAcrobatics {
-   background-position: -372px -64px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_BatFlight {
-   background-position: -372px -96px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_CapeGlide {
-   background-position: -372px -128px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_DisplacementSuperspeed {
-   background-position: -372px -160px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_DistortionSuperspeed {
-   background-position: -372px -192px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_EnergySlide {
-   background-position: -372px -224px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_ElectricArc {
-   background-position: -372px -256px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_LightningFlash {
-   background-position: -372px -288px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_ElectroFlight {
-   background-position: -372px -320px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_FireFlight {
-   background-position: -372px -352px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_EarthFlight {
-   background-position: -396px -0px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_DistortionAcrobatics {
-   background-position: -396px -32px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_FlagSpeed {
-   background-position: -396px -64px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_Flight {
-   background-position: -396px -96px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_HeroicFlight {
-   background-position: -396px -128px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_Hoverboard {
-   background-position: -396px -160px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_HoverDisk {
-   background-position: -396px -192px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_HyperBall {
-   background-position: -396px -224px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_RainbowFlight {
-   background-position: -396px -256px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_RainbowFlightCloud {
-   background-position: -396px -288px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_PhoenixFlight {
-   background-position: -396px -320px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_OozeTunneling {
-   background-position: -396px -352px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_NinjaLeaves {
-   background-position: -0px -396px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_MysticFlight {
-   background-position: -24px -396px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_MillennialFlight {
-   background-position: -48px -396px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_MagicCarpet {
-   background-position: -72px -396px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_MachSpeed {
-   background-position: -96px -396px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_Lightspeed {
-   background-position: -120px -396px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_RetractableWings {
-   background-position: -144px -396px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_JetPack {
-   background-position: -168px -396px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_JetBoots {
-   background-position: -192px -396px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_IceSlide {
-   background-position: -216px -396px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_PowerFlight {
-   background-position: -240px -396px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_ScarabFlight {
-   background-position: -264px -396px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_RocketJump {
-   background-position: -288px -396px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_ScarabTunneling {
-   background-position: -312px -396px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_ShadowSkullFlight {
-   background-position: -336px -396px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_ShadowWings {
-   background-position: -360px -396px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_SnowballRoll {
-   background-position: -384px -396px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_Superjump {
-   background-position: -420px -0px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_Swinging {
-   background-position: -420px -32px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_Teleportation {
-   background-position: -420px -64px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_Superspeed {
-   background-position: -420px -96px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_TornadoFlight {
-   background-position: -420px -128px;
-   width: 24px;
-   height: 32px;
-}
-.TravelPower_Tunneling {
-   background-position: -420px -160px;
-   width: 24px;
-   height: 32px;
-}
-.Unarmed_BurningChiFist {
-   background-position: -420px -192px;
-   width: 24px;
-   height: 32px;
-}
-.Unarmed_BackhandChop {
-   background-position: -420px -224px;
-   width: 24px;
-   height: 32px;
-}
-.Unarmed_CrashingWaveKick {
-   background-position: -420px -256px;
-   width: 24px;
-   height: 32px;
-}
-.Unarmed_DragonKick {
-   background-position: -420px -288px;
-   width: 24px;
-   height: 32px;
-}
-.Unarmed_DragonUppercut {
-   background-position: -420px -320px;
-   width: 24px;
-   height: 32px;
-}
-.Unarmed_ElbowSlam {
-   background-position: -420px -352px;
-   width: 24px;
-   height: 32px;
-}
-.Unarmed_FormOfTheMaster {
-   background-position: -420px -384px;
-   width: 24px;
-   height: 32px;
-}
-.Unarmed_OneHundredHands {
-   background-position: -0px -428px;
-   width: 24px;
-   height: 32px;
-}
-.Unarmed_OpenPalmStrike {
-   background-position: -24px -428px;
-   width: 24px;
-   height: 32px;
-}
-.Unarmed_RighteousFists {
-   background-position: -48px -428px;
-   width: 24px;
-   height: 32px;
-}
-.Unarmed_ThunderingKicks {
-   background-position: -72px -428px;
-   width: 24px;
-   height: 32px;
-}
-.Wind_Hurricane {
-   background-position: -96px -428px;
-   width: 24px;
-   height: 32px;
-}
-.Wind_DustDevil {
-   background-position: -120px -428px;
-   width: 24px;
-   height: 32px;
-}
-.Wind_AirElemental {
-   background-position: -144px -428px;
-   width: 24px;
-   height: 32px;
-}
-.Unarmed_ViciousStrikes {
-   background-position: -168px -428px;
-   width: 24px;
-   height: 32px;
-}
-.Wind_Gust {
-   background-position: -192px -428px;
-   width: 24px;
-   height: 32px;
-}
-.Wind_Stormbringer {
-   background-position: -216px -428px;
-   width: 24px;
-   height: 32px;
-}
-.Wind_Twister {
-   background-position: -240px -428px;
-   width: 24px;
-   height: 32px;
-}
-.Wind_Typhoon {
-   background-position: -264px -428px;
-   width: 24px;
-   height: 32px;
-}
-.Wind_Updraft {
-   background-position: -288px -428px;
-   width: 24px;
-   height: 32px;
-}
-.Wind_Whirlwind {
-   background-position: -312px -428px;
-   width: 24px;
-   height: 32px;
-}
-.Wind_WindBarrier {
-   background-position: -336px -428px;
-   width: 24px;
-   height: 32px;
-}
-.Wind_WindBreath {
-   background-position: -360px -428px;
-   width: 24px;
-   height: 32px;
-}
-.Wind_WindLash {
-   background-position: -384px -428px;
-   width: 24px;
-   height: 32px;
-}
-.Any_Generic {
-   background-position: -408px -428px;
-   width: 24px;
-   height: 32px;
-}
-.Archery_EvasiveManeuvers {
-   background-position: -444px -0px;
-   width: 24px;
-   height: 32px;
-}
-.Archery_ExplosiveArrow {
-   background-position: -444px -32px;
-   width: 24px;
-   height: 32px;
-}
-.Archery_FocusedShot {
-   background-position: -444px -64px;
-   width: 24px;
-   height: 32px;
-}
-.Wind_WindReverberation {
-   background-position: -444px -96px;
-   width: 24px;
-   height: 32px;
-}
-.Archery_GasArrow {
-   background-position: -444px -128px;
-   width: 24px;
-   height: 32px;
-}
-.Archery_HuntersInstinct {
-   background-position: -444px -160px;
-   width: 24px;
-   height: 32px;
-}
-.Archery_Quarry {
-   background-position: -444px -192px;
-   width: 24px;
-   height: 32px;
-}
-.Archery_SnapShot {
-   background-position: -444px -224px;
-   width: 24px;
-   height: 32px;
-}
-.Archery_SonicArrow {
-   background-position: -444px -256px;
-   width: 24px;
-   height: 32px;
-}
-.Archery_StormOfArrows {
-   background-position: -444px -288px;
-   width: 24px;
-   height: 32px;
-}
-.Archery_Strafe {
-   background-position: -444px -320px;
-   width: 24px;
-   height: 32px;
-}
-.Archery_StraightShot {
-   background-position: -444px -352px;
-   width: 24px;
-   height: 32px;
-}
-.Archery_TaserArrow {
-   background-position: -444px -384px;
-   width: 24px;
-   height: 32px;
-}
-.Archery_TorrentOfArrows {
-   background-position: -444px -416px;
-   width: 24px;
-   height: 32px;
-}
-.Archetype_Automaton {
+.Archetype_Behemoth {
    background-position: -0px -0px;
    width: 58px;
    height: 50px;
 }
-.Archetype_Behemoth {
+.Archetype_Automaton {
    background-position: -0px -50px;
    width: 58px;
    height: 50px;
 }
-.Archetype_Blade {
+.Archetype_Disciple {
    background-position: -58px -0px;
    width: 58px;
    height: 50px;
 }
-.Archetype_Cursed {
+.Archetype_CyberneticWarrior {
    background-position: -58px -50px;
    width: 58px;
    height: 50px;
 }
-.Archetype_CyberneticWarrior {
+.Archetype_Devastator {
    background-position: -0px -100px;
    width: 58px;
    height: 50px;
 }
-.Archetype_Devastator {
+.Archetype_Fist {
    background-position: -58px -100px;
    width: 58px;
    height: 50px;
 }
-.Archetype_Disciple {
+.Archetype_Freeform {
    background-position: -116px -0px;
    width: 58px;
    height: 50px;
 }
-.Archetype_Fist {
+.Archetype_Glacier {
    background-position: -116px -50px;
    width: 58px;
    height: 50px;
 }
-.Archetype_Freeform {
+.Archetype_Grimoire {
    background-position: -116px -100px;
    width: 58px;
    height: 50px;
 }
-.Archetype_Glacier {
+.Archetype_Cursed {
    background-position: -0px -150px;
    width: 58px;
    height: 50px;
 }
-.Archetype_Grimoire {
+.Archetype_Blade {
    background-position: -58px -150px;
    width: 58px;
    height: 50px;
@@ -793,12 +153,12 @@
    width: 58px;
    height: 50px;
 }
-.Archetype_Inventor {
+.Archetype_Master {
    background-position: -174px -150px;
    width: 58px;
    height: 50px;
 }
-.Archetype_Invincible {
+.Archetype_Inventor {
    background-position: -0px -200px;
    width: 58px;
    height: 50px;
@@ -808,7 +168,7 @@
    width: 58px;
    height: 50px;
 }
-.Archetype_Master {
+.Archetype_Invincible {
    background-position: -116px -200px;
    width: 58px;
    height: 50px;
@@ -838,52 +198,52 @@
    width: 58px;
    height: 50px;
 }
-.Archetype_Radiant {
+.Archetype_Psychokinetic {
    background-position: -232px -200px;
    width: 58px;
    height: 50px;
 }
-.Archetype_Rockstar {
+.Archetype_Radiant {
    background-position: -0px -250px;
    width: 58px;
    height: 50px;
 }
-.Archetype_Savage {
+.Archetype_Rockstar {
    background-position: -58px -250px;
    width: 58px;
    height: 50px;
 }
-.Archetype_Scourge {
+.Archetype_Savage {
    background-position: -116px -250px;
    width: 58px;
    height: 50px;
 }
-.Archetype_Soldier {
+.Archetype_Scourge {
    background-position: -174px -250px;
    width: 58px;
    height: 50px;
 }
-.Archetype_Specialist {
+.Archetype_Soldier {
    background-position: -232px -250px;
    width: 58px;
    height: 50px;
 }
-.Archetype_Squall {
+.Archetype_Specialist {
    background-position: -290px -0px;
    width: 58px;
    height: 50px;
 }
-.Archetype_Tempest {
+.Archetype_Squall {
    background-position: -290px -50px;
    width: 58px;
    height: 50px;
 }
-.Archetype_Unleashed {
+.Archetype_Tempest {
    background-position: -290px -100px;
    width: 58px;
    height: 50px;
 }
-.Archetype_Void {
+.Archetype_Unleashed {
    background-position: -290px -150px;
    width: 58px;
    height: 50px;
@@ -894,2447 +254,3132 @@
    height: 50px;
 }
 .blank {
-   background-position: -0px -460px;
+   background-position: -0px -332px;
    width: 24px;
    height: 32px;
 }
 .Brick_Aggressor {
-   background-position: -24px -460px;
+   background-position: -24px -332px;
    width: 24px;
    height: 32px;
 }
 .Brick_Defiance {
-   background-position: -48px -460px;
+   background-position: -48px -332px;
    width: 24px;
    height: 32px;
 }
 .Brick_Enrage {
-   background-position: -72px -460px;
+   background-position: -72px -332px;
    width: 24px;
    height: 32px;
 }
 .Brick_PowerChord {
-   background-position: -96px -460px;
+   background-position: -96px -332px;
    width: 24px;
    height: 32px;
 }
+.Archetype_Void {
+   background-position: -290px -250px;
+   width: 58px;
+   height: 50px;
+}
 .Brick_UnleashedRage {
-   background-position: -120px -460px;
+   background-position: -120px -332px;
    width: 24px;
    height: 32px;
 }
 .Brick_Unstoppable {
-   background-position: -144px -460px;
+   background-position: -144px -332px;
    width: 24px;
    height: 32px;
 }
 .Celestial_Ascension {
-   background-position: -168px -460px;
-   width: 24px;
-   height: 32px;
-}
-.Celestial_Expulse {
-   background-position: -192px -460px;
-   width: 24px;
-   height: 32px;
-}
-.Celestial_CelestialConduit {
-   background-position: -216px -460px;
+   background-position: -168px -332px;
    width: 24px;
    height: 32px;
 }
 .Celestial_CelestialCleansing {
-   background-position: -240px -460px;
+   background-position: -192px -332px;
+   width: 24px;
+   height: 32px;
+}
+.Celestial_CelestialConduit {
+   background-position: -216px -332px;
    width: 24px;
    height: 32px;
 }
 .Celestial_Conviction {
-   background-position: -264px -460px;
+   background-position: -240px -332px;
+   width: 24px;
+   height: 32px;
+}
+.Celestial_Expulse {
+   background-position: -264px -332px;
    width: 24px;
    height: 32px;
 }
 .Celestial_HolyWater {
-   background-position: -288px -460px;
+   background-position: -288px -332px;
    width: 24px;
    height: 32px;
 }
 .Celestial_Illumination {
-   background-position: -312px -460px;
+   background-position: -312px -332px;
    width: 24px;
    height: 32px;
 }
 .Celestial_Imbue {
-   background-position: -336px -460px;
+   background-position: -348px -0px;
    width: 24px;
    height: 32px;
 }
 .Celestial_Iniquity {
-   background-position: -360px -460px;
+   background-position: -348px -32px;
    width: 24px;
    height: 32px;
 }
 .Celestial_Palliate {
-   background-position: -384px -460px;
+   background-position: -348px -64px;
    width: 24px;
    height: 32px;
 }
 .Celestial_Radiance {
-   background-position: -408px -460px;
+   background-position: -348px -96px;
    width: 24px;
    height: 32px;
 }
 .Celestial_Rebuke {
-   background-position: -432px -460px;
+   background-position: -348px -128px;
    width: 24px;
    height: 32px;
 }
 .Celestial_Redemption {
-   background-position: -468px -0px;
+   background-position: -348px -160px;
    width: 24px;
    height: 32px;
 }
 .Celestial_Seraphim {
-   background-position: -468px -32px;
-   width: 24px;
-   height: 32px;
-}
-.Celestial_Vengeance {
-   background-position: -468px -64px;
+   background-position: -348px -192px;
    width: 24px;
    height: 32px;
 }
 .Darkness_DarkTransfusion {
-   background-position: -468px -96px;
+   background-position: -348px -224px;
+   width: 24px;
+   height: 32px;
+}
+.Celestial_Vengeance {
+   background-position: -348px -256px;
    width: 24px;
    height: 32px;
 }
 .Darkness_DarkTransfusion_old {
-   background-position: -468px -128px;
+   background-position: -348px -288px;
    width: 24px;
    height: 32px;
 }
 .Darkness_EbonRift {
-   background-position: -468px -160px;
+   background-position: -348px -320px;
    width: 24px;
    height: 32px;
 }
 .Darkness_EbonRuin {
-   background-position: -468px -192px;
+   background-position: -0px -364px;
    width: 24px;
    height: 32px;
 }
 .Darkness_EbonVoid {
-   background-position: -468px -224px;
+   background-position: -24px -364px;
    width: 24px;
    height: 32px;
 }
 .Darkness_GraspingShadows {
-   background-position: -468px -256px;
+   background-position: -48px -364px;
    width: 24px;
    height: 32px;
 }
 .Darkness_Lifedrain {
-   background-position: -468px -288px;
+   background-position: -72px -364px;
+   width: 24px;
+   height: 32px;
+}
+.Darkness_ShadeStorm {
+   background-position: -96px -364px;
    width: 24px;
    height: 32px;
 }
 .Darkness_ShadowBlast {
-   background-position: -468px -320px;
+   background-position: -120px -364px;
    width: 24px;
    height: 32px;
 }
 .Darkness_ShadowBolt {
-   background-position: -468px -352px;
+   background-position: -144px -364px;
    width: 24px;
    height: 32px;
 }
 .Darkness_ShadowEmbrace {
-   background-position: -468px -384px;
+   background-position: -168px -364px;
    width: 24px;
    height: 32px;
 }
 .Darkness_ShadowEruption {
-   background-position: -468px -416px;
+   background-position: -192px -364px;
    width: 24px;
    height: 32px;
 }
 .Darkness_ShadowForm {
-   background-position: -468px -448px;
+   background-position: -216px -364px;
    width: 24px;
    height: 32px;
 }
 .Darkness_ShadowShroud {
-   background-position: -492px -0px;
+   background-position: -240px -364px;
    width: 24px;
    height: 32px;
 }
 .Darkness_ShadowShroud_old {
-   background-position: -492px -32px;
+   background-position: -264px -364px;
    width: 24px;
    height: 32px;
 }
 .Darkness_SoulVortex {
-   background-position: -492px -64px;
+   background-position: -288px -364px;
    width: 24px;
    height: 32px;
 }
 .Darkness_SpiritReverberation {
-   background-position: -492px -96px;
+   background-position: -312px -364px;
    width: 24px;
    height: 32px;
 }
 .Darkness_SummonShadows {
-   background-position: -492px -128px;
+   background-position: -336px -364px;
    width: 24px;
    height: 32px;
 }
 .Darkness_VoidHorror {
-   background-position: -492px -160px;
-   width: 24px;
-   height: 32px;
-}
-.Darkness_VoidShift {
-   background-position: -492px -192px;
+   background-position: -372px -0px;
    width: 24px;
    height: 32px;
 }
 .DualBlades_BladeTempest {
-   background-position: -492px -224px;
+   background-position: -372px -32px;
    width: 24px;
    height: 32px;
 }
-.DualBlades_DragonsWrath {
-   background-position: -492px -256px;
+.Darkness_VoidShift {
+   background-position: -372px -64px;
    width: 24px;
    height: 32px;
 }
 .DualBlades_EyeOfTheStorm {
-   background-position: -492px -288px;
+   background-position: -372px -96px;
    width: 24px;
    height: 32px;
 }
 .DualBlades_FormOfTheTempest {
-   background-position: -492px -320px;
+   background-position: -372px -128px;
+   width: 24px;
+   height: 32px;
+}
+.DualBlades_DragonsWrath {
+   background-position: -372px -160px;
    width: 24px;
    height: 32px;
 }
 .DualBlades_RainOfSteel {
-   background-position: -492px -352px;
+   background-position: -372px -192px;
    width: 24px;
    height: 32px;
 }
 .DualBlades_StormsHarvest {
-   background-position: -492px -384px;
+   background-position: -372px -224px;
    width: 24px;
    height: 32px;
 }
 .DualBlades_StrikeDown {
-   background-position: -492px -416px;
+   background-position: -372px -256px;
    width: 24px;
    height: 32px;
 }
 .DualBlades_SwordCyclone {
-   background-position: -492px -448px;
+   background-position: -372px -288px;
    width: 24px;
    height: 32px;
 }
 .Earth_CaveIn {
-   background-position: -0px -492px;
-   width: 24px;
-   height: 32px;
-}
-.Earth_StoneShot {
-   background-position: -24px -492px;
-   width: 24px;
-   height: 32px;
-}
-.Earth_SeismicSmash {
-   background-position: -48px -492px;
-   width: 24px;
-   height: 32px;
-}
-.Earth_Quicksand {
-   background-position: -72px -492px;
-   width: 24px;
-   height: 32px;
-}
-.Earth_Onslaught {
-   background-position: -96px -492px;
-   width: 24px;
-   height: 32px;
-}
-.Earth_LandSlide {
-   background-position: -120px -492px;
-   width: 24px;
-   height: 32px;
-}
-.Earth_Fissure {
-   background-position: -144px -492px;
-   width: 24px;
-   height: 32px;
-}
-.Earth_FaultLine {
-   background-position: -168px -492px;
+   background-position: -372px -320px;
    width: 24px;
    height: 32px;
 }
 .Earth_EarthForm {
-   background-position: -192px -492px;
+   background-position: -372px -352px;
+   width: 24px;
+   height: 32px;
+}
+.Earth_FaultLine {
+   background-position: -396px -0px;
+   width: 24px;
+   height: 32px;
+}
+.Earth_Fissure {
+   background-position: -396px -32px;
+   width: 24px;
+   height: 32px;
+}
+.Earth_LandSlide {
+   background-position: -396px -64px;
+   width: 24px;
+   height: 32px;
+}
+.Earth_Onslaught {
+   background-position: -396px -96px;
+   width: 24px;
+   height: 32px;
+}
+.Earth_Quicksand {
+   background-position: -396px -128px;
+   width: 24px;
+   height: 32px;
+}
+.Earth_SeismicSmash {
+   background-position: -396px -160px;
+   width: 24px;
+   height: 32px;
+}
+.Earth_StoneShot {
+   background-position: -396px -192px;
    width: 24px;
    height: 32px;
 }
 .Earth_StoneShroud {
-   background-position: -216px -492px;
+   background-position: -396px -224px;
    width: 24px;
    height: 32px;
 }
 .Earth_Tremor {
-   background-position: -240px -492px;
+   background-position: -396px -256px;
    width: 24px;
    height: 32px;
 }
 .Earth_Upheaval {
-   background-position: -264px -492px;
+   background-position: -396px -288px;
    width: 24px;
    height: 32px;
 }
 .Earth_WieldEarth {
-   background-position: -288px -492px;
-   width: 24px;
-   height: 32px;
-}
-.Electricity_ElectricBolt {
-   background-position: -312px -492px;
-   width: 24px;
-   height: 32px;
-}
-.Electricity_DeathArc {
-   background-position: -336px -492px;
-   width: 24px;
-   height: 32px;
-}
-.Electricity_ChainLightning {
-   background-position: -360px -492px;
+   background-position: -396px -320px;
    width: 24px;
    height: 32px;
 }
 .Electricity_BallLightning {
-   background-position: -384px -492px;
+   background-position: -396px -352px;
+   width: 24px;
+   height: 32px;
+}
+.Electricity_ChainLightning {
+   background-position: -0px -396px;
+   width: 24px;
+   height: 32px;
+}
+.Electricity_DeathArc {
+   background-position: -24px -396px;
+   width: 24px;
+   height: 32px;
+}
+.Electricity_ElectricBolt {
+   background-position: -48px -396px;
    width: 24px;
    height: 32px;
 }
 .Electricity_ElectricForm {
-   background-position: -408px -492px;
+   background-position: -72px -396px;
    width: 24px;
    height: 32px;
 }
 .Electricity_ElectricPersonality {
-   background-position: -432px -492px;
+   background-position: -96px -396px;
    width: 24px;
    height: 32px;
 }
 .Electricity_ElectricSheath {
-   background-position: -456px -492px;
+   background-position: -120px -396px;
    width: 24px;
    height: 32px;
 }
 .Electricity_ElectricShield {
-   background-position: -480px -492px;
+   background-position: -144px -396px;
    width: 24px;
    height: 32px;
 }
 .Electricity_Electrocute {
-   background-position: -516px -0px;
+   background-position: -168px -396px;
    width: 24px;
    height: 32px;
 }
 .Electricity_Gigabolt {
-   background-position: -516px -32px;
+   background-position: -192px -396px;
    width: 24px;
    height: 32px;
 }
 .Specialization_SuperCharged {
-   background-position: -516px -64px;
+   background-position: -216px -396px;
    width: 24px;
    height: 32px;
 }
 .Electricity_IonicCompression {
-   background-position: -516px -96px;
+   background-position: -240px -396px;
    width: 24px;
    height: 32px;
 }
 .Electricity_IonicReverberation {
-   background-position: -516px -128px;
+   background-position: -264px -396px;
    width: 24px;
    height: 32px;
 }
 .Electricity_LightningArc {
-   background-position: -516px -160px;
+   background-position: -288px -396px;
    width: 24px;
    height: 32px;
 }
 .Electricity_LightningHelix {
-   background-position: -516px -192px;
+   background-position: -312px -396px;
    width: 24px;
    height: 32px;
 }
 .Electricity_LightningOverload {
-   background-position: -516px -224px;
+   background-position: -336px -396px;
    width: 24px;
    height: 32px;
 }
 .Electricity_LightningStorm {
-   background-position: -516px -256px;
+   background-position: -360px -396px;
    width: 24px;
    height: 32px;
 }
 .Electricity_MatterEnergyUnion {
-   background-position: -516px -288px;
+   background-position: -384px -396px;
    width: 24px;
    height: 32px;
 }
 .Electricity_NeuroelectricPulse {
-   background-position: -516px -320px;
+   background-position: -420px -0px;
    width: 24px;
    height: 32px;
 }
 .Electricity_NeverStrikesTwice {
-   background-position: -516px -352px;
+   background-position: -420px -32px;
    width: 24px;
    height: 32px;
 }
 .Electricity_SigilsOfTheStorm {
-   background-position: -516px -384px;
+   background-position: -420px -64px;
    width: 24px;
    height: 32px;
 }
 .Electricity_Sparkstorm {
-   background-position: -516px -416px;
+   background-position: -420px -96px;
    width: 24px;
    height: 32px;
 }
 .Electricity_StormSummoner {
-   background-position: -516px -448px;
+   background-position: -420px -128px;
    width: 24px;
    height: 32px;
 }
 .Electricity_Superconductor {
-   background-position: -516px -480px;
+   background-position: -420px -160px;
    width: 24px;
    height: 32px;
 }
 .Electricity_Thunderstrike {
-   background-position: -0px -524px;
-   width: 24px;
-   height: 32px;
-}
-.Specialization_MassDestruction {
-   background-position: -24px -524px;
-   width: 24px;
-   height: 32px;
-}
-.Electricity_Triplicity {
-   background-position: -48px -524px;
-   width: 24px;
-   height: 32px;
-}
-.EnergyProjector_EnergyStorm {
-   background-position: -72px -524px;
-   width: 24px;
-   height: 32px;
-}
-.EnergyProjector_FractalAegis {
-   background-position: -96px -524px;
-   width: 24px;
-   height: 32px;
-}
-.FightingClaws_DragonsClaws {
-   background-position: -120px -524px;
-   width: 24px;
-   height: 32px;
-}
-.EnergyProjector_GravityDriver {
-   background-position: -144px -524px;
+   background-position: -420px -192px;
    width: 24px;
    height: 32px;
 }
 .FightingClaws_HawksTalons {
-   background-position: -168px -524px;
+   background-position: -420px -224px;
    width: 24px;
    height: 32px;
 }
 .FightingClaws_FormOfTheTiger {
-   background-position: -192px -524px;
+   background-position: -420px -256px;
    width: 24px;
    height: 32px;
 }
-.Fire_Conflagration {
-   background-position: -216px -524px;
+.FightingClaws_DragonsClaws {
+   background-position: -420px -288px;
    width: 24px;
    height: 32px;
 }
-.Fire_AbsorbHeat {
-   background-position: -240px -524px;
+.EnergyProjector_EnergyStorm {
+   background-position: -420px -320px;
    width: 24px;
    height: 32px;
 }
-.Fire_Fireball {
-   background-position: -264px -524px;
+.EnergyProjector_GravityDriver {
+   background-position: -420px -352px;
    width: 24px;
    height: 32px;
 }
-.FightingClaws_VipersFangs {
-   background-position: -288px -524px;
+.Specialization_MassDestruction {
+   background-position: -420px -384px;
    width: 24px;
    height: 32px;
 }
-.FightingClaws_TigersBite {
-   background-position: -312px -524px;
+.Electricity_Triplicity {
+   background-position: -0px -428px;
    width: 24px;
    height: 32px;
 }
 .FightingClaws_RendAndTear {
-   background-position: -336px -524px;
+   background-position: -24px -428px;
    width: 24px;
    height: 32px;
 }
-.Fire_FieryForm {
-   background-position: -360px -524px;
+.EnergyProjector_FractalAegis {
+   background-position: -48px -428px;
+   width: 24px;
+   height: 32px;
+}
+.FightingClaws_TigersBite {
+   background-position: -72px -428px;
+   width: 24px;
+   height: 32px;
+}
+.FightingClaws_VipersFangs {
+   background-position: -96px -428px;
+   width: 24px;
+   height: 32px;
+}
+.Fire_AbsorbHeat {
+   background-position: -120px -428px;
+   width: 24px;
+   height: 32px;
+}
+.Fire_Conflagration {
+   background-position: -144px -428px;
    width: 24px;
    height: 32px;
 }
 .SuperStat_Endurance {
-   background-position: -384px -524px;
+   background-position: -168px -428px;
+   width: 24px;
+   height: 32px;
+}
+.Fire_FieryForm {
+   background-position: -192px -428px;
+   width: 24px;
+   height: 32px;
+}
+.Fire_Fireball {
+   background-position: -216px -428px;
    width: 24px;
    height: 32px;
 }
 .Fire_FireBreath {
-   background-position: -408px -524px;
+   background-position: -240px -428px;
    width: 24px;
    height: 32px;
 }
 .Fire_FireShield {
-   background-position: -432px -524px;
+   background-position: -264px -428px;
    width: 24px;
    height: 32px;
 }
 .Fire_FireSnake {
-   background-position: -456px -524px;
-   width: 24px;
-   height: 32px;
-}
-.Fire_FireStrike {
-   background-position: -480px -524px;
+   background-position: -288px -428px;
    width: 24px;
    height: 32px;
 }
 .Fire_Flashfire {
-   background-position: -504px -524px;
+   background-position: -312px -428px;
+   width: 24px;
+   height: 32px;
+}
+.Fire_FireStrike {
+   background-position: -336px -428px;
    width: 24px;
    height: 32px;
 }
 .Fire_HeatWave {
-   background-position: -540px -0px;
+   background-position: -360px -428px;
    width: 24px;
    height: 32px;
 }
 .MartialArts_FuryOfTheDragon {
-   background-position: -540px -32px;
+   background-position: -384px -428px;
    width: 24px;
    height: 32px;
 }
 .Fire_Hydra {
-   background-position: -540px -64px;
+   background-position: -408px -428px;
    width: 24px;
    height: 32px;
 }
 .Fire_Immolation {
-   background-position: -540px -96px;
+   background-position: -444px -0px;
    width: 24px;
    height: 32px;
 }
 .Fire_LivingFire {
-   background-position: -540px -128px;
+   background-position: -444px -32px;
    width: 24px;
    height: 32px;
 }
 .Fire_Pyre {
-   background-position: -540px -160px;
+   background-position: -444px -64px;
    width: 24px;
    height: 32px;
 }
 .Fire_PyromancersBlades {
-   background-position: -540px -192px;
+   background-position: -444px -96px;
    width: 24px;
    height: 32px;
 }
 .Fire_RimefireBurst {
-   background-position: -540px -224px;
+   background-position: -444px -128px;
    width: 24px;
    height: 32px;
 }
 .Fire_ThermalReverberation {
-   background-position: -540px -256px;
+   background-position: -444px -160px;
    width: 24px;
    height: 32px;
 }
 .Fire_ThrowFire {
-   background-position: -540px -288px;
+   background-position: -444px -192px;
    width: 24px;
    height: 32px;
 }
 .Force_ContainmentField {
-   background-position: -540px -320px;
+   background-position: -444px -224px;
    width: 24px;
    height: 32px;
 }
 .Force_CrushingWave {
-   background-position: -540px -352px;
+   background-position: -444px -256px;
    width: 24px;
    height: 32px;
 }
 .Force_FieldSurge {
-   background-position: -540px -384px;
+   background-position: -444px -288px;
    width: 24px;
    height: 32px;
 }
 .Force_ForceBlast {
-   background-position: -540px -416px;
-   width: 24px;
-   height: 32px;
-}
-.Force_ForceBolts {
-   background-position: -540px -448px;
+   background-position: -444px -320px;
    width: 24px;
    height: 32px;
 }
 .Force_ForceCascade {
-   background-position: -540px -480px;
+   background-position: -444px -352px;
    width: 24px;
    height: 32px;
 }
 .Force_ForceDetonation {
-   background-position: -540px -512px;
+   background-position: -444px -384px;
    width: 24px;
    height: 32px;
 }
 .Force_ForceEruption {
-   background-position: -0px -556px;
-   width: 24px;
-   height: 32px;
-}
-.Force_ForceShield {
-   background-position: -24px -556px;
+   background-position: -444px -416px;
    width: 24px;
    height: 32px;
 }
 .Force_ForceGeyser {
-   background-position: -48px -556px;
+   background-position: -0px -460px;
+   width: 24px;
+   height: 32px;
+}
+.Force_ForceShield {
+   background-position: -24px -460px;
    width: 24px;
    height: 32px;
 }
 .Force_ForceSnap {
-   background-position: -72px -556px;
+   background-position: -48px -460px;
    width: 24px;
    height: 32px;
 }
 .Force_IntertialDampeningField {
-   background-position: -96px -556px;
+   background-position: -72px -460px;
    width: 24px;
    height: 32px;
 }
 .Force_KineticManipulation {
-   background-position: -120px -556px;
-   width: 24px;
-   height: 32px;
-}
-.Force_PersonalForceField {
-   background-position: -144px -556px;
-   width: 24px;
-   height: 32px;
-}
-.Framework_ArcaneSorcery {
-   background-position: -168px -556px;
-   width: 24px;
-   height: 32px;
-}
-.Sorcery_Spellcaster {
-   background-position: -192px -556px;
-   width: 24px;
-   height: 32px;
-}
-.Framework_Sorcery_-_Copy {
-   background-position: -216px -556px;
-   width: 24px;
-   height: 32px;
-}
-.Force_RedirectedForce {
-   background-position: -240px -556px;
+   background-position: -96px -460px;
    width: 24px;
    height: 32px;
 }
 .Force_ProtectionField {
-   background-position: -264px -556px;
+   background-position: -120px -460px;
+   width: 24px;
+   height: 32px;
+}
+.Force_PersonalForceField {
+   background-position: -144px -460px;
+   width: 24px;
+   height: 32px;
+}
+.Force_ForceBolts {
+   background-position: -168px -460px;
+   width: 24px;
+   height: 32px;
+}
+.Force_RedirectedForce {
+   background-position: -192px -460px;
+   width: 24px;
+   height: 32px;
+}
+.Framework_Sorcery_-_Copy {
+   background-position: -216px -460px;
+   width: 24px;
+   height: 32px;
+}
+.Sorcery_Spellcaster {
+   background-position: -240px -460px;
+   width: 24px;
+   height: 32px;
+}
+.Framework_ArcaneSorcery {
+   background-position: -264px -460px;
    width: 24px;
    height: 32px;
 }
 .Framework_Archery {
-   background-position: -288px -556px;
+   background-position: -288px -460px;
    width: 24px;
    height: 32px;
 }
 .Framework_BestialSupernatural {
-   background-position: -312px -556px;
+   background-position: -312px -460px;
    width: 24px;
    height: 32px;
 }
 .Framework_Celestial {
-   background-position: -336px -556px;
+   background-position: -336px -460px;
    width: 24px;
    height: 32px;
 }
 .Framework_Darkness {
-   background-position: -360px -556px;
+   background-position: -360px -460px;
    width: 24px;
    height: 32px;
 }
 .Framework_DualBlades {
-   background-position: -384px -556px;
-   width: 24px;
-   height: 32px;
-}
-.Framework_EbonSorcery {
-   background-position: -408px -556px;
+   background-position: -384px -460px;
    width: 24px;
    height: 32px;
 }
 .Framework_Earth {
-   background-position: -432px -556px;
+   background-position: -408px -460px;
+   width: 24px;
+   height: 32px;
+}
+.Framework_EbonSorcery {
+   background-position: -432px -460px;
    width: 24px;
    height: 32px;
 }
 .Framework_Electricity {
-   background-position: -456px -556px;
+   background-position: -468px -0px;
    width: 24px;
    height: 32px;
 }
 .Framework_FightingClaws {
-   background-position: -480px -556px;
+   background-position: -468px -32px;
    width: 24px;
    height: 32px;
 }
 .Framework_Fire {
-   background-position: -504px -556px;
+   background-position: -468px -64px;
    width: 24px;
    height: 32px;
 }
 .Framework_Force {
-   background-position: -528px -556px;
+   background-position: -468px -96px;
    width: 24px;
    height: 32px;
 }
 .Framework_Gadgeteering {
-   background-position: -564px -0px;
-   width: 24px;
-   height: 32px;
-}
-.Framework_InfernalSupernatural {
-   background-position: -564px -32px;
+   background-position: -468px -128px;
    width: 24px;
    height: 32px;
 }
 .Framework_HeavyWeapon {
-   background-position: -564px -64px;
+   background-position: -468px -160px;
    width: 24px;
    height: 32px;
 }
 .Framework_Ice {
-   background-position: -564px -96px;
+   background-position: -468px -192px;
+   width: 24px;
+   height: 32px;
+}
+.Framework_InfernalSupernatural {
+   background-position: -468px -224px;
    width: 24px;
    height: 32px;
 }
 .Framework_LaserSword {
-   background-position: -564px -128px;
+   background-position: -468px -256px;
    width: 24px;
    height: 32px;
 }
 .LaserSword_LightspeedStrike {
-   background-position: -564px -160px;
+   background-position: -468px -288px;
    width: 24px;
    height: 32px;
 }
 .Framework_Might {
-   background-position: -564px -192px;
+   background-position: -468px -320px;
    width: 24px;
    height: 32px;
 }
 .Framework_Munitions {
-   background-position: -564px -224px;
+   background-position: -468px -352px;
    width: 24px;
    height: 32px;
 }
 .Framework_PowerArmor {
-   background-position: -564px -256px;
+   background-position: -468px -384px;
    width: 24px;
    height: 32px;
 }
 .Framework_PrimalSorcery {
-   background-position: -564px -288px;
+   background-position: -468px -416px;
    width: 24px;
    height: 32px;
 }
 .Framework_RadiantSorcery {
-   background-position: -564px -320px;
+   background-position: -468px -448px;
    width: 24px;
    height: 32px;
 }
 .Framework_SingleBlade {
-   background-position: -564px -352px;
+   background-position: -492px -0px;
    width: 24px;
    height: 32px;
 }
 .Framework_Telekinesis {
-   background-position: -564px -384px;
-   width: 24px;
-   height: 32px;
-}
-.Framework_Unarmed {
-   background-position: -564px -416px;
+   background-position: -492px -32px;
    width: 24px;
    height: 32px;
 }
 .Framework_Telepathy {
-   background-position: -564px -448px;
+   background-position: -492px -64px;
+   width: 24px;
+   height: 32px;
+}
+.Framework_Unarmed {
+   background-position: -492px -96px;
    width: 24px;
    height: 32px;
 }
 .Framework_Wind {
-   background-position: -564px -480px;
-   width: 24px;
-   height: 32px;
-}
-.Gadgeteering_BionicShielding {
-   background-position: -564px -512px;
+   background-position: -492px -128px;
    width: 24px;
    height: 32px;
 }
 .Gadgeteering_AttackToys {
-   background-position: -564px -544px;
+   background-position: -492px -160px;
+   width: 24px;
+   height: 32px;
+}
+.Gadgeteering_BionicShielding {
+   background-position: -492px -192px;
    width: 24px;
    height: 32px;
 }
 .Gadgeteering_Bolas {
-   background-position: -588px -0px;
+   background-position: -492px -224px;
    width: 24px;
    height: 32px;
 }
 .Gadgeteering_BoomerangToss {
-   background-position: -588px -32px;
-   width: 24px;
-   height: 32px;
-}
-.Gadgeteering_ResurrectionSerum {
-   background-position: -588px -64px;
-   width: 24px;
-   height: 32px;
-}
-.Gadgeteering_PulseBeamRifle {
-   background-position: -588px -96px;
-   width: 24px;
-   height: 32px;
-}
-.Gadgeteering_ParticleRifle {
-   background-position: -588px -128px;
-   width: 24px;
-   height: 32px;
-}
-.Gadgeteering_ParticleMine {
-   background-position: -588px -160px;
-   width: 24px;
-   height: 32px;
-}
-.Gadgeteering_OrbitalCannon {
-   background-position: -588px -192px;
-   width: 24px;
-   height: 32px;
-}
-.Gadgeteering_NanobotSwarm {
-   background-position: -588px -224px;
-   width: 24px;
-   height: 32px;
-}
-.Gadgeteering_MunitionsBots {
-   background-position: -588px -256px;
-   width: 24px;
-   height: 32px;
-}
-.Gadgeteering_MiniaturizationDrive {
-   background-position: -588px -288px;
-   width: 24px;
-   height: 32px;
-}
-.Gadgeteering_MolecularSelfAssembly {
-   background-position: -588px -320px;
-   width: 24px;
-   height: 32px;
-}
-.Gadgeteering_RicochetThrow {
-   background-position: -588px -352px;
-   width: 24px;
-   height: 32px;
-}
-.Gadgeteering_MedicalNanites {
-   background-position: -588px -384px;
-   width: 24px;
-   height: 32px;
-}
-.Gadgeteering_GrappleGunPull {
-   background-position: -588px -416px;
-   width: 24px;
-   height: 32px;
-}
-.Gadgeteering_GauntletChainsaw {
-   background-position: -588px -448px;
-   width: 24px;
-   height: 32px;
-}
-.Gadgeteering_GasPellets {
-   background-position: -588px -480px;
-   width: 24px;
-   height: 32px;
-}
-.Gadgeteering_ExperimentalBurstRay {
-   background-position: -588px -512px;
-   width: 24px;
-   height: 32px;
-}
-.Gadgeteering_ExperimentalBlaster {
-   background-position: -588px -544px;
+   background-position: -492px -256px;
    width: 24px;
    height: 32px;
 }
 .Gadgeteering_EntanglingMesh {
-   background-position: -0px -588px;
+   background-position: -492px -288px;
    width: 24px;
    height: 32px;
 }
-.Gadgeteering_SonicBlaster {
-   background-position: -24px -588px;
+.Gadgeteering_ExperimentalBlaster {
+   background-position: -492px -320px;
    width: 24px;
    height: 32px;
 }
-.Gadgeteering_SonicBoomGenerator {
-   background-position: -48px -588px;
+.Gadgeteering_ExperimentalBurstRay {
+   background-position: -492px -352px;
    width: 24px;
    height: 32px;
 }
-.Gadgeteering_SonicDevice {
-   background-position: -72px -588px;
+.Gadgeteering_GasPellets {
+   background-position: -492px -384px;
+   width: 24px;
+   height: 32px;
+}
+.Gadgeteering_GauntletChainsaw {
+   background-position: -492px -416px;
+   width: 24px;
+   height: 32px;
+}
+.Gadgeteering_GrappleGunPull {
+   background-position: -492px -448px;
+   width: 24px;
+   height: 32px;
+}
+.Gadgeteering_MedicalNanites {
+   background-position: -0px -492px;
+   width: 24px;
+   height: 32px;
+}
+.Gadgeteering_MiniaturizationDrive {
+   background-position: -24px -492px;
+   width: 24px;
+   height: 32px;
+}
+.Gadgeteering_MolecularSelfAssembly {
+   background-position: -48px -492px;
+   width: 24px;
+   height: 32px;
+}
+.Gadgeteering_MunitionsBots {
+   background-position: -72px -492px;
+   width: 24px;
+   height: 32px;
+}
+.Gadgeteering_NanobotSwarm {
+   background-position: -96px -492px;
+   width: 24px;
+   height: 32px;
+}
+.Gadgeteering_OrbitalCannon {
+   background-position: -120px -492px;
+   width: 24px;
+   height: 32px;
+}
+.Gadgeteering_ParticleMine {
+   background-position: -144px -492px;
+   width: 24px;
+   height: 32px;
+}
+.Gadgeteering_ParticleRifle {
+   background-position: -168px -492px;
+   width: 24px;
+   height: 32px;
+}
+.Gadgeteering_PulseBeamRifle {
+   background-position: -192px -492px;
    width: 24px;
    height: 32px;
 }
 .Gadgeteering_StrafingRun {
-   background-position: -96px -588px;
+   background-position: -216px -492px;
+   width: 24px;
+   height: 32px;
+}
+.Gadgeteering_SonicDevice {
+   background-position: -240px -492px;
+   width: 24px;
+   height: 32px;
+}
+.Gadgeteering_SonicBoomGenerator {
+   background-position: -264px -492px;
+   width: 24px;
+   height: 32px;
+}
+.Gadgeteering_SonicBlaster {
+   background-position: -288px -492px;
+   width: 24px;
+   height: 32px;
+}
+.Gadgeteering_RicochetThrow {
+   background-position: -312px -492px;
+   width: 24px;
+   height: 32px;
+}
+.Gadgeteering_ResurrectionSerum {
+   background-position: -336px -492px;
    width: 24px;
    height: 32px;
 }
 .Gadgeteering_SupportDrones {
-   background-position: -120px -588px;
+   background-position: -360px -492px;
    width: 24px;
    height: 32px;
 }
 .Gadgeteering_TanglecoilLauncher {
-   background-position: -144px -588px;
+   background-position: -384px -492px;
    width: 24px;
    height: 32px;
 }
 .Gadgeteering_ThrowingBlades {
-   background-position: -168px -588px;
+   background-position: -408px -492px;
    width: 24px;
    height: 32px;
 }
 .Gadgeteering_ToxicNanites {
-   background-position: -192px -588px;
-   width: 24px;
-   height: 32px;
-}
-.Gadgeteering_TractorBeam {
-   background-position: -216px -588px;
+   background-position: -432px -492px;
    width: 24px;
    height: 32px;
 }
 .HeavyWeapon_Annihilate {
-   background-position: -240px -588px;
+   background-position: -456px -492px;
+   width: 24px;
+   height: 32px;
+}
+.Gadgeteering_TractorBeam {
+   background-position: -480px -492px;
    width: 24px;
    height: 32px;
 }
 .HeavyWeapon_ArcOfRuin {
-   background-position: -264px -588px;
+   background-position: -516px -0px;
    width: 24px;
    height: 32px;
 }
 .HeavyWeapon_Bludgeon {
-   background-position: -288px -588px;
+   background-position: -516px -32px;
    width: 24px;
    height: 32px;
 }
 .HeavyWeapon_Brimstone {
-   background-position: -312px -588px;
+   background-position: -516px -64px;
    width: 24px;
    height: 32px;
 }
 .HeavyWeapon_BruteStrike {
-   background-position: -336px -588px;
+   background-position: -516px -96px;
    width: 24px;
    height: 32px;
 }
 .HeavyWeapon_Cleave {
-   background-position: -360px -588px;
+   background-position: -516px -128px;
    width: 24px;
    height: 32px;
 }
 .HeavyWeapon_Decimate {
-   background-position: -384px -588px;
-   width: 24px;
-   height: 32px;
-}
-.HeavyWeapon_EarthSplitter {
-   background-position: -408px -588px;
-   width: 24px;
-   height: 32px;
-}
-.HeavyWeapon_Eruption {
-   background-position: -432px -588px;
-   width: 24px;
-   height: 32px;
-}
-.HeavyWeapon_Guard {
-   background-position: -456px -588px;
+   background-position: -516px -160px;
    width: 24px;
    height: 32px;
 }
 .HeavyWeapon_Skewer {
-   background-position: -480px -588px;
+   background-position: -516px -192px;
+   width: 24px;
+   height: 32px;
+}
+.HeavyWeapon_Guard {
+   background-position: -516px -224px;
+   width: 24px;
+   height: 32px;
+}
+.HeavyWeapon_Eruption {
+   background-position: -516px -256px;
+   width: 24px;
+   height: 32px;
+}
+.HeavyWeapon_EarthSplitter {
+   background-position: -516px -288px;
    width: 24px;
    height: 32px;
 }
 .HeavyWeapon_Skullcrusher {
-   background-position: -504px -588px;
+   background-position: -516px -320px;
    width: 24px;
    height: 32px;
 }
 .HeavyWeapon_ViciousDescent {
-   background-position: -528px -588px;
-   width: 24px;
-   height: 32px;
-}
-.Ice_ArcticBeast {
-   background-position: -552px -588px;
+   background-position: -516px -352px;
    width: 24px;
    height: 32px;
 }
 .Ice_Aurora {
-   background-position: -576px -588px;
+   background-position: -516px -384px;
    width: 24px;
    height: 32px;
 }
 .Ice_Avalanche {
-   background-position: -612px -0px;
+   background-position: -516px -416px;
    width: 24px;
    height: 32px;
 }
 .Ice_ChilledForm {
-   background-position: -612px -32px;
+   background-position: -516px -448px;
+   width: 24px;
+   height: 32px;
+}
+.Ice_ArcticBeast {
+   background-position: -516px -480px;
    width: 24px;
    height: 32px;
 }
 .Ice_FrostBreath {
-   background-position: -612px -64px;
-   width: 24px;
-   height: 32px;
-}
-.Ice_IceCage {
-   background-position: -612px -96px;
+   background-position: -0px -524px;
    width: 24px;
    height: 32px;
 }
 .Ice_IceBlast {
-   background-position: -612px -128px;
-   width: 24px;
-   height: 32px;
-}
-.Ice_IceBarrier {
-   background-position: -612px -160px;
+   background-position: -24px -524px;
    width: 24px;
    height: 32px;
 }
 .Ice_IceBurst {
-   background-position: -612px -192px;
+   background-position: -48px -524px;
+   width: 24px;
+   height: 32px;
+}
+.Ice_IceBarrier {
+   background-position: -72px -524px;
+   width: 24px;
+   height: 32px;
+}
+.Ice_IceCage {
+   background-position: -96px -524px;
    width: 24px;
    height: 32px;
 }
 .Ice_IceForm {
-   background-position: -612px -224px;
+   background-position: -120px -524px;
    width: 24px;
    height: 32px;
 }
 .Ice_IceShards {
-   background-position: -612px -256px;
+   background-position: -144px -524px;
    width: 24px;
    height: 32px;
 }
 .Ice_IceSheath {
-   background-position: -612px -288px;
+   background-position: -168px -524px;
    width: 24px;
    height: 32px;
 }
 .Ice_IceShield {
-   background-position: -612px -320px;
+   background-position: -192px -524px;
    width: 24px;
    height: 32px;
 }
 .Ice_IcicleSpear {
-   background-position: -612px -352px;
+   background-position: -216px -524px;
    width: 24px;
    height: 32px;
 }
 .Ice_IcyEmbrace {
-   background-position: -612px -384px;
+   background-position: -240px -524px;
    width: 24px;
    height: 32px;
 }
 .Ice_Shatter {
-   background-position: -612px -416px;
-   width: 24px;
-   height: 32px;
-}
-.Ice_VaporForm {
-   background-position: -612px -448px;
-   width: 24px;
-   height: 32px;
-}
-.Ice_WallOfIce {
-   background-position: -612px -480px;
+   background-position: -264px -524px;
    width: 24px;
    height: 32px;
 }
 .Ice_SnowStorm {
-   background-position: -612px -512px;
+   background-position: -288px -524px;
+   width: 24px;
+   height: 32px;
+}
+.Ice_VaporForm {
+   background-position: -312px -524px;
+   width: 24px;
+   height: 32px;
+}
+.Ice_WallOfIce {
+   background-position: -336px -524px;
    width: 24px;
    height: 32px;
 }
 .Innate_Talent {
-   background-position: -612px -544px;
-   width: 24px;
-   height: 32px;
-}
-.LaserSword_Glance {
-   background-position: -612px -576px;
+   background-position: -360px -524px;
    width: 24px;
    height: 32px;
 }
 .LaserSword_CyberneticTether {
-   background-position: -0px -620px;
+   background-position: -384px -524px;
    width: 24px;
    height: 32px;
 }
-.LaserSword_LuminescentSlash {
-   background-position: -24px -620px;
-   width: 24px;
-   height: 32px;
-}
-.LaserSword_LightwaveSlash {
-   background-position: -48px -620px;
-   width: 24px;
-   height: 32px;
-}
-.LaserSword_LaserEdge {
-   background-position: -72px -620px;
-   width: 24px;
-   height: 32px;
-}
-.LaserSword_LightspeedDash {
-   background-position: -96px -620px;
+.LaserSword_Glance {
+   background-position: -408px -524px;
    width: 24px;
    height: 32px;
 }
 .LaserSword_LaserDeflection {
-   background-position: -120px -620px;
+   background-position: -432px -524px;
+   width: 24px;
+   height: 32px;
+}
+.LaserSword_LightspeedDash {
+   background-position: -456px -524px;
+   width: 24px;
+   height: 32px;
+}
+.LaserSword_LaserEdge {
+   background-position: -480px -524px;
+   width: 24px;
+   height: 32px;
+}
+.LaserSword_LightwaveSlash {
+   background-position: -504px -524px;
+   width: 24px;
+   height: 32px;
+}
+.LaserSword_LuminescentSlash {
+   background-position: -540px -0px;
    width: 24px;
    height: 32px;
 }
 .LaserSword_ParticleAccelerator {
-   background-position: -144px -620px;
+   background-position: -540px -32px;
    width: 24px;
    height: 32px;
 }
 .LaserSword_ParticleAccelerator_Old {
-   background-position: -168px -620px;
+   background-position: -540px -64px;
    width: 24px;
    height: 32px;
 }
 .LaserSword_ParticleSmash {
-   background-position: -192px -620px;
+   background-position: -540px -96px;
    width: 24px;
    height: 32px;
 }
 .LaserSword_ParticleWave {
-   background-position: -216px -620px;
+   background-position: -540px -128px;
    width: 24px;
    height: 32px;
 }
 .LaserSword_PlasmaCutter {
-   background-position: -240px -620px;
+   background-position: -540px -160px;
    width: 24px;
    height: 32px;
 }
 .LaserSword_QuantumStabilizer {
-   background-position: -264px -620px;
+   background-position: -540px -192px;
    width: 24px;
    height: 32px;
 }
 .LaserSword_UnifiedTheory {
-   background-position: -288px -620px;
+   background-position: -540px -224px;
    width: 24px;
    height: 32px;
 }
 .LaserSword_UnifiedTheory_Old {
-   background-position: -312px -620px;
+   background-position: -540px -256px;
    width: 24px;
    height: 32px;
 }
 .MartialArts_BountifulChiResurgence {
-   background-position: -336px -620px;
+   background-position: -540px -288px;
    width: 24px;
    height: 32px;
 }
 .MartialArts_ChainedKunai {
-   background-position: -360px -620px;
+   background-position: -540px -320px;
    width: 24px;
    height: 32px;
 }
 .MartialArts_Fluidity {
-   background-position: -384px -620px;
+   background-position: -540px -352px;
    width: 24px;
    height: 32px;
 }
 .MartialArts_InexorableTides {
-   background-position: -408px -620px;
+   background-position: -540px -384px;
    width: 24px;
    height: 32px;
 }
 .MartialArts_Intensity {
-   background-position: -432px -620px;
-   width: 24px;
-   height: 32px;
-}
-.MartialArts_MasterfulDodge {
-   background-position: -456px -620px;
+   background-position: -540px -416px;
    width: 24px;
    height: 32px;
 }
 .MartialArts_LightningReflexes {
-   background-position: -480px -620px;
+   background-position: -540px -448px;
    width: 24px;
    height: 32px;
 }
 .MartialArts_Parry {
-   background-position: -504px -620px;
+   background-position: -540px -480px;
+   width: 24px;
+   height: 32px;
+}
+.MartialArts_MasterfulDodge {
+   background-position: -540px -512px;
    width: 24px;
    height: 32px;
 }
 .MartialArts_Relentless {
-   background-position: -528px -620px;
+   background-position: -0px -556px;
    width: 24px;
    height: 32px;
 }
 .MartialArts_RisingKnee {
-   background-position: -552px -620px;
-   width: 24px;
-   height: 32px;
-}
-.MartialArts_ShurikenThrow {
-   background-position: -576px -620px;
+   background-position: -24px -556px;
    width: 24px;
    height: 32px;
 }
 .MartialArts_ShurikenStorm {
-   background-position: -600px -620px;
+   background-position: -48px -556px;
    width: 24px;
    height: 32px;
 }
-.MartialArts_Sneak {
-   background-position: -636px -0px;
+.MartialArts_ShurikenThrow {
+   background-position: -72px -556px;
    width: 24px;
    height: 32px;
 }
 .MartialArts_SmokeBomb {
-   background-position: -636px -32px;
+   background-position: -96px -556px;
+   width: 24px;
+   height: 32px;
+}
+.MartialArts_Sneak {
+   background-position: -120px -556px;
    width: 24px;
    height: 32px;
 }
 .MartialArts_Steadfast {
-   background-position: -636px -64px;
+   background-position: -144px -556px;
    width: 24px;
    height: 32px;
 }
 .MartialArts_ThunderboltLunge {
-   background-position: -636px -96px;
+   background-position: -168px -556px;
    width: 24px;
    height: 32px;
 }
 .MartialArts_VorpalBlade {
-   background-position: -636px -128px;
+   background-position: -192px -556px;
    width: 24px;
    height: 32px;
 }
 .MartialArts_WayOfTheWarrior {
-   background-position: -636px -160px;
+   background-position: -216px -556px;
    width: 24px;
    height: 32px;
 }
-.Mentalist_MentalImpact {
-   background-position: -636px -192px;
+.Mentalist_EgoBladePandemonium {
+   background-position: -240px -556px;
    width: 24px;
    height: 32px;
 }
 .Mentalist_Manipulation {
-   background-position: -636px -224px;
+   background-position: -264px -556px;
+   width: 24px;
+   height: 32px;
+}
+.Mentalist_MentalImpact {
+   background-position: -288px -556px;
    width: 24px;
    height: 32px;
 }
 .Mentalist_MindLink {
-   background-position: -636px -256px;
+   background-position: -312px -556px;
    width: 24px;
    height: 32px;
 }
 .Might_Beatdown {
-   background-position: -636px -288px;
-   width: 24px;
-   height: 32px;
-}
-.Might_Demolish {
-   background-position: -636px -320px;
+   background-position: -336px -556px;
    width: 24px;
    height: 32px;
 }
 .Might_Clobber {
-   background-position: -636px -352px;
+   background-position: -360px -556px;
    width: 24px;
    height: 32px;
 }
 .Might_DefensiveCombo {
-   background-position: -636px -384px;
+   background-position: -384px -556px;
+   width: 24px;
+   height: 32px;
+}
+.Might_Demolish {
+   background-position: -408px -556px;
    width: 24px;
    height: 32px;
 }
 .Might_HavocStomp {
-   background-position: -636px -416px;
+   background-position: -432px -556px;
    width: 24px;
    height: 32px;
 }
 .Might_Haymaker {
-   background-position: -636px -448px;
+   background-position: -456px -556px;
    width: 24px;
    height: 32px;
 }
 .Might_HeadButt {
-   background-position: -636px -480px;
+   background-position: -480px -556px;
    width: 24px;
    height: 32px;
 }
 .Might_Hurl {
-   background-position: -636px -512px;
+   background-position: -504px -556px;
    width: 24px;
    height: 32px;
 }
 .Might_HyperVoice {
-   background-position: -636px -544px;
-   width: 24px;
-   height: 32px;
-}
-.Might_IronChain {
-   background-position: -636px -576px;
-   width: 24px;
-   height: 32px;
-}
-.Might_IronCyclone {
-   background-position: -636px -608px;
+   background-position: -528px -556px;
    width: 24px;
    height: 32px;
 }
 .Might_IronLariat {
-   background-position: -0px -652px;
+   background-position: -564px -0px;
+   width: 24px;
+   height: 32px;
+}
+.Might_IronCyclone {
+   background-position: -564px -32px;
+   width: 24px;
+   height: 32px;
+}
+.Might_IronChain {
+   background-position: -564px -64px;
    width: 24px;
    height: 32px;
 }
 .Might_MightyKick {
-   background-position: -24px -652px;
-   width: 24px;
-   height: 32px;
-}
-.Might_Retaliation {
-   background-position: -48px -652px;
-   width: 24px;
-   height: 32px;
-}
-.Might_Thunderclap {
-   background-position: -72px -652px;
+   background-position: -564px -96px;
    width: 24px;
    height: 32px;
 }
 .Might_MightyLeap {
-   background-position: -96px -652px;
+   background-position: -564px -128px;
+   width: 24px;
+   height: 32px;
+}
+.Might_Retaliation {
+   background-position: -564px -160px;
    width: 24px;
    height: 32px;
 }
 .Might_Roomsweeper {
-   background-position: -120px -652px;
+   background-position: -564px -192px;
    width: 24px;
    height: 32px;
 }
 .Might_Shockwave {
-   background-position: -144px -652px;
+   background-position: -564px -224px;
+   width: 24px;
+   height: 32px;
+}
+.Might_Thunderclap {
+   background-position: -564px -256px;
    width: 24px;
    height: 32px;
 }
 .Might_Uppercut {
-   background-position: -168px -652px;
+   background-position: -564px -288px;
    width: 24px;
    height: 32px;
 }
 .minus {
-   background-position: -192px -652px;
+   background-position: -564px -320px;
    width: 24px;
    height: 32px;
 }
 .Munitions_AssaultRifle {
-   background-position: -216px -652px;
+   background-position: -564px -352px;
    width: 24px;
    height: 32px;
 }
 .Munitions_BreakawayShot {
-   background-position: -240px -652px;
-   width: 24px;
-   height: 32px;
-}
-.Munitions_BulletBeatdown {
-   background-position: -264px -652px;
+   background-position: -564px -384px;
    width: 24px;
    height: 32px;
 }
 .Munitions_PistolWhip {
-   background-position: -288px -652px;
+   background-position: -564px -416px;
+   width: 24px;
+   height: 32px;
+}
+.Munitions_BulletBeatdown {
+   background-position: -564px -448px;
    width: 24px;
    height: 32px;
 }
 .Munitions_BulletHail {
-   background-position: -312px -652px;
+   background-position: -564px -480px;
    width: 24px;
    height: 32px;
 }
 .Munitions_BurstShot {
-   background-position: -336px -652px;
-   width: 24px;
-   height: 32px;
-}
-.Munitions_ConcussionGrenade {
-   background-position: -360px -652px;
+   background-position: -564px -512px;
    width: 24px;
    height: 32px;
 }
 .Munitions_Composure {
-   background-position: -384px -652px;
+   background-position: -564px -544px;
    width: 24px;
    height: 32px;
 }
-.Munitions_Flamethrower {
-   background-position: -408px -652px;
+.Munitions_ConcussionGrenade {
+   background-position: -588px -0px;
    width: 24px;
    height: 32px;
 }
 .Munitions_ExecutionShot {
-   background-position: -432px -652px;
-   width: 24px;
-   height: 32px;
-}
-.Munitions_FragGrenade {
-   background-position: -456px -652px;
-   width: 24px;
-   height: 32px;
-}
-.Munitions_GatlingGun {
-   background-position: -480px -652px;
-   width: 24px;
-   height: 32px;
-}
-.Munitions_Gunslinger {
-   background-position: -504px -652px;
+   background-position: -588px -32px;
    width: 24px;
    height: 32px;
 }
 .Munitions_HoldoutShot {
-   background-position: -528px -652px;
+   background-position: -588px -64px;
    width: 24px;
    height: 32px;
 }
-.Munitions_KillerInstinct {
-   background-position: -552px -652px;
+.Munitions_GatlingGun {
+   background-position: -588px -96px;
+   width: 24px;
+   height: 32px;
+}
+.Munitions_Flamethrower {
+   background-position: -588px -128px;
+   width: 24px;
+   height: 32px;
+}
+.Munitions_FragGrenade {
+   background-position: -588px -160px;
+   width: 24px;
+   height: 32px;
+}
+.Munitions_Gunslinger {
+   background-position: -588px -192px;
    width: 24px;
    height: 32px;
 }
 .Munitions_IncendiaryGrenade {
-   background-position: -576px -652px;
+   background-position: -588px -224px;
+   width: 24px;
+   height: 32px;
+}
+.Munitions_KillerInstinct {
+   background-position: -588px -256px;
    width: 24px;
    height: 32px;
 }
 .Munitions_LeadTempest {
-   background-position: -600px -652px;
+   background-position: -588px -288px;
    width: 24px;
    height: 32px;
 }
 .Munitions_LockNLoad {
-   background-position: -624px -652px;
+   background-position: -588px -320px;
    width: 24px;
    height: 32px;
 }
 .Munitions_MiniMines {
-   background-position: -660px -0px;
+   background-position: -588px -352px;
    width: 24px;
    height: 32px;
 }
 .Munitions_PartingShot {
-   background-position: -660px -32px;
+   background-position: -588px -384px;
    width: 24px;
    height: 32px;
 }
 .Munitions_RifleButt {
-   background-position: -660px -64px;
+   background-position: -588px -416px;
    width: 24px;
    height: 32px;
 }
 .Munitions_Rocket {
-   background-position: -660px -96px;
+   background-position: -588px -448px;
    width: 24px;
    height: 32px;
 }
 .Munitions_SharpShooter {
-   background-position: -660px -128px;
+   background-position: -588px -480px;
    width: 24px;
    height: 32px;
 }
 .Munitions_ShotgunBlast {
-   background-position: -660px -160px;
+   background-position: -588px -512px;
    width: 24px;
    height: 32px;
 }
 .Munitions_SmokeGrenade {
-   background-position: -660px -192px;
+   background-position: -588px -544px;
    width: 24px;
    height: 32px;
 }
 .Munitions_SniperRifle {
-   background-position: -660px -224px;
-   width: 24px;
-   height: 32px;
-}
-.PowerArmor_DualWristRocketBarrage {
-   background-position: -660px -256px;
-   width: 24px;
-   height: 32px;
-}
-.PowerArmor_EnergyShield {
-   background-position: -660px -288px;
-   width: 24px;
-   height: 32px;
-}
-.PowerArmor_ConcussorBeam {
-   background-position: -660px -320px;
-   width: 24px;
-   height: 32px;
-}
-.PowerArmor_ChestLaser {
-   background-position: -660px -352px;
-   width: 24px;
-   height: 32px;
-}
-.PowerArmor_ChestBeam {
-   background-position: -660px -384px;
-   width: 24px;
-   height: 32px;
-}
-.PowerArmor_AspectOfTheMachine {
-   background-position: -660px -416px;
-   width: 24px;
-   height: 32px;
-}
-.plus {
-   background-position: -660px -448px;
-   width: 24px;
-   height: 32px;
-}
-.Mystic_PlanarFracture {
-   background-position: -660px -480px;
-   width: 24px;
-   height: 32px;
-}
-.PowerArmor_EnergyWave {
-   background-position: -660px -512px;
-   width: 24px;
-   height: 32px;
-}
-.Mystic_EndbringersGrasp {
-   background-position: -660px -544px;
-   width: 24px;
-   height: 32px;
-}
-.Mystic_CrashingIncantation {
-   background-position: -660px -576px;
-   width: 24px;
-   height: 32px;
-}
-.Mystic_Compassion {
-   background-position: -660px -608px;
-   width: 24px;
-   height: 32px;
-}
-.Munitions_TwoGunMojo {
-   background-position: -660px -640px;
-   width: 24px;
-   height: 32px;
-}
-.PowerArmor_EyeBeam {
-   background-position: -684px -0px;
-   width: 24px;
-   height: 32px;
-}
-.Munitions_SubmachinegunBurst {
-   background-position: -684px -32px;
-   width: 24px;
-   height: 32px;
-}
-.Munitions_TripWire {
-   background-position: -684px -64px;
+   background-position: -0px -588px;
    width: 24px;
    height: 32px;
 }
 .Munitions_SteadyShot {
-   background-position: -684px -96px;
+   background-position: -24px -588px;
+   width: 24px;
+   height: 32px;
+}
+.Munitions_SubmachinegunBurst {
+   background-position: -48px -588px;
+   width: 24px;
+   height: 32px;
+}
+.Munitions_TripWire {
+   background-position: -72px -588px;
+   width: 24px;
+   height: 32px;
+}
+.Munitions_TwoGunMojo {
+   background-position: -96px -588px;
+   width: 24px;
+   height: 32px;
+}
+.Mystic_Compassion {
+   background-position: -120px -588px;
+   width: 24px;
+   height: 32px;
+}
+.Mystic_CrashingIncantation {
+   background-position: -144px -588px;
+   width: 24px;
+   height: 32px;
+}
+.Mystic_EndbringersGrasp {
+   background-position: -168px -588px;
+   width: 24px;
+   height: 32px;
+}
+.Mystic_PlanarFracture {
+   background-position: -192px -588px;
+   width: 24px;
+   height: 32px;
+}
+.plus {
+   background-position: -216px -588px;
+   width: 24px;
+   height: 32px;
+}
+.PowerArmor_AspectOfTheMachine {
+   background-position: -240px -588px;
+   width: 24px;
+   height: 32px;
+}
+.PowerArmor_ChestBeam {
+   background-position: -264px -588px;
+   width: 24px;
+   height: 32px;
+}
+.PowerArmor_ChestLaser {
+   background-position: -288px -588px;
+   width: 24px;
+   height: 32px;
+}
+.PowerArmor_ConcussorBeam {
+   background-position: -312px -588px;
+   width: 24px;
+   height: 32px;
+}
+.PowerArmor_DualWristRocketBarrage {
+   background-position: -336px -588px;
+   width: 24px;
+   height: 32px;
+}
+.PowerArmor_EnergyShield {
+   background-position: -360px -588px;
+   width: 24px;
+   height: 32px;
+}
+.PowerArmor_EyeBeam {
+   background-position: -384px -588px;
+   width: 24px;
+   height: 32px;
+}
+.PowerArmor_EnergyWave {
+   background-position: -408px -588px;
    width: 24px;
    height: 32px;
 }
 .PowerArmor_HandCannon {
-   background-position: -684px -128px;
+   background-position: -432px -588px;
    width: 24px;
    height: 32px;
 }
 .PowerArmor_Invulnerability {
-   background-position: -684px -160px;
+   background-position: -456px -588px;
    width: 24px;
    height: 32px;
 }
 .PowerArmor_MicroMunitions {
-   background-position: -684px -192px;
+   background-position: -480px -588px;
    width: 24px;
    height: 32px;
 }
 .PowerArmor_MiniGun {
-   background-position: -684px -224px;
-   width: 24px;
-   height: 32px;
-}
-.PowerArmor_PlasmaBeam {
-   background-position: -684px -256px;
+   background-position: -504px -588px;
    width: 24px;
    height: 32px;
 }
 .PowerArmor_Overdrive {
-   background-position: -684px -288px;
+   background-position: -528px -588px;
+   width: 24px;
+   height: 32px;
+}
+.PowerArmor_PlasmaBeam {
+   background-position: -552px -588px;
    width: 24px;
    height: 32px;
 }
 .PowerArmor_PowerBolts {
-   background-position: -684px -320px;
+   background-position: -576px -588px;
    width: 24px;
    height: 32px;
 }
 .PowerArmor_PowerGauntlet {
-   background-position: -684px -352px;
-   width: 24px;
-   height: 32px;
-}
-.PowerArmor_RocketPunch {
-   background-position: -684px -384px;
+   background-position: -612px -0px;
    width: 24px;
    height: 32px;
 }
 .PowerArmor_ReconstructionCircuits {
-   background-position: -684px -416px;
+   background-position: -612px -32px;
+   width: 24px;
+   height: 32px;
+}
+.PowerArmor_RocketPunch {
+   background-position: -612px -64px;
    width: 24px;
    height: 32px;
 }
 .PowerArmor_ShoulderLauncher {
-   background-position: -684px -448px;
+   background-position: -612px -96px;
    width: 24px;
    height: 32px;
 }
 .PowerArmor_TacticalMissiles {
-   background-position: -684px -480px;
+   background-position: -612px -128px;
    width: 24px;
    height: 32px;
 }
 .PowerArmor_TargetingComputer {
-   background-position: -684px -512px;
+   background-position: -612px -160px;
    width: 24px;
    height: 32px;
 }
 .PowerArmor_Unbreakable {
-   background-position: -684px -544px;
+   background-position: -612px -192px;
    width: 24px;
    height: 32px;
 }
 .PowerArmor_WristBolter {
-   background-position: -684px -576px;
+   background-position: -612px -224px;
    width: 24px;
    height: 32px;
 }
 .PowerSet_Brick {
-   background-position: -684px -608px;
+   background-position: -612px -256px;
    width: 24px;
    height: 32px;
 }
 .PowerSet_EnergyProjector {
-   background-position: -684px -640px;
+   background-position: -612px -288px;
    width: 24px;
    height: 32px;
 }
 .PowerSet_MartialArts {
-   background-position: -0px -684px;
+   background-position: -612px -320px;
    width: 24px;
    height: 32px;
 }
 .PowerSet_Mentalist {
-   background-position: -24px -684px;
-   width: 24px;
-   height: 32px;
-}
-.SingleBlade_ScythingBlade {
-   background-position: -48px -684px;
-   width: 24px;
-   height: 32px;
-}
-.SingleBlade_ReapersTouch {
-   background-position: -72px -684px;
-   width: 24px;
-   height: 32px;
-}
-.SingleBlade_ReapersEmbrace {
-   background-position: -96px -684px;
-   width: 24px;
-   height: 32px;
-}
-.SingleBlade_ReapersCaress {
-   background-position: -120px -684px;
-   width: 24px;
-   height: 32px;
-}
-.SingleBlade_FormOfTheSwordsman {
-   background-position: -144px -684px;
-   width: 24px;
-   height: 32px;
-}
-.SingleBlade_DragonsBite {
-   background-position: -168px -684px;
-   width: 24px;
-   height: 32px;
-}
-.Role_Tank {
-   background-position: -192px -684px;
-   width: 24px;
-   height: 32px;
-}
-.SingleBlade_CutDown {
-   background-position: -216px -684px;
-   width: 24px;
-   height: 32px;
-}
-.Role_Support {
-   background-position: -240px -684px;
-   width: 24px;
-   height: 32px;
-}
-.Role_MeleeDamage {
-   background-position: -264px -684px;
-   width: 24px;
-   height: 32px;
-}
-.Role_Hybrid {
-   background-position: -288px -684px;
-   width: 24px;
-   height: 32px;
-}
-.Role_Freeform {
-   background-position: -312px -684px;
-   width: 24px;
-   height: 32px;
-}
-.Specialization_Tinkering {
-   background-position: -336px -684px;
-   width: 24px;
-   height: 32px;
-}
-.PowerSet_Technology {
-   background-position: -360px -684px;
+   background-position: -612px -352px;
    width: 24px;
    height: 32px;
 }
 .PowerSet_Mystic {
-   background-position: -384px -684px;
+   background-position: -612px -384px;
+   width: 24px;
+   height: 32px;
+}
+.Role_Freeform {
+   background-position: -612px -416px;
+   width: 24px;
+   height: 32px;
+}
+.Specialization_Tinkering {
+   background-position: -612px -448px;
+   width: 24px;
+   height: 32px;
+}
+.PowerSet_Technology {
+   background-position: -612px -480px;
+   width: 24px;
+   height: 32px;
+}
+.Role_Hybrid {
+   background-position: -612px -512px;
+   width: 24px;
+   height: 32px;
+}
+.Role_MeleeDamage {
+   background-position: -612px -544px;
    width: 24px;
    height: 32px;
 }
 .Role_RangedDamage {
-   background-position: -408px -684px;
+   background-position: -612px -576px;
+   width: 24px;
+   height: 32px;
+}
+.Role_Support {
+   background-position: -0px -620px;
+   width: 24px;
+   height: 32px;
+}
+.Role_Tank {
+   background-position: -24px -620px;
+   width: 24px;
+   height: 32px;
+}
+.SingleBlade_CutDown {
+   background-position: -48px -620px;
+   width: 24px;
+   height: 32px;
+}
+.SingleBlade_FormOfTheSwordsman {
+   background-position: -72px -620px;
+   width: 24px;
+   height: 32px;
+}
+.SingleBlade_DragonsBite {
+   background-position: -96px -620px;
+   width: 24px;
+   height: 32px;
+}
+.SingleBlade_ReapersCaress {
+   background-position: -120px -620px;
+   width: 24px;
+   height: 32px;
+}
+.SingleBlade_ReapersEmbrace {
+   background-position: -144px -620px;
+   width: 24px;
+   height: 32px;
+}
+.SingleBlade_ReapersTouch {
+   background-position: -168px -620px;
+   width: 24px;
+   height: 32px;
+}
+.SingleBlade_ScythingBlade {
+   background-position: -192px -620px;
    width: 24px;
    height: 32px;
 }
 .SingleBlade_Slash {
-   background-position: -432px -684px;
+   background-position: -216px -620px;
    width: 24px;
    height: 32px;
 }
 .SingleBlade_SwiftSlash {
-   background-position: -456px -684px;
+   background-position: -240px -620px;
    width: 24px;
    height: 32px;
 }
 .Sorcery_ArcaneVitality {
-   background-position: -480px -684px;
+   background-position: -264px -620px;
    width: 24px;
    height: 32px;
 }
 .Sorcery_AuraOfArcaneClarity {
-   background-position: -504px -684px;
+   background-position: -288px -620px;
    width: 24px;
    height: 32px;
 }
 .Sorcery_AuraOfEbonDestruction {
-   background-position: -528px -684px;
+   background-position: -312px -620px;
    width: 24px;
    height: 32px;
 }
 .Sorcery_AuraOfPrimalMajesty {
-   background-position: -552px -684px;
+   background-position: -336px -620px;
    width: 24px;
    height: 32px;
 }
 .Sorcery_AuraOfRadiantProtection {
-   background-position: -576px -684px;
+   background-position: -360px -620px;
    width: 24px;
    height: 32px;
 }
 .Sorcery_Banish {
-   background-position: -600px -684px;
+   background-position: -384px -620px;
    width: 24px;
    height: 32px;
 }
 .Sorcery_BindingOfAratron {
-   background-position: -624px -684px;
+   background-position: -408px -620px;
    width: 24px;
    height: 32px;
 }
 .Sorcery_CircleOfArcanePower {
-   background-position: -648px -684px;
-   width: 24px;
-   height: 32px;
-}
-.Sorcery_CircleOfPrimalDominion {
-   background-position: -672px -684px;
-   width: 24px;
-   height: 32px;
-}
-.Sorcery_CircleOfRadiantGlory {
-   background-position: -708px -0px;
-   width: 24px;
-   height: 32px;
-}
-.Sorcery_Conjuring {
-   background-position: -708px -32px;
-   width: 24px;
-   height: 32px;
-}
-.Sorcery_CircleOfEbonWrath {
-   background-position: -708px -64px;
-   width: 24px;
-   height: 32px;
-}
-.Sorcery_DivineRenewal {
-   background-position: -708px -96px;
-   width: 24px;
-   height: 32px;
-}
-.Sorcery_EldritchBlast {
-   background-position: -708px -128px;
-   width: 24px;
-   height: 32px;
-}
-.Sorcery_EldritchBolts {
-   background-position: -708px -160px;
-   width: 24px;
-   height: 32px;
-}
-.Sorcery_EldritchShield {
-   background-position: -708px -192px;
-   width: 24px;
-   height: 32px;
-}
-.Sorcery_Enchanter {
-   background-position: -708px -224px;
-   width: 24px;
-   height: 32px;
-}
-.Sorcery_HexOfSuffering {
-   background-position: -708px -256px;
-   width: 24px;
-   height: 32px;
-}
-.Specialization_TwistFate {
-   background-position: -708px -288px;
-   width: 24px;
-   height: 32px;
-}
-.Sorcery_InvocationOfStormCalling {
-   background-position: -708px -320px;
-   width: 24px;
-   height: 32px;
-}
-.Sorcery_MagiciansDust {
-   background-position: -708px -352px;
-   width: 24px;
-   height: 32px;
-}
-.Sorcery_MarchOfTheDead {
-   background-position: -708px -384px;
-   width: 24px;
-   height: 32px;
-}
-.Sorcery_PillarOfPoz {
-   background-position: -708px -416px;
-   width: 24px;
-   height: 32px;
-}
-.Sorcery_RitualOfArcaneSummoning {
-   background-position: -708px -448px;
-   width: 24px;
-   height: 32px;
-}
-.Sorcery_RitualOfEbonSummoning {
-   background-position: -708px -480px;
+   background-position: -432px -620px;
    width: 24px;
    height: 32px;
 }
 .Sorcery_RitualOfPrimalSummoning {
-   background-position: -708px -512px;
+   background-position: -456px -620px;
+   width: 24px;
+   height: 32px;
+}
+.Sorcery_RitualOfEbonSummoning {
+   background-position: -480px -620px;
+   width: 24px;
+   height: 32px;
+}
+.Sorcery_RitualOfArcaneSummoning {
+   background-position: -504px -620px;
+   width: 24px;
+   height: 32px;
+}
+.Sorcery_PillarOfPoz {
+   background-position: -528px -620px;
+   width: 24px;
+   height: 32px;
+}
+.Sorcery_MarchOfTheDead {
+   background-position: -552px -620px;
+   width: 24px;
+   height: 32px;
+}
+.Sorcery_MagiciansDust {
+   background-position: -576px -620px;
+   width: 24px;
+   height: 32px;
+}
+.Sorcery_InvocationOfStormCalling {
+   background-position: -600px -620px;
+   width: 24px;
+   height: 32px;
+}
+.Sorcery_HexOfSuffering {
+   background-position: -636px -0px;
+   width: 24px;
+   height: 32px;
+}
+.Specialization_TwistFate {
+   background-position: -636px -32px;
+   width: 24px;
+   height: 32px;
+}
+.Sorcery_Enchanter {
+   background-position: -636px -64px;
+   width: 24px;
+   height: 32px;
+}
+.Sorcery_EldritchShield {
+   background-position: -636px -96px;
+   width: 24px;
+   height: 32px;
+}
+.Sorcery_EldritchBolts {
+   background-position: -636px -128px;
+   width: 24px;
+   height: 32px;
+}
+.Sorcery_EldritchBlast {
+   background-position: -636px -160px;
+   width: 24px;
+   height: 32px;
+}
+.Sorcery_DivineRenewal {
+   background-position: -636px -192px;
+   width: 24px;
+   height: 32px;
+}
+.Sorcery_Conjuring {
+   background-position: -636px -224px;
+   width: 24px;
+   height: 32px;
+}
+.Sorcery_CircleOfRadiantGlory {
+   background-position: -636px -256px;
+   width: 24px;
+   height: 32px;
+}
+.Sorcery_CircleOfPrimalDominion {
+   background-position: -636px -288px;
+   width: 24px;
+   height: 32px;
+}
+.Sorcery_CircleOfEbonWrath {
+   background-position: -636px -320px;
    width: 24px;
    height: 32px;
 }
 .Sorcery_RitualOfRadiantSummoning {
-   background-position: -708px -544px;
-   width: 24px;
-   height: 32px;
-}
-.Sorcery_SigilsOfArcaneRunes {
-   background-position: -708px -576px;
-   width: 24px;
-   height: 32px;
-}
-.Sorcery_SigilsOfEbonWeakness {
-   background-position: -708px -608px;
-   width: 24px;
-   height: 32px;
-}
-.Sorcery_SigilsOfRadiantSanctuary {
-   background-position: -708px -640px;
+   background-position: -636px -352px;
    width: 24px;
    height: 32px;
 }
 .Sorcery_SigilsOfDestruction {
-   background-position: -708px -672px;
+   background-position: -636px -384px;
+   width: 24px;
+   height: 32px;
+}
+.Sorcery_SigilsOfArcaneRunes {
+   background-position: -636px -416px;
+   width: 24px;
+   height: 32px;
+}
+.Sorcery_SigilsOfEbonWeakness {
+   background-position: -636px -448px;
+   width: 24px;
+   height: 32px;
+}
+.Sorcery_SigilsOfRadiantSanctuary {
+   background-position: -636px -480px;
    width: 24px;
    height: 32px;
 }
 .Sorcery_SkarnsBane {
-   background-position: -0px -716px;
+   background-position: -636px -512px;
    width: 24px;
    height: 32px;
 }
-.Sorcery_SoulBeam {
-   background-position: -24px -716px;
+.Sorcery_StarBarrage {
+   background-position: -636px -544px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_TelekineticAssault {
+   background-position: -636px -576px;
    width: 24px;
    height: 32px;
 }
 .Sorcery_TyrannonsFamiliar {
-   background-position: -48px -716px;
+   background-position: -636px -608px;
    width: 24px;
    height: 32px;
 }
 .Sorcery_UrthonasCharm {
-   background-position: -72px -716px;
+   background-position: -0px -652px;
+   width: 24px;
+   height: 32px;
+}
+.Sorcery_SoulBeam {
+   background-position: -24px -652px;
    width: 24px;
    height: 32px;
 }
 .Sorcery_ValasLight {
-   background-position: -96px -716px;
-   width: 24px;
-   height: 32px;
-}
-.Sorcery_WarlocksBlades {
-   background-position: -120px -716px;
+   background-position: -48px -652px;
    width: 24px;
    height: 32px;
 }
 .Specialization_AggressiveStance {
-   background-position: -144px -716px;
+   background-position: -72px -652px;
+   width: 24px;
+   height: 32px;
+}
+.Sorcery_WarlocksBlades {
+   background-position: -96px -652px;
    width: 24px;
    height: 32px;
 }
 .Specialization_Anguish {
-   background-position: -168px -716px;
+   background-position: -120px -652px;
    width: 24px;
    height: 32px;
 }
 .Specialization_ArbiterAura {
-   background-position: -192px -716px;
+   background-position: -144px -652px;
    width: 24px;
    height: 32px;
 }
 .Specialization_PowerSwell {
-   background-position: -216px -716px;
+   background-position: -168px -652px;
    width: 24px;
    height: 32px;
 }
 .Specialization_Armored {
-   background-position: -240px -716px;
+   background-position: -192px -652px;
    width: 24px;
    height: 32px;
 }
 .Specialization_BrushItOff {
-   background-position: -264px -716px;
+   background-position: -216px -652px;
    width: 24px;
    height: 32px;
 }
 .Specialization_CantTouchThis {
-   background-position: -288px -716px;
+   background-position: -240px -652px;
    width: 24px;
    height: 32px;
 }
 .Specialization_Caregiver {
-   background-position: -312px -716px;
+   background-position: -264px -652px;
    width: 24px;
    height: 32px;
 }
 .Specialization_CreateAnOpening {
-   background-position: -336px -716px;
-   width: 24px;
-   height: 32px;
-}
-.Specialization_Initiative {
-   background-position: -360px -716px;
-   width: 24px;
-   height: 32px;
-}
-.Specialization_DeadlyAim {
-   background-position: -384px -716px;
+   background-position: -288px -652px;
    width: 24px;
    height: 32px;
 }
 .Specialization_DebilitatingChallenge {
-   background-position: -408px -716px;
+   background-position: -312px -652px;
+   width: 24px;
+   height: 32px;
+}
+.Specialization_Initiative {
+   background-position: -336px -652px;
+   width: 24px;
+   height: 32px;
+}
+.Specialization_DeadlyAim {
+   background-position: -360px -652px;
+   width: 24px;
+   height: 32px;
+}
+.Specialization_ExhaustingStrikes {
+   background-position: -384px -652px;
+   width: 24px;
+   height: 32px;
+}
+.Telepathy_MindWipe {
+   background-position: -408px -652px;
    width: 24px;
    height: 32px;
 }
 .Specialization_Expertise {
-   background-position: -432px -716px;
+   background-position: -432px -652px;
    width: 24px;
    height: 32px;
 }
 .Specialization_FinishingBlow {
-   background-position: -456px -716px;
-   width: 24px;
-   height: 32px;
-}
-.Specialization_GearUtilization {
-   background-position: -480px -716px;
+   background-position: -456px -652px;
    width: 24px;
    height: 32px;
 }
 .Specialization_FuelMyFire {
-   background-position: -504px -716px;
+   background-position: -480px -652px;
+   width: 24px;
+   height: 32px;
+}
+.Specialization_GearUtilization {
+   background-position: -504px -652px;
    width: 24px;
    height: 32px;
 }
 .Specialization_Merciless {
-   background-position: -528px -716px;
+   background-position: -528px -652px;
    width: 24px;
    height: 32px;
 }
 .Specialization_MomentOfNeed {
-   background-position: -552px -716px;
+   background-position: -552px -652px;
    width: 24px;
    height: 32px;
 }
 .Specialization_NoEscape {
-   background-position: -576px -716px;
+   background-position: -576px -652px;
    width: 24px;
    height: 32px;
 }
 .Specialization_OverseerAura {
-   background-position: -600px -716px;
+   background-position: -600px -652px;
    width: 24px;
    height: 32px;
 }
 .Specialization_Persevere {
-   background-position: -624px -716px;
-   width: 24px;
-   height: 32px;
-}
-.Specialization_RapidResponse {
-   background-position: -648px -716px;
+   background-position: -624px -652px;
    width: 24px;
    height: 32px;
 }
 .Specialization_Retribution {
-   background-position: -672px -716px;
+   background-position: -660px -0px;
+   width: 24px;
+   height: 32px;
+}
+.Specialization_RapidResponse {
+   background-position: -660px -32px;
    width: 24px;
    height: 32px;
 }
 .Specialization_SentinelAura {
-   background-position: -696px -716px;
+   background-position: -660px -64px;
    width: 24px;
    height: 32px;
 }
 .Specialization_SentryAura {
-   background-position: -732px -0px;
+   background-position: -660px -96px;
    width: 24px;
    height: 32px;
 }
 .Specialization_StallingTactics {
-   background-position: -732px -32px;
+   background-position: -660px -128px;
    width: 24px;
    height: 32px;
 }
 .Specialization_Tactician {
-   background-position: -732px -64px;
+   background-position: -660px -160px;
    width: 24px;
    height: 32px;
 }
 .Specialization_TheRushOfBattle {
-   background-position: -732px -96px;
+   background-position: -660px -192px;
    width: 24px;
    height: 32px;
 }
 .Specialization_Torment {
-   background-position: -732px -128px;
+   background-position: -660px -224px;
    width: 24px;
    height: 32px;
 }
 .Specialization_Unrelenting {
-   background-position: -732px -160px;
+   background-position: -660px -256px;
    width: 24px;
    height: 32px;
 }
 .Stat_Constitution {
-   background-position: -732px -192px;
+   background-position: -660px -288px;
    width: 24px;
    height: 32px;
 }
 .Stat_Dexterity {
-   background-position: -732px -224px;
-   width: 24px;
-   height: 32px;
-}
-.Stat_Presence {
-   background-position: -732px -256px;
-   width: 24px;
-   height: 32px;
-}
-.Stat_Intelligence {
-   background-position: -732px -288px;
-   width: 24px;
-   height: 32px;
-}
-.Stat_Endurance {
-   background-position: -732px -320px;
+   background-position: -660px -320px;
    width: 24px;
    height: 32px;
 }
 .Stat_Ego {
-   background-position: -732px -352px;
+   background-position: -660px -352px;
    width: 24px;
    height: 32px;
 }
-.Stat_Strength {
-   background-position: -732px -384px;
+.Stat_Endurance {
+   background-position: -660px -384px;
+   width: 24px;
+   height: 32px;
+}
+.Stat_Intelligence {
+   background-position: -660px -416px;
+   width: 24px;
+   height: 32px;
+}
+.Stat_Presence {
+   background-position: -660px -448px;
    width: 24px;
    height: 32px;
 }
 .Stat_Recovery {
-   background-position: -732px -416px;
+   background-position: -660px -480px;
+   width: 24px;
+   height: 32px;
+}
+.Stat_Strength {
+   background-position: -660px -512px;
    width: 24px;
    height: 32px;
 }
 .Supernatural_Antagonize {
-   background-position: -732px -448px;
+   background-position: -660px -544px;
    width: 24px;
    height: 32px;
 }
 .Supernatural_AspectOfTheBestial {
-   background-position: -732px -480px;
+   background-position: -660px -576px;
    width: 24px;
    height: 32px;
 }
 .Supernatural_AspectOfTheInfernal {
-   background-position: -732px -512px;
+   background-position: -660px -608px;
    width: 24px;
    height: 32px;
 }
 .Supernatural_AspectOfTheEthereal {
-   background-position: -732px -544px;
+   background-position: -660px -640px;
    width: 24px;
    height: 32px;
 }
 .Supernatural_BarbedChain {
-   background-position: -732px -576px;
-   width: 24px;
-   height: 32px;
-}
-.Supernatural_BarbedLariat {
-   background-position: -732px -608px;
+   background-position: -684px -0px;
    width: 24px;
    height: 32px;
 }
 .Supernatural_BeastialFury {
-   background-position: -732px -640px;
+   background-position: -684px -32px;
    width: 24px;
    height: 32px;
 }
-.Supernatural_CommandAnimals {
-   background-position: -732px -672px;
-   width: 24px;
-   height: 32px;
-}
-.Supernatural_Condemn {
-   background-position: -732px -704px;
+.Supernatural_BarbedLariat {
+   background-position: -684px -64px;
    width: 24px;
    height: 32px;
 }
 .Supernatural_Bite {
-   background-position: -0px -748px;
+   background-position: -684px -96px;
+   width: 24px;
+   height: 32px;
+}
+.Supernatural_CommandAnimals {
+   background-position: -684px -128px;
+   width: 24px;
+   height: 32px;
+}
+.Supernatural_Condemn {
+   background-position: -684px -160px;
    width: 24px;
    height: 32px;
 }
 .Supernatural_Cower {
-   background-position: -24px -748px;
+   background-position: -684px -192px;
    width: 24px;
    height: 32px;
 }
 .Supernatural_CripplingCoils {
-   background-position: -48px -748px;
+   background-position: -684px -224px;
    width: 24px;
    height: 32px;
 }
 .Supernatural_Curse {
-   background-position: -72px -748px;
+   background-position: -684px -256px;
    width: 24px;
    height: 32px;
 }
 .Supernatural_DeathsEmbrace {
-   background-position: -96px -748px;
+   background-position: -684px -288px;
    width: 24px;
    height: 32px;
 }
 .Supernatural_Defile {
-   background-position: -120px -748px;
-   width: 24px;
-   height: 32px;
-}
-.Supernatural_Frenzy {
-   background-position: -144px -748px;
-   width: 24px;
-   height: 32px;
-}
-.Supernatural_Howl {
-   background-position: -168px -748px;
-   width: 24px;
-   height: 32px;
-}
-.Supernatural_Feint {
-   background-position: -192px -748px;
-   width: 24px;
-   height: 32px;
-}
-.Supernatural_Eviscerate {
-   background-position: -216px -748px;
-   width: 24px;
-   height: 32px;
-}
-.Supernatural_Epidemic {
-   background-position: -240px -748px;
-   width: 24px;
-   height: 32px;
-}
-.Supernatural_Entrancing {
-   background-position: -264px -748px;
+   background-position: -684px -320px;
    width: 24px;
    height: 32px;
 }
 .Supernatural_DevourEssence {
-   background-position: -288px -748px;
+   background-position: -684px -352px;
+   width: 24px;
+   height: 32px;
+}
+.Supernatural_Entrancing {
+   background-position: -684px -384px;
+   width: 24px;
+   height: 32px;
+}
+.Supernatural_Epidemic {
+   background-position: -684px -416px;
+   width: 24px;
+   height: 32px;
+}
+.Supernatural_Feint {
+   background-position: -684px -448px;
+   width: 24px;
+   height: 32px;
+}
+.Supernatural_Eviscerate {
+   background-position: -684px -480px;
+   width: 24px;
+   height: 32px;
+}
+.Supernatural_Frenzy {
+   background-position: -684px -512px;
+   width: 24px;
+   height: 32px;
+}
+.Supernatural_Howl {
+   background-position: -684px -544px;
    width: 24px;
    height: 32px;
 }
 .Supernatural_InfernalBlast {
-   background-position: -312px -748px;
+   background-position: -684px -576px;
    width: 24px;
    height: 32px;
 }
 .Supernatural_InfernalBolts {
-   background-position: -336px -748px;
+   background-position: -684px -608px;
    width: 24px;
    height: 32px;
 }
 .Supernatural_LaceratingCyclone {
-   background-position: -360px -748px;
+   background-position: -684px -640px;
    width: 24px;
    height: 32px;
 }
 .Supernatural_Lash {
-   background-position: -384px -748px;
-   width: 24px;
-   height: 32px;
-}
-.SuperStat_Recovery {
-   background-position: -408px -748px;
-   width: 24px;
-   height: 32px;
-}
-.Supernatural_SoulMesmerism {
-   background-position: -432px -748px;
-   width: 24px;
-   height: 32px;
-}
-.Supernatural_Shred {
-   background-position: -456px -748px;
-   width: 24px;
-   height: 32px;
-}
-.Supernatural_Resurgence {
-   background-position: -480px -748px;
-   width: 24px;
-   height: 32px;
-}
-.Supernatural_Rebirth_old {
-   background-position: -504px -748px;
-   width: 24px;
-   height: 32px;
-}
-.Supernatural_Regeneration {
-   background-position: -528px -748px;
-   width: 24px;
-   height: 32px;
-}
-.Supernatural_Rebirth {
-   background-position: -552px -748px;
-   width: 24px;
-   height: 32px;
-}
-.Supernatural_Pounce {
-   background-position: -576px -748px;
-   width: 24px;
-   height: 32px;
-}
-.Supernatural_Pestilence {
-   background-position: -600px -748px;
-   width: 24px;
-   height: 32px;
-}
-.Supernatural_Mephitic {
-   background-position: -624px -748px;
-   width: 24px;
-   height: 32px;
-}
-.Supernatural_Massacre {
-   background-position: -648px -748px;
+   background-position: -0px -684px;
    width: 24px;
    height: 32px;
 }
 .Supernatural_LifeEssence {
-   background-position: -672px -748px;
+   background-position: -24px -684px;
    width: 24px;
    height: 32px;
 }
 .Supernatural_LocustSwarm {
-   background-position: -696px -748px;
+   background-position: -48px -684px;
    width: 24px;
    height: 32px;
 }
-.Supernatural_SupernaturalPower {
-   background-position: -720px -748px;
+.Supernatural_Massacre {
+   background-position: -72px -684px;
+   width: 24px;
+   height: 32px;
+}
+.Supernatural_Mephitic {
+   background-position: -96px -684px;
+   width: 24px;
+   height: 32px;
+}
+.Supernatural_Pestilence {
+   background-position: -120px -684px;
+   width: 24px;
+   height: 32px;
+}
+.Supernatural_Pounce {
+   background-position: -144px -684px;
+   width: 24px;
+   height: 32px;
+}
+.Supernatural_Rebirth {
+   background-position: -168px -684px;
+   width: 24px;
+   height: 32px;
+}
+.Supernatural_Regeneration {
+   background-position: -192px -684px;
+   width: 24px;
+   height: 32px;
+}
+.Supernatural_Resurgence {
+   background-position: -216px -684px;
+   width: 24px;
+   height: 32px;
+}
+.Supernatural_Rebirth_old {
+   background-position: -240px -684px;
+   width: 24px;
+   height: 32px;
+}
+.Supernatural_Shred {
+   background-position: -264px -684px;
+   width: 24px;
+   height: 32px;
+}
+.SuperStat_Recovery {
+   background-position: -288px -684px;
+   width: 24px;
+   height: 32px;
+}
+.Supernatural_SoulMesmerism {
+   background-position: -312px -684px;
    width: 24px;
    height: 32px;
 }
 .Supernatural_Thrash {
-   background-position: -756px -0px;
-   width: 24px;
-   height: 32px;
-}
-.Supernatural_ViciousCyclone {
-   background-position: -756px -32px;
+   background-position: -336px -684px;
    width: 24px;
    height: 32px;
 }
 .Supernatural_VenomousBreath {
-   background-position: -756px -64px;
+   background-position: -360px -684px;
    width: 24px;
    height: 32px;
 }
-.Supernatural_VileLariat {
-   background-position: -756px -96px;
+.Supernatural_ViciousCyclone {
+   background-position: -384px -684px;
    width: 24px;
    height: 32px;
 }
 .Supernatural_VoodooDoll {
-   background-position: -756px -128px;
-   width: 24px;
-   height: 32px;
-}
-.Supernatural_WildThing {
-   background-position: -756px -160px;
-   width: 24px;
-   height: 32px;
-}
-.Supernatural_WillOTheWisp {
-   background-position: -756px -192px;
+   background-position: -408px -684px;
    width: 24px;
    height: 32px;
 }
 .SuperStat_Constitution {
-   background-position: -756px -224px;
+   background-position: -432px -684px;
+   width: 24px;
+   height: 32px;
+}
+.Supernatural_WillOTheWisp {
+   background-position: -456px -684px;
+   width: 24px;
+   height: 32px;
+}
+.Supernatural_VileLariat {
+   background-position: -480px -684px;
+   width: 24px;
+   height: 32px;
+}
+.Supernatural_SupernaturalPower {
+   background-position: -504px -684px;
+   width: 24px;
+   height: 32px;
+}
+.Supernatural_WildThing {
+   background-position: -528px -684px;
    width: 24px;
    height: 32px;
 }
 .SuperStat_Dexterity {
-   background-position: -756px -256px;
+   background-position: -552px -684px;
    width: 24px;
    height: 32px;
 }
 .SuperStat_Ego {
-   background-position: -756px -288px;
+   background-position: -576px -684px;
    width: 24px;
    height: 32px;
 }
 .SuperStat_Intelligence {
+   background-position: -600px -684px;
+   width: 24px;
+   height: 32px;
+}
+.SuperStat_Strength {
+   background-position: -624px -684px;
+   width: 24px;
+   height: 32px;
+}
+.Talent {
+   background-position: -648px -684px;
+   width: 24px;
+   height: 32px;
+}
+.Technology_Concentration {
+   background-position: -672px -684px;
+   width: 24px;
+   height: 32px;
+}
+.Technology_FireAllWeapons {
+   background-position: -708px -0px;
+   width: 24px;
+   height: 32px;
+}
+.Technology_ImplosionEngine {
+   background-position: -708px -32px;
+   width: 24px;
+   height: 32px;
+}
+.Technology_MechanicalMonstrosity {
+   background-position: -708px -64px;
+   width: 24px;
+   height: 32px;
+}
+.Technology_Showdown {
+   background-position: -708px -96px;
+   width: 24px;
+   height: 32px;
+}
+.Technology_Meltdown {
+   background-position: -708px -128px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_EgoBlade {
+   background-position: -708px -160px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_EgoBladeAnnihilation {
+   background-position: -708px -192px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_EgoBladeAstonish {
+   background-position: -708px -224px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_EgoBladeBreach {
+   background-position: -708px -256px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_EgoBladeDash {
+   background-position: -708px -288px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_EgoBladeFrenzy {
+   background-position: -708px -320px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_EgoChoke {
+   background-position: -708px -352px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_EgoForm {
+   background-position: -708px -384px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_EgoReverberation {
+   background-position: -708px -416px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_EgoHold {
+   background-position: -708px -448px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_EgoSurge {
+   background-position: -708px -480px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_EgoWeaponary {
+   background-position: -708px -512px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_IdMastery {
+   background-position: -708px -544px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_KineticDarts {
+   background-position: -708px -576px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_MentalDiscipline {
+   background-position: -708px -608px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_Telekinesis {
+   background-position: -708px -640px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_MentalPrecision {
+   background-position: -708px -672px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_TelekineticBarrage {
+   background-position: -0px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_TelekineticBurst {
+   background-position: -24px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_TelekineticEruption {
+   background-position: -48px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_TelekineticLance {
+   background-position: -72px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_TelekineticLariat {
+   background-position: -96px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_TelekineticMaelstrom {
+   background-position: -120px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_TelekineticShards {
+   background-position: -144px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_TelekineticShield {
+   background-position: -168px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_TelekineticStrike {
+   background-position: -192px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telekinesis_TelekineticWave {
+   background-position: -216px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telepathy_CollectiveWill {
+   background-position: -240px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telepathy_EgoBlast {
+   background-position: -264px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telepathy_CongressOfSelves {
+   background-position: -288px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telepathy_MasterOfTheMind {
+   background-position: -312px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telepathy_EgoSprites {
+   background-position: -336px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telepathy_EgoSleep {
+   background-position: -360px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telepathy_EgoPlacate {
+   background-position: -384px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telepathy_MentalLeech {
+   background-position: -408px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telepathy_EmpathicHealing {
+   background-position: -432px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telepathy_MindDrain {
+   background-position: -456px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telepathy_EgoStorm {
+   background-position: -480px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telepathy_MindfulReinforcement {
+   background-position: -504px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telepathy_MindControl {
+   background-position: -528px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telepathy_MentalStorm {
+   background-position: -552px -716px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_Acrobatics {
+   background-position: -576px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telepathy_ShadowOfDoubt {
+   background-position: -600px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telepathy_SummonNightmare {
+   background-position: -624px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telepathy_PsychicVortex {
+   background-position: -648px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telepathy_PsionicHealing {
+   background-position: -672px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telepathy_PsiLash {
+   background-position: -696px -716px;
+   width: 24px;
+   height: 32px;
+}
+.Telepathy_MindBreak {
+   background-position: -732px -0px;
+   width: 24px;
+   height: 32px;
+}
+.Telepathy_MindLock {
+   background-position: -732px -32px;
+   width: 24px;
+   height: 32px;
+}
+.Telepathy_TelepathicReverberation {
+   background-position: -732px -64px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_Athletics {
+   background-position: -732px -96px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_BatFlight {
+   background-position: -732px -128px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_BlazingSpeed {
+   background-position: -732px -160px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_CapeGlide {
+   background-position: -732px -192px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_DisplacementSuperspeed {
+   background-position: -732px -224px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_DisplacementAcrobatics {
+   background-position: -732px -256px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_DistortionSuperspeed {
+   background-position: -732px -288px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_DistortionAcrobatics {
+   background-position: -732px -320px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_EarthFlight {
+   background-position: -732px -352px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_ElectricArc {
+   background-position: -732px -384px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_LightningFlash {
+   background-position: -732px -416px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_ElectroFlight {
+   background-position: -732px -448px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_FireFlight {
+   background-position: -732px -480px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_FlagSpeed {
+   background-position: -732px -512px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_EnergySlide {
+   background-position: -732px -544px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_Flight {
+   background-position: -732px -576px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_HeroicFlight {
+   background-position: -732px -608px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_Hoverboard {
+   background-position: -732px -640px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_HoverDisk {
+   background-position: -732px -672px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_HyperBall {
+   background-position: -732px -704px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_IceSlide {
+   background-position: -0px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_JetBoots {
+   background-position: -24px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_Lightspeed {
+   background-position: -48px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_JetPack {
+   background-position: -72px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_MachSpeed {
+   background-position: -96px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_MillennialFlight {
+   background-position: -120px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_MagicCarpet {
+   background-position: -144px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_MysticFlight {
+   background-position: -168px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_NinjaLeaves {
+   background-position: -192px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_OozeTunneling {
+   background-position: -216px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_PhoenixFlight {
+   background-position: -240px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_PowerFlight {
+   background-position: -264px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_RainbowFlight {
+   background-position: -288px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_RainbowFlightCloud {
+   background-position: -312px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_RetractableWings {
+   background-position: -336px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_RocketJump {
+   background-position: -360px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_ScarabFlight {
+   background-position: -384px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_ScarabTunneling {
+   background-position: -408px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_ShadowSkullFlight {
+   background-position: -432px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_ShadowWings {
+   background-position: -456px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_SnowballRoll {
+   background-position: -480px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_Superjump {
+   background-position: -504px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_Superspeed {
+   background-position: -528px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_Swinging {
+   background-position: -552px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_Teleportation {
+   background-position: -576px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_TornadoFlight {
+   background-position: -600px -748px;
+   width: 24px;
+   height: 32px;
+}
+.Unarmed_BackhandChop {
+   background-position: -624px -748px;
+   width: 24px;
+   height: 32px;
+}
+.TravelPower_Tunneling {
+   background-position: -648px -748px;
+   width: 24px;
+   height: 32px;
+}
+.Unarmed_BurningChiFist {
+   background-position: -672px -748px;
+   width: 24px;
+   height: 32px;
+}
+.Unarmed_CrashingWaveKick {
+   background-position: -696px -748px;
+   width: 24px;
+   height: 32px;
+}
+.Unarmed_DragonKick {
+   background-position: -720px -748px;
+   width: 24px;
+   height: 32px;
+}
+.Unarmed_DragonUppercut {
+   background-position: -756px -0px;
+   width: 24px;
+   height: 32px;
+}
+.Unarmed_ElbowSlam {
+   background-position: -756px -32px;
+   width: 24px;
+   height: 32px;
+}
+.Unarmed_FormOfTheMaster {
+   background-position: -756px -64px;
+   width: 24px;
+   height: 32px;
+}
+.Unarmed_OpenPalmStrike {
+   background-position: -756px -96px;
+   width: 24px;
+   height: 32px;
+}
+.Unarmed_OneHundredHands {
+   background-position: -756px -128px;
+   width: 24px;
+   height: 32px;
+}
+.Unarmed_RighteousFists {
+   background-position: -756px -160px;
+   width: 24px;
+   height: 32px;
+}
+.Unarmed_ThunderingKicks {
+   background-position: -756px -192px;
+   width: 24px;
+   height: 32px;
+}
+.Unarmed_ViciousStrikes {
+   background-position: -756px -224px;
+   width: 24px;
+   height: 32px;
+}
+.Wind_AirElemental {
+   background-position: -756px -256px;
+   width: 24px;
+   height: 32px;
+}
+.Wind_DustDevil {
+   background-position: -756px -288px;
+   width: 24px;
+   height: 32px;
+}
+.Wind_Gust {
    background-position: -756px -320px;
+   width: 24px;
+   height: 32px;
+}
+.Wind_Hurricane {
+   background-position: -756px -352px;
+   width: 24px;
+   height: 32px;
+}
+.Wind_Stormbringer {
+   background-position: -756px -384px;
+   width: 24px;
+   height: 32px;
+}
+.Wind_Twister {
+   background-position: -756px -416px;
+   width: 24px;
+   height: 32px;
+}
+.Wind_Typhoon {
+   background-position: -756px -448px;
+   width: 24px;
+   height: 32px;
+}
+.Wind_Updraft {
+   background-position: -756px -480px;
+   width: 24px;
+   height: 32px;
+}
+.Wind_Whirlwind {
+   background-position: -756px -512px;
+   width: 24px;
+   height: 32px;
+}
+.Wind_WindBarrier {
+   background-position: -756px -544px;
+   width: 24px;
+   height: 32px;
+}
+.Wind_WindBreath {
+   background-position: -756px -576px;
+   width: 24px;
+   height: 32px;
+}
+.Wind_WindLash {
+   background-position: -756px -608px;
+   width: 24px;
+   height: 32px;
+}
+.Wind_WindReverberation {
+   background-position: -756px -640px;
    width: 24px;
    height: 32px;
 }

@@ -1,4 +1,13 @@
 Changelog for HeroCreator
+v2.2.2.23
+6/22/2017 - Aesica
+ - Added and updated powers to reflect the TK Blades changes
+ - Added The Psychokinetic AT and innate
+ - Added data for all the newest travel powers
+ - Fixed a minor stat mixup in The Predator's innate
+ - Specializations can now be reset properly via the logo-click reset feature
+ - Swapped Shade Storm's placeholder icon for the real thing
+ - Other minor fixes and changes
 
 v2.2.1.22
 5/29/2017 - Aesica
