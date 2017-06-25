@@ -43,7 +43,11 @@ div#viewAbout {
 .title {
     font-size: 200%;
     margin-top: 0.5em;
-    margin-bottom: 0.5em;
+}
+
+#titleVersion {
+	font-size: 75%;
+	margin-bottom: 1em;
 }
 
 .menu {

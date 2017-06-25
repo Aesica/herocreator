@@ -1111,6 +1111,46 @@ dataVersionUpdate[dataVersionUpdate.length] = new VersionUpdate(
         }
     });
 
+// version 23 => 24 (stuff I forgot in 23.  Oops!)
+dataVersionUpdate[dataVersionUpdate.length] = new VersionUpdate(
+    dataVersionUpdate.length, 12,
+    function(thing, value) {
+        var codeNum1 = (value['code1'] == undefined) ? 0 : urlCodeToNum(value['code1']); // framework
+        var codeNum2 = (value['code2'] == undefined) ? 0 : urlCodeToNum(value['code2']); // power
+        // var codeNum3 = (value['code3'] == undefined) ? 0 : urlCodeToNum(value['code3']);
+        // var codeNum4 = (value['code4'] == undefined) ? 0 : urlCodeToNum(value['code4']);
+        switch (thing) {
+        case 'data': return value['data'];
+        case 'pos': return value['pos'];
+        case 'i': return value['i'];
+        case 'inc': return value['inc'];
+        case 'code1': return value['code1'];
+        case 'code2': return value['code2'];
+        case 'code3': return value['code3'];
+        case 'code4': return value['code4'];
+        case 'archetype': return value['archetype'];
+        case 'superStat': return value['superStat'];
+        case 'innateTalent': return value['innateTalent'];
+        case 'talent': return value['talent'];
+        case 'travelPower': return value['travelPower'];
+        case 'framework': return value['framework'];
+        case 'power':
+			var power = value['power'];
+            if (codeNum1 == 16) // telepathy framework
+			{
+				if (codeNum2 > 9) power++; // insert ego form
+				if (codeNum2 > 22) power--; // pop master of the mind out of its old slot and shuffle powers accordingly
+				if (codeNum2 == 23) power = 27; // remove master of the mind if the user currently had it selected.
+			}
+			if (codeNum1 == 21 && codeNum2 > 1) power++; // insert dark tether
+            return power;		
+		case 'mask': return value['mask'];
+        case 'specializationTree': return value['specializationTree'];
+        case 'specialization': return value['specialization'];
+        }
+    });
+
+
 //==============================================================================
 // Get Methods
 //==============================================================================

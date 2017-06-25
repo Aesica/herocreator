@@ -1,4 +1,11 @@
 Changelog for HeroCreator
+v2.2.3.24
+6/22/2017 - Aesica
+ - Added Ego Form to Telepathy
+ - Updated Master of the Mind to reflect its new status as an Ultimate ability
+ - Added Dark Lariat to Darkness, although it's using the placeholder icon until whenever the next big set of power updates happens.
+ - Added version displays below the main page title and to export data to hopefully make it easier for people to know which version they'er working with or, in the case of exports, to know which version the build they're looking at was made with.
+ 
 v2.2.2.23
 6/22/2017 - Aesica
  - Added and updated powers to reflect the TK Blades changes

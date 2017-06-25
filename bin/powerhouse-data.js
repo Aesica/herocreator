@@ -3553,6 +3553,9 @@ dataPowerAlias['Buzzsaw'] = new PowerAlias('Buzzsaw', 'Buzzsaw', 'Buzzsaw', 'Sna
 dataPowerAlias['Ego Leech'] = new PowerAlias('Ego Leech', 'Ego Leech', 'Ego Leech', 'Ego Leech decreases the cost of your Mentalist powers by 5% for 15 seconds.  Stacks up to 5 times.');
 dataPowerAlias['Id Blades'] = new PowerAlias('Id Blades', 'Id Blades', 'Id Blades', 'Causes your Ego Blade powers to manifest Dual Id Blades instead of a single Ego Blade.');
 dataPowerAlias['Id Surge'] = new PowerAlias('Id Surge', 'Id Surge', 'Id Surge', 'Increases your Ego damage strength by +15% and your Ego by +13 for 15 seconds.');
+dataPowerAlias['MotM'] = new PowerAlias('MotM', 'Master of the Mind', '<div class="Sprite Telepathy_MasterOfTheMind"></div>&nbsp;Master of the Mind', 'Telepathy, Transform and Self Buff<br /><br />Requires level 35<br />You may only own 1 Ultimate Power<br /><br />Applies Break Free damage to any Holds, Roots, or Disables affecting you and applies the following effects for 15 seconds:<br /><br />+ 125% increased resistance to Hold and Knock effects.<br />+ 125% increased resistance to all damage.<br />+ Increased critical strike chance for each stack of Ego Leech.<br />+ 1 stack of Ego Leech every sec.<br /><br />This power counts as both an Active Offense and Active Defense and activates a shared cooldown on both.');
+dataPowerAlias['Ego Form'] = new PowerAlias('Ego Form', 'Ego Form', '<div class="Sprite Telekinesis_EgoForm"></div>&nbsp;Ego Form', 'Mentalist, Offensive Passive - Energy Form<br /><br />Requires 1 power from Mentalist or 2 non-Energy Building powers from any framework.<br /><br />+ Increases your Paranormal damage.<br />+ Increases your Physical damage by a lesser amount.<Br />+ Increases your Ego damage resistance.<br />+ Increases your resistance to all damage by a lesser amount.<br />+ Grants a small power cost discount to Mentalist powers.<br />+ Recovers Energy when you take Ego damage, scaling with your Equilibrium.<br />+ Counts as an Energy Form.');
+
 
 //------------------------------------------------------------------------------
 // Power Framework: Telekinesis
@@ -3639,7 +3642,7 @@ dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(3, 'Sudden I
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(4, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(5, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
 
-dataPower[dataPower.length] = new Power(dataPower.length, 'Ego Form', '<div class="Sprite Telekinesis_EgoForm"></div>&nbsp;Ego Form', 4, 15, pow++, 1, 'Telekinesis, Offensive Passive - Energy Form<br /><br />Requires 1 power from Telekinesis or 2 non-Energy Building powers from any framework.<br /><br />+ Increases your Paranormal damage.<br />+ Increases your Physical damage by a lesser amount.<Br />+ Increases your Ego damage resistance.<br />+ Increases your resistance to all damage by a lesser amount.<br />+ Grants a small power cost discount to Mentalist powers.<br />+ Recovers Energy when you take Ego damage, scaling with your Equilibrium.<br />+ Counts as an Energy Form.');
+dataPower[dataPower.length] = new Power(dataPower.length, dataPowerAlias['Ego Form'].name, dataPowerAlias['Ego Form'].desc, 4, 15, pow++, 1, dataPowerAlias['Ego Form'].tip);
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, null, null, null, null));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
@@ -3815,6 +3818,11 @@ dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPower
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(3, dataPowerAlias['LaM'].name, dataPowerAlias['LaM'].desc, 1, null, dataPowerAlias['LaM'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(4, dataPowerAlias['Buzzsaw'].name, dataPowerAlias['Buzzsaw'].desc, 1, null, dataPowerAlias['Buzzsaw'].tip));
 
+dataPower[dataPower.length] = new Power(dataPower.length, dataPowerAlias['MotM'].name, dataPowerAlias['MotM'].desc, 4, 15, pow++, 4, dataPowerAlias['MotM'].tip);
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, null, null, null, null));
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
+
 //------------------------------------------------------------------------------
 // Power Framework: Telepathy
 //------------------------------------------------------------------------------
@@ -3890,11 +3898,18 @@ dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPower
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(3, 'Empathic Amplification', 'Empathic Amplification', 2, null, 'When you heal someone else with Empathic Healing, you transfer the pain to yourself. You can then redirect this pain through your own attacks for a short period of time. Failing to redirect the pain quickly enough will cause you to take damage.'));
 
-dataPower[dataPower.length] = new Power(dataPower.length, 'Congress of Selves', '<div class="Sprite Telepathy_CongressOfSelves"></div>&nbsp;Congress of Selves', 4, 16, pow++, 1, 'Telepathy, Slotted Hybrid Passive and Energy Form<br /><br />Requires 1 power from Telepathy or 2 non-Energy Building powers from any framework.<br /><br />Your mastery of your psyche has allowed you to strike deep into your foe\\\'s mind and leaving them wracked with pain.');
+dataPower[dataPower.length] = new Power(dataPower.length, 'Congress of Selves', '<div class="Sprite Telepathy_CongressOfSelves"></div>&nbsp;Congress of Selves', 4, 16, pow++, 1, 'Telepathy, Slotted Hybrid Passive - Energy Form<br /><br />Requires 1 power from Telepathy or 2 non-Energy Building powers from any framework.<br /><br />+ Can be used in any passive slot.<br />+ Your Ego damage over time effects deal increased damage and ignore 10% damage resistance.<br />+ Increases your Ego damage resistance and restores energy whenever you take Ego damage.<br />+ Grants a power cost discount to all Mentalist powers.<br />+ Increases your Aggression Stealth and reduces your Threat Generation.<br />+ Counts as an Energy Form.');
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, null, null, null, null));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(3, 'Conditioning', 'Conditioning', 2, null, 'Congress of Selves allows control powers to apply Trauma.' + dataPowerAlias['Trauma'].tip));
+
+dataPower[dataPower.length] = new Power(dataPower.length, dataPowerAlias['Ego Form'].name, dataPowerAlias['Ego Form'].desc, 4, 16, pow++, 1, dataPowerAlias['Ego Form'].tip);
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, null, null, null, null));
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(3, dataPowerAlias['Id Blades'].name, dataPowerAlias['Id Blades'].desc, 0, null, dataPowerAlias['Id Blades'].tip));
+dataRequireGroupPower[dataPower.length-1] = 'mentalist';
 
 dataPower[dataPower.length] = new Power(dataPower.length, dataPowerAlias['Manipulator'].name, dataPowerAlias['Manipulator'].desc, 2, 16, pow++, 1, dataPowerAlias['Manipulator'].tip);
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, null, null, null, null));
@@ -3976,11 +3991,6 @@ dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPower
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(3, 'Revitalizing Boost', 'Revitalizing Boost', 2, null, 'If your Mindful Reinforcement shield absorbs the full amount it restores Energy to you.'));
 
-dataPower[dataPower.length] = new Power(dataPower.length, 'Master of the Mind', '<div class="Sprite Telepathy_MasterOfTheMind"></div>&nbsp;Master of the Mind', 4, 16, pow++, 3, 'Telepathy, Transform and Self Buff<br /><br />Requires 5 powers from Telepathy or 6 non-Energy Building powers from any framework.<br /><br />Unleash the full fury of your mind and destroy your foes.');
-dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
-dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-
 dataPower[dataPower.length] = new Power(dataPower.length, dataPowerAlias['Mind Link'].name, dataPowerAlias['Mind Link'].desc, 4, 16, pow++, 4, dataPowerAlias['Mind Link'].tip);
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, null, null, null, null));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
@@ -3999,6 +4009,11 @@ dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPower
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(3, dataPowerAlias['LaM'].name, dataPowerAlias['LaM'].desc, 1, null, dataPowerAlias['LaM'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(4, dataPowerAlias['Buzzsaw'].name, dataPowerAlias['Buzzsaw'].desc, 1, null, dataPowerAlias['Buzzsaw'].tip));
+
+dataPower[dataPower.length] = new Power(dataPower.length, dataPowerAlias['MotM'].name, dataPowerAlias['MotM'].desc, 4, 16, pow++, 4, dataPowerAlias['MotM'].tip);
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, null, null, null, null));
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
 
 //------------------------------------------------------------------------------
 // Power Set: Brick
@@ -4714,6 +4729,16 @@ dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPower
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(3, 'Psychotic Break', 'Psychotic Break', 2, null, 'Full charge vs Feared target pushes them into full on psychosis, Stunning the target and dealing additional Dimensional Damage over Time.'));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(4, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(5, dataPowerAlias['CC'].name, dataPowerAlias['CC'].desc, 3, null, dataPowerAlias['CC'].tip));
+
+dataPower[dataPower.length] = new Power(dataPower.length, 'Dark Tether', '<div class="Sprite Any_Generic"></div>&nbsp;Dark Tether', 6, 21, pow++, 1, 'Darkness, 50 foot - Ranged Damage, Knock To, and Fear<br /><br />Requires 1 power from Darkness or 2 non-Energy Building powers from any framework.<br /><br />Deals Dimensional damage and Knocks the target to you.  Has a 46-100% chance (based on charge time) to apply Fear to the target.');
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, null, null, null, null));
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(3, 'Work Up', 'Work Up', 2, null, dataPowerAlias['SP'].tip));
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(4, 'Devoid', 'Devoid', 2, null, 'On a full charge, applies Devoid to the target, reducing their Dimensional damage resistance by -18% for 12 sec.'));
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(5, dataPowerAlias['NG'].name, dataPowerAlias['NG'].desc, 2, null, dataPowerAlias['NG'].tip));
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(6, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
+dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(7, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
 
 dataPower[dataPower.length] = new Power(dataPower.length, 'Shadow Embrace', '<div class="Sprite Darkness_ShadowEmbrace"></div>&nbsp;Shadow Embrace', 6, 21, pow++, 1, 'Darkness, 50 foot Ranged 45 degree Cone AoE Damage<br /><br />Requires 1 power from Darkness or 2 non-Energy Building powers from any framework.<br /><br />Shadow Embrace assaults enemies in front of you with relentless dark energy.');
 dataPower[dataPower.length-1].advantageList.push(new PowerAdvantage(0, null, null, null, null, null));

@@ -20,9 +20,9 @@ const SPECIALIZATION_ROLE2 = 3;
 const SPECIALIZATION_MASTERY = 4;
 
 var debug = false;
-var appVersion = "2.2.2";
+var appVersion = "2.2.3";
 var releaseDate = "6/22/2017";
-var buildVersion = 23; // data version, actually
+var buildVersion = 24; // data version, actually
 
 var siteName = "HeroCreator";
 var siteUrl = window.location.href.split("?")[0];
@@ -1213,7 +1213,7 @@ function getTravelPowerDefault(num)
 window['getTravelPowerDefault'] = getTravelPowerDefault;
 
 // power functions
-function setupFrameworks() // xxx
+function setupFrameworks()
 {
 	var mContainer = document.getElementById("frameworkSelectionContainer");
 	var i;
@@ -1243,7 +1243,7 @@ function setupFrameworks() // xxx
 }
 window['setupFrameworks'] = setupFrameworks;
 
-function selectFramework(framework) // xxx
+function selectFramework(framework)
 {
 	ResetDialogBox(iPowerColumnCount);
 	var sHeader = "Select Framework";
@@ -1837,7 +1837,6 @@ function selectAdvantageUpdate(type, num)
 				selectAdvantage.setAttribute('class', 'disabledButton');
 			}
 		}
-		// xxx
 		changeUpdate();
 	}
 }
@@ -2617,7 +2616,6 @@ function selectArchetype()
 }
 window['selectArchetype'] = selectArchetype;
 
-// xxx
 function setArchetype(id)
 {
 	var archetype = dataArchetype[id];
@@ -2973,7 +2971,7 @@ function parseUrlParams(url)
 					mask = applyVersionUpdate(version, 'mask', {'type': 'travelPower', 'pos': pos, 'i': i, 'inc': inc, 'code1': code1, 'code2': code2, 'code3': code3, 'archetype': archetype, 'travelPower': travelPower, 'mask': mask});
 					var travelPowerCode = numToUrlCode2(travelPower);
 					data[i] = travelPowerCode[0];
-					data[i + 1] = travelPowerCode[1]; // xxxx
+					data[i + 1] = travelPowerCode[1];
 					data[i + 2] = numToUrlCode(mask >> 1);
 					inc = 3;
 				}
@@ -3202,7 +3200,7 @@ function buildLink(submit)
 	//var name = phName;
 	//if (name == '') name = 'Hero';
 	//name = siteName + ': ' + name;
-	var url = base + link; // xxx
+	var url = base + link;
 	field.href = url;
 	//field.setAttribute('onclick', 'return submitBuild()');
 	//field.innerHTML = name;
@@ -3389,6 +3387,7 @@ function forumPreview()
 	var buildName = (phName == "") ? "(Unnamed Build)" : phName;
 
 	result.push('<b><u><a href="' + phBuildLink + '"><span class="forumLink">' + buildName + ' - ' + phArchetype.name + '</span></a></u></b>' + forumNewline(1));
+	result.push('v' + appVersion + '-' + buildVersion + forumNewline(1));
 	result.push(forumNewline(1));
 	result.push(forumHeader(1, 'Super Stats'));
 	result.push(forumEntry(1, 'Level 6:', forumName(phSuperStat[1].name), '(Primary)'));
@@ -3523,6 +3522,7 @@ function forumExport()
 		result.push('Link to this build: __' + phBuildLink + '__' + forumNewline(forumTypeNum));
 		break;
 	}
+	result.push('v' + appVersion + '-' + buildVersion + forumNewline(forumTypeNum));
 	result.push(forumNewline(forumTypeNum));
 	result.push(forumHeader(forumTypeNum, 'Super Stats'));
 	result.push(forumEntry(forumTypeNum, 'Level 6:', forumName(phSuperStat[1].name), '(Primary)'));
@@ -3981,8 +3981,12 @@ function start()
 	if (debug)
 	{
 		document.getElementById("showViewDebug").style.visibility = "visible";
-		document.getElementById("title").innerHTML = siteName + " Beta " + appVersion + "-" + buildVersion;
+		document.getElementById("title").innerHTML = siteName + " [Beta]";
 	}
+
+	// show version
+	document.getElementById("titleVersion").innerHTML = "Last updated: " + releaseDate + " - v" + appVersion + "-" + buildVersion;
+
 }
 window['start'] = start;
 
