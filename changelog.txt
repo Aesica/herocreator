@@ -1,4 +1,11 @@
 Changelog for HeroCreator
+v2.3.1.25
+9/7/2017 - Aesica
+ - Added the new and updated existing Electricity powers to reflect the latest changes to the Electricity framework
+ - Updated the Impulse AT's progression path
+ - Fixed some minor bugs and typo nonsense
+ - Updated several of the classes used to parse power data with a new framework that allows for more detailed parameters (range, cooldown, cast times, etc) as well as dynamically-generated tooltips (the old ones were static and had a lot of redundant things in them).  What this means is that you'll start to see more informative tooltips for powers using this new data system.  Powers not yet updated will show [Legacy data] in their tooltips, but should otherwise function fine.  Over time, more will be updated until everything is peachy.  Hopefully.
+
 v2.2.3.24
 6/22/2017 - Aesica
  - Added Ego Form to Telepathy

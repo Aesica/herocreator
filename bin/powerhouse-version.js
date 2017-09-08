@@ -1150,7 +1150,47 @@ dataVersionUpdate[dataVersionUpdate.length] = new VersionUpdate(
         }
     });
 
-
+// version 24 => 25 (electric revamp)
+dataVersionUpdate[dataVersionUpdate.length] = new VersionUpdate(
+    dataVersionUpdate.length, 12,
+    function(thing, value) {
+        var codeNum1 = (value['code1'] == undefined) ? 0 : urlCodeToNum(value['code1']); // framework
+        var codeNum2 = (value['code2'] == undefined) ? 0 : urlCodeToNum(value['code2']); // power
+        // var codeNum3 = (value['code3'] == undefined) ? 0 : urlCodeToNum(value['code3']);
+        // var codeNum4 = (value['code4'] == undefined) ? 0 : urlCodeToNum(value['code4']);
+        switch (thing) {
+        case 'data': return value['data'];
+        case 'pos': return value['pos'];
+        case 'i': return value['i'];
+        case 'inc': return value['inc'];
+        case 'code1': return value['code1'];
+        case 'code2': return value['code2'];
+        case 'code3': return value['code3'];
+        case 'code4': return value['code4'];
+        case 'archetype': return value['archetype'];
+        case 'superStat': return value['superStat'];
+        case 'innateTalent': return value['innateTalent'];
+        case 'talent': return value['talent'];
+        case 'travelPower': return value['travelPower'];
+        case 'framework': return value['framework'];
+        case 'power':
+			var power = value['power'];
+            if (codeNum1 == 1) // electric framework
+			{
+				if (codeNum2 == 2) power = 18; // move larc to t3
+				if (codeNum2 == 3 || codeNum2 == 4) power--; // bump sigils of the storm and sparkstorm down 1
+				if (codeNum2 == 5 || codeNum2 == 6) power++; // bump elec sheath and form up 1
+				if (codeNum2 >= 7 && codeNum2 <= 10) power += 2; // bump elec shield, ionic reverb, s.summoner, and tstrike up 2
+				if (codeNum2 == 11 || codeNum2 == 12) power += 4; // bump electrocutie and npulse up 4 slots
+				if (codeNum2 == 14 || codeNum2 == 15) power += 5; // bump gigglebolt and lstorm up 5 slots
+				if (codeNum2 >= 16 && codeNum2 <= 18) power += 6; // bump the 3 ultimates up 6 slots
+			}
+            return power;		
+		case 'mask': return value['mask'];
+        case 'specializationTree': return value['specializationTree'];
+        case 'specialization': return value['specialization'];
+        }
+    });
 //==============================================================================
 // Get Methods
 //==============================================================================

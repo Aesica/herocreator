@@ -19,10 +19,10 @@ const SPECIALIZATION_ROLE1 = 2;
 const SPECIALIZATION_ROLE2 = 3;
 const SPECIALIZATION_MASTERY = 4;
 
-var debug = false;
-var appVersion = "2.2.3";
-var releaseDate = "6/22/2017";
-var buildVersion = 24; // data version, actually
+var debug = true;
+var appVersion = "2.3.1";
+var releaseDate = "9/7/2017";
+var buildVersion = 25; // data version
 
 var siteName = "HeroCreator";
 var siteUrl = window.location.href.split("?")[0];
@@ -37,8 +37,8 @@ var analyticsBuildCatagory = 'Build';
 // cookie variables with default values and other saved data parameters
 var cookieExpireDays = 365;
 var forumExportType = 'co';
-var prefFontFamilyList = ["serif", "sans-serif", "Arial", "Comic Sans MS", "Courier New", "Franklin Gothic", "Georgia", "Lexia", "Lucida Console", "Segoe Print", "Segoe UI", "Times New Roman", "Trebuchet MS", "Verdana"];
-var prefFontFamily = "Lexia";
+var prefFontFamilyList = ["serif", "sans-serif", "Arial", "Comic Sans MS", "Courier New", "Franklin Gothic", "Georgia", "Lucida Console", "Segoe Print", "Segoe UI", "Times New Roman", "Trebuchet MS", "Verdana"];
+var prefFontFamily = "sans-serif";
 var prefFontSize = 100;
 var prefPopupTipsList = ["Off", "When Selecting", "On"];
 var prefPopupTips = parseInt(2);
@@ -477,49 +477,37 @@ function popout()
 }
 window['popout'] = popout;
 
-// function delayedPopup(text) {
-//     return function() {
-//         var field = this;
-//         var delay = setTimeout(popup(text), 1000);
-//         field.onmouseout = function() {
-//             clearTimeout(delay);
-//             popout();
-//         };
-//     }
-// }
-// window['delayedPopup'] = delayedPopup;
 function setOnmouseoverPopupL1(field, text)
 {
+	clearOnmouseoverPopup(field);
 	if (text != null)
 	{
-		field.setAttribute('onmouseover', 'popupL1(\'' + text + '\')');
-		field.setAttribute('onmouseout', 'popout()');
-	}
-	else
-	{
-		clearOnmouseoverPopup(field);
+		field.customPopupL1 = function(){popupL1(text)};
+		field.customPopout = function(){popout()};
+		field.addEventListener("mouseover", field.customPopupL1);
+		field.addEventListener("mouseout", field.customPopout);
 	}
 }
 window['setOnmouseoverPopupL1'] = setOnmouseoverPopupL1;
 
 function setOnmouseoverPopupL2(field, text)
 {
+	clearOnmouseoverPopup(field);
 	if (text != null)
 	{
-		field.setAttribute('onmouseover', 'popupL2(\'' + text + '\')');
-		field.setAttribute('onmouseout', 'popout()');
-	}
-	else
-	{
-		clearOnmouseoverPopup(field);
+		field.customPopupL2 = function(){popupL2(text)};
+		field.customPopout = function(){popout()};
+		field.addEventListener("mouseover", field.customPopupL2);
+		field.addEventListener("mouseout", field.customPopout);
 	}
 }
 window['setOnmouseoverPopupL2'] = setOnmouseoverPopupL2;
 
 function clearOnmouseoverPopup(field)
 {
-	field.removeAttribute('onmouseover');
-	field.removeAttribute('onmouseout');
+	field.removeEventListener("mouseover", field.customPopupL1);
+	field.removeEventListener("mouseover", field.customPopupL2);
+	field.removeEventListener("mouseout", field.customPopout);
 }
 window['clearOnmouseoverPopup'] = clearOnmouseoverPopup;
 
@@ -732,7 +720,7 @@ function setupSuperStats()
 		mCurrent.setAttribute("onclick", "selectConfirmation('setSuperStat(" + i + ")', '" + escapeQuotes(dataSuperStat[i].desc) + "', '" + dataSuperStat[i].tip + "')");
 		mCurrent.setAttribute("style", "display: block;");
 		mCurrent.innerHTML = "<div class='Sprite Stat_" + dataSuperStat[i].name + "'></div> " + dataSuperStat[i].name;
-		setOnmouseoverPopupL1(mCurrent, "<b>" + dataSuperStat[i].name + "</b><br /><br />" + dataSuperStat[i].tip);
+		setOnmouseoverPopupL1(mCurrent, dataSuperStat[i].tip);
 		AddItemToDialogBox(mCurrent, iColumn);
 	}
 }
@@ -843,10 +831,13 @@ function highlightSuperStats(str)
 {
 	for (var i = 1; i < phSuperStat.length; i++)
 	{
-		var regex = new RegExp('(' + phSuperStat[i].abbrev + ': \\d+)');
-		if (regex != null)
+		if (phSuperStat[i].id > 0)
 		{
-			str = str.replace(regex, '<span class="specHighlight">$1</span>');
+			var regex = new RegExp('(' + phSuperStat[i].abbrev + ': \\d+)');
+			if (regex != null)
+			{
+				str = str.replace(regex, '<span class="specHighlight">$1</span>');
+			}
 		}
 	}
 	return str;
@@ -876,7 +867,7 @@ function setupInnateTalents()
 		mCurrent.setAttribute("onclick", "selectConfirmation('setInnateTalent(" + i + ")', '" + escapeQuotes(dataInnateTalent[i].desc) + "', '" + dataInnateTalent[i].tip + "')");
 		mCurrent.setAttribute("style", "display: block;");
 		mCurrent.innerHTML = "<div class='Sprite Innate_Talent'></div>&nbsp;" + dataInnateTalent[i].desc + ((dataInnateTalent[i].extra != null) ? " <span class='selectSpec'>(" + highlightSuperStats(dataInnateTalent[i].extra) + ")</span>" : "");
-		setOnmouseoverPopupL1(mCurrent, "<b>" + dataInnateTalent[i].name + "</b><br /><br />" + dataInnateTalent[i].tip);
+		setOnmouseoverPopupL1(mCurrent, dataInnateTalent[i].tip);
 
 		// 1st half in column 1, 2nd half in column 2
 		iColumn = Math.floor((i - 1) / (iLength - 1) * 2);
@@ -1080,7 +1071,8 @@ function setupTravelPowers()
 	var iLength = dataTravelPower.length;
 	var mCurrent = document.createElement("a");
 	mCurrent.setAttribute("id", "selectTravelPower0");
-	mCurrent.setAttribute("onclick", "selectConfirmation('setTravelPower(0)', 'Clear', '')");
+	//mCurrent.setAttribute("onclick", "selectConfirmation('setTravelPower(0)', 'Clear', '')");
+	mCurrent.addEventListener("click", function(){selectConfirmation('setTravelPower(0)', 'Clear', '')});
 	mCurrent.innerHTML = sClearButton;
 	AddItemToDialogBoxMenu(mCurrent);
 
@@ -1089,7 +1081,8 @@ function setupTravelPowers()
 		iColumn = Math.floor((i - 1) / (iLength - 1) * iTravelPowerColumnCount);
 		mCurrent = document.createElement("a");
 		mCurrent.setAttribute("id", "selectTravelPower" + i);
-		mCurrent.setAttribute("onclick", "selectConfirmation('setTravelPower(" + i + ")', '" + escapeQuotes(dataTravelPower[i].desc) + "', '" + dataTravelPower[i].tip + "')");
+		(function(i){ mCurrent.addEventListener("click", function(){ selectConfirmation("setTravelPower(" + i + ");", escapeQuotes(dataTravelPower[i].desc), dataTravelPower[i].tip) }) }(i));
+		//mCurrent.setAttribute("onclick", "selectConfirmation('setTravelPower(" + i + ")', '" + escapeQuotes(dataTravelPower[i].desc) + "', '" + dataTravelPower[i].tip + "')");
 		mCurrent.setAttribute("style", "display: block;");
 		mCurrent.innerHTML = dataTravelPower[i].desc;
 		setOnmouseoverPopupL1(mCurrent, dataTravelPower[i].tip);
@@ -1291,12 +1284,13 @@ function selectFramework(framework)
 			mNode.setAttribute("class", "disabledButton");
 			break;
 		case 1:
-			mNode.setAttribute("onclick", "selectConfirmation('setPower(" + iPowerID + ")', '" + escapeQuotes(dataPower[iPowerID].desc) + "', '" + dataPower[iPowerID].tip + "')");
+			//mNode.setAttribute("onclick", "selectConfirmation('setPower(" + iPowerID + ")', '" + escapeQuotes(dataPower[iPowerID].desc) + "', '" + dataPower[iPowerID].tip + "')");
+			(function(iPowerID){ mNode.addEventListener("click", function(){ selectConfirmation("setPower(" + iPowerID + ");", dataPower[iPowerID].desc, dataPower[iPowerID].tip);})}(iPowerID));
 			mNode.setAttribute("class", "button");
 			break;
 		case 2:
-			mNode.setAttribute("onclick", "selectConfirmation('setPower(" + iPowerID + ")', '" + escapeQuotes(dataPower[iPowerID].desc) + "', '" + dataPower[iPowerID].tip + "')");
-			mNode.setAttribute("class", "takenButton");
+			//mNode.setAttribute("onclick", "selectConfirmation('setPower(" + iPowerID + ")', '" + escapeQuotes(dataPower[iPowerID].desc) + "', '" + dataPower[iPowerID].tip + "')");
+			(function(iPowerID){ mNode.addEventListener("click", function(){ selectConfirmation("setPower(" + iPowerID + ");", dataPower[iPowerID].desc, dataPower[iPowerID].tip);})}(iPowerID));mNode.setAttribute("class", "takenButton");
 			break;
 		}
 		mNode.innerHTML = dataPower[iPowerID].desc;
@@ -1617,7 +1611,8 @@ function selectArchetypePower(iPowerNumber)
 			if (oPower != phPower[iPowerNumber])
 			{
 				mOption = CreateButton(oPower.desc, "selectPower" + iCurrentPowerID);
-				mOption.setAttribute("onclick", "selectConfirmation('setArchetypePower(" + iCurrentPowerID + ")', '" + escapeQuotes(dataPower[iCurrentPowerID].desc) + "', '" + dataPower[iCurrentPowerID].tip + "')");
+				//mOption.setAttribute("onclick", "selectConfirmation('setArchetypePower(" + iCurrentPowerID + ")', '" + escapeQuotes(dataPower[iCurrentPowerID].desc) + "', '" + dataPower[iCurrentPowerID].tip + "')");
+				(function(iCurrentPowerID){ mOption.addEventListener("click", function(){ selectConfirmation("setArchetypePower(" + iCurrentPowerID + ");", dataPower[iCurrentPowerID].desc, dataPower[iCurrentPowerID].tip); }) }(iCurrentPowerID));
 				mOption.setAttribute("class", "button");
 				setOnmouseoverPopupL1(mOption, oPower.tip);
 				AddItemToDialogBox(mOption);
@@ -1940,6 +1935,7 @@ function setAdvantage(type, num, mask)
 		(type == 1) ? phPowerAdvantage[num] = mask : phTravelPowerAdvantage[num] = mask;
 		field.innerHTML = advantageTextSpan(type, num, mask);
 		setOnmouseoverPopupL2(field, advantageTip(type, num, mask));
+		// xxx
 	}
 	else
 	{
@@ -1992,7 +1988,7 @@ function advantageTip(type, num, mask)
 {
 	var power = (type == 1) ? phPower[num] : phTravelPower[num];
 	var advantageList = power.advantageList;
-	var result = '';
+	var result = "";
 	if (advantageList.length > 0 && mask != 0)
 	{
 		for (var i = 1; i < advantageList.length; i++)
@@ -2002,14 +1998,8 @@ function advantageTip(type, num, mask)
 				var tip = advantageList[i].tip;
 				if (tip != null && tip.length > 0)
 				{
-					if (result.length == 0)
-					{
-						result = tip;
-					}
-					else
-					{
-						result += '<br /><br />' + tip;
-					}
+					if (result.length > 0) result += "<hr />";
+					result += tip;
 				}
 			}
 		}
@@ -2595,7 +2585,6 @@ function setupArchtypes()
 		if (mContainer.childNodes.length % (iArchetypeRowSize + 1) == 0) mContainer.appendChild(document.createElement("br"));
 		mCurrent = CreateButton(dataArchetype[i].desc, "selectArchetype" + i, "", "setArchetype(" + i + ")");
 		setOnmouseoverPopupL1(mCurrent, "<b>" + dataArchetype[i].name + "</b><br /><br />" + dataArchetype[i].tip);
-		//alert(i + ": " + dataArchetype[i].group + " - " + dataArchetype[i].name);
 		mContainer.appendChild(mCurrent);
 	}
 
@@ -3749,6 +3738,7 @@ function showView(view)
 	var section = document.getElementById('view' + view);
 	document.getElementById('viewEdit').style.display = 'none';
 	document.getElementById('viewData').style.display = 'none';
+	document.getElementById('viewReference').style.display = 'none';
 	document.getElementById('viewPreview').style.display = 'none';
 	document.getElementById('viewExport').style.display = 'none';
 	document.getElementById('viewPrefs').style.display = 'none';
@@ -3761,6 +3751,8 @@ function showView(view)
 	document.getElementById('showViewEdit').setAttribute('class', 'button');
 	document.getElementById('showViewData').href.onclick = '';
 	document.getElementById('showViewData').setAttribute('class', 'button');
+	document.getElementById('showViewReference').href.onclick = '';
+	document.getElementById('showViewReference').setAttribute('class', 'button');
 	document.getElementById('showViewPreview').href.onclick = '';
 	document.getElementById('showViewPreview').setAttribute('class', 'button');
 	document.getElementById('showViewExport').href.onclick = '';
@@ -3803,69 +3795,69 @@ function dataDump()
 	win.document.write('<h3><a onclick="document.getElementById(\'version-update\').scrollIntoView();">Version Update Data</a></h3>');
 	win.document.write('<hr>');
 	win.document.write('<h2 id="super-stat">Super Stat Data</h3>');
-	for (var i = 1; i < dataSuperStat.length; i++)
+	for (var i = 0; i < dataSuperStat.length; i++)
 	{
-		win.document.write('dataSuperStat[' + i + '] = ' + dataSuperStat[i].toString() + '<br />');
+		win.document.write('<b>dataSuperStat[' + i + ']</b> = ' + dataSuperStat[i].toString() + '<br />');
 	}
-	win.document.write('<hr>');
+	win.document.write('</table><hr>');
 	win.document.write('<h2 id="innate-talent">Innate Talent Data</h3>');
-	for (var i = 1; i < dataInnateTalent.length; i++)
+	for (var i = 0; i < dataInnateTalent.length; i++)
 	{
-		win.document.write('dataInnateTalent[' + i + '] = ' + dataInnateTalent[i].toString() + '<br />');
+		win.document.write('<b>dataInnateTalent[' + i + ']</b> = ' + dataInnateTalent[i].toString() + '<br />');
 	}
 	win.document.write('<hr>');
 	win.document.write('<h2 id="talent">Talent Data</h3>');
-	for (var i = 1; i < dataTalent.length; i++)
+	for (var i = 0; i < dataTalent.length; i++)
 	{
-		win.document.write('dataTalent[' + i + '] = ' + dataTalent[i].toString() + '<br />');
+		win.document.write('<b>dataTalent[' + i + ']</b> = ' + dataTalent[i].toString() + '<br />');
 	}
 	win.document.write('<hr>');
 	win.document.write('<h2 id="travel-power">Travel Power Data</h3>');
-	for (var i = 1; i < dataTravelPower.length; i++)
+	for (var i = 0; i < dataTravelPower.length; i++)
 	{
-		win.document.write('dataTravelPower[' + i + '] = ' + dataTravelPower[i].toString() + '<br />');
+		win.document.write('<b>dataTravelPower[' + i + ']</b> = ' + dataTravelPower[i].toString() + '<br />');
 	}
 	win.document.write('<hr>');
 	win.document.write('<h2 id="power-set">Power Set Data</h3>');
-	for (var i = 1; i < dataPowerSet.length; i++)
+	for (var i = 0; i < dataPowerSet.length; i++)
 	{
-		win.document.write('dataPowerSet[' + i + '] = ' + dataPowerSet[i].toString() + '<br />');
+		win.document.write('<b>dataPowerSet[' + i + ']</b> = ' + dataPowerSet[i].toString() + '<br />');
 	}
 	win.document.write('<hr>');
 	win.document.write('<h2 id="framework">Framework Data</h3>');
-	for (var i = 1; i < dataFramework.length; i++)
+	for (var i = 0; i < dataFramework.length; i++)
 	{
-		win.document.write('dataFramework[' + i + '] = ' + dataFramework[i].toString() + '<br />');
+		win.document.write('<b>dataFramework[' + i + ']</b> = ' + dataFramework[i].toString() + '<br />');
 	}
 	win.document.write('<hr>');
 	win.document.write('<h2 id="power">Power Data</h3>');
-	for (var i = 1; i < dataPower.length; i++)
+	for (var i = 0; i < dataPower.length; i++)
 	{
-		win.document.write('dataPower[' + i + '] = ' + dataPower[i].toString() + '<br />');
+		win.document.write('<b>dataPower[' + i + ']</b> = ' + dataPower[i].toString() + '<br />');
 	}
 	win.document.write('<hr>');
 	win.document.write('<h2 id="archetype-group">Archetype Group Data</h3>');
-	for (var i = 1; i < dataArchetypeGroup.length; i++)
+	for (var i = 0; i < dataArchetypeGroup.length; i++)
 	{
-		win.document.write('dataArchetypeGroup[' + i + '] = ' + dataArchetypeGroup[i].toString() + '<br />');
+		win.document.write('<b>dataArchetypeGroup[' + i + ']</b> = ' + dataArchetypeGroup[i].toString() + '<br />');
 	}
 	win.document.write('<hr>');
 	win.document.write('<h2 id="archetype">Archetype Data</h3>');
-	for (var i = 1; i < dataArchetype.length; i++)
+	for (var i = 0; i < dataArchetype.length; i++)
 	{
-		win.document.write('dataArchetype[' + i + '] = ' + dataArchetype[i].toString() + '<br />');
+		win.document.write('<b>dataArchetype[' + i + ']</b> = ' + dataArchetype[i].toString() + '<br />');
 	}
 	win.document.write('<hr>');
 	win.document.write('<h2 id="specialization-tree">Specialization Tree Data</h3>');
-	for (var i = 1; i < dataSpecializationTree.length; i++)
+	for (var i = 0; i < dataSpecializationTree.length; i++)
 	{
-		win.document.write('dataSpecializationTree[' + i + '] = ' + dataSpecializationTree[i].toString() + '<br />');
+		win.document.write('<b>dataSpecializationTree[' + i + ']</b> = ' + dataSpecializationTree[i].toString() + '<br />');
 	}
 	win.document.write('<hr>');
 	win.document.write('<h2 id="version-update">Version Update Data</h3>');
-	for (var i = 1; i < dataVersionUpdate.length; i++)
+	for (var i = 0; i < dataVersionUpdate.length; i++)
 	{
-		win.document.write('dataVersionUpdate[' + i + '] = ' + dataVersionUpdate[i].toString() + '<br />');
+		win.document.write('<b>dataVersionUpdate[' + i + ']</b> = ' + dataVersionUpdate[i].toString() + '<br />');
 	}
 	win.focus();
 }
@@ -3976,6 +3968,9 @@ function start()
 	// setup saved data
 	RefreshSaveList();
 	if (LocalStorageSupported()) SetUpSaveTools();
+
+	// setup data reference stuffs
+	InitReferenceSheet();
 
 	// show debug tab if debug mode is true
 	if (debug)

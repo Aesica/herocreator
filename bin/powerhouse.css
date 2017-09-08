@@ -131,6 +131,11 @@ img {
     z-index: 10;
 }
 
+.popupRight {
+	float: right;
+	text-align: right;
+}
+
 .left {
     float: left;
     min-width: 49%;

@@ -12,29 +12,6 @@
 
 var aTiers = [0, 1, 3, 5];
 
-/** Alternate way to create commonly-repeated parts of power tooltips
-* iFramework		Framework ID (I should make consts for these at some point to make this more coder-friendly)
-* iTier				Power tier
-* sTargetingEtc		This is the brief target/range/basic description
-* sDesc				This is the actual power description
-*/
-function PowerTip(iFramework, iTier, sTargetingEtc, sDesc)
-{
-	var sReturn = dataFramework[iFramework].name;
-	if (iTier == -1) sReturn += ", Energy Builder";
-	sReturn += ", " + sTargetingEtc + "<br /><br />";
-	if (iTier > 0 && iTier < 4) // tiered powers with requirements
-	{
-		sReturn += "Requires " + aTiers[iTier] + " powers from " + dataFramework[iFramework].name + " or " + (aTiers[iTier] + 1) + " non-Energy Building powers from any framework.<br /><br />";
-	}
-	else if (iTier == 4) // ultimate -- note that this isn't useful at the moment
-	{
-		sReturn += "Requires level 35<br /><br />You may only own 1 ultimate Power.<br /><br />";
-	}
-	sReturn += sDesc;
-	return sReturn;
-}
-
 //
 /** Shorter way to parse an advantage created via PowerAlias
 * id			ID of power
@@ -191,7 +168,7 @@ function CreateButton(sLabel, sID="", sClass="", sOnClick="")
 	var mReturn = document.createElement("a");
 	mReturn.setAttribute("id", sID);
 	mReturn.setAttribute("class", sClass);
-	mReturn.setAttribute("onclick", sOnClick);
+	mReturn.setAttribute("onclick", sOnClick); // TODO:  Eval bullshit.  Allowed to live only until the dependent evals in powerhouse.js are dealt with
 	mReturn.innerHTML = sLabel;
 	return mReturn;
 }
@@ -223,6 +200,21 @@ function changeFont(e)
 	setPrefFontFamily(prefFontFamily);
 }
 
+/////////////////////// Reference sheet /////////////////////
+
+function InitReferenceSheet()
+{
+	var mDamageTypeList = document.getElementById("damageTypeList");
+	var i, iLength = dataDamageType.length;
+	var sData = "<table>";
+	//alert(JSON.stringify(dataDamageType));
+	for (i = 0; i < iLength; i++)
+	{
+		sData += "<tr><td>" + dataDamageType[i].group + "</td><td>" + dataDamageType[i].name + "</td><td>" + dataDamageType[i].frameworkList + "</td></tr>";
+	}
+	sData += "</table>";
+	mDamageTypeList.innerHTML = sData;
+}
 
 
 ////////////////////////// Local storage & data load/save functions ///////////////
@@ -436,7 +428,7 @@ function RefreshSaveList()
 		mTd = document.createElement("td");
 		mNode = document.createElement("input");
 		mNode.setAttribute("type", "checkbox");
-		mNode.setAttribute("onclick", "CheckAllSaveSlots()");
+		mNode.addEventListener("click", CheckAllSaveSlots);
 		mNode.setAttribute("id", "selectAllSaves");
 		mTd.appendChild(mNode);
 		mNode = document.createElement("span");
@@ -557,6 +549,7 @@ function BuildToString()
 	var aFFLevels = [0, 1, 1, 6, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35, 38];
 	var aATLevels = [0, 1, 1, 6, 8, 11, 14, 17, 21, 25, 30, 35, 40];
 	var aLevels;
+	var rxQuoteFix = /'/g;
 	if (phArchetype != dataArchetype[1])
 	{
 		aLevels = aATLevels;
@@ -580,7 +573,7 @@ function BuildToString()
 	for (i = 1; i < iLength; i++)
 	{
 		if (i > 1) sReturn += "<br />";
-		sReturn += aLevels[i] + ": <b>" + (phPower[i].name ? phPower[i].name : "???") + "</b> <i>" + forumAdvantageText(1, i, phPowerAdvantage[i]) + "</i>";
+		sReturn += aLevels[i] + ": <b>" + (phPower[i].name ? phPower[i].name.replace(rxQuoteFix, "\\\'") : "???") + "</b> <i>" + forumAdvantageText(1, i, phPowerAdvantage[i]) + "</i>";
 	}
 	return sReturn;
 }
@@ -601,8 +594,8 @@ function ShowResetDataOptions()
 	
 	var mAll = CreateCheckbox("<b>Everything</b>", "resetAll", "resetGroup", false, true);
 	var mSelective = CreateCheckbox("<b>Selective</b>", "resetSome", "resetGroup", false);
-	mAll.setAttribute("onclick", "ResetAllClicked(true);");
-	mSelective.setAttribute("onclick", "ResetAllClicked(false);");
+	mAll.addEventListener("click", function(){ResetAllClicked(true)});
+	mSelective.addEventListener("click", function(){ResetAllClicked(false)});
 	setOnmouseoverPopupL1(mAll, "This option will clear all selected fields.  If working with an archetype, it will be reset back to freeform as well.");
 	setOnmouseoverPopupL1(mSelective, "Allows you to pick and choose which fields to reset.  Note that archetypes cannot reset certain things.");
 	
@@ -741,23 +734,22 @@ function EchoVersion()
 function ListPowersFromFramework(iFramework)
 {
 	var i, iLength, iCurrentFramework, sReturn;
-	if (!isNaN(iFramework))
+	if (isNaN(parseInt(iFramework))) iFramework = -1;
+	sReturn = EchoVersion();
+	sReturn += "\npower id code tier name advantageList.length";
+	iLength = dataPower.length;
+	iCurrentFramework = (iFramework < 0) ? 0 : iFramework;
+	for (i = 0; i < iLength; i++)
 	{
-		sReturn = EchoVersion();
-		sReturn += "\npower id tier name advantageList.length";
-		iLength = dataPower.length;
-		iCurrentFramework = (iFramework < 0) ?  0 : iFramework;
-		for (i = 0; i < iLength; i++)
+		if (dataPower[i].framework == iFramework || iFramework == -1)
 		{
-			if (dataPower[i].framework == iFramework || iFramework == -1)
+			if (dataPower[i].power == 0)
 			{
-				if (dataPower[i].power == 0)
-				{
-					sReturn += "\n" + dataFramework[iCurrentFramework].name + " [" + iCurrentFramework + "]";
-					iCurrentFramework++;
-				}
-				sReturn += "\n[" + dataPower[i].power + "][" + dataPower[i].id + "][" + dataPower[i].tier + "] " + dataPower[i].name + " (" + dataPower[i].advantageList.length + ")";
+				if (dataFramework[iCurrentFramework]) sReturn += "\n" + dataFramework[iCurrentFramework].name + " [" + iCurrentFramework + "]";
+				else sReturn += "\n### Invalid FrameworkID: " + iCurrentFramework;
+				iCurrentFramework++;
 			}
+			sReturn += "\n[" + dataPower[i].power + "][" + dataPower[i].id + "][" + dataPower[i].code() + "][" + dataPower[i].tier + "] " + dataPower[i].name + " (" + dataPower[i].advantageList.length + ")";
 		}
 	}
 	return sReturn;
@@ -766,15 +758,13 @@ function ListPowersFromFramework(iFramework)
 function ListTravelPowers(iType)
 {
 	var i, iLength, sReturn;
-	if (!isNaN(iType))
+	if (isNaN(parseInt(iType))) iType = -1;
+	sReturn = EchoVersion() + "\n";
+	sReturn += "Travel Powers of type [" + ((iType > -1 && iType < TRAVEL_POWER_TYPES.length) ? TRAVEL_POWER_TYPES[iType] : "All") + "]\nid code isvar name advantageList.length";
+	iLength = dataTravelPower.length;
+	for (i = 0; i < iLength; i++)
 	{
-		sReturn = EchoVersion() + "\n";
-		sReturn += "Travel Powers of type [" + ((iType > -1 && iType < TRAVEL_POWER_TYPES.length) ? TRAVEL_POWER_TYPES[iType] : "All") + "]\nid isvar name advantageList.length";
-		iLength = dataTravelPower.length;
-		for (i = 0; i < iLength; i++)
-		{
-			if (dataTravelPower[i].type == iType || iType == -1) sReturn += "\n[" + dataTravelPower[i].id + "][" + dataTravelPower[i].isVariant + "] " + dataTravelPower[i].name + " (" + dataTravelPower[i].advantageList.length + ")";
-		}
+		if (dataTravelPower[i].type == iType || iType == -1) sReturn += "\n[" + dataTravelPower[i].id + "][" + dataTravelPower[i].code() + "][" + dataTravelPower[i].isVariant + "] " + dataTravelPower[i].name + " (" + dataTravelPower[i].advantageList.length + ")";
 	}
 	return sReturn;
 }
@@ -785,10 +775,10 @@ function ListTalents(iType=0)
 	var aList = (iType == 0) ? dataInnateTalent : dataTalent;
 	var i;
 	var iLength = aList.length;
-	var sReturn = EchoVersion() + "\n" + "Innate Talents\nid name extra";
+	var sReturn = EchoVersion() + "\n" + "Innate Talents\nid code name extra";
 	for (i = 0; i < iLength; i++)
 	{
-		sReturn += "\n[" + aList[i].id + "] " + aList[i].name + " (" + aList[i].extra + ")";
+		sReturn += "\n[" + aList[i].id + "][" + aList[i].code() + "] " + aList[i].name + " (" + aList[i].extra + ")";
 	}
 	return sReturn;
 }
@@ -797,10 +787,10 @@ function ListArchetypes()
 {
 	var i;
 	var iLength = dataArchetype.length;
-	var sReturn = EchoVersion() + "\nArchetypes\nid name";
+	var sReturn = EchoVersion() + "\nArchetypes\nid code name";
 	for (i = 0; i < iLength; i++)
 	{
-		sReturn += "\n[" + dataArchetype[i].id + "] " + dataArchetype[i].name;
+		sReturn += "\n[" + dataArchetype[i].id + "][" + dataArchetype[i].code() + "] " + dataArchetype[i].name;
 	}
 	return sReturn;
 }

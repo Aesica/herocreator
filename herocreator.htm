@@ -28,7 +28,8 @@
 			<div id="titleVersion">Something went horribly wrong 🙁</div>
             <div class="menu">
                 <a id="showViewData" class="button" onclick="RefreshSaveList(); showView('Data')" style="margin-right: 1em;">Data</a>
-                <a id="showViewEdit" class="button" onclick="showView('Edit')" style="margin-right: 1em;">Edit</a>
+				<a id="showViewEdit" class="button" onclick="showView('Edit')" style="margin-right: 1em;">Edit</a>
+				<a id="showViewReference" class="button" onclick="showView('Reference')" style="display: none;">Reference</a>
                 <a id="showViewPreview" class="button" onclick="showView('Preview')" style="margin-right: 1em;">Preview</a>
                 <a id="showViewExport" class="button" onclick="showView('Export')" style="margin-right: 1em;">Export</a>
                 <a id="showViewPrefs" class="button" onclick="showView('Prefs')" style="margin-right: 1em;">Settings</a>
@@ -413,6 +414,11 @@
     <div id="saveDataContainer" class="pageSection"></div>
 </div>
 
+<div id="viewReference" style="display: none">
+	<h3>Reference Sheet</h3>
+	<div id="damageTypeList" class="pageSection"></div>
+</div>
+
 <div id="viewPreview" style="display:none">
     <h3>Forum Preview</h3>
     <div id="forumPreview" class="pageSection preview">
@@ -712,16 +718,33 @@
         <div id="viewDebug" style="display: none;">
             <h3>Debug</h3>
 			<div class="pageSection">
+				<b>Data Viewing Functions</b>
+				<hr />
 				<ul>
-                    <li><a onclick="DebugOutput('');">Clear</a></li>
-					<li><a onclick="DebugOutputFromInput(btoa)">btoa(value:String);</a></li>
-					<li><a onclick="DebugOutputFromInput(atob)">atob(base64:String);</a></li>
-					<li><a onclick="DebugOutputFromInput(ListPowersFromFramework)">ListPowersFromFramework(frameworkID:uint|-1);</a></li>
-					<li><a onclick="DebugOutputFromInput(ListTravelPowers)">ListTravelPowers(type:uint|-1);</a></li>
+					<li><a onclick="DebugOutputFromInput(ListPowersFromFramework)">Powers</a> (frameworkID:int|NaN)</li>
+					<li><a onclick="DebugOutputFromInput(ListTravelPowers)">TravelPowers</a> (type:int|NaN)</li>
 					<li><a onclick="DebugOutput(ListTalents(0))">Innate Talents</a></li>
 					<li><a onclick="DebugOutput(ListTalents(1))">Talents</a></li>
 					<li><a onclick="DebugOutput(ListArchetypes())">Archetypes</a></li>
-					<hr />
+					<li><a onclick="dataDump();">Data Dump</a> (legacy function - new window)</li>
+				</ul>
+				<hr />
+				<b>Code/Tinkering Functions</b>
+				<hr />
+				<ul>
+					<li><a onclick="DebugOutputFromInput(eval)">eval(code:String);</a></li>
+					<li><a onclick="DebugOutputFromInput(btoa)">btoa(value:String);</a></li>
+					<li><a onclick="DebugOutputFromInput(atob)">atob(base64:String);</a></li>
+				</ul>
+			</div>
+            <div class="pageSection">
+				<a onclick="DebugOutput('');"><h2>Clear Window Contents</h2></a>
+				<textarea id="debugoutput"></textarea>
+			</div>
+			<div class="pageSection">
+				<b>JSON Export Functions - To be used eventually...</b>
+				<hr />
+				<ul>
                     <li><a onclick="DebugOutput(SuperStatsToJSON());">Superstats</a></li>
                     <li><a onclick="DebugOutput(ArchetypesToJSON());">Archetypes</a></li>
                     <li><a onclick="DebugOutput(InnateTalentsToJSON());">Innate Talents</a></li>
@@ -730,13 +753,8 @@
                     <li><a onclick="DebugOutput(TravelPowersToJSON());">Travel Powers</a></li>
                     <li><a onclick="return false;">Advantages</a> (NYI)</li>
                     <li><a onclick="return false;">Specializations</a> (NYI)</li>
-					<li><a onclick="dataDump();">Data Dump</a> (new window)</li>
 				</ul>
 			</div>
-            <div class="pageSection">
-				<textarea id="debugoutput"></textarea>
-			</div>
-
         </div>
         <div id="footer" class="footer" style="display:none">
 
