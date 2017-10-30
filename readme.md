@@ -1,9 +1,8 @@
-HeroCreator README
------------------
+## HeroCreator README
 
-Website: http://aesica.net/co/herocreator.htm
+---
 
-
+[Website](http://aesica.net/co/herocreator.htm)
 
 HeroCreator is an open-source HTML/Javascript character planner for Champions Online™ that is updated and maintained by Aesica. It is a fork of the much-beloved PowerHouse originally created by Kyle W. T. Sherman.
 
@@ -20,6 +19,7 @@ Champions Online is a registered trademark of Cryptic Studios, Inc. Champions On
 Special thanks to Lohr and all of the contributors at Champions Online Wiki for their hard work, and of course to Kyle Sherman/Nullware for creating the amazing PowerHouse character planner and making it open source.
 
 Running HeroCreator Locally
---------------------------
+
+---
 
 If you would like to run HeroCreator on your computer, download the source files found right here on GitHub.  Uncompress the files into a folder on your computer, then use your browser to open the 'herocreator.htm' file.
