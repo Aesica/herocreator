@@ -19,10 +19,11 @@ const SPECIALIZATION_ROLE1 = 2;
 const SPECIALIZATION_ROLE2 = 3;
 const SPECIALIZATION_MASTERY = 4;
 
-var debug = true;
-var appVersion = "2.3.1";
-var releaseDate = "9/7/2017";
-var buildVersion = 25; // data version
+// Default value for debug now--use query string to set: debug=0 disable, debug=1 enable
+var debug = false; 
+var appVersion = "2.3.2"; // encompasses powerhouse.js
+var releaseDate = "11/5/2017";
+var buildVersion = 26; // data version
 
 var siteName = "HeroCreator";
 var siteUrl = window.location.href.split("?")[0];
@@ -35,7 +36,7 @@ var analyticsSetCatagory = 'Set';
 var analyticsBuildCatagory = 'Build';
 
 // cookie variables with default values and other saved data parameters
-var cookieExpireDays = 365;
+//var cookieExpireDays = 365; // no longer used
 var forumExportType = 'co';
 var prefFontFamilyList = ["serif", "sans-serif", "Arial", "Comic Sans MS", "Courier New", "Franklin Gothic", "Georgia", "Lucida Console", "Segoe Print", "Segoe UI", "Times New Roman", "Trebuchet MS", "Verdana"];
 var prefFontFamily = "sans-serif";
@@ -73,6 +74,24 @@ var iArchetypeRowSize = 7;
 var iSpecPointMax = 10;
 var sMinusArrow = "<div class='Sprite minus' style='margin-left: 2em; margin-right: 0.7em;'></div>";
 var sPlusArrow = "<div class='Sprite plus' style='margin-left: 0.7em; margin-right: 0.7em;'></div>";
+
+function getQueryString()
+{
+	var oReturn = {};
+	var rxQueryString = /[?&]([^?&=\t\n\r]+=[^?&=\t\n\r]*)/gi;
+	var aSegments = rxQueryString.exec(window.location.href);
+	var i, iLength, aTemp;
+	if (aSegments)
+	{
+		iLength = aSegments.length
+		for (i = 1; i < iLength; i++)
+		{
+			aTemp = aSegments[i].split("=");
+			oReturn[aTemp[0]] = aTemp[1];
+		}
+	}
+	return oReturn;
+}
 
 // escape quotes
 function escapeQuotes(str)
@@ -1688,6 +1707,9 @@ function selectPowerAdvantage(num)
 }
 window['selectPowerAdvantage'] = selectPowerAdvantage;
 
+// TODO:  nasty evals rooted pretty deep in this function via selectConfirmation().  The future of
+// selectConfirmation and how useful it actually is will need to be considered.  In the meantime,
+// double-escaping apostrophes (\\\') in advantage tooltips will need to be a thing.
 function selectAdvantage(iType, iPowerID)
 {
 	var aFormIDs = ['formPowerAdvantage', 'formTravelPowerAdvantage'];
@@ -1711,7 +1733,7 @@ function selectAdvantage(iType, iPowerID)
 		// clear button
 		mClear = document.createElement("a");
 		mClear.setAttribute("id", "selectAdvantageClear");
-		mClear.setAttribute('onclick', "selectAdvantageClear(" + iType + ", " + iPowerID + ")");
+		mClear.setAttribute("onclick", "selectAdvantageClear(" + iType + ", " + iPowerID + ")");
 		mClear.innerHTML = "Clear";
 		mTable = document.createElement("table");
 		mTable.setAttribute("style", "width: 100%;");
@@ -2806,6 +2828,9 @@ function parseUrlParams(url)
 			case 'd': // deprecated, but required for data versions older than 20 (power IDs are 1 digit)
 				data = pair[1].split('');
 				break;
+			case "debug": // for toggling debug mode
+				setPrefDebugMode(pair[1]);
+				break;
 			}
 		}
 	}
@@ -3713,6 +3738,13 @@ function selectPrefConfirmSelections()
 }
 window['selectPrefConfirmSelections'] = selectPrefConfirmSelections;
 
+function setPrefDebugMode(confirmDebug)
+{
+	debug = confirmDebug > 0;
+	SaveData("prefDebugMode", debug);
+	//document.getElementById('prefDebugModeValue').innerHTML = (confirmDebug ? 'On' : 'Off');
+}
+
 function setPrefAnalytics(analytics)
 {
 	/*
@@ -3892,6 +3924,12 @@ function setupPrefs()
 	if (confirmSelections == undefined) confirmSelections = prefConfirmSelections;
 	else confirmSelections = coerceToBoolean(confirmSelections, prefConfirmSelections);
 	setPrefConfirmSelections(confirmSelections);
+	// debug mode
+	var debugMode = LoadData("prefDebugMode");
+	if (debugMode == undefined) debugMode = debug;
+	else debugMode = coerceToBoolean(debugMode, debug);
+	setPrefDebugMode(debugMode);
+
 	// analytics - removed
 /*
    var analytics = LoadData("prefAnalytics");
