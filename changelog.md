@@ -1,5 +1,10 @@
 ## Changelog for HeroCreator
 
+**v2.3.2.26** - 11/5/2017 - Aesica
+ - Fixed some broken advantages
+ - Fixed a flag on Thermal Reverb
+ - Fixed Form of the Tiger to be lumped with Fighting Claws again, not Dual Blades
+ - Added Moonstruck
 ---
 **v2.3.1.25** - 9/7/2017 - Aesica
  - Added the new and updated existing Electricity powers to reflect the latest changes to the Electricity framework
