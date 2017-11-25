@@ -1,5 +1,11 @@
 ## Changelog for HeroCreator
 
+**v2.3.2.27** - 11/25/2017 - Aesica
+ - Added the new Fire powers:  Fiery Will, Rise From the Ashes, Flame Prison, Incinerate, and Meteor Blaze.
+ - Updated the various powers and advantages changed by the Fire revamp.
+ - Updated The Inferno AT to reflect new progression path.
+ - Added Icons for Moonstruck as well as the new Fire poewrs.
+---
 **v2.3.2.26** - 11/5/2017 - Aesica
  - Fixed some broken advantages
  - Fixed a flag on Thermal Reverb
