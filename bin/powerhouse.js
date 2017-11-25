@@ -22,7 +22,7 @@ const SPECIALIZATION_MASTERY = 4;
 // Default value for debug now--use query string to set: debug=0 disable, debug=1 enable
 var debug = false; 
 var appVersion = "2.3.2"; // encompasses powerhouse.js
-var releaseDate = "11/5/2017";
+var releaseDate = "11/25/2017";
 var buildVersion = 27; // data version
 
 var siteName = "HeroCreator";
