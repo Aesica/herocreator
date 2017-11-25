@@ -23,7 +23,7 @@ const SPECIALIZATION_MASTERY = 4;
 var debug = false; 
 var appVersion = "2.3.2"; // encompasses powerhouse.js
 var releaseDate = "11/5/2017";
-var buildVersion = 26; // data version
+var buildVersion = 27; // data version
 
 var siteName = "HeroCreator";
 var siteUrl = window.location.href.split("?")[0];

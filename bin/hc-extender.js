@@ -755,6 +755,35 @@ function ListPowersFromFramework(iFramework)
 	return sReturn;
 }
 
+function ListSpecializations(iSpec)
+{
+	var i, iStart, iLength, j, iTreeLength, iCurrentSpec, oTree, sReturn;
+	sReturn = EchoVersion();
+	sReturn += "id tier ranks name";
+	iSpec = parseInt(iSpec);
+	if (isNaN(iSpec))
+	{
+		iStart = 0;
+		iLength = dataSpecializationTree.length;
+	}
+	else
+	{
+		iStart = iSpec;
+		iLength = iSpec + 1;
+	}
+	for (i = iStart; i < iLength; i++)
+	{
+		oTree = dataSpecializationTree[i];
+		sReturn += "\n" + oTree.name + " [" + i + "]";
+		iTreeLength = oTree.specializationList.length;
+		for (j = 0; j < iTreeLength; j++)
+		{
+			sReturn += "\n[" + oTree.specializationList[j].id + "][" + oTree.specializationList[j].tier + "][" + oTree.specializationList[j].maxPoints + "] " + oTree.specializationList[j].name;
+		}
+	}
+	return sReturn;
+}
+
 function ListTravelPowers(iType)
 {
 	var i, iLength, sReturn;
