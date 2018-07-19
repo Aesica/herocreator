@@ -4,14 +4,19 @@
  * PowerHouse Javascript
  *
  * Author: Kyle W T Sherman
+ * 
+ * Maintainer/Contributor:  Aesica
  *
  * Time-stamp: <2016-02-17 22:55:12 (kyle)>
  *============================================================================*/
 
 const EXPORT_TYPE_NONE = 0;
 const EXPORT_TYPE_HTML = 1;
-const EXPORT_TYPE_BBCODE = 2;
-const EXPORT_TYPE_MARKDOWN = 3;
+const EXPORT_TYPE_HTML_FORUM = 2;
+const EXPORT_TYPE_BBCODE = 3;
+const EXPORT_TYPE_MARKDOWN = 4;
+const exportTips = ["Plain text contains no special formatting.", "HTML is the markup language used by websites.  This option assigns classes to elements for use with CSS.", "This is basic HTML with line breaks omitted.<br /><br /><span class='redText'>This format is no longer used by the official CO forums and has been deprecated.</span>", "BBCode is a formatting system used by many forums based on Invision, phpBB, vBulletin, etc.<br /><br /><span class='greenText'>The official Champions Online forums use this for post formatting.</span>", "Markdown is a basic text formatting system used by Reddit, Discord, etc."];
+
 
 const SPECIALIZATION_NONE = 0;
 const SPECIALIZATION_STAT = 1;
@@ -19,13 +24,20 @@ const SPECIALIZATION_ROLE1 = 2;
 const SPECIALIZATION_ROLE2 = 3;
 const SPECIALIZATION_MASTERY = 4;
 
+const SETTINGS_LABEL = "HeroCreatorSettings";
+const DEFAULT_ICON_NAME = "Any_Generic";
+const DEFAULT_ICON_NAME_AT = "Any_Generic";
+const DEFAULT_SETTINGS = {"iconWidth":24, "iconHeight":32, "iconWidthAT":58, "iconHeightAT":50, "popupTips":2, "confirmSelection":false, "forumExportType":"phpbbs", "fontFamily":"sans-serif", "fontSize":100, "analytics":false, "debug":0};
+
 // Default value for debug now--use query string to set: debug=0 disable, debug=1 enable
-var debug = false; 
-var appVersion = "2.3.2"; // encompasses powerhouse.js
-var releaseDate = "12/11/2017";
-var buildVersion = 28; // data version
+var app = 
+{
+	"version":3.01,
+	"releaseDate":"7/17/2018"
+}
 
 var siteName = "HeroCreator";
+var siteLogo = "img/hc-logo.png";
 var siteUrl = window.location.href.split("?")[0];
 var mouseX = 0;
 var mouseY = 0;
@@ -37,30 +49,31 @@ var analyticsBuildCatagory = 'Build';
 
 // cookie variables with default values and other saved data parameters
 //var cookieExpireDays = 365; // no longer used
-var forumExportType = 'co';
 var prefFontFamilyList = ["serif", "sans-serif", "Arial", "Comic Sans MS", "Courier New", "Franklin Gothic", "Georgia", "Lucida Console", "Segoe Print", "Segoe UI", "Times New Roman", "Trebuchet MS", "Verdana"];
-var prefFontFamily = "sans-serif";
-var prefFontSize = 100;
-var prefPopupTipsList = ["Off", "When Selecting", "On"];
-var prefPopupTips = parseInt(2);
-var prefConfirmSelections = false;
-var prefAnalytics = false;
+var prefPopupTipsList = ["Mobile/Touch (beta)", "Disabled", "PC/Mouseover"];
 var iMaxSaveSlots = 100;
+var prefs = DEFAULT_SETTINGS;
+//var forumExportType = 'co';
+//var prefFontFamily = "sans-serif";
+//var prefFontSize = 100;
+//var prefPopupTips = 2;
+//var prefConfirmSelections = false;
 
 // Browser detection and browser specific things
 var isChrome = !!window.chrome && !!window.chrome.webstore;
 var isFirefox = typeof InstallTrigger !== 'undefined';
 // chromesucks and can't currently handle td 'width: 100%' for shit
-var sAdvantageNameCellStyle = (isChrome) ? "min-width: 10em;" : "width: 100%;";
+var sAdvantageNameCellStyle = (isChrome) ? "min-width: 10em;" : "width: 100%";
 
 // colors and appearances
-var titleColor = "#8844dd";
-var linkColor = "#aaccee";
-var previewEntryFontColor = "#88aaff";
-var previewPowerFontColor = "#aaddff";
-var previewAdvantageFontColor = "#8888bb";
+/*
+var titleColor = "#84d";
+var linkColor = "#ace";
+var previewEntryFontColor = "#8af";
+var previewPowerFontColor = "#adf";
+var previewAdvantageFontColor = "#88b";
 var closeButtonColor = "#f33";
-var exportTips = ["Plain text contains no special formatting.", "HTML is the formatting used by websites and some forums.<br /><br /><b>The official Champions Online forums use this for post formatting if you don't have the forum extension installed.</b>", "BBCode is a formatting system used by many forums based on Invision, phpBB, vBulletin, etc.<br /><br />If you're using the forum extension for Arc's Vanilla forums, use this instead of HTML.", "Markdown is a basic text formatting system used by Reddit, Discord, etc."];
+*/
 var sClearButton = "Clear";
 var sInsertButton = "Insert";
 var sDeleteButton = "Delete";
@@ -72,8 +85,6 @@ var iArchetypeRowSize = 7;
 
 // other
 var iSpecPointMax = 10;
-var sMinusArrow = "<div class='Sprite minus' style='margin-left: 2em; margin-right: 0.7em;'></div>";
-var sPlusArrow = "<div class='Sprite plus' style='margin-left: 0.7em; margin-right: 0.7em;'></div>";
 
 function getQueryString()
 {
@@ -100,6 +111,7 @@ function escapeQuotes(str)
 }
 
 // set and get cookies
+/*
 function setCookie(name, value, expireDays)
 {
 	var expireDate = new Date();
@@ -122,15 +134,15 @@ function getCookie(name)
 	return undefined;
 }
 window['getCookie'] = getCookie;
-
+*/
 // encode number to url code
 // valid number range is 0-61 (invalid numbers default to 0)
 function numToUrlCode(num)
 {
 	var charCode = 0;
-	if (num >= 0 && num <= 9) charCode = num + 48;
-	else if (num >= 10 && num <= 35) charCode = num + 55;
-	else if (num >= 36 && num <= 61) charCode = num + 61;
+	if (num >= 0 && num <= 9) charCode = num + 48; // 0-9
+	else if (num >= 10 && num <= 35) charCode = num + 55; // A-Z
+	else if (num >= 36 && num <= 61) charCode = num + 61; // a-z
 	else throw 'numToUrlCode: num is out of valid range: ' + num;
 	return String.fromCharCode(charCode);
 }
@@ -194,7 +206,7 @@ window['urlCodeToNum4'] = urlCodeToNum4;
 function submitAnalytics(catagory, action, label, value)
 {
 /*
-   if (prefAnalytics) {
+   if (prefs.analytics) {
    if (debug) {
    console.log(['_trackEvent', catagory, action, label, value]);
    } else {
@@ -212,7 +224,7 @@ var analyticsQueueServiceRunning = false;
 function queueAnalytics(catagory, action, label, value)
 {
 /*
-   if (prefAnalytics) {
+   if (prefs.analytics) {
    analyticsQueue.push([catagory, action, label, value]);
    // start google analytics queue submission service
    if (!analyticsQueueServiceRunning) analyticsQueueService();
@@ -239,17 +251,17 @@ function analyticsQueueService()
 window['analyticsQueueService'] = analyticsQueueService;
 
 // get data sets (from powerhouse-data.js)
-var dataSuperStat = getDataSuperStat();
-var dataInnateTalent = getDataInnateTalent();
-var dataTalent = getDataTalent();
+//var dataSuperStat = getDataSuperStat();
+//var dataInnateTalent = getDataInnateTalent();
+//var dataTalent = getDataTalent();
 var dataTravelPower = getDataTravelPower();
 var dataPowerSet = getDataPowerSet();
 var dataFramework = getDataFramework();
 var dataPower = getDataPower();
 var dataEnergyUnlockPower = getDataEnergyUnlockPower();
-var dataArchetypeGroup = getDataArchetypeGroup();
-var dataArchetype = getDataArchetype();
-var dataSpecializationTree = getDataSpecializationTree();
+//var dataArchetypeGroup = getDataArchetypeGroup();
+//var dataArchetype = getDataArchetype();
+//var dataSpecializationTree = getDataSpecializationTree();
 var dataVersionUpdate = getDataVersionUpdate();
 
 // power code lookup
@@ -290,56 +302,63 @@ for (var i = 0; i < dataPower.length; i++)
 }
 
 // current power house character info
-var phVersion = buildVersion;
-var phName = '';
-var phArchetype = dataArchetype[1];
-var phSuperStat = [];
+var PH = {};
+PH.version = HCData.version;
+PH.name = "";
+PH.archetype = HCData.archetype[1];
+PH.role = HCData.archetypeGroup[1];
+PH.device = [];
+for (var i = 1; i <= 4; i++)
+{
+	PH.device[i] = HCData.device[0];
+}
+PH.superStat = [];
 for (var i = 1; i <= 3; i++)
 {
-	phSuperStat[i] = dataSuperStat[0];
+	PH.superStat[i] = HCData.superStat[0];
 }
-var phInnateTalent = Array();
+PH.innateTalent = [];
 for (var i = 1; i <= 1; i++)
 {
-	phInnateTalent[i] = dataInnateTalent[0];
+	PH.innateTalent[i] = HCData.innateTalent[0];
 }
-var phTalent = [];
+PH.talent = [];
 for (var i = 1; i <= 6; i++)
 {
-	phTalent[i] = dataTalent[0];
+	PH.talent[i] = HCData.talent[0];
 }
-var phTravelPower = [];
+PH.travelPower = [];
 for (var i = 1; i <= 2; i++)
 {
-	phTravelPower[i] = dataTravelPower[0];
+	PH.travelPower[i] = dataTravelPower[0];
 }
-var phTravelPowerAdvantage = [];
+PH.travelPowerAdvantage = [];
 for (var i = 1; i <= 2; i++)
 {
-	phTravelPowerAdvantage[i] = 0;
+	PH.travelPowerAdvantage[i] = 0;
 }
-var phPower = [];
+PH.power = [];
 for (var i = 1; i <= 14; i++)
 {
-	phPower[i] = dataPower[0];
+	PH.power[i] = dataPower[0];
 }
-var phPowerAdvantage = [];
+PH.powerAdvantage = [];
 for (var i = 1; i <= 14; i++)
 {
-	phPowerAdvantage[i] = 0;
+	PH.powerAdvantage[i] = 0;
 }
-var phSpecializationTree = [];
+PH.specializationTree = [];
 for (var i = 1; i <= 4; i++)
 {
-	phSpecializationTree[i] = dataSpecializationTree[0];
+	PH.specializationTree[i] = HCData.specializationTree[0];
 }
-var phSpecialization = [];
+PH.specialization = [];
 for (var i = 1; i <= 4; i++)
 {
-	phSpecialization[i] = 0;
+	PH.specialization[i] = 0;
 }
-var phBuildLink = "";
-var phBuildLinkRef = "";
+PH.buildLink = "";
+PH.buildLinkRef = "";
 var statFrameworkCount = [];
 for (var i = 1; i <= dataFramework.length; i++)
 {
@@ -473,7 +492,7 @@ window['popup'] = popup;
 
 function popupL1(text)
 {
-	if (prefPopupTips >= 1)
+	if (prefs.popupTips == 2)
 	{
 		popup(text);
 	}
@@ -482,7 +501,7 @@ window['popupL1'] = popupL1;
 
 function popupL2(text)
 {
-	if (prefPopupTips >= 2)
+	if (prefs.popupTips == 2)
 	{
 		popup(text);
 	}
@@ -596,7 +615,7 @@ window['updatePositionSection'] = updatePositionSection;
 function editName()
 {
 	var field = document.getElementById('editName');
-	field.value = phName;
+	field.value = PH.name;
 	hideSection('sectionDisplayName');
 	showSection('sectionEditName');
 	field.focus();
@@ -614,12 +633,12 @@ function changeName(evnt)
 {
 	//var evnt = evnt ? evnt : window.event;
 	//var target = evnt.target ? evnt.target : evnt.srcElement;
-	phName = document.getElementById('editName').value;
+	PH.name = document.getElementById('editName').value;
 	hideSection('sectionEditName');
-	document.getElementById('fieldName').firstChild.data = phName;
+	document.getElementById('fieldName').firstChild.data = PH.name;
 	showSection('sectionDisplayName');
 	changeUpdate();
-	//submitAnalytics(analyticsSetCatagory, 'Name', phName);
+	//submitAnalytics(analyticsSetCatagory, 'Name', PH.namee);
 }
 window['changeName'] = changeName;
 
@@ -691,25 +710,29 @@ window['selectClearMaybe'] = selectClearMaybe;
 
 // confirm selection
 // if prefConfirmSelections is true then prompt user for confirmation before setting things
-function selectConfirmation(sFunction, sName, sDesc, sConfirmText="Confirm", bForceConfirm=false)
+function selectConfirmation(fFunction, sName, sDesc, sConfirmText="Confirm", bForceConfirm=false)
 {
 	var mConfirmButton, mContent;
-	if (prefConfirmSelections || bForceConfirm)
+	if (prefs.confirmSelections || bForceConfirm)
 	{
-		ResetDialogBox();
-		SetDialogBoxHeader(sName);
-		mConfirmButton = CreateButton(sConfirmText, "", "selectConfirmButton", sFunction + "; hideSection('selectionWindow');");
+		/*
+		AES.resetDialogBox();
+		AES.setDialogBoxHeader(sName);
+		mConfirmButton = AES.createButton(sConfirmText, "", "selectConfirmButton", sFunction + "; hideSection('selectionWindow');");
 		mContent = document.createElement("div");
 		mContent.innerHTML = sDesc;
 		mContent.setAttribute("class", "selectConfirmContent");
-		AddItemToDialogBoxMenu(mContent);
-		AddItemToDialogBox(mConfirmButton);
+		AES.addItemToDialogBoxMenu(mContent);
+		AES.addItemToDialogBox(mConfirmButton);
 		popout();
 		showPositionSection("selectionWindow", true);
+		*/
+		Aesica.HCEngine.quickConfirmationBox(sName, sDesc, sConfirmText, fFunction);
 	}
 	else
 	{
-		eval(sFunction);
+		if (typeof fFunction == "function") fFunction();
+		else if (typeof fFunction == "string") eval(fFunction); // <-- RAGE.  This will be going away soon.
 	}
 }
 window['selectConfirmation'] = selectConfirmation;
@@ -717,30 +740,27 @@ window['selectConfirmation'] = selectConfirmation;
 // super stat functions
 function setupSuperStats()
 {
-	ResetDialogBox(2);
+	Aesica.HCEngine.resetDialogBox(2);
 
-	SetDialogBoxHeader("Superstats");
+	Aesica.HCEngine.setDialogBoxHeader("Superstats");
 
 	var i;
-	var iLength = dataSuperStat.length;
+	var iLength = HCData.superStat.length;
 	// clear button
-	var mCurrent = document.createElement("a");
+	var mCurrent = Aesica.HCEngine.createButton(sClearButton, "selectSuperStat" + i, null, (function(){ setSuperStat(0); }));
 	var iColumn;
-	mCurrent.setAttribute("id", "selectSuperStat" + i);
-	mCurrent.setAttribute("onclick", "selectConfirmation('setSuperStat(0)', 'Clear', '')");
-	mCurrent.innerHTML = sClearButton;
-	AddItemToDialogBoxMenu(mCurrent);
+	Aesica.HCEngine.addItemToDialogBoxMenu(mCurrent);
 	// superstat buttons
 	for (i = 1; i < iLength; i++)
 	{
 		iColumn = Math.floor((i - 1) / (iLength - 1) * 2);
-		mCurrent = document.createElement("a");
-		mCurrent.setAttribute("id", "selectSuperStat" + i);
-		mCurrent.setAttribute("onclick", "selectConfirmation('setSuperStat(" + i + ")', '" + escapeQuotes(dataSuperStat[i].desc) + "', '" + dataSuperStat[i].tip + "')");
-		mCurrent.setAttribute("style", "display: block;");
-		mCurrent.innerHTML = "<div class='Sprite Stat_" + dataSuperStat[i].name + "'></div> " + dataSuperStat[i].name;
-		setOnmouseoverPopupL1(mCurrent, dataSuperStat[i].tip);
-		AddItemToDialogBox(mCurrent, iColumn);
+		(function(i)
+		{
+			mCurrent = Aesica.HCEngine.createButton(Aesica.HCEngine.getDescNode("Stat_" + HCData.superStat[i].name, HCData.superStat[i].name), "selectSuperStat" + i, null, (function(){ selectConfirmation((function(){ setSuperStat(i); }), HCData.superStat[i].name, Aesica.dataHarness.SuperStat.tip(HCData.superStat[i])); })); // xxx
+			mCurrent.setAttribute("style", "display: block;");
+		})(i);
+		setOnmouseoverPopupL1(mCurrent, Aesica.dataHarness.SuperStat.tip(HCData.superStat[i]));
+		Aesica.HCEngine.addItemToDialogBox(mCurrent, iColumn);
 	}
 }
 window['setupSuperStats'] = setupSuperStats;
@@ -749,7 +769,7 @@ function selectSuperStat(num)
 {
 	var fieldId = 'fieldSuperStat' + num;
 	var field = document.getElementById(fieldId);
-	if (selectedFieldId == fieldId)
+	if (selectedFieldId == fieldId || field.className == "lockedButton")
 	{
 		selectClear();
 	}
@@ -771,7 +791,7 @@ function setSuperStat(id)
 	var num = selectedNum;
 	var field = document.getElementById('fieldSuperStat' + num);
 	var selectField = document.getElementById('selectSuperStat' + id);
-	var oldId = phSuperStat[num].id;
+	var oldId = PH.superStat[num].id;
 	var oldSelectField = document.getElementById('selectSuperStat' + oldId);
 	var swapNum = 0;
 	var swapField;
@@ -779,38 +799,38 @@ function setSuperStat(id)
 	{
 		if (id > 0)
 		{
-			for (var i = 1; i < phSuperStat.length; i++)
+			for (var i = 1; i < PH.superStat.length; i++)
 			{
-				if (i != num && phSuperStat[i].id == id)
+				if (i != num && PH.superStat[i].id == id)
 				{
 					swapNum = i;
 					swapField = document.getElementById('fieldSuperStat' + i);
 				}
 			}
 		}
-		phSuperStat[num] = dataSuperStat[id];
+		PH.superStat[num] = HCData.superStat[id];
 		if (id == 0)
 		{
-			field.innerHTML = getSuperStatDefault(num);
+			Aesica.HCEngine.setNodeContents(field, getSuperStatDefault(num));
 			clearOnmouseoverPopup(field);
 		}
 		else
 		{
-			field.innerHTML = getSuperStatDesc(id, num);
-			setOnmouseoverPopupL2(field, dataSuperStat[id].tip);
+			Aesica.HCEngine.setNodeContents(field, getSuperStatDesc(id, num))
+			setOnmouseoverPopupL2(field, Aesica.dataHarness.SuperStat.tip(HCData.superStat[id]));
 			selectField.setAttribute('class', 'takenButton');
 		}
 		if (swapNum > 0)
 		{
-			phSuperStat[swapNum] = dataSuperStat[oldId];
+			PH.superStat[swapNum] = HCData.superStat[oldId];
 			if (oldId != 0)
 			{
-				swapField.innerHTML = getSuperStatDesc(oldId, swapNum);
-				setOnmouseoverPopupL2(swapField, dataSuperStat[oldId].tip);
+				Aesica.HCEngine.setNodeContents(swapField, getSuperStatDesc(oldId, swapNum));
+				setOnmouseoverPopupL2(swapField, Aesica.dataHarness.SuperStat.tip(HCData.superStat[oldId]));
 			}
 			else
 			{
-				swapField.innerHTML = getSuperStatDefault(swapNum);
+				Aesica.HCEngine.setNodeContents(swapField, getSuperStatDefault(swapNum));
 				clearOnmouseoverPopup(swapField);
 			}
 		}
@@ -818,7 +838,7 @@ function setSuperStat(id)
 		{
 			oldSelectField.setAttribute('class', 'button');
 		}
-			//submitAnalytics(analyticsSetCatagory, 'SuperStat', phSuperStat[num].name);
+			//submitAnalytics(analyticsSetCatagory, 'SuperStat', PH.superStat[num].name);
 	}
 	//setupInnateTalents();
 	//setupTalents();
@@ -829,30 +849,33 @@ window['setSuperStat'] = setSuperStat;
 
 function getSuperStatDefault(num)
 {
+	var sReturn;
 	if (num == 1)
 	{
-		return '<span><div class="Sprite blank"></div>&nbsp;Primary Super Stat</span>';
+		sReturn = Aesica.HCEngine.getDescNode("blank", "Primary Super Stat");
 	}
 	else
 	{
-		return '<span><div class="Sprite blank"></div>&nbsp;Secondary Super Stat ' + (num - 1) + '</span>';
+		sReturn = Aesica.HCEngine.getDescNode("blank", "Secondary Super Stat " + (num - 1));
 	}
+	return sReturn;
 }
 window['getSuperStatDefault'] = getSuperStatDefault;
 
 function getSuperStatDesc(id, num)
 {
-	return dataSuperStat[id].desc + ' <span class="spec">' + ((num == 1) ? '(Primary)' : '(Secondary)') + '</span>';
+	//return dataSuperStat[id].desc + ' <span class="spec">' + ((num == 1) ? '(Primary)' : '(Secondary)') + '</span>';
+	return Aesica.HCEngine.getDescNode(Aesica.dataHarness.SuperStat.icon(HCData.superStat[id]), HCData.superStat[id].name + " <span class='spec'>" + ((num == 1) ? "(Primary)" : "(Secondary)") + "</span>");
 }
 window['getSuperStatDesc'] = getSuperStatDesc;
 
 function highlightSuperStats(str)
 {
-	for (var i = 1; i < phSuperStat.length; i++)
+	for (var i = 1; i < PH.superStat.length; i++)
 	{
-		if (phSuperStat[i].id > 0)
+		if (PH.superStat[i].id > 0)
 		{
-			var regex = new RegExp('(' + phSuperStat[i].abbrev + ': \\d+)');
+			var regex = new RegExp('(' + Aesica.dataHarness.SuperStat.abbrev(PH.superStat[i]) + ': \\d+)');
 			if (regex != null)
 			{
 				str = str.replace(regex, '<span class="specHighlight">$1</span>');
@@ -866,31 +889,28 @@ window['highlightSuperStats'] = highlightSuperStats;
 // innate talent functions
 function setupInnateTalents()
 {
-	ResetDialogBox(2);
-	SetDialogBoxHeader("Innate Talents");
+	Aesica.HCEngine.resetDialogBox(2);
+	Aesica.HCEngine.setDialogBoxHeader("Innate Talents");
 
 	var i;
-	var iLength = dataInnateTalent.length;
+	var iLength = HCData.innateTalent.length;
 	var iColumn;
-	var mCurrent = document.createElement("a");
 	// clear button
-	mCurrent.setAttribute("id", "selectInnateTalent0");
-	mCurrent.setAttribute("onclick", "selectConfirmation('setInnateTalent(0)', 'Clear', '')");
-	mCurrent.innerHTML = sClearButton;
-	AddItemToDialogBoxMenu(mCurrent);
+	var mCurrent = Aesica.HCEngine.createButton("Clear", "selectInnateTalent0", null, (function(){ setInnateTalent(0); }));
+	Aesica.HCEngine.addItemToDialogBoxMenu(mCurrent);
 	// innates
 	for (i = 1; i < iLength; i++)
 	{
-		mCurrent = document.createElement("a");
-		mCurrent.setAttribute("id", "selectInnateTalent" + i);
-		mCurrent.setAttribute("onclick", "selectConfirmation('setInnateTalent(" + i + ")', '" + escapeQuotes(dataInnateTalent[i].desc) + "', '" + dataInnateTalent[i].tip + "')");
-		mCurrent.setAttribute("style", "display: block;");
-		mCurrent.innerHTML = "<div class='Sprite Innate_Talent'></div>&nbsp;" + dataInnateTalent[i].desc + ((dataInnateTalent[i].extra != null) ? " <span class='selectSpec'>(" + highlightSuperStats(dataInnateTalent[i].extra) + ")</span>" : "");
-		setOnmouseoverPopupL1(mCurrent, dataInnateTalent[i].tip);
+		(function(i)
+		{
+			mCurrent = Aesica.HCEngine.createButton(Aesica.HCEngine.getDescNode("Innate_Talent", HCData.innateTalent[i].name + ((Aesica.dataHarness.InnateTalent.extra(HCData.innateTalent[i]) != null) ? " <span class='selectSpec'>(" + highlightSuperStats(Aesica.dataHarness.InnateTalent.extra(dataInnateTalent[i])) + ")</span>" : "")), "selectInnateTalent" + i, null, (function(){ selectConfirmation((function(){ setInnateTalent(i); }), HCData.innateTalent[i].name, Aesica.dataHarness.InnateTalent.tip(HCData.innateTalent[i])); }));
+		})(i);
+
+		setOnmouseoverPopupL1(mCurrent, Aesica.dataHarness.InnateTalent.tip(HCData.innateTalent[i]));
 
 		// 1st half in column 1, 2nd half in column 2
 		iColumn = Math.floor((i - 1) / (iLength - 1) * 2);
-		AddItemToDialogBox(mCurrent, iColumn);
+		Aesica.HCEngine.addItemToDialogBox(mCurrent, iColumn);
 	}
 }
 window['setupInnateTalents'] = setupInnateTalents;
@@ -899,7 +919,7 @@ function selectInnateTalent(num)
 {
 	var fieldId = 'fieldInnateTalent' + num;
 	var field = document.getElementById(fieldId);
-	if (selectedFieldId == fieldId)
+	if (selectedFieldId == fieldId || field.className == "lockedButton")
 	{
 		selectClear();
 	}
@@ -921,27 +941,27 @@ function setInnateTalent(id)
 	var num = selectedNum;
 	var field = document.getElementById('fieldInnateTalent' + num);
 	var selectField = document.getElementById('selectInnateTalent' + id);
-	var oldId = phInnateTalent[num].id;
+	var oldId = PH.innateTalent[num].id;
 	var oldSelectField = document.getElementById('selectInnateTalent' + oldId);
 	if (id != oldId)
 	{
-		phInnateTalent[num] = dataInnateTalent[id];
+		PH.innateTalent[num] = HCData.innateTalent[id];
 		if (id == 0)
 		{
-			field.innerHTML = getInnateTalentDefault(num);
+			Aesica.HCEngine.setNodeContents(field, getInnateTalentDefault(num));
 			clearOnmouseoverPopup(field);
 		}
 		else
 		{
-			field.innerHTML = getInnateTalentDesc(id, num);
-			setOnmouseoverPopupL2(field, dataInnateTalent[id].tip);
+			Aesica.HCEngine.setNodeContents(field, getInnateTalentDesc(id, num));
+			setOnmouseoverPopupL2(field, Aesica.dataHarness.InnateTalent.tip(HCData.innateTalent[id]));
 			selectField.setAttribute('class', 'takenButton');
 		}
 		if (oldId != 0)
 		{
 			oldSelectField.setAttribute('class', 'selectButton');
 		}
-			//submitAnalytics(analyticsSetCatagory, 'InnateTalent', phInnateTalent[num].name);
+			//submitAnalytics(analyticsSetCatagory, 'InnateTalent', PH.innateTalent[num].name);
 	}
 	selectClear();
 }
@@ -949,41 +969,40 @@ window['setInnateTalent'] = setInnateTalent;
 
 function getInnateTalentDefault(num)
 {
-	return '<span><div class="Sprite blank"></div>&nbsp;Innate Talent</span>';
+	//return '<span><div class="Sprite blank"></div>&nbsp;Innate Talent</span>';
+	return Aesica.HCEngine.getDescNode("blank", "Innate Talent");
 }
 window['getInnateTalentDefault'] = getInnateTalentDefault;
 
 function getInnateTalentDesc(id, num)
 {
-	return '<div class="Sprite Innate_Talent"></div>&nbsp;' + dataInnateTalent[id].desc + ((dataInnateTalent[id].extra != null) ? ' <span class="spec">(' + dataInnateTalent[id].extra + ')</span>' : '');
+	return Aesica.HCEngine.getDescNode("Innate_Talent", HCData.innateTalent[id].name + ((Aesica.dataHarness.InnateTalent.extra(HCData.innateTalent[id]) != null) ? " <span class='spec'>(" + Aesica.dataHarness.InnateTalent.extra(HCData.innateTalent[id]) + ")</span>" : ""));
 }
 window['getInnateTalentDesc'] = getInnateTalentDesc;
 
 // talent functions
 function setupTalents()
 {
-	ResetDialogBox(2);
-	SetDialogBoxHeader("Talents");
+	Aesica.HCEngine.resetDialogBox(2);
+	Aesica.HCEngine.setDialogBoxHeader("Talents");
 
 	var i;
 	var iColumn;
-	var iLength = dataTalent.length;
-	var mCurrent = document.createElement("a");
-	mCurrent.setAttribute("id", "selectTalent0");
-	mCurrent.setAttribute("onclick", "selectConfirmation('setTalent(0)', 'Clear', '')");
-	mCurrent.innerHTML = sClearButton;
-	AddItemToDialogBoxMenu(mCurrent);
+	var iLength = HCData.talent.length;
+	var mCurrent = Aesica.HCEngine.createButton("Clear", "selectTalent0", null, (function(){ setTalent(0); }));
+	Aesica.HCEngine.addItemToDialogBoxMenu(mCurrent);
 
 	for (i = 1; i < iLength; i++)
 	{
 		iColumn = Math.floor((i - 1) / (iLength - 1) * 2);
-		mCurrent = document.createElement("a");
-		mCurrent.setAttribute("id", "selectTalent" + i);
-		mCurrent.setAttribute("onclick", "selectConfirmation('setTalent(" + i + ")', '" + escapeQuotes(dataTalent[i].desc) + "', '')");
+		(function(i)
+		{
+			mCurrent = Aesica.HCEngine.createButton(Aesica.HCEngine.getDescNode("Talent", HCData.talent[i].name + ((Aesica.dataHarness.Talent.extra(HCData.talent[i]) != null) ? " <span class='selectSpec'>(" + highlightSuperStats(Aesica.dataHarness.Talent.extra(HCData.talent[i])) + ")</span>" : "")), "selectTalent" + i, null, (function(){ selectConfirmation((function(){ setTalent(i); }), HCData.talent[i].name, Aesica.dataHarness.Talent.extra(HCData.talent[i])); }));
+		})(i)
+
 		mCurrent.setAttribute("style", "display: block;");
-		mCurrent.innerHTML = "<div class='Sprite Talent'></div>&nbsp;" + dataTalent[i].desc + ((dataTalent[i].extra != null) ? " <span class='selectSpec'>(" + highlightSuperStats(dataTalent[i].extra) + ")</span>" : "");
-		setOnmouseoverPopupL1(mCurrent, "<b>" + dataTalent[i].name + "</b><br /><br />" + dataTalent[i].extra);
-		AddItemToDialogBox(mCurrent, iColumn);
+		setOnmouseoverPopupL1(mCurrent, "<b>" + HCData.talent[i].name + "</b><br /><br />" + Aesica.dataHarness.Talent.extra(HCData.talent[i]));
+		Aesica.HCEngine.addItemToDialogBox(mCurrent, iColumn);
 	}
 }
 window['setupTalents'] = setupTalents;
@@ -992,7 +1011,7 @@ function selectTalent(num)
 {
 	var fieldId = 'fieldTalent' + num;
 	var field = document.getElementById(fieldId);
-	if (selectedFieldId == fieldId)
+	if (selectedFieldId == fieldId || field.className == "lockedButton")
 	{
 		selectClear();
 	}
@@ -1014,7 +1033,7 @@ function setTalent(id)
 	var num = selectedNum;
 	var field = document.getElementById('fieldTalent' + num);
 	var selectField = document.getElementById('selectTalent' + id);
-	var oldId = phTalent[num].id;
+	var oldId = PH.talent[num].id;
 	var oldSelectField = document.getElementById('selectTalent' + oldId);
 	var swapNum = 0;
 	var swapField;
@@ -1022,38 +1041,38 @@ function setTalent(id)
 	{
 		if (id > 0)
 		{
-			for (var i = 1; i < phTalent.length; i++)
+			for (var i = 1; i < PH.talent.length; i++)
 			{
-				if (i != num && phTalent[i].id == id)
+				if (i != num && PH.talent[i].id == id)
 				{
 					swapNum = i;
 					swapField = document.getElementById('fieldTalent' + i);
 				}
 			}
 		}
-		phTalent[num] = dataTalent[id];
+		PH.talent[num] = HCData.talent[id];
 		if (id == 0)
 		{
-			field.innerHTML = getTalentDefault(num);
+			Aesica.HCEngine.setNodeContents(field, getTalentDefault(num));
 			clearOnmouseoverPopup(field);
 		}
 		else
 		{
-			field.innerHTML = getTalentDesc(id);
-			setOnmouseoverPopupL2(field, dataTalent[id].tip);
+			Aesica.HCEngine.setNodeContents(field, getTalentDesc(id));
+			setOnmouseoverPopupL2(field, Aesica.dataHarness.Talent.tip(HCData.talent[id]));
 			selectField.setAttribute('class', 'takenButton');
 		}
 		if (swapNum > 0)
 		{
-			phTalent[swapNum] = dataTalent[oldId];
+			PH.talent[swapNum] = HCData.talent[oldId];
 			if (oldId != 0)
 			{
-				swapField.innerHTML = getTalentDesc(oldId);
-				setOnmouseoverPopupL2(swapField, dataTalent[oldId].tip);
+				Aesica.HCEngine.setNodeContents(swapField, getTalentDesc(oldId));
+				setOnmouseoverPopupL2(swapField, Aesica.dataHarness.Talent.tip(HCData.talent[oldId]));
 			}
 			else
 			{
-				swapField.innerHTML = getTalentDefault(swapNum);
+				Aesica.HCEngine.setNodeContents(swapField, getTalentDefault(swapNum));
 				clearOnmouseoverPopup(swapField);
 			}
 		}
@@ -1061,7 +1080,7 @@ function setTalent(id)
 		{
 			oldSelectField.setAttribute('class', 'button');
 		}
-			//submitAnalytics(analyticsSetCatagory, 'Talent', phTalent[num].name);
+			//submitAnalytics(analyticsSetCatagory, 'Talent', PH.talent[num].name);
 	}
 	selectClear();
 }
@@ -1069,43 +1088,58 @@ window['setTalent'] = setTalent;
 
 function getTalentDefault(num)
 {
-	return '<span><div class="Sprite blank"></div>&nbsp;Talent ' + num + '</span>';
+	return Aesica.HCEngine.getDescNode("blank", "Talent " + num);
 }
 window['getTalentDefault'] = getTalentDefault;
 
 function getTalentDesc(id)
 {
-	return '<div class="Sprite Talent"></div>&nbsp;' + dataTalent[id].desc + ((dataTalent[id].extra != null) ? ' <span class="spec">(' + dataTalent[id].extra + ')</span>' : '');
+	return Aesica.HCEngine.getDescNode("Talent", HCData.talent[id].name + ((Aesica.dataHarness.Talent.extra(HCData.talent[id]) != null) ? " <span class='spec'>(" + Aesica.dataHarness.Talent.extra(HCData.talent[id]) + ")</span>" : ""));
 }
 window['getTalentDesc'] = getTalentDesc;
 
 // travel power functions
-function setupTravelPowers()
+function setupTravelPowers(currentType=0)
 {
-	ResetDialogBox(iTravelPowerColumnCount);
-	SetDialogBoxHeader("Travel Powers");
-
+	Aesica.HCEngine.resetDialogBox(iTravelPowerColumnCount);
+	Aesica.HCEngine.setDialogBoxHeader("Travel Powers");
 	var i;
 	var iColumn;
-	var iLength = dataTravelPower.length;
-	var mCurrent = document.createElement("a");
-	mCurrent.setAttribute("id", "selectTravelPower0");
-	//mCurrent.setAttribute("onclick", "selectConfirmation('setTravelPower(0)', 'Clear', '')");
-	mCurrent.addEventListener("click", function(){selectConfirmation('setTravelPower(0)', 'Clear', '')});
-	mCurrent.innerHTML = sClearButton;
-	AddItemToDialogBoxMenu(mCurrent);
-
+	var iLength
+	var mCurrent = Aesica.HCEngine.createButton(sClearButton, "selectTravelPower0", null, (function(){ setTravelPower(0) }));
+	Aesica.HCEngine.addItemToDialogBoxMenu(mCurrent);
+	var aTravelPowerList = [];
+	iLength = HCData.travelPowerType.length;
 	for (i = 1; i < iLength; i++)
 	{
-		iColumn = Math.floor((i - 1) / (iLength - 1) * iTravelPowerColumnCount);
-		mCurrent = document.createElement("a");
-		mCurrent.setAttribute("id", "selectTravelPower" + i);
-		(function(i){ mCurrent.addEventListener("click", function(){ selectConfirmation("setTravelPower(" + i + ");", escapeQuotes(dataTravelPower[i].desc), dataTravelPower[i].tip) }) }(i));
-		//mCurrent.setAttribute("onclick", "selectConfirmation('setTravelPower(" + i + ")', '" + escapeQuotes(dataTravelPower[i].desc) + "', '" + dataTravelPower[i].tip + "')");
+		mCurrent = Aesica.HCEngine.createButton(Aesica.HCEngine.getDescNode(HCData.travelPowerType[i].icon, "", false, true));
+		(function(i)
+		{
+			mCurrent.addEventListener("click", (function(){ setupTravelPowers(i); updatePositionSection("selectionWindow"); }));
+		})(i);
+		if (i == currentType) mCurrent.className = "frameworkSelected";
+		else mCurrent.className = "frameworkUnselected";
+		setOnmouseoverPopupL2(mCurrent, HCData.travelPowerType[i].name);
+		Aesica.HCEngine.addItemToDialogBox(mCurrent);
+	}
+	Aesica.HCEngine.addItemToDialogBox(document.createElement("br"));
+	iLength = dataTravelPower.length;
+	for (i = 1; i < iLength; i++)
+	{
+		if (dataTravelPower[i].type == currentType) aTravelPowerList.push(dataTravelPower[i]);
+	}
+	iLength = aTravelPowerList.length;
+	if (iLength > 0) Aesica.HCEngine.addItemToDialogBox(document.createElement("br"));
+	for (i = 0; i < iLength; i++)
+	{
+		iColumn = Math.floor((i) / (iLength / iTravelPowerColumnCount));
+		(function(i)
+		{
+			mCurrent = Aesica.HCEngine.createButton(Aesica.HCEngine.getDescNode(aTravelPowerList[i].icon, aTravelPowerList[i].name), "selectTravelPower" + aTravelPowerList[i].id, null, (function(){ selectConfirmation((function(){ setTravelPower(aTravelPowerList[i].id); }), dataTravelPower[i].name, dataTravelPower[i].tip); }));
+		})(i);
 		mCurrent.setAttribute("style", "display: block;");
-		mCurrent.innerHTML = dataTravelPower[i].desc;
-		setOnmouseoverPopupL1(mCurrent, dataTravelPower[i].tip);
-		AddItemToDialogBox(mCurrent, iColumn);
+		setOnmouseoverPopupL1(mCurrent, aTravelPowerList[i].tip);
+		Aesica.HCEngine.addItemToDialogBox(mCurrent, iColumn);
 	}
 }
 window['setupTravelPowers'] = setupTravelPowers;
@@ -1114,7 +1148,7 @@ function selectTravelPower(num)
 {
 	var fieldId = 'fieldTravelPower' + num;
 	var field = document.getElementById(fieldId);
-	if (selectedFieldId == fieldId)
+	if (selectedFieldId == fieldId || field.className == "lockedButton")
 	{
 		selectClear();
 	}
@@ -1125,7 +1159,7 @@ function selectTravelPower(num)
 		selectedFieldId = fieldId;
 		selectedFieldClass = field.getAttribute('class');
 		field.setAttribute('class', 'selectedButton');
-		setupTravelPowers();
+		setupTravelPowers(PH.travelPower[num].type);
 		showPositionSection('selectionWindow', true);
 	}
 }
@@ -1137,8 +1171,8 @@ function setTravelPower(id)
 	var field = document.getElementById('fieldTravelPower' + num);
 	var advantageField = document.getElementById('fieldTravelPowerAdvantage' + num);
 	var selectField = document.getElementById('selectTravelPower' + id);
-	var oldId = phTravelPower[num].id;
-	var oldAdvantage = phTravelPowerAdvantage[num];
+	var oldId = PH.travelPower[num].id;
+	var oldAdvantage = PH.travelPowerAdvantage[num];
 	var oldSelectField = document.getElementById('selectTravelPower' + oldId);
 	var swapNum = 0;
 	var swapField;
@@ -1147,9 +1181,9 @@ function setTravelPower(id)
 	{
 		if (id > 0)
 		{
-			for (var i = 1; i < phTravelPower.length; i++)
+			for (var i = 1; i < PH.travelPower.length; i++)
 			{
-				if (i != num && phTravelPower[i].id == id)
+				if (i != num && PH.travelPower[i].id == id)
 				{
 					swapNum = i;
 					swapField = document.getElementById('fieldTravelPower' + i);
@@ -1159,23 +1193,23 @@ function setTravelPower(id)
 		}
 		if (swapNum > 0)
 		{
-			phTravelPower[num] = phTravelPower[swapNum];
-			phTravelPowerAdvantage[num] = phTravelPowerAdvantage[swapNum];
-			field.innerHTML = dataTravelPower[id].desc;
+			PH.travelPower[num] = PH.travelPower[swapNum];
+			PH.travelPowerAdvantage[num] = PH.travelPowerAdvantage[swapNum];
+			Aesica.HCEngine.setNodeContents(field, Aesica.HCEngine.getDescNode(dataTravelPower[id].icon, dataTravelPower[id].name, false, true));
 			setOnmouseoverPopupL2(field, dataTravelPower[id].tip);
 			advantageField.style.display = '';
-			setAdvantage(2, num, phTravelPowerAdvantage[num]);
-			phTravelPower[swapNum] = dataTravelPower[oldId];
-			phTravelPowerAdvantage[swapNum] = oldAdvantage;
+			setAdvantage(2, num, PH.travelPowerAdvantage[num]);
+			PH.travelPower[swapNum] = dataTravelPower[oldId];
+			PH.travelPowerAdvantage[swapNum] = oldAdvantage;
 			if (oldId != 0)
 			{
-				swapField.innerHTML = dataTravelPower[oldId].desc;
+				Aesica.HCEngine.setNodeContents(swapField, Aesica.HCEngine.getDescNode(dataTravelPower[oldId].icon, dataTravelPower[oldId].name, false, true));
 				setOnmouseoverPopupL2(swapField, dataTravelPower[oldId].tip);
-				setAdvantage(2, swapNum, phTravelPowerAdvantage[swapNum]);
+				setAdvantage(2, swapNum, PH.travelPowerAdvantage[swapNum]);
 			}
 			else
 			{
-				swapField.innerHTML = getTravelPowerDefault(swapNum);
+				Aesica.HCEngine.setNodeContents(swapField, getTravelPowerDefault(swapNum));
 				clearOnmouseoverPopup(swapField);
 				swapAdvantageField.style.display = 'none';
 				setAdvantage(2, swapNum, 0);
@@ -1183,28 +1217,31 @@ function setTravelPower(id)
 		}
 		else
 		{
-			if (phTravelPower[num].id != 0)
+			if (PH.travelPower[num].id != 0)
 			{
 				setAdvantage(2, num, 0);
 			}
-			phTravelPower[num] = dataTravelPower[id];
-			phTravelPowerAdvantage[num] = 0;
+			PH.travelPower[num] = dataTravelPower[id];
+			PH.travelPowerAdvantage[num] = 0;
 			if (id == 0)
 			{
-				field.innerHTML = getTravelPowerDefault(num);
+				Aesica.HCEngine.setNodeContents(field, getTravelPowerDefault(num));
 				clearOnmouseoverPopup(field);
 				advantageField.style.display = 'none';
 			}
 			else
 			{
-				field.innerHTML = dataTravelPower[id].desc;
+				Aesica.HCEngine.setNodeContents(field, Aesica.HCEngine.getDescNode(dataTravelPower[id].icon, dataTravelPower[id].name, false, true));
 				setOnmouseoverPopupL2(field, dataTravelPower[id].tip);
 				advantageField.innerHTML = advantageTextSpan(2, num, 0);
 				advantageField.style.display = '';
-				selectField.setAttribute('class', 'takenButton');
-				if (oldId != 0)
+				if (selectField)
 				{
-					oldSelectField.setAttribute('class', 'button');
+					selectField.setAttribute('class', 'takenButton');
+					if (oldId != 0)
+					{
+						oldSelectField.setAttribute('class', 'button');
+					}
 				}
 			}
 			if (oldId != 0)
@@ -1212,7 +1249,7 @@ function setTravelPower(id)
 				oldSelectField.setAttribute('class', 'button');
 			}
 		}
-			//submitAnalytics(analyticsSetCatagory, 'TravelPower', phTravelPower[num].name);
+			//submitAnalytics(analyticsSetCatagory, 'TravelPower', PH.travelPower[num].name);
 	}
 	selectClear();
 }
@@ -1220,7 +1257,7 @@ window['setTravelPower'] = setTravelPower;
 
 function getTravelPowerDefault(num)
 {
-	return '<span><div class="Sprite blank"></div>&nbsp;Travel Power ' + num + '</span>';
+	return Aesica.HCEngine.getDescNode("blank", "Travel Power " + num, false, true);
 }
 window['getTravelPowerDefault'] = getTravelPowerDefault;
 
@@ -1234,6 +1271,7 @@ function setupFrameworks()
 	var iNextLineID = Math.floor(iLength / 2);
 	var iGroup = -1;
 	var mPowersetGroup;
+	var mButtonlabel;
 	for (i = 1; i < iLength; i++)
 	{
 		if (iGroup < dataFramework[i].powerset)
@@ -1243,9 +1281,16 @@ function setupFrameworks()
 			mContainer.appendChild(mPowersetGroup);
 			iGroup++;
 		}
-		mNode = CreateButton(dataFramework[i].desc, "selectFramework" + i, "", "selectFramework(" + i + ")");
-		mPowersetGroup.appendChild(mNode);
-		setOnmouseoverPopupL1(mNode, dataFramework[i].tip);
+
+		(function(i)
+		{
+			mNode = Aesica.HCEngine.createButton("", "selectFramework" + i, "", (function(){ selectFramework(i); }));
+			mButtonlabel = Aesica.HCEngine.getDescNode(dataFramework[i].icon, "");
+			mNode.appendChild(mButtonlabel);
+			mPowersetGroup.appendChild(mNode);
+			setOnmouseoverPopupL1(mNode, dataFramework[i].tip);
+		})(i);
+		
 		// reduce brightness for nonselected frameworks
 		if (dataFramework[i].id != prevSelectedFramework) mNode.setAttribute("class", "frameworkUnselected");
 		else mNode.setAttribute("class", "frameworkSelected");
@@ -1257,12 +1302,12 @@ window['setupFrameworks'] = setupFrameworks;
 
 function selectFramework(framework)
 {
-	ResetDialogBox(iPowerColumnCount);
+	Aesica.HCEngine.resetDialogBox(iPowerColumnCount);
 	var sHeader = "Select Framework";
 
 	if (framework > 0 && framework < dataFramework.length) sHeader = "Framework > " + dataPowerSet[dataFramework[framework].powerset].name + " > " + dataFramework[framework].name;
 
-	SetDialogBoxHeader(sHeader);
+	Aesica.HCEngine.setDialogBoxHeader(sHeader);
 
 	var aFrameworkPowers = dataPowerIdFromFramework[framework];
 	var i;
@@ -1271,26 +1316,24 @@ function selectFramework(framework)
 	// framework selection container
 	var mFrameworkContainer = document.createElement("div");
 	mFrameworkContainer.setAttribute("id", "frameworkSelectionContainer");
-	AddItemToDialogBox(mFrameworkContainer);
-	// break
-	//AddItemToDialogBox(document.createElement("hr"));
+	Aesica.HCEngine.addItemToDialogBox(mFrameworkContainer);
 	// clear button
-	var mClear = CreateButton(sClearButton, "selectPower0", "", "selectConfirmation('setPower(0)', 'Clear', '')");
-	AddItemToDialogBoxMenu(mClear);
+	var mClear = Aesica.HCEngine.createButton(sClearButton, "selectPower0", "", (function(){ setPower(0); }));
+	Aesica.HCEngine.addItemToDialogBoxMenu(mClear);
 	// insert button
-	var mInsert = CreateButton(sInsertButton, "selectPowerInsert", "", "selectPowerInsert(" + selectedNum + ")");
+	var mInsert = Aesica.HCEngine.createButton(sInsertButton, "selectPowerInsert", "", (function(){ selectPowerInsert(selectedNum); }));
 	mInsert.setAttribute("style", "margin-left: 1.5em; margin-right: 1.5em;");
-	AddItemToDialogBoxMenu(mInsert);
+	Aesica.HCEngine.addItemToDialogBoxMenu(mInsert);
 	// delete button
-	var mDelete = CreateButton(sDeleteButton, "selectPowerDelete", "", "selectPowerDelete(" + selectedNum + ")")
-	AddItemToDialogBoxMenu(mDelete);
+	var mDelete = Aesica.HCEngine.createButton(sDeleteButton, "selectPowerDelete", "", (function(){ selectPowerDelete(selectedNum); }));
+	Aesica.HCEngine.addItemToDialogBoxMenu(mDelete);
 	// framework powers
 	var mNode;
 	var iPowerID;
 	var oPower;
 	var iColumn;
 	var iColumnSize = Math.ceil(iLength / iPowerColumnCount);
-	for (i = 0; i < iLength; i++)
+	for (i = 0; i < iLength && framework > 0; i++)
 	{
 		iPowerID = aFrameworkPowers[i];
 		oPower = dataPower[iPowerID];
@@ -1303,21 +1346,18 @@ function selectFramework(framework)
 			mNode.setAttribute("class", "disabledButton");
 			break;
 		case 1:
-			//mNode.setAttribute("onclick", "selectConfirmation('setPower(" + iPowerID + ")', '" + escapeQuotes(dataPower[iPowerID].desc) + "', '" + dataPower[iPowerID].tip + "')");
-			(function(iPowerID){ mNode.addEventListener("click", function(){ selectConfirmation("setPower(" + iPowerID + ");", dataPower[iPowerID].desc, dataPower[iPowerID].tip);})}(iPowerID));
+			(function(iPowerID){ mNode.addEventListener("click", function(){ selectConfirmation((function(){ setPower(iPowerID); }), dataPower[iPowerID].desc, dataPower[iPowerID].tip);})}(iPowerID));
 			mNode.setAttribute("class", "button");
 			break;
 		case 2:
-			//mNode.setAttribute("onclick", "selectConfirmation('setPower(" + iPowerID + ")', '" + escapeQuotes(dataPower[iPowerID].desc) + "', '" + dataPower[iPowerID].tip + "')");
-			(function(iPowerID){ mNode.addEventListener("click", function(){ selectConfirmation("setPower(" + iPowerID + ");", dataPower[iPowerID].desc, dataPower[iPowerID].tip);})}(iPowerID));mNode.setAttribute("class", "takenButton");
+			(function(iPowerID){ mNode.addEventListener("click", function(){ selectConfirmation((function(){ setPower(iPowerID); }), dataPower[iPowerID].desc, dataPower[iPowerID].tip);})}(iPowerID));mNode.setAttribute("class", "takenButton");
 			break;
 		}
-		mNode.innerHTML = dataPower[iPowerID].desc;
-		mNode.setAttribute("style", "display: block;");
+		Aesica.HCEngine.setNodeContents(mNode, Aesica.HCEngine.getDescNode(dataPower[iPowerID].icon, dataPower[iPowerID].name));
 		setOnmouseoverPopupL1(mNode, dataPower[iPowerID].tip);
 		// add to dialog box
 		iColumn = Math.floor(i / iColumnSize);
-		AddItemToDialogBox(mNode, iColumn);
+		Aesica.HCEngine.addItemToDialogBox(mNode, iColumn);
 	}
 
 	prevSelectedFramework = framework;
@@ -1329,22 +1369,26 @@ window['selectFramework'] = selectFramework;
 
 function selectPower(num)
 {
-	var fieldId = 'fieldPower' + num;
+	var fieldId = "fieldPower" + num;
 	var field = document.getElementById(fieldId);
-	if (selectedFieldId == fieldId)
+	if (selectedFieldId == fieldId || field.className == "lockedButton")
 	{
 		selectClear();
+	}
+	else if (PH.archetype.id > 1)
+	{
+		selectArchetypePower(num);
 	}
 	else
 	{
 		selectClear();
 		selectedNum = num;
 		selectedFieldId = fieldId;
-		selectedFieldClass = field.getAttribute('class');
-		field.setAttribute('class', 'selectedButton');
-		if (phPower[num].id != 0)
+		selectedFieldClass = field.className;
+		field.className = "selectedButton";
+		if (PH.power[num].id != 0)
 		{
-			selectFramework(phPower[num].framework);
+			selectFramework(PH.power[num].framework);
 		}
 		else if (prevSelectedFramework != 0)
 		{
@@ -1354,7 +1398,7 @@ function selectPower(num)
 		{
 			selectFramework(0);
 		}
-		showPositionSection('selectionWindow', false);
+		showPositionSection("selectionWindow", false);
 	}
 }
 window['selectPower'] = selectPower;
@@ -1364,8 +1408,8 @@ function setPower(id)
 	var num = selectedNum;
 	var field = document.getElementById('fieldPower' + num);
 	var advantageField = document.getElementById('fieldPowerAdvantage' + num);
-	var oldId = phPower[num].id;
-	var oldAdvantage = phPowerAdvantage[num];
+	var oldId = PH.power[num].id;
+	var oldAdvantage = PH.powerAdvantage[num];
 	var swapNum = 0;
 	var swapField;
 	var swapAdvantageField;
@@ -1373,9 +1417,9 @@ function setPower(id)
 	{
 		if (id > 0)
 		{
-			for (var i = 1; i < phPower.length; i++)
+			for (var i = 1; i < PH.power.length; i++)
 			{
-				if (i != num && phPower[i].name == dataPower[id].name)
+				if (i != num && PH.power[i].name == dataPower[id].name)
 				{
 					swapNum = i;
 					swapField = document.getElementById('fieldPower' + i);
@@ -1385,24 +1429,24 @@ function setPower(id)
 		}
 		if (swapNum > 0)
 		{
-			phPower[num] = phPower[swapNum];
-			phPowerAdvantage[num] = phPowerAdvantage[swapNum];
-			field.innerHTML = dataPower[id].desc;
+			PH.power[num] = PH.power[swapNum];
+			PH.powerAdvantage[num] = PH.powerAdvantage[swapNum];
+			Aesica.HCEngine.setNodeContents(field, Aesica.HCEngine.getDescNode(dataPower[id].icon, dataPower[id].name, false, true));
 			setOnmouseoverPopupL2(field, dataPower[id].tip);
 			advantageField.style.display = '';
-			setAdvantage(1, num, phPowerAdvantage[num]);
-			phPower[swapNum] = dataPower[oldId];
-			phPowerAdvantage[swapNum] = oldAdvantage;
+			setAdvantage(1, num, PH.powerAdvantage[num]);
+			PH.power[swapNum] = dataPower[oldId];
+			PH.powerAdvantage[swapNum] = oldAdvantage;
 			if (oldId != 0)
 			{
-				swapField.innerHTML = dataPower[oldId].desc;
+				Aesica.HCEngine.setNodeContents(swapField, Aesica.HCEngine.getDescNode(dataPower[oldId].icon, dataPower[oldId].name, false, true));
 				setOnmouseoverPopupL2(swapField, dataPower[oldId].tip);
 				swapAdvantageField.style.display = '';
-				setAdvantage(1, swapNum, phPowerAdvantage[swapNum]);
+				setAdvantage(1, swapNum, PH.powerAdvantage[swapNum]);
 			}
 			else
 			{
-				swapField.innerHTML = getPowerDefault(swapNum);
+				Aesica.HCEngine.setNodeContents(swapField, getPowerDefault(swapNum));
 				clearOnmouseoverPopup(swapField);
 				swapAdvantageField.style.display = 'none';
 				setAdvantage(1, swapNum, 0);
@@ -1410,27 +1454,27 @@ function setPower(id)
 		}
 		else
 		{
-			if (phPower[num].id != 0)
+			if (PH.power[num].id != 0)
 			{
 				setAdvantage(1, num, 0);
 			}
-			phPower[num] = dataPower[id];
-			phPowerAdvantage[num] = 0;
+			PH.power[num] = dataPower[id];
+			PH.powerAdvantage[num] = 0;
 			if (id == 0)
 			{
-				field.innerHTML = getPowerDefault(num);
+				Aesica.HCEngine.setNodeContents(field, getPowerDefault(num));
 				clearOnmouseoverPopup(field);
 				advantageField.style.display = 'none';
 			}
 			else
 			{
-				field.innerHTML = dataPower[id].desc;
+				Aesica.HCEngine.setNodeContents(field, Aesica.HCEngine.getDescNode(dataPower[id].icon, dataPower[id].name, false, true));
 				setOnmouseoverPopupL2(field, dataPower[id].tip);
 				advantageField.innerHTML = advantageTextSpan(1, num, 0);
 				advantageField.style.display = '';
 			}
 		}
-			//submitAnalytics(analyticsSetCatagory, 'Power', phPower[num].name);
+			//submitAnalytics(analyticsSetCatagory, 'Power', PH.power[num].name);
 	}
 	selectClear();
 	validatePowers();
@@ -1439,7 +1483,7 @@ window['setPower'] = setPower;
 
 function getPowerDefault(num)
 {
-	return '<span><div class="Sprite blank"></div>&nbsp;Power ' + num + '</span>';
+	return Aesica.HCEngine.getDescNode("blank", "Power " + num, false, true);
 }
 window['getPowerDefault'] = getPowerDefault;
 
@@ -1448,7 +1492,7 @@ function selectPowerAllowed(num, id)
 	// returns: 0=no, 1=yes, 2=taken
 	var result = 0;
 	var power = dataPower[id];
-	var oldTier = (num > 0) ? phPower[num].tier : -1;
+	var oldTier = (num > 0) ? PH.power[num].tier : -1;
 	var powerCount = 0;
 	var powerSetCount = 0;
 	var frameworkCount = 0;
@@ -1457,9 +1501,9 @@ function selectPowerAllowed(num, id)
 	var energyBuilderId = 0;
 	var energyUnlockId = 0;
 	var tier4Id = 0;
-	for (var i = 1; i < phPower.length; i++)
+	for (var i = 1; i < PH.power.length; i++)
 	{
-		var p = phPower[i];
+		var p = PH.power[i];
 		// some framework powers act like they belong to a specific power set for the purposes of calculating counts
 		if (dataReplacePower[p.id] != undefined) p = dataPower[dataReplacePower[p.id]];
 		if (i < num)
@@ -1519,19 +1563,19 @@ function selectPowerAllowed(num, id)
 	case 4:
 		//if (powerSetCount >= 10) result = 1;
 		//if (powerCount >= 12 && tier4Id == 0) result = 1;
-		//if (phArchetype > 1 || num >= 13) { }
+		//if (PH.archetype > 1 || num >= 13) { }
 		if (tier4Id == 0) result = 1;
 		else if (oldTier == 4) result = 2;
 		break;
 	}
 	if (result > 0 && energyUnlockId != 0 && dataEnergyUnlockPower[id] != undefined)
 	{
-		if (dataEnergyUnlockPower[phPower[num].id] != undefined) result = 2;
+		if (dataEnergyUnlockPower[PH.power[num].id] != undefined) result = 2;
 		else result = 0;
 	}
-	for (var i = 1; i < phPower.length; i++)
+	for (var i = 1; i < PH.power.length; i++)
 	{
-		if (phPower[i].name == power.name && (num != i || result == 1)) result = 2;
+		if (PH.power[i].name == power.name && (num != i || result == 1)) result = 2;
 	}
 	return result;
 }
@@ -1553,16 +1597,16 @@ window['validatePower'] = validatePower;
 
 function validatePowers()
 {
-	for (var i = 1; i < phPower.length; i++)
+	for (var i = 1; i < PH.power.length; i++)
 	{
-		validatePower(i, phPower[i].id);
+		validatePower(i, PH.power[i].id);
 	}
 }
 window['validatePowers'] = validatePowers;
 
 function selectPowerInsert(num)
 {
-	for (var i = phPower.length - 1; i > num; i--)
+	for (var i = PH.power.length - 1; i > num; i--)
 	{
 		movePower(i - 1, i);
 	}
@@ -1575,11 +1619,11 @@ window['selectPowerInsert'] = selectPowerInsert;
 
 function selectPowerDelete(num)
 {
-	for (var i = num + 1; i < phPower.length; i++)
+	for (var i = num + 1; i < PH.power.length; i++)
 	{
 		movePower(i, i - 1);
 	}
-	selectedNum = phPower.length - 1;
+	selectedNum = PH.power.length - 1;
 	setPower(0);
 	selectClear();
 	validatePowers();
@@ -1588,13 +1632,181 @@ window['selectPowerDelete'] = selectPowerDelete;
 
 function movePower(fromNum, toNum)
 {
-	var power = phPower[fromNum];
-	var mask = phPowerAdvantage[fromNum];
+	var power = PH.power[fromNum];
+	var mask = PH.powerAdvantage[fromNum];
 	selectedNum = toNum;
 	setPower(power.id);
 	setAdvantage(1, toNum, mask);
 }
 window['movePower'] = movePower;
+
+// role selection functions
+function selectRole()
+{
+	var fieldId = "fieldRole";
+	var field = document.getElementById(fieldId);
+	if (field.className != "lockedButton")
+	{
+		selectClear();
+		selectedFieldId = fieldId;
+		selectedFieldClass = field.className;
+		field.className = "selectedButton";
+		setupRoles();
+		showPositionSection("selectionWindow", true);
+	};
+}
+
+function setupRoles()
+{
+	Aesica.HCEngine.resetDialogBox();
+	Aesica.HCEngine.setDialogBoxHeader("Roles");
+	var i, iLength = HCData.archetypeGroup.length;
+	var mRole;
+	for (i = 1; i < iLength; i++)
+	{
+		mRole = Aesica.HCEngine.createButton(Aesica.HCEngine.getDescNode(HCData.archetypeGroup[i].icon, HCData.archetypeGroup[i].name), null, "button", setRole);
+		mRole.setAttribute("roleID", i);
+		Aesica.HCEngine.addItemToDialogBox(mRole);
+		setOnmouseoverPopupL1(mRole, Aesica.dataHarness.ArchetypeGroup.tip(HCData.archetypeGroup[i]));
+	}
+}
+
+function setRole(e)
+{
+	var iRole = parseInt((e instanceof MouseEvent) ? e.currentTarget.getAttribute("roleID") : e);
+	var field = document.getElementById("fieldRole");
+	PH.role = HCData.archetypeGroup[iRole];
+	Aesica.HCEngine.setNodeContents(field, Aesica.HCEngine.getDescNode(HCData.archetypeGroup[iRole].icon, HCData.archetypeGroup[iRole].name));
+	setOnmouseoverPopupL1(field, Aesica.dataHarness.ArchetypeGroup.tip(HCData.archetypeGroup[iRole]));
+	selectClear();
+}
+
+// device functions
+function selectDevice(e)
+{
+	var mField = e.currentTarget;
+	if (mField.className != "lockedButton")
+	{
+		selectClear();
+		selectedNum = parseInt(mField.getAttribute("deviceSlot"));
+		selectedFieldId = mField.id;
+		selectedFieldClass = mField.className;
+		mField.className = "selectedButton";
+		setupDevice(PH.device[selectedNum].type);
+		showPositionSection("selectionWindow", true);
+	}
+}
+
+function setupDevice(currentCategory=0)
+{
+	Aesica.HCEngine.resetDialogBox(3);
+	Aesica.HCEngine.setDialogBoxHeader("Devices" + (currentCategory > 0 ? " > " + HCData.deviceType[currentCategory].name : ""));
+	var aDeviceList = [];
+	var i, iLength;
+	var mCategorySelector;
+	var mCategoryGroup = document.createElement("div");
+	mCategoryGroup.className = "frameworkSelectionGroup";
+	iLength = HCData.deviceType.length;
+	for (i = 1; i < iLength; i++)
+	{
+		mCategorySelector = Aesica.HCEngine.createButton(Aesica.HCEngine.getDescNode(HCData.deviceType[i].icon, "", false, true));
+		(function(i)
+		{
+			mCategorySelector.addEventListener("click", (function(){ setupDevice(i); updatePositionSection("selectionWindow"); }));
+		})(i);
+		if (i == currentCategory) mCategorySelector.className = "frameworkSelected";
+		else mCategorySelector.className = "frameworkUnselected";
+		setOnmouseoverPopupL2(mCategorySelector, "<b>" + HCData.deviceType[i].name + "</b><br /><br />" + HCData.deviceType[i].tip);
+		mCategoryGroup.appendChild(mCategorySelector);
+	}
+	Aesica.HCEngine.addItemToDialogBox(mCategoryGroup);
+	Aesica.HCEngine.addItemToDialogBox(document.createElement("br"));
+	var mClear = Aesica.HCEngine.createButton(sClearButton, null, "button", setDevice);
+	mClear.setAttribute("deviceID", 0);
+	Aesica.HCEngine.addItemToDialogBoxMenu(mClear);
+	var mDevice, oDevice;
+	iLength = HCData.device.length;
+	for (i = 1; i < iLength; i++)
+	{
+		oDevice = HCData.device[i];
+		if (oDevice.type == currentCategory) aDeviceList.push(oDevice);
+	}
+	iLength = aDeviceList.length
+	if (iLength > 0) Aesica.HCEngine.addItemToDialogBox(document.createElement("br"));
+	var iColumn;
+	for (i = 0; i < iLength; i++)
+	{
+		iColumn = Math.floor(i / (iLength / 3));
+		mDevice = Aesica.HCEngine.createButton(Aesica.HCEngine.getDescNode(aDeviceList[i].icon, aDeviceList[i].name), null, "button " + HCData.rarity[aDeviceList[i].rarity].className, setDevice);
+		mDevice.setAttribute("deviceID", aDeviceList[i].id);
+		setOnmouseoverPopupL1(mDevice, Aesica.dataHarness.Device.tip(aDeviceList[i]));
+		Aesica.HCEngine.addItemToDialogBox(mDevice, iColumn);
+	}
+}
+
+// e = MouseEvent or field ID.  If MouseEvent, iDeviceID is not required because this information should be in the calling
+// button's "deviceID" attribute.
+function setDevice(e, iDeviceID=null)
+{
+	if (e instanceof MouseEvent) iDeviceID = parseInt(e.currentTarget.getAttribute("deviceID"));
+	else
+	{
+		selectedNum = e;
+		selectedFieldId = "fieldDevice" + e;
+	}
+	if (isNaN(iDeviceID)) iDeviceID = 0;
+	var oDevice = HCData.device[iDeviceID];
+	var mDevice = document.getElementById(selectedFieldId);
+	var mDevicePowers = document.getElementById(selectedFieldId + "Powers");
+	PH.device[selectedNum] = HCData.device[iDeviceID];
+	if (iDeviceID > 0)
+	{
+		Aesica.HCEngine.setNodeContents(mDevice, Aesica.HCEngine.getDescNode(oDevice.icon, oDevice.name, false, true));
+		mDevice.className = "button " + HCData.rarity[oDevice.rarity].className;
+		setOnmouseoverPopupL1(mDevice, Aesica.dataHarness.Device.tip(oDevice));
+		if (Array.isArray(oDevice.powers)) mDevicePowers.style.display = "inline-block";
+		else mDevicePowers.style.display = "none";
+	}
+	else
+	{
+		Aesica.HCEngine.setNodeContents(mDevice, Aesica.HCEngine.getDescNode("blank", "Device " + selectedNum, false, true));
+		mDevice.className = "button";
+		setOnmouseoverPopupL1(mDevice, null);
+		mDevicePowers.style.display = "none";
+	}
+	selectedFieldId = null;
+	selectClear();
+}
+
+function selectDevicePowerPreview(e)
+{
+	var oDevice = PH.device[e.currentTarget.getAttribute("deviceSlot")];
+	Aesica.HCEngine.resetDialogBox();
+	Aesica.HCEngine.setDialogBoxHeader(oDevice.name + " > Power List");
+	var i, mPower, iLength = oDevice.powers.length;
+	for (i = 0; i < iLength; i++)
+	{
+		mPower = document.createElement("a");
+		mPower.className = "button";
+		if (oDevice.powers[i].powerRef)
+		{
+			mPower.appendChild(Aesica.HCEngine.getDescNode(dataPower[oDevice.powers[i].powerRef].icon, dataPower[oDevice.powers[i].powerRef].name));
+			setOnmouseoverPopupL2(mPower, dataPower[oDevice.powers[i].powerRef].tip);
+		}
+		else if (oDevice.powers[i].travelPowerRef)
+		{
+			mPower.appendChild(Aesica.HCEngine.getDescNode(dataTravelPower[oDevice.powers[i].travelPowerRef].icon, dataTravelPower[oDevice.powers[i].travelPowerRef].name));
+			setOnmouseoverPopupL2(mPower, dataTravelPower[oDevice.powers[i].travelPowerRef].tip);
+		}
+		else
+		{
+			mPower.appendChild(Aesica.HCEngine.getDescNode(oDevice.powers[i].icon, oDevice.powers[i].name));
+			setOnmouseoverPopupL2(mPower, "<b>" + oDevice.powers[i].name + "</b><br /><br />" + oDevice.powers[i].toolTip);
+		}
+		Aesica.HCEngine.addItemToDialogBox(mPower);
+	}
+	showPositionSection("selectionWindow", true);
+}
 
 // archetype power functions
 function selectArchetypePower(iPowerNumber)
@@ -1615,27 +1827,28 @@ function selectArchetypePower(iPowerNumber)
 		selectedFieldClass = mField.getAttribute("class");
 		mField.setAttribute("class", "selectedButton");
 
-		ResetDialogBox();
-		SetDialogBoxHeader(phPower[iPowerNumber].name);
+		Aesica.HCEngine.resetDialogBox();
+		Aesica.HCEngine.setDialogBoxHeader(PH.power[iPowerNumber].name);
 		mText = document.createElement("span");
 		mText.innerHTML = "Replace with...";
-		AddItemToDialogBoxMenu(mText);
-		aPowerList = phArchetype.powerList[iPowerNumber];
-		iLength = aPowerList.length;
-		for (i = 1; i < iLength; i++)
+		Aesica.HCEngine.addItemToDialogBoxMenu(mText);
+		aPowerList = PH.archetype.powerList[iPowerNumber - 1];
+		if (!Array.isArray(aPowerList)) aPowerList = [aPowerList];
+		iLength = (aPowerList[0]) ? aPowerList.length : 0;
+		for (i = 0; i < iLength; i++)
 		{
-			iCurrentPowerID = aPowerList[i];
+			iCurrentPowerID = HCLookup.power[aPowerList[i]];
 			oPower = dataPower[iCurrentPowerID];
 
-			if (oPower != phPower[iPowerNumber])
+			if (oPower != PH.power[iPowerNumber])
 			{
-				mOption = CreateButton(oPower.desc, "selectPower" + iCurrentPowerID);
+				mOption = Aesica.HCEngine.createButton(Aesica.HCEngine.getDescNode(oPower.icon, oPower.name, false, true), "selectPower" + iCurrentPowerID);
 				//mOption.setAttribute("onclick", "selectConfirmation('setArchetypePower(" + iCurrentPowerID + ")', '" + escapeQuotes(dataPower[iCurrentPowerID].desc) + "', '" + dataPower[iCurrentPowerID].tip + "')");
-				(function(iCurrentPowerID){ mOption.addEventListener("click", function(){ selectConfirmation("setArchetypePower(" + iCurrentPowerID + ");", dataPower[iCurrentPowerID].desc, dataPower[iCurrentPowerID].tip); }) }(iCurrentPowerID));
+				(function(iCurrentPowerID){ mOption.addEventListener("click", function(){ selectConfirmation((function(){  setArchetypePower(iCurrentPowerID); }), dataPower[iCurrentPowerID].desc, dataPower[iCurrentPowerID].tip); }) }(iCurrentPowerID));
 				mOption.setAttribute("class", "button");
 				setOnmouseoverPopupL1(mOption, oPower.tip);
-				AddItemToDialogBox(mOption);
-				AddItemToDialogBox(document.createElement("br"));
+				Aesica.HCEngine.addItemToDialogBox(mOption);
+				Aesica.HCEngine.addItemToDialogBox(document.createElement("br"));
 			}
 			else
 			{
@@ -1652,18 +1865,18 @@ function setArchetypePower(id)
 	var num = selectedNum;
 	var field = document.getElementById('fieldPower' + num);
 	var advantageField = document.getElementById('fieldPowerAdvantage' + num);
-	var oldId = phPower[num].id;
+	var oldId = PH.power[num].id;
 	if (id != oldId)
 	{
 		setAdvantage(1, num, 0);
-		phPower[num] = dataPower[id];
-		phPowerAdvantage[num] = 0;
-		field.innerHTML = dataPower[id].desc;
+		PH.power[num] = dataPower[id];
+		PH.powerAdvantage[num] = 0;
+		Aesica.HCEngine.setNodeContents(field, Aesica.HCEngine.getDescNode(dataPower[id].icon, dataPower[id].name, false, true));
 		advantageField.innerHTML = advantageTextSpan(1, num, 0);
 		setOnmouseoverPopupL2(advantageField, advantageTip(1, num, 0));
 		setOnmouseoverPopupL2(field, dataPower[id].tip);
 		advantageField.style.display = '';
-		//submitAnalytics(analyticsSetCatagory, 'ArchetypePower', phPower[num].name);
+		//submitAnalytics(analyticsSetCatagory, 'ArchetypePower', PH.power[num].name);
 	}
 	selectClear();
 }
@@ -1673,8 +1886,8 @@ window['setArchetypePower'] = setArchetypePower;
 function checkAdvantageDependancyId(type, num, id)
 {
 	var result = true;
-	var power = (type == 1) ? phPower[num] : phTravelPower[num];
-	var mask = (type == 1) ? phPowerAdvantage[num] : phTravelPowerAdvantage[num];
+	var power = (type == 1) ? PH.power[num] : PH.travelPower[num];
+	var mask = (type == 1) ? PH.powerAdvantage[num] : PH.travelPowerAdvantage[num];
 	var dependency = power.advantageList[id].dependency;
 	if (dependency != null && !power.hasAdvantage(mask, dependency)) result = false;
 	return result;
@@ -1684,8 +1897,8 @@ window['checkAdvantageDependancyId'] = checkAdvantageDependancyId;
 function checkAdvantageDependancyMask(type, num, mask)
 {
 	var result = true;
-	var power = (type == 1) ? phPower[num] : phTravelPower[num];
-	var advantageList = (type == 1) ? phPower[num].advantageList : phTravelPower[num].advantageList;
+	var power = (type == 1) ? PH.power[num] : PH.travelPower[num];
+	var advantageList = (type == 1) ? PH.power[num].advantageList : PH.travelPower[num].advantageList;
 	for (var i = 1; i < advantageList.length; i++)
 	{
 		var advantage = advantageList[i];
@@ -1707,17 +1920,72 @@ function selectPowerAdvantage(num)
 }
 window['selectPowerAdvantage'] = selectPowerAdvantage;
 
+function updateAdvantageDisplay(iType, iPowerID, bUpdateAdvantageText=true)
+{
+	var mTable = document.getElementById("advantageTable");
+	var oPower = (iType == 1) ? PH.power[iPowerID] : PH.travelPower[iPowerID];
+	var iMask = (iType == 1) ? PH.powerAdvantage[iPowerID] : PH.travelPowerAdvantage[iPowerID];
+	var iPoints = oPower.getPoints(iMask);
+	var aAdvantageList = oPower.advantageList;
+	var iLength = aAdvantageList.length;
+	var i, mCheckmark, mAdvantage, mPoints, mRow;
+	mTable.innerHTML = "";
+	for (i = 1; i < iLength; i++)
+	{
+		oAdvantage = aAdvantageList[i];
+		mCheckmark = document.createElement("div");
+		mCheckmark.innerHTML = "✓";
+		mPoints = document.createElement("div");
+		mPoints.innerHTML = oAdvantage.points;
+		mPoints.className = "note";
+		(function(i)
+		{
+			mAdvantage = Aesica.HCEngine.createButton(oAdvantage.name, null, null, (function(){ selectAdvantageToggle(iType, iPowerID, i); }));
+		})(i);
+		mRow = Aesica.HCEngine.createTableRow(mCheckmark, mAdvantage, mPoints);
+		mRow.className = (iMask > 0 && oPower.hasAdvantage(iMask, i)) ? "advantageRowSelected" : "advantageRow";
+		mAdvantage.className = (mRow.className == "advantageRowSelected" || (statAdvantagePoints + oAdvantage.points <= maxAdvantagePointsTotal && iPoints + oAdvantage.points <= maxAdvantagePointsPerPower && checkAdvantageDependancyId(iType, iPowerID, oAdvantage.id))) ? "button" : "disabledButton";
+		setOnmouseoverPopupL1(mAdvantage, oAdvantage.tip);
+		if (mTable) mTable.appendChild(mRow);
+	}
+	if (bUpdateAdvantageText) document.getElementById(selectedFieldId).innerHTML = advantageTextSpan(iType, iPowerID, iMask);
+}
+
+function selectAdvantage(iType, iPowerID)
+{
+	var sFieldID = ((iType == 1) ? "fieldPowerAdvantage" : "fieldTravelPowerAdvantage") + iPowerID;
+	var mField = document.getElementById(sFieldID);
+	var mClear = Aesica.HCEngine.createButton(sClearButton, "selectAdvantageClear", null, (function(){ selectAdvantageClear(iType, iPowerID); }));
+	var mTable = document.createElement("table");
+
+	selectClear();
+
+	mTable.id = "advantageTable";
+	selectedNum = iPowerID;
+	selectedFieldId = sFieldID;
+	selectedFieldClass = mField.className;
+	mField.className = "selectedButtonNote";
+
+	Aesica.HCEngine.resetDialogBox();
+	Aesica.HCEngine.setDialogBoxHeader(PH.power[iPowerID].name);
+	Aesica.HCEngine.addItemToDialogBoxMenu(mClear);
+	Aesica.HCEngine.addItemToDialogBox(mTable);
+	updateAdvantageDisplay(iType, iPowerID, false);
+	showPositionSection("selectionWindow", (iType == 1) ? false : true); // power : tpower
+}
+
 // TODO:  nasty evals rooted pretty deep in this function via selectConfirmation().  The future of
 // selectConfirmation and how useful it actually is will need to be considered.  In the meantime,
 // double-escaping apostrophes (\\\') in advantage tooltips will need to be a thing.
-function selectAdvantage(iType, iPowerID)
+/*
+function selectAdvantage_OLD(iType, iPowerID)
 {
 	var aFormIDs = ['formPowerAdvantage', 'formTravelPowerAdvantage'];
 	var sFieldID = ((iType == 1) ? 'fieldPowerAdvantage' : 'fieldTravelPowerAdvantage') + iPowerID;
 	var mField = document.getElementById(sFieldID);
-	var oPower = (iType == 1) ? phPower[iPowerID] : phTravelPower[iPowerID];
-	var oMask = (iType == 1) ? phPowerAdvantage[iPowerID] : phTravelPowerAdvantage[iPowerID];
-	var iPoints = oPower.getPoints(oMask);
+	var oPower = (iType == 1) ? PH.power[iPowerID] : PH.travelPower[iPowerID];
+	var iMask = (iType == 1) ? PH.powerAdvantage[iPowerID] : PH.travelPowerAdvantage[iPowerID];
+	var iPoints = oPower.getPoints(iMask);
 	var mClear, mTable, mRow, mCell, i, oAdvantage, mCheckBox, mLabel, mPoints;
 	var aAdvantageList = oPower.advantageList;
 	var iLength = aAdvantageList.length;
@@ -1727,16 +1995,13 @@ function selectAdvantage(iType, iPowerID)
 	{
 		selectedNum = iPowerID;
 		selectedFieldId = sFieldID;
-		selectedFieldClass = mField.getAttribute("class");
-		mField.setAttribute("class", "selectedButtonNote");
+		selectedFieldClass = mField.className;
+		mField.className = "selectedButtonNote";
 
 		// clear button
-		mClear = document.createElement("a");
-		mClear.setAttribute("id", "selectAdvantageClear");
-		mClear.setAttribute("onclick", "selectAdvantageClear(" + iType + ", " + iPowerID + ")");
-		mClear.innerHTML = "Clear";
+		mClear = AES.createButton(sClearButton, "selectAdvantageClear", null, (function(){ selectAdvantageClear(iType, iPowerID); }));
 		mTable = document.createElement("table");
-		mTable.setAttribute("style", "width: 100%;");
+		mTable.style.width = "100%";
 		for (i = 1; i < iLength; i++)
 		{
 			oAdvantage = aAdvantageList[i];
@@ -1746,21 +2011,22 @@ function selectAdvantage(iType, iPowerID)
 			mCell = document.createElement("td");
 			mRow.appendChild(mCell);
 			// checkbox
-			mCheckBox = document.createElement("input");
+			mCheckBox = document.createElement("input"); // xxx
 			mCheckBox.setAttribute("id", "checkboxAdvantage" + i);
 			mCheckBox.setAttribute("type", "checkbox");
 			mCheckBox.setAttribute("name", oAdvantage.name);
 			mCheckBox.setAttribute("value", oAdvantage.id);
-			if (oMask > 0 && oPower.hasAdvantage(oMask, i)) mCheckBox.checked = true;
+			if (iMask > 0 && oPower.hasAdvantage(iMask, i)) mCheckBox.checked = true;
 			if (mCheckBox.checked || (statAdvantagePoints + oAdvantage.points <= maxAdvantagePointsTotal && iPoints + oAdvantage.points <= maxAdvantagePointsPerPower && checkAdvantageDependancyId(iType, iPowerID, oAdvantage.id)))
 			{
-				if (mCheckBox.checked)
-					mCheckBox.setAttribute("onclick", "selectAdvantageToggle(" + iType + ", " + iPowerID + ", " + i + ")");
-				else mCheckBox.setAttribute("onclick", "selectConfirmation('selectAdvantageToggle(" + iType + ", " + iPowerID + ", " + i + ")', '" + escapeQuotes(oAdvantage.desc) + "', '" + oAdvantage.tip + "')");
-			}
-			else
-			{
-				mCheckBox.setAttribute('onclick', 'return false');
+				(function(i, oAdvantage)
+				{
+					if (mCheckBox.checked)	mCheckBox.addEventListener("click", (function(){ selectAdvantageToggle(iType, iPowerID, i); }));
+					else mCheckBox.addEventListener("click", (function(){ selectConfirmation((function(){ selectAdvantageToggle(iType, iPowerID, i) }) , oAdvantage.name, oAdvantage.tip); }));
+					//old if// mCheckBox.setAttribute("onclick", "selectAdvantageToggle(" + iType + ", " + iPowerID + ", " + i + ")");
+					//old else// mCheckBox.setAttribute("onclick", "selectConfirmation('selectAdvantageToggle(" + iType + ", " + iPowerID + ", " + i + ")', '" + escapeQuotes(oAdvantage.desc) + "', '" + oAdvantage.tip + "')");
+
+				})(i, oAdvantage);
 			}
 			mCell.appendChild(mCheckBox);
 
@@ -1772,6 +2038,12 @@ function selectAdvantage(iType, iPowerID)
 			mLabel.setAttribute("id", "selectAdvantage" + i);
 			if (mCheckBox.checked || (statAdvantagePoints + oAdvantage.points <= maxAdvantagePointsTotal && iPoints + oAdvantage.points <= maxAdvantagePointsPerPower && checkAdvantageDependancyId(iType, iPowerID, oAdvantage.id)))
 			{
+				(function(i, oAdvantage)
+				{
+					if (mCheckBox.checked)	mLabel.addEventListener("click", (function(){ selectAdvantageToggle(iType, iPowerID, i); }));
+					else mLabel.addEventListener("click", (function(){ selectConfirmation((function(){ selectAdvantageToggle(iType, iPowerID, i) }) , oAdvantage.name, oAdvantage.tip); }));
+				})(i, oAdvantage);
+				/*
 				if (mCheckBox.checked)
 				{
 					mLabel.setAttribute("onclick", "selectAdvantageToggle(" + iType + ", " + iPowerID + ", " + i + ")");
@@ -1780,14 +2052,16 @@ function selectAdvantage(iType, iPowerID)
 				{
 					mLabel.setAttribute("onclick", "selectConfirmation('selectAdvantageToggle(" + iType + ", " + iPowerID + ", " + i + ")', '" + escapeQuotes(oAdvantage.desc) + "', '" + oAdvantage.tip + "')");
 				}
-				mLabel.setAttribute("class", "selectButton");
+				*/
+				/*
+				mLabel.className = "selectButton";
 			}
 			else
 			{
-				mLabel.setAttribute("onclick", "return false");
-				mLabel.setAttribute("class", "disabledButton");
+				//mLabel.setAttribute("onclick", "return false");
+				mLabel.className = "disabledButton";
 			}
-			mLabel.setAttribute("style", "display: block;");
+			mLabel.style.display = "block";
 			mLabel.innerHTML = oAdvantage.desc;
 			setOnmouseoverPopupL1(mLabel, oAdvantage.tip);
 			mCell.appendChild(mLabel);
@@ -1796,16 +2070,17 @@ function selectAdvantage(iType, iPowerID)
 			mCell = document.createElement("td");
 			mRow.appendChild(mCell);
 			mPoints = document.createElement("span");
-			mPoints.setAttribute("class", "note");
-			mPoints.setAttribute("style", "margin-left: 1.5em;");
+			mPoints.className = "note";
+			//mPoints.setAttribute("style", "margin-left: 1.5em;");
+			mPoints.style.marginLeft = "1.5em";
 			mPoints.innerHTML = oAdvantage.points;
 			mCell.appendChild(mPoints);
 		}
 
-		ResetDialogBox();
-		SetDialogBoxHeader(oPower.name);
-		AddItemToDialogBoxMenu(mClear);
-		AddItemToDialogBox(mTable);
+		AES.resetDialogBox();
+		AES.setDialogBoxHeader(oPower.name);
+		AES.addItemToDialogBoxMenu(mClear);
+		AES.addItemToDialogBox(mTable);
 
 		if (iType == 1)
 		{
@@ -1818,12 +2093,13 @@ function selectAdvantage(iType, iPowerID)
 	}
 }
 window['selectAdvantage'] = selectAdvantage;
-
+*/
+/*
 function selectAdvantageUpdate(type, num)
 {
 	var field = document.getElementById(((type == 1) ? 'fieldPowerAdvantage' : 'fieldTravelPowerAdvantage') + num);
-	var power = (type == 1) ? phPower[num] : phTravelPower[num];
-	var mask = (type == 1) ? phPowerAdvantage[num] : phTravelPowerAdvantage[num];
+	var power = (type == 1) ? PH.power[num] : PH.travelPower[num];
+	var mask = (type == 1) ? PH.powerAdvantage[num] : PH.travelPowerAdvantage[num];
 	var advantageList = power.advantageList;
 	var advantagePoints = power.getPoints(mask);
 	for (var i = 1; i < advantageList.length; i++)
@@ -1858,13 +2134,20 @@ function selectAdvantageUpdate(type, num)
 	}
 }
 window['selectAdvantageUpdate'] = selectAdvantageUpdate;
+*/
+function selectAdvantageClear(iType, iPowerID)
+{
+	setAdvantage(iType, iPowerID, 0);
+	updateAdvantageDisplay(iType, iPowerID);
+}
 
-function selectAdvantageClear(type, num)
+/*
+function selectAdvantageClear_OLD(type, num)
 {
 	var mask = 0;
 	setAdvantage(type, num, mask);
 	var field = document.getElementById(((type == 1) ? 'fieldPowerAdvantage' : 'fieldTravelPowerAdvantage') + num);
-	var power = (type == 1) ? phPower[num] : phTravelPower[num];
+	var power = (type == 1) ? PH.power[num] : PH.travelPower[num];
 	var advantageList = power.advantageList;
 	for (var i = 1; i < advantageList.length; i++)
 	{
@@ -1887,10 +2170,11 @@ function selectAdvantageClear(type, num)
 	setOnmouseoverPopupL1(field, advantageTip(type, num, mask));
 }
 window['selectAdvantageClear'] = selectAdvantageClear;
+*/
 
 function selectAdvantageCancel(type, num, mask)
 {
-	var field = document.getElementById(((type == 1) ? 'fieldPowerAdvantage' : 'fieldTravelPowerAdvantage') + num);
+	var field = document.getElementById(((type == 1) ? "fieldPowerAdvantage" : "fieldTravelPowerAdvantage") + num);
 	field.innerHTML = advantageTextSpan(type, num, mask);
 	setOnmouseoverPopupL1(field, advantageTip(type, num, mask));
 	setAdvantage(type, num, mask);
@@ -1898,26 +2182,56 @@ function selectAdvantageCancel(type, num, mask)
 }
 window['selectAdvantageCancel'] = selectAdvantageCancel;
 
-function selectAdvantageToggle(type, num, id)
+function selectAdvantageToggle(iType, iPowerID, iAdvantageID)
 {
-	var mask = (type == 1) ? phPowerAdvantage[num] : phTravelPowerAdvantage[num];
-	var field = document.getElementById('checkboxAdvantage' + id);
-	var power = (type == 1) ? phPower[num] : phTravelPower[num];
-	if (power.hasAdvantage(mask, id))
+	var mField = document.getElementById('checkboxAdvantage' + iAdvantageID);
+	var oPower = (iType == 1) ? PH.power[iPowerID] : PH.travelPower[iPowerID];
+	var iMask = (iType == 1) ? PH.powerAdvantage[iPowerID] : PH.travelPowerAdvantage[iPowerID];
+	var i, oAdvantage, iAdvantagePoints, iLength = oPower.advantageList.length;
+	if (oPower.hasAdvantage(iMask, iAdvantageID))
 	{
-		mask = power.delAdvantage(mask, id);
+		iMask = oPower.delAdvantage(iMask, iAdvantageID);
+		for (i = 0; i < iLength; i++)
+		{
+			oAdvantage = oPower.advantageList[i];
+			if (oAdvantage.dependency != null && oAdvantage.dependency == iAdvantageID) iMask = oPower.delAdvantage(iMask, oAdvantage.id);
+		}
+		setAdvantage(iType, iPowerID, iMask);
+	}
+	else
+	{
+		oAdvantage = oPower.advantageList[iAdvantageID];
+		iAdvantagePoints = oPower.getPoints(iMask);
+		if (statAdvantagePoints +oAdvantage.points <= maxAdvantagePointsTotal && iAdvantagePoints + oAdvantage.points <= maxAdvantagePointsPerPower && checkAdvantageDependancyId(iType, iPowerID, iAdvantageID))
+		{
+			iMask = oPower.addAdvantage(iMask, iAdvantageID);
+			setAdvantage(iType, iPowerID, iMask);
+		}
+	}
+	updateAdvantageDisplay(iType, iPowerID);
+}
+
+/*
+function selectAdvantageToggle_OLD(iType, iPowerID, iAdvantageID)
+{
+	var mask = (iType == 1) ? PH.powerAdvantage[iPowerID] : PH.travelPowerAdvantage[iPowerID];
+	var field = document.getElementById('checkboxAdvantage' + iAdvantageID);
+	var power = (iType == 1) ? PH.power[iPowerID] : PH.travelPower[iPowerID];
+	if (power.hasAdvantage(mask, iAdvantageID))
+	{
+		mask = power.delAdvantage(mask, iAdvantageID);
 		var advantageList = power.advantageList;
 		for (var i = 1; i < advantageList.length; i++)
 		{
 			var advantage = advantageList[i];
-			if (advantage.dependency != null && advantage.dependency == id)
+			if (advantage.dependency != null && advantage.dependency == iAdvantageID)
 			{
 				mask = power.delAdvantage(mask, advantage.id);
 				document.getElementById('checkboxAdvantage' + advantage.id).checked = false;
 			}
 		}
 		field.checked = false;
-		setAdvantage(type, num, mask);
+		setAdvantage(iType, iPowerID, mask);
 	}
 	else
 	{
@@ -1934,13 +2248,14 @@ function selectAdvantageToggle(type, num, id)
 	selectAdvantageUpdate(type, num);
 }
 window['selectAdvantageToggle'] = selectAdvantageToggle;
+*/
 
 function setAdvantage(type, num, mask)
 {
 	var oldStatAdvantagePoints = statAdvantagePoints;
-	var field = document.getElementById(((type == 1) ? 'fieldPowerAdvantage' : 'fieldTravelPowerAdvantage') + num);
-	var power = (type == 1) ? phPower[num] : phTravelPower[num];
-	var phMask = (type == 1) ? phPowerAdvantage[num] : phTravelPowerAdvantage[num];
+	var field = document.getElementById(((type == 1) ? "fieldPowerAdvantage" : "fieldTravelPowerAdvantage") + num);
+	var power = (type == 1) ? PH.power[num] : PH.travelPower[num];
+	var phMask = (type == 1) ? PH.powerAdvantage[num] : PH.travelPowerAdvantage[num];
 	var advantageList = power.getAdvantageList(phMask);
 	var advantagePoints = power.getPoints(mask);
 	for (var i = 0; i < advantageList.length; i++)
@@ -1954,10 +2269,9 @@ function setAdvantage(type, num, mask)
 	}
 	if (statAdvantagePoints <= maxAdvantagePointsTotal && advantagePoints <= maxAdvantagePointsPerPower && checkAdvantageDependancyMask(type, num, mask))
 	{
-		(type == 1) ? phPowerAdvantage[num] = mask : phTravelPowerAdvantage[num] = mask;
+		(type == 1) ? PH.powerAdvantage[num] = mask : PH.travelPowerAdvantage[num] = mask;
 		field.innerHTML = advantageTextSpan(type, num, mask);
 		setOnmouseoverPopupL2(field, advantageTip(type, num, mask));
-		// xxx
 	}
 	else
 	{
@@ -1968,32 +2282,26 @@ window['setAdvantage'] = setAdvantage;
 
 function advantageText(type, num, mask)
 {
-	var power = (type == 1) ? phPower[num] : phTravelPower[num];
+	var power = (type == 1) ? PH.power[num] : PH.travelPower[num];
 	var advantageList = power.advantageList;
 	var result = '';
 	if (advantageList.length > 0)
 	{
 		if (mask == 0)
 		{
-			result = '(advantages)';
+			result = "(advantages)";
 		}
 		else
 		{
+			result = "("
 			for (var i = 1; i < advantageList.length; i++)
 			{
 				if (power.hasAdvantage(mask, i))
 				{
-					if (result.length == 0)
-					{
-						result = '(' + advantageList[i].desc;
-					}
-					else
-					{
-						result += ', ' + advantageList[i].desc;
-					}
+					result += ((result.length > 2) ? ", " : "") + advantageList[i].desc;
 				}
 			}
-			result += ')';
+			result += ")";
 		}
 	}
 	return result;
@@ -2002,13 +2310,13 @@ window['advantageText'] = advantageText;
 
 function advantageTextSpan(type, num, mask)
 {
-	return '<span class="advantage">' + advantageText(type, num, mask) + '</span>';
+	return ' <span class="advantage">' + advantageText(type, num, mask) + '</span>';
 }
 window['advantageTextSpan'] = advantageTextSpan;
 
 function advantageTip(type, num, mask)
 {
-	var power = (type == 1) ? phPower[num] : phTravelPower[num];
+	var power = (type == 1) ? PH.power[num] : PH.travelPower[num];
 	var advantageList = power.advantageList;
 	var result = "";
 	if (advantageList.length > 0 && mask != 0)
@@ -2034,12 +2342,12 @@ window['advantageTip'] = advantageTip;
 // specialization functions
 function setupSpecializations()
 {
-	if (prevSelectedSpecializationSuperStat != phSuperStat[1].id)
+	if (prevSelectedSpecializationSuperStat != PH.superStat[1].id)
 	{
-		phSpecializationTree[1] = dataSpecializationTree[phSuperStat[1].id];
-		phSpecialization[1] = 0;
-		prevSelectedSpecializationSuperStat = phSuperStat[1].id;
-		phSpecializationTree[4] = dataSpecializationTree[0];
+		PH.specializationTree[1] = HCData.specializationTree[PH.superStat[1].id];
+		PH.specialization[1] = 0;
+		prevSelectedSpecializationSuperStat = PH.superStat[1].id;
+		PH.specializationTree[4] = HCData.specializationTree[0];
 	}
 	for (var i = 1; i <= 4; i++)
 	{
@@ -2052,11 +2360,11 @@ function setupSpecializations()
 	}
 	for (var i = 1; i <= 4; i++)
 	{
-		var specializationTree = phSpecializationTree[i];
-		var mask = phSpecialization[i];
+		var specializationTree = PH.specializationTree[i];
+		var mask = PH.specialization[i];
 		var specializationList = specializationTree.specializationList;
-		var specializationPointList = specializationTree.getSpecializationList(mask);
-		var totalPoints = specializationTree.getPoints(mask);
+		var specializationPointList = Aesica.dataHarness.SpecializationTree.getSpecializationList(specializationTree, mask);
+		var totalPoints = Aesica.dataHarness.SpecializationTree.getPoints(specializationTree, mask);
 		var header = document.getElementById('headerSpecialization' + i);
 		var table = document.getElementById('tableSpecialization' + i);
 		switch (i)
@@ -2065,7 +2373,6 @@ function setupSpecializations()
 			if (specializationTree.id == 0)
 			{
 				header.setAttribute('class', 'disabledButton');
-				header.setAttribute('onclick', 'return false');
 				//header.innerHTML = '<span><div class="Sprite blank"></div>&nbsp;Stat Tree <span class="spec">(0/10)</span></span>';
 				header.innerHTML = '<span>Stat Tree <span class="spec">(0/10)</span></span>';
 			}
@@ -2074,7 +2381,7 @@ function setupSpecializations()
 				header.setAttribute('class', 'button');
 				header.setAttribute('onclick', 'selectSpecialization(' + i + ')');
 				//header.innerHTML = '<span><div class="Sprite blank"></div>&nbsp;' + specializationTree.desc + ' Tree <span class="spec">(' + totalPoints + '/10)</span></span>';
-				header.innerHTML = '<span>' + specializationTree.desc + ' Tree <span class="spec">(' + totalPoints + '/10)</span></span>';
+				header.innerHTML = '<span>' + specializationTree.name + ' Tree <span class="spec">(' + totalPoints + '/10)</span></span>';
 			}
 			break;
 		case 2:
@@ -2086,7 +2393,7 @@ function setupSpecializations()
 			}
 			else
 			{
-				header.innerHTML = '<span>' + specializationTree.desc + ' Tree <span class="spec">(' + totalPoints + '/10)</span></span>';
+				header.innerHTML = '<span>' + specializationTree.name + ' Tree <span class="spec">(' + totalPoints + '/10)</span></span>';
 			}
 			break;
 		case 4:
@@ -2094,12 +2401,14 @@ function setupSpecializations()
 			{
 				//header.innerHTML = '<span><div class="Sprite blank"></div>&nbsp;Mastery <span class="spec">(0/1)</span></span>';
 				header.innerHTML = '<span>Mastery <span class="spec">(0/1)</span></span>';
+				setOnmouseoverPopupL1(header, null);
 			}
 			else
 			{
 				// var specialization = specializationList[8];
 				// header.innerHTML = '<span>' + specialization.desc + ' <span class="spec">(1/1)</span></span>';
-				header.innerHTML = '<span>' + specializationTree.desc + ' Mastery <span class="spec">(1/1)</span></span>';
+				header.innerHTML = '<span>' + specializationTree.name + ' Mastery <span class="spec">(1/1)</span></span>';
+				setOnmouseoverPopupL1(header, specializationTree.specializationList[8].tip);
 			}
 			break;
 		}
@@ -2116,7 +2425,8 @@ function setupSpecializations()
 					var td = document.createElement('td');
 					tr.appendChild(td);
 					var span = document.createElement('span');
-					span.innerHTML = specialization.desc;
+					//span.innerHTML = specialization.desc;
+					Aesica.HCEngine.setNodeContents(span, Aesica.HCEngine.getDescNode(specialization.icon, specialization.name));
 					setOnmouseoverPopupL2(span, specialization.tip);
 					td.appendChild(span);
 					var td = document.createElement('td');
@@ -2168,15 +2478,15 @@ window['selectSpecialization'] = selectSpecialization;
 function selectSpecializationRefresh(num)
 {
 	// gird your loins, kids!
-	ResetDialogBox(1);
+	Aesica.HCEngine.resetDialogBox(1);
 	var i, iLength;
-	var oSpecTree = phSpecializationTree[num];
-	var oMask = phSpecialization[num];
+	var oSpecTree = PH.specializationTree[num];
+	var iMask = PH.specialization[num];
 	var aSpecList = oSpecTree.specializationList;
 	var oSpecialization;
-	var aSpecPointList = oSpecTree.getSpecializationList(oMask);
-	var iTotalPoints = oSpecTree.getPoints(oMask);
-	var iTier1Points = oSpecTree.getTierPoints(oMask, 1);
+	var aSpecPointList = Aesica.dataHarness.SpecializationTree.getSpecializationList(oSpecTree, iMask);
+	var iTotalPoints = Aesica.dataHarness.SpecializationTree.getPoints(oSpecTree, iMask);
+	var iTier1Points = Aesica.dataHarness.SpecializationTree.getTierPoints(oSpecTree, iMask, 1);
 	var mElement, mButton, mTable, mTr, mTd;
 	// stat tree
 	if (num == SPECIALIZATION_STAT)
@@ -2193,8 +2503,8 @@ function selectSpecializationRefresh(num)
 			//span.innerHTML = '<div class="Sprite blank"></div>&nbsp;' + specializationTree.desc + ' (' + totalPoints + '/10)';
 			mElement.innerHTML = oSpecTree.desc + " Tree (" + iTotalPoints + "/" + iSpecPointMax + ")";
 		}
-		SetDialogBoxHeader("Stat Specialization > " + oSpecTree.desc);
-		AddItemToDialogBox(mElement, 0);
+		Aesica.HCEngine.setDialogBoxHeader("Stat Specialization > " + oSpecTree.name);
+		Aesica.HCEngine.addItemToDialogBox(mElement, 0);
 
 	}
 	// role tree 1 and 2
@@ -2202,9 +2512,9 @@ function selectSpecializationRefresh(num)
 	{
 		// if freeform
 		// warning - magic numbers: 9, 15
-		if (phArchetype.id == 1)
+		if (PH.archetype.id == 1)
 		{
-			iLength = dataSpecializationTree.length;
+			iLength = HCData.specializationTree.length;
 			mTable = document.createElement("table");
 			mTable.setAttribute("style", "border-collapse: collapse; margin-bottom: 0.5em;")
 			mTr = document.createElement("tr");
@@ -2214,66 +2524,60 @@ function selectSpecializationRefresh(num)
 				mTd = document.createElement("td");
 				if (i == 15)
 				{
-					//AddItemToDialogBox(document.createElement("br"), 0);
+					//AES.addItemToDialogBox(document.createElement("br"), 0);
 					mTr = document.createElement("tr");
 					mTable.appendChild(mTr);
 				}
-				if (oSpecTree.id == i)
+				(function(i)
 				{
-					mButton = CreateButton(dataSpecializationTree[i].desc, "", "takenButton", "setSpecializationTree(" + num + ", " + i + ")");
+					if (oSpecTree.id == i)
+					{
+						mButton = Aesica.HCEngine.createButton(HCData.specializationTree[i].name, "", "takenButton", (function(){ setSpecializationTree(num, i); }));
+					}
+					else if ((num == 2 && PH.specializationTree[3].id == i) || (num == 3 && PH.specializationTree[2].id == i))
+					{	
+						mButton = Aesica.HCEngine.createButton(HCData.specializationTree[i].name, "", "takenButton", (function(){ setSpecializationTree(num, i); }));
+					}	
+					else
+					{
+						mButton = Aesica.HCEngine.createButton(HCData.specializationTree[i].name, "", "button", (function(){ setSpecializationTree(num, i); }));
+					}
 				}
-				else if ((num == 2 && phSpecializationTree[3].id == i) || (num == 3 && phSpecializationTree[2].id == i))
-				{
-					mButton = CreateButton(dataSpecializationTree[i].desc, "", "takenButton", "setSpecializationTree(" + num + ", " + i + ")");
-				}
-				else
-				{
-					mButton = CreateButton(dataSpecializationTree[i].desc, "", "button", "setSpecializationTree(" + num + ", " + i + ")");
-				}
+				)(i);
 				mButton.setAttribute("style", "padding-right: 1.2em; display: block;");
-				setOnmouseoverPopupL1(mButton, dataSpecializationTree[i].tip);
+				setOnmouseoverPopupL1(mButton, HCData.specializationTree[i].tip);
 				mTd.appendChild(mButton);
 				mTr.appendChild(mTd);
 			}
-			AddItemToDialogBoxMenu(mTable);
+			Aesica.HCEngine.addItemToDialogBoxMenu(mTable);
 		}
 		if (oSpecTree.id != 0)
 		{
 			mElement = document.createElement("span");
 			mElement.setAttribute("id", "selectSpecialization" + num);
-			mElement.innerHTML = oSpecTree.desc + " Tree (" + iTotalPoints + "/" + iSpecPointMax + ")";
-			AddItemToDialogBox(mElement, 0);
-			AddItemToDialogBox(document.createElement("br"), 0);
+			mElement.innerHTML = oSpecTree.name + " Tree (" + iTotalPoints + "/" + iSpecPointMax + ")";
+			Aesica.HCEngine.addItemToDialogBox(mElement, 0);
+			Aesica.HCEngine.addItemToDialogBox(document.createElement("br"), 0);
 		}
-		if (oSpecTree.desc) SetDialogBoxHeader("Role Specialization > " + oSpecTree.desc);
-		else SetDialogBoxHeader("Role Specialization");
+		if (oSpecTree.name) Aesica.HCEngine.setDialogBoxHeader("Role Specialization > " + oSpecTree.name);
+		else Aesica.HCEngine.setDialogBoxHeader("Role Specialization");
 	}
 	// mastery 'tree'
 	else if (num == SPECIALIZATION_MASTERY)
 	{
 		mElement = document.createElement("span");
 		mElement.setAttribute("id", "selectSpecialization4");
-		if (oSpecTree.id == 0)
-		{
-			//span.innerHTML = '<span><div class="Sprite blank"></div>&nbsp;Mastery (0/1)</span>';
-			mElement.innerHTML = "<span>Mastery (0/1)</span>";
-		}
-		else
-		{
-			// var specialization = specializationList[8];
-			// span.innerHTML = '<span>' + specialization.desc + ' (1/1)</span>';
-			mElement.innerHTML = "<span>" + oSpecTree.desc + " Mastery (1/1)</span>";
-		}
-		AddItemToDialogBox(mElement, 0);
-		if (oSpecTree.desc) SetDialogBoxHeader("Mastery > " + oSpecTree.desc);
-		else  SetDialogBoxHeader("Mastery");
+		mElement.innerHTML = "<span>Mastery (0/1)</span>";
+		if (oSpecTree.id == 0) Aesica.HCEngine.setDialogBoxHeader("Mastery");
+		else Aesica.HCEngine.setDialogBoxHeader("Mastery > " + oSpecTree.name);
+		Aesica.HCEngine.addItemToDialogBox(mElement, 0);
 	}
 
 	if (num == 1 || num == 4 || aSpecList.length > 0)
 	{
-		mButton = CreateButton(sClearButton, "selectSpecializationClear", "", "selectSpecializationClear(" + num + ")");
+		mButton = Aesica.HCEngine.createButton(sClearButton, "selectSpecializationClear", "", (function(){ selectSpecializationClear(num); }));
 		mButton.setAttribute("style", "margin-right: 1.5em;");
-		AddItemToDialogBoxMenu(mButton);
+		Aesica.HCEngine.addItemToDialogBoxMenu(mButton);
 	}
 
 	if (num != SPECIALIZATION_MASTERY)
@@ -2290,7 +2594,7 @@ function selectSpecializationRefresh(num)
 			mTr.appendChild(mTd);
 			mElement = document.createElement("span");
 			mElement.setAttribute("id", "selectSpecializationDescription" + i);
-			mElement.innerHTML = oSpecialization.desc;
+			Aesica.HCEngine.setNodeContents(mElement, Aesica.HCEngine.getDescNode(oSpecialization.icon, oSpecialization.name));
 			setOnmouseoverPopupL1(mElement, oSpecialization.tip);
 			if (iTotalPoints < iSpecPointMax || aSpecList[i] > 0)
 			{
@@ -2305,15 +2609,17 @@ function selectSpecializationRefresh(num)
 			// spec decrement arrow
 			mTd = document.createElement("td");
 			mTr.appendChild(mTd);
-			if (aSpecPointList[i] > 0)
+			(function(i)
 			{
-				mButton = CreateButton(sMinusArrow, "selectSpecializationDecrement" + i, "selectButton", "selectSpecializationDecrement(" + num + "," + i + ")");
-			}
-			else
-			{
-				mButton = CreateButton(sMinusArrow, "selectSpecializationDecrement" + i, "disabledButton", "return false;");
-				mButton
-			}
+				if (aSpecPointList[i] > 0)
+				{
+					mButton = Aesica.HCEngine.createButton(Aesica.HCEngine.getDescNode("minus"), "selectSpecializationDecrement" + i, "selectButton", (function(){ selectSpecializationDecrement(num, i); }));
+				}
+				else
+				{
+					mButton = Aesica.HCEngine.createButton(Aesica.HCEngine.getDescNode("minus"), "selectSpecializationDecrement" + i, "disabledButton");
+				}
+			})(i);
 			mTd.appendChild(mButton);
 
 			// spec points invested
@@ -2337,21 +2643,17 @@ function selectSpecializationRefresh(num)
 			mTr.appendChild(mTd);
 			var a = document.createElement('a');
 			a.setAttribute('id', 'selectSpecializationIncrement' + i);
-			if (iTotalPoints < iSpecPointMax && aSpecPointList[i] < oSpecialization.maxPoints && (i < 4 || iTier1Points >= 5))
+			(function(oSpecialization, i)
 			{
-				if (aSpecPointList[i] == 0)
+				if (iTotalPoints < iSpecPointMax && aSpecPointList[i] < oSpecialization.maxPoints && (i < 4 || iTier1Points >= 5))
 				{
-					mButton = CreateButton(sPlusArrow, "selectSpecializationIncrement" + i, "selectButton", "selectConfirmation('selectSpecializationIncrement(" + num + ", " + i + ")', '" + escapeQuotes(oSpecialization.desc) + "', '" + oSpecialization.tip + "')");
+					mButton = Aesica.HCEngine.createButton(Aesica.HCEngine.getDescNode("plus"), "selectSpecializationIncrement" + i, "selectButton", (function(){ selectSpecializationIncrement(num, i); })); // TODO:  Something strange is going on here.  may resolve itself as you continue updating...
 				}
 				else
 				{
-					mButton = CreateButton(sPlusArrow, "selectSpecializationIncrement" + i, "selectButton", "selectSpecializationIncrement(" + num + "," + i + ")");
+					mButton = Aesica.HCEngine.createButton(Aesica.HCEngine.getDescNode("plus"), "selectSpecializationIncrement" + i, "disabledButton");
 				}
-			}
-			else
-			{
-				mButton = CreateButton(sPlusArrow, "selectSpecializationIncrement" + i, "disabledButton", "return false;");
-			}
+			})(oSpecialization, i);
 			mTd.appendChild(mButton);
 		}
 	}
@@ -2362,14 +2664,14 @@ function selectSpecializationRefresh(num)
 		mTable.appendChild(mTr);
 		mTd = document.createElement("td");
 		mTr.appendChild(mTd);
-		if (phSpecializationTree[1].id == 0)
+		if (PH.specializationTree[1].id == 0)
 		{
-			mButton = CreateButton("<span><div class='Sprite blank'></div>&nbsp;Stat Mastery</span>", "", "disabledButton", "return false;");
+			mButton = Aesica.HCEngine.createButton(Aesica.HCEngine.getDescNode("blank", "Stat Mastery"), "", "disabledButton");
 		}
 		else
 		{
-			oSpecialization = phSpecializationTree[1].specializationList[8]; // magic number - what's 8?
-			mButton = CreateButton("<span>" + oSpecialization.desc + "</span>", "", "selectButton", "setSpecializationMastery(1);");
+			oSpecialization = PH.specializationTree[1].specializationList[8]; // magic number - what's 8?
+			mButton = Aesica.HCEngine.createButton(Aesica.HCEngine.getDescNode(oSpecialization.icon, oSpecialization.name), "", "selectButton", (function(){ setSpecializationMastery(1); }));
 			setOnmouseoverPopupL1(mButton, oSpecialization.tip);
 		}
 		mTd.appendChild(mButton);
@@ -2379,30 +2681,37 @@ function selectSpecializationRefresh(num)
 			mTable.appendChild(mTr);
 			mTd = document.createElement("td");
 			mTr.appendChild(mTd);
-			if (phSpecializationTree[i].id == 0)
+
+			(function(i, oSpecialization)
 			{
-				mButton = CreateButton("<span><div class='Sprite blank'></div>&nbsp;Role Mastery</span>", "", "disabledButton", "return false;");
-			}
-			else
-			{
-				oSpecialization = phSpecializationTree[i].specializationList[8]; // magic number - what's 8?
-				mButton = CreateButton("<span>" + oSpecialization.desc + "</span>", "", "selectButton", "setSpecializationMastery(" + i + ")");
-				setOnmouseoverPopupL1(mButton, oSpecialization.tip);
-					//a.innerHTML = '<span>' + phSpecializationTree[i].desc + ' Mastery</span>';
-			}
+				if (PH.specializationTree[i].id == 0)
+				{
+					//mButton = AES.createButton("<span><div class='Sprite blank'></div>&nbsp;Role Mastery</span>", "", "disabledButton");
+					mButton = Aesica.HCEngine.createButton(Aesica.HCEngine.getDescNode("blank", "Role Mastery"), "", "disabledButton");
+				}
+				else
+				{
+					oSpecialization = PH.specializationTree[i].specializationList[8]; // magic number - what's 8?
+					//mButton = AES.createButton("<span>" + oSpecialization.desc + "</span>", "", "selectButton", (function(){ setSpecializationMastery(i); }));
+					mButton = Aesica.HCEngine.createButton(Aesica.HCEngine.getDescNode(oSpecialization.icon, oSpecialization.name), "", "selectButton", (function(){ setSpecializationMastery(i); }));
+					setOnmouseoverPopupL1(mButton, oSpecialization.tip);
+				}
+			})(i, oSpecialization);
 			mTd.appendChild(mButton);
 		}
 	}
 
-	AddItemToDialogBox(mTable);
+	Aesica.HCEngine.addItemToDialogBox(mTable);
 	updatePositionSection("selectionWindow");
 }
 window['selectSpecializationRefresh'] = selectSpecializationRefresh;
 
+/*
+// This whole function might actually be completely unnecessary? :o
 function selectSpecializationUpdate(num)
 {
-	var specializationTree = phSpecializationTree[num];
-	var mask = phSpecialization[num];
+	var specializationTree = PH.specializationTree[num];
+	var mask = PH.specialization[num];
 	var specializationList = specializationTree.specializationList;
 	var specializationPointList = specializationTree.getSpecializationList(mask);
 	var totalPoints = specializationTree.getPoints(mask);
@@ -2461,14 +2770,16 @@ function selectSpecializationUpdate(num)
 	}
 }
 window['selectSpecializationUpdate'] = selectSpecializationUpdate;
+*/
 
 function selectSpecializationClear(num)
 {
-	if (phArchetype.id == 1 || num == 4)
+	if (PH.archetype.id == 1 || num == 4)
 	{
-		phSpecializationTree[num] = dataSpecializationTree[0];
+		PH.specializationTree[num] = HCData.specializationTree[0];
 	}
-	phSpecialization[num] = 0;
+
+	PH.specialization[num] = 0;
 	if (num == 1) prevSelectedSpecializationSuperStat = 0; // force super stat specialization to reset properly
 	setupSpecializations();
 	selectClear();
@@ -2484,46 +2795,48 @@ window['selectSpecializationCancel'] = selectSpecializationCancel;
 
 function selectSpecializationIncrement(num, id)
 {
-	var specializationTree = phSpecializationTree[num];
-	var mask = phSpecialization[num];
-	var totalPoints = specializationTree.getPoints(mask);
-	var tier1Points = specializationTree.getTierPoints(mask, 1);
+	var specializationTree = PH.specializationTree[num];
+	var mask = PH.specialization[num];
+	var totalPoints = Aesica.dataHarness.SpecializationTree.getPoints(specializationTree, mask);
+	var tier1Points = Aesica.dataHarness.SpecializationTree.getTierPoints(specializationTree, mask, 1);
 	var specializationList = specializationTree.specializationList;
-	var specializationPointList = specializationTree.getSpecializationList(mask);
+	var specializationPointList = Aesica.dataHarness.SpecializationTree.getSpecializationList(specializationTree, mask);
 	var specialization = specializationList[id];
 	if (totalPoints < 10 && specializationPointList[id] < specialization.maxPoints && (id < 4 || tier1Points >= 5))
 	{
-		var newMask = specializationTree.incrSpecialization(mask, id);
+		var newMask = Aesica.dataHarness.SpecializationTree.incrSpecialization(specializationTree, mask, id);
 		setSpecialization(num, newMask);
-		selectSpecializationUpdate(num);
-			//submitAnalytics(analyticsSetCatagory, 'Specialization', specializationTree.name + ': ' + specialization.name, specializationPointList[id]);
+		selectSpecializationRefresh(num);
+		//selectSpecializationUpdate(num);
+		//submitAnalytics(analyticsSetCatagory, 'Specialization', specializationTree.name + ': ' + specialization.name, specializationPointList[id]);
 	}
 }
 window['selectSpecializationIncrement'] = selectSpecializationIncrement;
 
 function selectSpecializationDecrement(num, id)
 {
-	var specializationTree = phSpecializationTree[num];
-	var mask = phSpecialization[num];
-	var totalPoints = specializationTree.getPoints(mask);
+	var specializationTree = PH.specializationTree[num];
+	var mask = PH.specialization[num];
+	var totalPoints = Aesica.dataHarness.SpecializationTree.getPoints(specializationTree, mask);
 	var specializationList = specializationTree.specializationList;
-	var specializationPointList = specializationTree.getSpecializationList(mask);
+	var specializationPointList = Aesica.dataHarness.SpecializationTree.getSpecializationList(specializationTree, mask);
 	var specialization = specializationList[id];
 	if (specializationPointList[id] > 0)
 	{
-		var newMask = specializationTree.decrSpecialization(mask, id);
+		var newMask = Aesica.dataHarness.SpecializationTree.decrSpecialization(specializationTree, mask, id);
 		setSpecialization(num, newMask);
-		selectSpecializationUpdate(num);
-			//submitAnalytics(analyticsSetCatagory, 'Specialization', specializationTree.name + ': ' + specialization.name, specializationPointList[id]);
+		selectSpecializationRefresh(num);
+		//selectSpecializationUpdate(num);
+		//submitAnalytics(analyticsSetCatagory, 'Specialization', specializationTree.name + ': ' + specialization.name, specializationPointList[id]);
 	}
 }
 window['selectSpecializationDecrement'] = selectSpecializationDecrement;
 
 function setSpecialization(num, mask)
 {
-	if (dataSpecializationTree[num].getPoints(mask) <= 10)
+	if (Aesica.dataHarness.SpecializationTree.getPoints(HCData.specializationTree[num], mask) <= 10)
 	{
-		phSpecialization[num] = mask;
+		PH.specialization[num] = mask;
 		setupSpecializations();
 	}
 }
@@ -2531,47 +2844,47 @@ window['setSpecialization'] = setSpecialization;
 
 function setSpecializationTree(num, id)
 {
-	var currentTree = phSpecializationTree[num];
+	var currentTree = PH.specializationTree[num];
 	if (currentTree.id != id)
 	{
-		if ((num == 2 && phSpecializationTree[3].id == id) || (num == 3 && phSpecializationTree[2].id == id))
+		if ((num == 2 && PH.specializationTree[3].id == id) || (num == 3 && PH.specializationTree[2].id == id))
 		{
 			var otherNum = ((num == 2) ? 3 : 2);
-			var otherTree = phSpecializationTree[otherNum];
-			var otherSpec = phSpecialization[otherNum];
-			phSpecializationTree[otherNum] = phSpecializationTree[num];
-			phSpecialization[otherNum] = phSpecialization[num];
-			phSpecializationTree[num] = otherTree;
-			phSpecialization[num] = otherSpec;
+			var otherTree = PH.specializationTree[otherNum];
+			var otherSpec = PH.specialization[otherNum];
+			PH.specializationTree[otherNum] = PH.specializationTree[num];
+			PH.specialization[otherNum] = PH.specialization[num];
+			PH.specializationTree[num] = otherTree;
+			PH.specialization[num] = otherSpec;
 		}
 		else
 		{
-			if (phSpecializationTree[num].id == phSpecializationTree[4].id) phSpecializationTree[4] = dataSpecializationTree[0];
-			phSpecializationTree[num] = dataSpecializationTree[id];
-			phSpecialization[num] = 0;
+			if (PH.specializationTree[num].id == PH.specializationTree[4].id) PH.specializationTree[4] = HCData.specializationTree[0];
+			PH.specializationTree[num] = HCData.specializationTree[id];
+			PH.specialization[num] = 0;
 		}
 		selectSpecializationRefresh(num);
 		setupSpecializations();
-			//submitAnalytics(analyticsSetCatagory, 'SpecializationTree', phSpecializationTree[num].name);
+			//submitAnalytics(analyticsSetCatagory, 'SpecializationTree', PH.specializationTree[num].name);
 	}
 }
 window['setSpecializationTree'] = setSpecializationTree;
 
 function setSpecializationMastery(id)
 {
-	if (id == 0) phSpecializationTree[4] = dataSpecializationTree[0];
-	else phSpecializationTree[4] = phSpecializationTree[id];
+	if (id == 0) PH.specializationTree[4] = HCData.specializationTree[0];
+	else PH.specializationTree[4] = PH.specializationTree[id];
 	setupSpecializations();
 	selectClear();
-	//if (id > 0) submitAnalytics(analyticsSetCatagory, 'SpecializationMastery', phSpecializationTree[4].name);
+	//if (id > 0) submitAnalytics(analyticsSetCatagory, 'SpecializationMastery', PH.specializationTree[4].name);
 }
 window['setSpecializationMastery'] = setSpecializationMastery;
 
 function getSpecializationMasteryId(id)
 {
-	for (var i = 1; i < phSpecializationTree.length - 1; i++)
+	for (var i = 1; i < PH.specializationTree.length - 1; i++)
 	{
-		if (phSpecializationTree[i].id == id) return i;
+		if (PH.specializationTree[i].id == id) return i;
 	}
 	return 0;
 }
@@ -2580,37 +2893,40 @@ window['getSpecializationMasteryId'] = getSpecializationMasteryId;
 // archetype functions
 function setupArchtypes()
 {
-	ResetDialogBox();
-	SetDialogBoxHeader("Archetypes");
+	Aesica.HCEngine.resetDialogBox();
+	Aesica.HCEngine.setDialogBoxHeader("Archetypes");
 
 	var i;
-	var iArchetypeCount = dataArchetype.length;
+	var iArchetypeCount = HCData.archetype.length;
 	var mCurrent;
-	var iLength = dataArchetypeGroup.length;
+	var iLength = HCData.archetypeGroup.length;
 	var aContainers = [null];
 	var mContainer, mLabel;
 	for (i = 1; i < iLength; i++)
 	{
-		if (i > 1) AddItemToDialogBox(document.createElement("hr"));
+		if (i > 1) Aesica.HCEngine.addItemToDialogBox(document.createElement("hr"));
 		mContainer = document.createElement("div");
 		mLabel = document.createElement("div");
-		mLabel.innerHTML = dataArchetypeGroup[i].name;
+		mLabel.innerHTML = HCData.archetypeGroup[i].name;
 		mContainer.appendChild(mLabel);
 		aContainers[i] = mContainer;
-		AddItemToDialogBox(aContainers[i]);
+		Aesica.HCEngine.addItemToDialogBox(aContainers[i]);
 	}
 
 	// add new archetypes
 	for (i = 1; i < iArchetypeCount; i++)
 	{
-		mContainer = aContainers[dataArchetype[i].group];
+		mContainer = aContainers[HCData.archetype[i].group];
 		if (mContainer.childNodes.length % (iArchetypeRowSize + 1) == 0) mContainer.appendChild(document.createElement("br"));
-		mCurrent = CreateButton(dataArchetype[i].desc, "selectArchetype" + i, "", "setArchetype(" + i + ")");
-		setOnmouseoverPopupL1(mCurrent, "<b>" + dataArchetype[i].name + "</b><br /><br />" + dataArchetype[i].tip);
+		(function(i)
+		{
+			mCurrent = Aesica.HCEngine.createButton(Aesica.HCEngine.getDescNode(HCData.archetype[i].icon, null, true, true), "selectArchetype" + i, "", (function(){ setArchetype(i); }));
+		})(i);
+		setOnmouseoverPopupL1(mCurrent, "<b>" + HCData.archetype[i].name + "</b><br /><br />" + Aesica.dataHarness.Archetype.tip(HCData.archetype[i]));
 		mContainer.appendChild(mCurrent);
 	}
 
-	SetVisibility("selectionWindow", true);
+	Aesica.HCEngine.setVisibility("selectionWindow", true);
 }
 window['setupArchtypes'] = setupArchtypes;
 
@@ -2629,78 +2945,79 @@ window['selectArchetype'] = selectArchetype;
 
 function setArchetype(id)
 {
-	var archetype = dataArchetype[id];
+	var archetype = HCData.archetype[id];
 	if (id == 1)
 	{
-		for (var i = 1; i < phSuperStat.length; i++)
+		for (var i = 1; i < PH.superStat.length; i++)
 		{
-			var field = document.getElementById('fieldSuperStat' + i);
-			field.setAttribute('onclick', 'selectSuperStat(' + i + ')');
-			field.setAttribute('class', 'button');
+			var field = document.getElementById("fieldSuperStat" + i);
+			//field.setAttribute('onclick', 'selectSuperStat(' + i + ')');
+			field.className = "button";
 		}
-		for (var i = 1; i < phInnateTalent.length; i++)
+		for (var i = 1; i < PH.innateTalent.length; i++)
 		{
-			var field = document.getElementById('fieldInnateTalent' + i);
-			field.setAttribute('onclick', 'selectInnateTalent(' + i + ')');
-			field.setAttribute('class', 'button');
+			var field = document.getElementById("fieldInnateTalent" + i);
+			//field.setAttribute('onclick', 'selectInnateTalent(' + i + ')');
+			field.className = "button";
 		}
-		for (var i = 1; i < phPower.length; i++)
+		for (var i = 1; i < PH.power.length; i++)
 		{
-			var field = document.getElementById('fieldPower' + i);
-			field.setAttribute('onclick', 'selectPower(' + i + ')');
-			field.setAttribute('class', 'button');
+			var ield = document.getElementById("fieldPower" + i);
+			//field.setAttribute('onclick', 'selectPower(' + i + ')');
+			field.className = "button";
 		}
-		document.getElementById('fieldTalentNote1').innerHTML = '6&nbsp;';
-		document.getElementById('fieldTalentNote2').innerHTML = '9&nbsp;';
-		document.getElementById('fieldTalentNote3').innerHTML = '12&nbsp;';
-		document.getElementById('fieldTalentNote4').innerHTML = '15&nbsp;';
-		document.getElementById('fieldTalentNote5').innerHTML = '18&nbsp;';
-		document.getElementById('fieldTalentNote6').innerHTML = '21&nbsp;';
-		document.getElementById('fieldPowerNote8').innerHTML = '20&nbsp;';
-		document.getElementById('fieldPowerNote9').innerHTML = '23&nbsp;';
-		document.getElementById('fieldPowerNote10').innerHTML = '26&nbsp;';
-		document.getElementById('fieldPowerNote11').innerHTML = '29&nbsp;';
-		document.getElementById('fieldPowerNote12').innerHTML = '32&nbsp;';
-		document.getElementById('rowPower13').style.display = '';
-		document.getElementById('rowPower14').style.display = '';
+		document.getElementById("fieldTalentNote1").innerHTML = "6";
+		document.getElementById("fieldTalentNote2").innerHTML = "9";
+		document.getElementById("fieldTalentNote3").innerHTML = "12";
+		document.getElementById("fieldTalentNote4").innerHTML = "15";
+		document.getElementById("fieldTalentNote5").innerHTML = "18";
+		document.getElementById("fieldTalentNote6").innerHTML = "21";
+		document.getElementById("fieldPowerNote8").innerHTML = "20";
+		document.getElementById("fieldPowerNote9").innerHTML = "23";
+		document.getElementById("fieldPowerNote10").innerHTML = "26";
+		document.getElementById("fieldPowerNote11").innerHTML = "29";
+		document.getElementById("fieldPowerNote12").innerHTML = "32";
+		document.getElementById("rowPower13").style.display = "";
+		document.getElementById("rowPower14").style.display = "";
+		
+		for (var i = 1; i < PH.power.length; i++)
+		{
+			document.getElementById("fieldPower" + i).className = "button";
+		}
+
+		document.getElementById("fieldRole").className = "button";
 	}
 	else
 	{
-		for (var i = 1; i < phSuperStat.length; i++)
+		for (var i = 1; i < PH.superStat.length; i++)
 		{
-			var id = archetype.superStatList[i];
-			var field = document.getElementById('fieldSuperStat' + i);
-			//var selectField = document.getElementById('selectSuperStat' + id);
-			if (id != phSuperStat[i].id)
+			var id = archetype.superStatList[i - 1];
+			var field = document.getElementById("fieldSuperStat" + i);
+			if (id != PH.superStat[i].id)
 			{
-				phSuperStat[i] = dataSuperStat[id];
-				field.innerHTML = getSuperStatDesc(id, i);
-				setOnmouseoverPopupL2(field, dataSuperStat[id].tip);
+				PH.superStat[i] = HCData.superStat[id];
+				Aesica.HCEngine.setNodeContents(field, getSuperStatDesc(id, i));
+				setOnmouseoverPopupL2(field, Aesica.dataHarness.SuperStat.tip(HCData.superStat[id]));
 			}
-			field.setAttribute('onclick', 'return false');
-			field.setAttribute('class', 'lockedButton');
-				//selectField.setAttribute('class', 'takenButton');
+			field.className = "lockedButton";
 		}
-		for (var i = 1; i < phInnateTalent.length; i++)
+		for (var i = 1; i < PH.innateTalent.length; i++)
 		{
 			var id = archetype.innateTalent;
-			var field = document.getElementById('fieldInnateTalent' + i);
-			//var selectField = document.getElementById('selectInnateTalent' + id);
-			if (id != phInnateTalent[i].id)
+			var field = document.getElementById("fieldInnateTalent" + i);
+			if (id != PH.innateTalent[i].id)
 			{
-				phInnateTalent[i] = dataInnateTalent[id];
-				field.innerHTML = getInnateTalentDesc(id, i);
-				setOnmouseoverPopupL2(field, dataInnateTalent[id].tip);
+				PH.innateTalent[i] = HCData.innateTalent[id];
+				Aesica.HCEngine.setNodeContents(field, getInnateTalentDesc(id, i));
+				setOnmouseoverPopupL2(field, Aesica.dataHarness.InnateTalent.tip(HCData.innateTalent[id]));
 			}
-			field.setAttribute('onclick', 'return false');
-			field.setAttribute('class', 'lockedButton');
-				//selectField.setAttribute('class', 'takenButton');
+			field.className = "lockedButton";
 		}
-		for (var i = 1; i < phPower.length; i++)
+		for (var i = 1; i < PH.power.length; i++)
 		{
-			var field = document.getElementById('fieldPower' + i);
-			var advantageField = document.getElementById('fieldPowerAdvantage' + i);
-			var id = archetype.powerList[i];
+			var field = document.getElementById("fieldPower" + i);
+			var advantageField = document.getElementById("fieldPowerAdvantage" + i);
+			var id = archetype.powerList[i - 1];
 			if (id != undefined)
 			{
 				var multiplePowers = false;
@@ -2708,39 +3025,33 @@ function setArchetype(id)
 				{
 					multiplePowers = true;
 					var powers = id;
-					var oldId = phPower[i].id;
+					var oldId = PH.power[i].id;
 					for (var j = 1; j < powers.length; j++)
 					{
-						if (powers[j] == oldId) id = powers[j];
+						if (HCLookup.power[powers[j]] == oldId) id = HCLookup.power[powers[j]];
 					}
-					if (id instanceof Array) id = powers[1];
+					if (id instanceof Array) id = powers[0];
 				}
-				if (id != phPower[i].id)
+				if (typeof id == "string") id = HCLookup.power[id];
+				if (id != PH.power[i].id)
 				{
 					setAdvantage(1, i, 0);
-					phPower[i] = dataPower[id];
-					field.innerHTML = dataPower[id].desc;
+					PH.power[i] = dataPower[id];
+					//field.innerHTML = dataPower[id].desc;
+					Aesica.HCEngine.setNodeContents(field, Aesica.HCEngine.getDescNode(dataPower[id].icon, dataPower[id].name, false, true));
 					setOnmouseoverPopupL2(field, dataPower[id].tip);
 					advantageField.innerHTML = advantageTextSpan(1, i, 0);
 					setOnmouseoverPopupL2(advantageField, advantageTip(1, i, 0));
 				}
-				if (multiplePowers)
-				{
-					field.setAttribute('onclick', 'selectArchetypePower(' + i + ')');
-					field.setAttribute('class', 'button');
-				}
-				else
-				{
-					field.setAttribute('onclick', 'return false');
-					field.setAttribute('class', 'lockedButton');
-				}
+				if (multiplePowers) field.className = "button";
+				else field.className = "lockedButton";
 				advantageField.style.display = '';
 			}
 			else
 			{
 				setAdvantage(1, i, 0);
-				phPower[i] = dataPower[0];
-				field.innerHTML = getPowerDefault(i);
+				PH.power[i] = dataPower[0];
+				Aesica.HCEngine.setNodeContents(field, getPowerDefault(i));
 				setOnmouseoverPopupL2(field, dataPower[i].tip);
 				advantageField.innerHTML = advantageTextSpan(1, i, 0);
 				setOnmouseoverPopupL2(advantageField, advantageTip(1, i, 0));
@@ -2748,34 +3059,33 @@ function setArchetype(id)
 		}
 		for (var i = 1; i <= 3; i++)
 		{
-			setSpecializationTree(i, archetype.specializationTreeList[i]);
+			setSpecializationTree(i, archetype.specializationTreeList[i - 1]);
 		}
-		document.getElementById('fieldTalentNote1').innerHTML = '7&nbsp;';
-		document.getElementById('fieldTalentNote2').innerHTML = '12&nbsp;';
-		document.getElementById('fieldTalentNote3').innerHTML = '15&nbsp;';
-		document.getElementById('fieldTalentNote4').innerHTML = '20&nbsp;';
-		document.getElementById('fieldTalentNote5').innerHTML = '25&nbsp;';
-		document.getElementById('fieldTalentNote6').innerHTML = '30&nbsp;';
-		document.getElementById('fieldPowerNote8').innerHTML = '21&nbsp;';
-		document.getElementById('fieldPowerNote9').innerHTML = '25&nbsp;';
-		document.getElementById('fieldPowerNote10').innerHTML = '30&nbsp;';
-		document.getElementById('fieldPowerNote11').innerHTML = '35&nbsp;';
-		document.getElementById('fieldPowerNote12').innerHTML = '40&nbsp;';
-		document.getElementById('rowPower13').style.display = 'none';
-		document.getElementById('rowPower14').style.display = 'none';
+		document.getElementById("fieldTalentNote1").innerHTML = "7";
+		document.getElementById("fieldTalentNote2").innerHTML = "12";
+		document.getElementById("fieldTalentNote3").innerHTML = "15";
+		document.getElementById("fieldTalentNote4").innerHTML = "20";
+		document.getElementById("fieldTalentNote5").innerHTML = "25";
+		document.getElementById("fieldTalentNote6").innerHTML = "30";
+		document.getElementById("fieldPowerNote8").innerHTML = "21";
+		document.getElementById("fieldPowerNote9").innerHTML = "25";
+		document.getElementById("fieldPowerNote10").innerHTML = "30";
+		document.getElementById("fieldPowerNote11").innerHTML = "35";
+		document.getElementById("fieldPowerNote12").innerHTML = "40";
+		document.getElementById("rowPower13").style.display = "none";
+		document.getElementById("rowPower14").style.display = "none";
+
+		setRole(archetype.group);
+		var fieldRole = document.getElementById("fieldRole");
+		fieldRole.className = "lockedButton";
 	}
-	// update talent highlights when selecting an AT
-	//setupTalents();
-	//setupInnateTalents();
 
-	phArchetype = archetype;
-
-	var mArchetypeDisplay = document.getElementById('fieldArchetype');
-	mArchetypeDisplay.innerHTML = archetype.desc + "&nbsp;" + archetype.name;
-	setOnmouseoverPopupL1(mArchetypeDisplay, "<b>" + archetype.name + "</b><br /><br />" + archetype.tip);
-
+	PH.archetype = archetype;
+	var mArchetypeDisplay = document.getElementById("fieldArchetype");
+	mArchetypeDisplay.innerHTML = "";//archetype.desc + "&nbsp;" + archetype.name;
+	mArchetypeDisplay.appendChild(Aesica.HCEngine.getDescNode(archetype.icon, archetype.name, true));
+	setOnmouseoverPopupL1(mArchetypeDisplay, "<b>" + archetype.name + "</b><br /><br />" + Aesica.dataHarness.Archetype.tip(archetype));
 	selectClear();
-
 	//submitAnalytics(analyticsSetCatagory, 'Archetype', archetype.name);
 }
 window['setArchetype'] = setArchetype;
@@ -2785,15 +3095,15 @@ function applyVersionUpdate(version, thing, value)
 {
 	var result = value[thing];
 	var orig = result;
-	if (version < phVersion && version < dataVersionUpdate.length)
+	if (version < PH.version && version < dataVersionUpdate.length)
 	{
 		var funct = dataVersionUpdate[version].funct;
 		result = funct(thing, value);
 		value[thing] = result;
 	}
-	if (debug && result != orig && thing != 'inc')
+	if (prefs.debug && result != orig && thing != 'inc')
 	{
-		console.log("applyVersionUpdate: version=" + appVersion + ", thing=" + thing + ", value=" + orig + ", result=" + result);
+		console.log("applyVersionUpdate: version=" + HCData.version + ", thing=" + thing + ", value=" + orig + ", result=" + result);
 	}
 	return result;
 }
@@ -2802,7 +3112,8 @@ window['applyVersionUpdate'] = applyVersionUpdate;
 // parse url for parameters
 function parseUrlParams(url)
 {
-	var version = buildVersion;
+	Aesica.HCEngine.writeMessage("Parsing build...");
+	var version = HCData.version;
 	var data = [];
 	var parts = url.split('?');
 	if (parts[1] != undefined)
@@ -2817,16 +3128,16 @@ function parseUrlParams(url)
 				version = parseInt(pair[1]);
 				break;
 			case 'n':
-				phName = decodeURIComponent(pair[1]);
-				document.getElementById('fieldName').firstChild.data = phName;
+				PH.name = decodeURIComponent(pair[1]);
+				document.getElementById('fieldName').firstChild.data = PH.name;
 				break;
 			case 'a':
 				// note: deprecated, but needed for backwards compatibility with version 1
-				phArchetype = dataArchetype[parseInt(pair[1])];
-				//document.getElementById('fieldArchetype').firstChild.data = phArchetype.name;
+				PH.archetype = HCData.archetype[parseInt(pair[1])];
+				//document.getElementById('fieldArchetype').firstChild.data = PH.archetype.name;
 				break;
 			case 'd': // deprecated, but required for data versions older than 20 (power IDs are 1 digit)
-				data = pair[1].split('');
+				data = pair[1].split("");
 				break;
 			case "debug": // for toggling debug mode
 				setPrefDebugMode(pair[1]);
@@ -2834,17 +3145,17 @@ function parseUrlParams(url)
 			}
 		}
 	}
-	while (version <= buildVersion)
+	while (version <= HCData.version)
 	{
-		var finalVersion = (version == buildVersion);
+		var finalVersion = (version == HCData.version);
 		var pos = 0;
 		var i = 0;
 		var inc = 1;
-		var archetype = (phArchetype && phArchetype.id) || 1;
+		var archetype = (PH.archetype && PH.archetype.id) || 1;
 		var specializationMasteryId = 0;
-		if (debug)
+		if (prefs.debug)
 		{
-			console.log("parseUrlParams: version=" + appVersion + ", name=" + name + ", data=" + data);
+			console.log("parseUrlParams: version=" + HCData.version + ", name=" + name + ", data=" + data);
 		}
 		data = applyVersionUpdate(version, 'data', {'type': 'init', 'data': data, 'pos': pos, 'i': i, 'inc': inc, 'archetype': archetype});
 		while (i < data.length)
@@ -2863,7 +3174,7 @@ function parseUrlParams(url)
 				data[i] = numToUrlCode(archetype);
 				if (finalVersion)
 				{
-					phArchetype = dataArchetype[archetype];
+					PH.archetype = HCData.archetype[archetype];
 				}
 				inc = 1;
 				inc = applyVersionUpdate(version, 'inc', {'type': 'archetype', 'pos': pos, 'i': i, 'inc': inc, 'code1': code1, 'archetype': archetype});
@@ -3074,15 +3385,34 @@ function parseUrlParams(url)
 				inc = 4;
 				inc = applyVersionUpdate(version, 'inc', {'type': 'specialization', 'pos': pos, 'i': i, 'inc': inc, 'code1': code1, 'code2': code2, 'code3': code3, 'code4': code4, 'archetype': archetype, 'specializationTree': specializationTree, 'specialization': specialization});
 				break;
+			case 30: // role - not going to bother adding this to the version updater
+				if (finalVersion)
+				{
+					setRole(urlCodeToNum(data[i]));
+				}
+				inc = 1;
+				break;
+			case 31: // devices.  also not bothering with the version updater here
+			case 32:
+			case 33:
+			case 34:
+				if (finalVersion)
+				{
+					var num = pos - 30;
+					setDevice(num, urlCodeToNum2(data[i] + data[i + 1]));
+				}
+				inc = 2;
+				break;
 			}
 			i += inc;
 			pos++;
 		}
 		if (finalVersion)
 		{
+			console.log(specializationMasteryId);
 			setSpecializationMastery(specializationMasteryId);
 			validatePowers();
-			if (phArchetype.id > 1) setArchetype(phArchetype.id);
+			if (PH.archetype.id > 1) setArchetype(PH.archetype.id);
 		}
 		// loop until all version updates have been applied
 		version++;
@@ -3102,8 +3432,9 @@ window['changeUpdate'] = changeUpdate;
 // set page title
 function setTitle()
 {
-	var title = siteName + ': ' + phName;
-	if (phName == '') title = siteName;
+	//var title = siteName + ': ' + PH.namee;
+	//if (PH.namee == "") title = siteName;
+	var title = siteName + (PH.name != "" ? ": " + PH.name : "");
 	if (document.title != title) document.title = title;
 }
 window['setTitle'] = setTitle;
@@ -3132,86 +3463,93 @@ function buildLink(submit)
 	//var fieldBookmark = document.getElementById('buildLinkBookmark');
 	var fieldRef = document.getElementById('buildLinkRef');
 	var base = window.location.href.replace(/\?.*$/, '');
-	//var link = '?v=' + phVersion + '&n=' + encodeURIComponent(phName) + '&a=' + phArchetype.id + '&d=';
-	var link = '?v=' + phVersion + '&n=' + encodeURIComponent(phName) + '&d=';
-	if (submit) queueAnalytics(analyticsBuildCatagory, 'Version', phVersion);
-	if (submit && phName != '') queueAnalytics(analyticsBuildCatagory, 'Name', phName);
+	//var link = '?v=' + PH.version + '&n=' + encodeURIComponent(PH.name) + '&a=' + PH.archetype.id + '&d=';
+	var link = '?v=' + PH.version + '&n=' + encodeURIComponent(PH.name) + '&d=';
+	if (submit) queueAnalytics(analyticsBuildCatagory, 'Version', PH.version);
+	if (submit && PH.name != '') queueAnalytics(analyticsBuildCatagory, 'Name', PH.name);
 	var params = [];
-	params.push(phArchetype.code());
-	if (submit && phArchetype.id > 0) queueAnalytics(analyticsBuildCatagory, 'Archtype', phArchetype.name);
-	for (var i = 1; i < phSuperStat.length; i++)
+	params.push(Aesica.dataHarness.Archetype.code(PH.archetype));
+	if (submit && PH.archetype.id > 0) queueAnalytics(analyticsBuildCatagory, 'Archtype', PH.archetype.name);
+	for (var i = 1; i < PH.superStat.length; i++)
 	{
-		params.push(phSuperStat[i].code());
-		if (submit && phSuperStat[i].id > 0) queueAnalytics(analyticsBuildCatagory, 'SuperStat', phSuperStat[i].name);
+		params.push(Aesica.dataHarness.SuperStat.code(PH.superStat[i]));
+		if (submit && PH.superStat[i].id > 0) queueAnalytics(analyticsBuildCatagory, 'SuperStat', PH.superStat[i].name);
 	}
-	for (var i = 1; i < phInnateTalent.length; i++)
+	for (var i = 1; i < PH.innateTalent.length; i++)
 	{
-		params.push(phInnateTalent[i].code());
-		if (submit && phInnateTalent[i].id > 0) queueAnalytics(analyticsBuildCatagory, 'InnateTalent', phInnateTalent[i].name);
+		params.push(Aesica.dataHarness.InnateTalent.code(PH.innateTalent[i]));
+		if (submit && PH.innateTalent[i].id > 0) queueAnalytics(analyticsBuildCatagory, 'InnateTalent', PH.innateTalent[i].name);
 	}
-	for (var i = 1; i < phTalent.length; i++)
+	for (var i = 1; i < PH.talent.length; i++)
 	{
-		params.push(phTalent[i].code());
-		if (submit && phTalent[i].id > 0) queueAnalytics(analyticsBuildCatagory, 'Talent', phTalent[i].name);
+		params.push(Aesica.dataHarness.Talent.code(PH.talent[i]));
+		if (submit && PH.talent[i].id > 0) queueAnalytics(analyticsBuildCatagory, 'Talent', PH.talent[i].name);
 	}
-	for (var i = 1; i < phTravelPower.length; i++)
+	for (var i = 1; i < PH.travelPower.length; i++)
 	{
-		params.push(phTravelPower[i].code());
-		params.push(numToUrlCode(phTravelPowerAdvantage[i] >> 1));
-		if (submit && phTravelPower[i].id > 0)
+		params.push(PH.travelPower[i].code());
+		params.push(numToUrlCode(PH.travelPowerAdvantage[i] >> 1));
+		if (submit && PH.travelPower[i].id > 0)
 		{
-			queueAnalytics(analyticsBuildCatagory, 'TravelPower', phTravelPower[i].name);
-			var advantageList = phTravelPower[i].getAdvantageList(phTravelPowerAdvantage[i]);
+			queueAnalytics(analyticsBuildCatagory, 'TravelPower', PH.travelPower[i].name);
+			var advantageList = PH.travelPower[i].getAdvantageList(PH.travelPowerAdvantage[i]);
 			for (var j = 0; j < advantageList.length; j++)
 			{
-				queueAnalytics(analyticsBuildCatagory, 'TravelPowerAdvantage', phTravelPower[i].name + ': ' + advantageList[j].name);
+				queueAnalytics(analyticsBuildCatagory, 'TravelPowerAdvantage', PH.travelPower[i].name + ': ' + advantageList[j].name);
 			}
 		}
 	}
-	for (var i = 1; i < phPower.length; i++)
+	for (var i = 1; i < PH.power.length; i++)
 	{
-		params.push(phPower[i].code());
-		params.push(numToUrlCode2(phPowerAdvantage[i] >> 1));
-		if (submit && phPower[i].id > 0)
+		params.push(PH.power[i].code());
+		params.push(numToUrlCode2(PH.powerAdvantage[i] >> 1));
+		if (submit && PH.power[i].id > 0)
 		{
-			queueAnalytics(analyticsBuildCatagory, 'Power', phPower[i].name);
-			var advantageList = phPower[i].getAdvantageList(phPowerAdvantage[i]);
+			queueAnalytics(analyticsBuildCatagory, 'Power', PH.power[i].name);
+			var advantageList = PH.power[i].getAdvantageList(PH.powerAdvantage[i]);
 			for (var j = 0; j < advantageList.length; j++)
 			{
-				queueAnalytics(analyticsBuildCatagory, 'PowerAdvantage', phPower[i].name + ': ' + advantageList[j].name);
+				queueAnalytics(analyticsBuildCatagory, 'PowerAdvantage', PH.power[i].name + ': ' + advantageList[j].name);
 			}
 		}
 	}
-	for (var i = 1; i < phSpecializationTree.length - 1; i++)
+	for (var i = 1; i < PH.specializationTree.length - 1; i++)
 	{
 		if (i == 1)
 		{
-			var specializationMasteryId = getSpecializationMasteryId(phSpecializationTree[4].id);
-			params.push(numToUrlCode4(specializationMasteryId | (phSpecialization[1] << 4)));
-			if (submit && specializationMasteryId > 0 && phSpecializationTree[specializationMasteryId].id > 0)
-				queueAnalytics(analyticsBuildCatagory, 'SpecializationMastery', phSpecializationTree[specializationMasteryId].name);
+			var specializationMasteryId = getSpecializationMasteryId(PH.specializationTree[4].id);
+			params.push(numToUrlCode4(specializationMasteryId | (PH.specialization[1] << 4)));
+			if (submit && specializationMasteryId > 0 && PH.specializationTree[specializationMasteryId].id > 0)
+				queueAnalytics(analyticsBuildCatagory, 'SpecializationMastery', PH.specializationTree[specializationMasteryId].name);
 		}
 		else
 		{
-			params.push(numToUrlCode4(((phSpecializationTree[i].id == 0) ? 0 : phSpecializationTree[i].id - 8) | (phSpecialization[i] << 4)));
+			params.push(numToUrlCode4(((PH.specializationTree[i].id == 0) ? 0 : PH.specializationTree[i].id - 8) | (PH.specialization[i] << 4)));
 		}
 		if (submit)
 		{
-			var specializationList = phSpecializationTree[i].specializationList;
-			var specializationPointList = phSpecializationTree[i].getSpecializationList(phSpecialization[i]);
+			var specializationList = PH.specializationTree[i].specializationList;
+			var specializationPointList = Aesica.dataHarness.SpecializationTree.getSpecializationList(PH.specializationTree[i], PH.specialization[i]);
 			for (var j = 0; j < specializationList.length; j++)
 			{
 				if (specializationPointList[j] > 0)
-					queueAnalytics(analyticsBuildCatagory, 'Specialization', phSpecializationTree[i].name + ': ' + specializationList[j].name, specializationPointList[j]);
+					queueAnalytics(analyticsBuildCatagory, 'Specialization', PH.specializationTree[i].name + ': ' + specializationList[j].name, specializationPointList[j]);
 			}
 		}
+	}
+
+	var i, iLength = PH.device.length;
+	params.push(Aesica.dataHarness.ArchetypeGroup.code(PH.role));
+	for (i = 1; i < iLength; i++)// xxxx
+	{
+		params.push(Aesica.dataHarness.Device.code(PH.device[i]));
 	}
 	var data = params.join('');
 	if (submit) submitAnalytics(analyticsBuildCatagory, 'Data', data);
 	link += data;
-	phBuildLinkRef = link;
-	phBuildLink = siteUrl + link;
-	//var name = phName;
+	PH.buildLinkRef = link;
+	PH.buildLink = siteUrl + link;
+	//var name = PH.name;
 	//if (name == '') name = 'Hero';
 	//name = siteName + ': ' + name;
 	var url = base + link;
@@ -3224,10 +3562,10 @@ function buildLink(submit)
 
 	// restore previous build--I don't think this ever worked properly, so I'm just removing it.
 /*
-   if (prevBuildLink != undefined) SaveData("buildLink", prevBuildLink);
+   if (prevBuildLink != undefined) AES.saveData("buildLink", prevBuildLink);
    prevBuildLink = url;
    var restore = document.getElementById('restorePrevBuild');
-   if (LoadData("buildLink") == undefined) restore.style.display = "none";
+   if (AES.loadData("buildLink") == undefined) restore.style.display = "none";
    else restore.style.display = "";
  */
 }
@@ -3245,7 +3583,7 @@ function autoHighlight(elementID)
 // restore previous build (if saved to cookie)
 function restorePrevBuild()
 {
-	var url = LoadData("buildLink");
+	var url = Aesica.HCEngine.loadData("buildLink");
 	if (url != undefined) window.open(url, '_self');
 }
 window['restorePrevBuild'] = restorePrevBuild;
@@ -3261,18 +3599,18 @@ window['submitBuild'] = submitBuild;
 // generate forum newlines
 function forumNewline(type)
 {
-	var result = '';
+	var result = "\n";
 	switch (type)
 	{
-	case 1:
-		result += '<br />\n';
-		break;
-	case 2:
-	case 3:
-	case 4:
-	case 5:
-		result += '\n';
-		break;
+		case 0:
+			break;
+		case 1:
+			result = "<br />" + result;
+			break;
+		case 2:
+		case 3:
+		case 4:
+			break;
 	}
 	return result;
 }
@@ -3283,21 +3621,21 @@ function forumHeader(type, text, isBold = true)
 
 	switch (type)
 	{
-	case 1:
-		result += (isBold ? '<b><u>' : '') + '<span class="forumFirst">' + text + '</font></span>' + (isBold ? '</u></b>' : '');
-		break;
-	case 2:
-		result += (isBold ? '<b><u>' : '') + text + (isBold ? '</u></b>' : '');
-		break;
-	case 3:
-		result += text;
-		break;
-	case 4:
-		result += (isBold ? '[b][u]' : '') + text + (isBold ? '[/u][/b]' : '');
-		break;
-	case 5:
-		result += (isBold ? '__**' : '') + text + (isBold ? '**__' : '');
-		break;
+		case 0: 
+			result += text;
+			break;
+		case 1:
+			result += '<span class="forumHeader">' + text + '</span>';
+			break;
+		case 2:
+			result += (isBold ? '<b><u>' : '') + text + (isBold ? '</u></b>' : '');
+			break;
+		case 3:
+			result += (isBold ? '[b][u]' : '') + text + (isBold ? '[/u][/b]' : '');
+			break;
+		case 4:
+			result += (isBold ? '__**' : '') + text + (isBold ? '**__' : '');
+			break;
 	}
 	result += forumNewline(type);
 	return result;
@@ -3309,61 +3647,61 @@ function forumEntry(type, first, second, third)
 	var result = '';
 	switch (type)
 	{
-	case 1:
-		result += '<span class="forumFirst">' + first + '</span>';
-		if (second)
-		{
-			result += ' <span class="forumSecond"><b>' + second + '</b></span>';
-			if (third)
+		case 0:
+			result += first;
+			if (second)
 			{
-				result += ' <span class="forumThird"><font size="-1"><i>' + third + '</i></font></span>';
+				result += ' ' + second;
+				if (third)
+				{
+					result += ' ' + third;
+				}
 			}
-		}
-		break;
-	case 2:
-		result += first;
-		if (second)
-		{
-			result += ' <b>' + second + '</b>';
-			if (third)
+			break;
+		case 1:
+			result += '<span class="forumFirst">' + first + '</span>';
+			if (second)
 			{
-				result += ' <font size="-1"><i>' + third + '</i></font>';
+				result += ' <span class="forumSecond">' + second + '</span>';
+				if (third)
+				{
+					result += ' <span class="forumThird">' + third + '</span>';
+				}
 			}
-		}
-		break;
-	case 3:
-		result += first;
-		if (second)
-		{
-			result += ' ' + second;
-			if (third)
+			break;
+		case 2:
+			result += first;
+			if (second)
 			{
-				result += ' ' + third;
+				result += ' <b>' + second + '</b>';
+				if (third)
+				{
+					result += ' <font size="-1"><i>' + third + '</i></font>';
+				}
 			}
-		}
-		break;
-	case 4:
-		result += first;
-		if (second)
-		{
-			result += ' [b]' + second + '[/b]';
-			if (third)
+			break;
+		case 3:
+			result += first;
+			if (second)
 			{
-				result += ' [i]' + third + '[/i]';
+				result += ' [b]' + second + '[/b]';
+				if (third)
+				{
+					result += ' [i]' + third + '[/i]';
+				}
 			}
-		}
-		break;
-	case 5:
-		result += first;
-		if (second)
-		{
-			result += ' **' + second + '**';
-			if (third)
+			break;
+		case 4:
+			result += first;
+			if (second)
 			{
-				result += ' *' + third + '*';
+				result += ' **' + second + '**';
+				if (third)
+				{
+					result += ' *' + third + '*';
+				}
 			}
-		}
-		break;
+			break;
 	}
 	result += forumNewline(type);
 	return result;
@@ -3396,241 +3734,171 @@ function forumTalentStatText(statText)
 // forum preview
 function forumPreview()
 {
-	var forumPreview = document.getElementById('forumPreview');
-	var result = [];
-	var buildName = (phName == "") ? "(Unnamed Build)" : phName;
-
-	result.push('<b><u><a href="' + phBuildLink + '"><span class="forumLink">' + buildName + ' - ' + phArchetype.name + '</span></a></u></b>' + forumNewline(1));
-	result.push('v' + appVersion + '-' + buildVersion + forumNewline(1));
-	result.push(forumNewline(1));
-	result.push(forumHeader(1, 'Super Stats'));
-	result.push(forumEntry(1, 'Level 6:', forumName(phSuperStat[1].name), '(Primary)'));
-	result.push(forumEntry(1, 'Level 10:', forumName(phSuperStat[2].name), '(Secondary)'));
-	result.push(forumEntry(1, 'Level 15:', forumName(phSuperStat[3].name), '(Secondary)'));
-	result.push(forumNewline(1));
-	result.push(forumHeader(1, 'Talents'));
-	result.push(forumEntry(1, 'Level 1:', forumName(phInnateTalent[1].name), forumTalentStatText(phInnateTalent[1].extra)));
-	if (phArchetype.id > 1)
-	{
-		result.push(forumEntry(1, 'Level 7:', forumName(phTalent[1].name), forumTalentStatText(phTalent[1].extra)));
-		result.push(forumEntry(1, 'Level 12:', forumName(phTalent[2].name), forumTalentStatText(phTalent[2].extra)));
-		result.push(forumEntry(1, 'Level 15:', forumName(phTalent[3].name), forumTalentStatText(phTalent[3].extra)));
-		result.push(forumEntry(1, 'Level 20:', forumName(phTalent[4].name), forumTalentStatText(phTalent[4].extra)));
-		result.push(forumEntry(1, 'Level 25:', forumName(phTalent[5].name), forumTalentStatText(phTalent[5].extra)));
-		result.push(forumEntry(1, 'Level 30:', forumName(phTalent[6].name), forumTalentStatText(phTalent[6].extra)));
-		result.push(forumNewline(1));
-	}
-	else
-	{
-		result.push(forumEntry(1, 'Level 6:', forumName(phTalent[1].name), forumTalentStatText(phTalent[1].extra)));
-		result.push(forumEntry(1, 'Level 9:', forumName(phTalent[2].name), forumTalentStatText(phTalent[2].extra)));
-		result.push(forumEntry(1, 'Level 12:', forumName(phTalent[3].name), forumTalentStatText(phTalent[3].extra)));
-		result.push(forumEntry(1, 'Level 15:', forumName(phTalent[4].name), forumTalentStatText(phTalent[4].extra)));
-		result.push(forumEntry(1, 'Level 18:', forumName(phTalent[5].name), forumTalentStatText(phTalent[5].extra)));
-		result.push(forumEntry(1, 'Level 21:', forumName(phTalent[6].name), forumTalentStatText(phTalent[6].extra)));
-		result.push(forumNewline(1));
-	}
-	result.push(forumHeader(1, 'Powers'));
-	result.push(forumEntry(1, 'Level 1:', forumName(phPower[1].name), forumAdvantageText(1, 1, phPowerAdvantage[1])));
-	result.push(forumEntry(1, 'Level 1:', forumName(phPower[2].name), forumAdvantageText(1, 2, phPowerAdvantage[2])));
-	result.push(forumEntry(1, 'Level 6:', forumName(phPower[3].name), forumAdvantageText(1, 3, phPowerAdvantage[3])));
-	result.push(forumEntry(1, 'Level 8:', forumName(phPower[4].name), forumAdvantageText(1, 4, phPowerAdvantage[4])));
-	result.push(forumEntry(1, 'Level 11:', forumName(phPower[5].name), forumAdvantageText(1, 5, phPowerAdvantage[5])));
-	result.push(forumEntry(1, 'Level 14:', forumName(phPower[6].name), forumAdvantageText(1, 6, phPowerAdvantage[6])));
-	result.push(forumEntry(1, 'Level 17:', forumName(phPower[7].name), forumAdvantageText(1, 7, phPowerAdvantage[7])));
-	if (phArchetype.id > 1)
-	{
-		result.push(forumEntry(1, 'Level 21:', forumName(phPower[8].name), forumAdvantageText(1, 8, phPowerAdvantage[8])));
-		result.push(forumEntry(1, 'Level 25:', forumName(phPower[9].name), forumAdvantageText(1, 9, phPowerAdvantage[9])));
-		result.push(forumEntry(1, 'Level 30:', forumName(phPower[10].name), forumAdvantageText(1, 10, phPowerAdvantage[10])));
-		result.push(forumEntry(1, 'Level 35:', forumName(phPower[11].name), forumAdvantageText(1, 11, phPowerAdvantage[11])));
-		result.push(forumEntry(1, 'Level 40:', forumName(phPower[12].name), forumAdvantageText(1, 12, phPowerAdvantage[12])));
-		result.push(forumNewline(1));
-	}
-	else
-	{
-		result.push(forumEntry(1, 'Level 20:', forumName(phPower[8].name), forumAdvantageText(1, 8, phPowerAdvantage[8])));
-		result.push(forumEntry(1, 'Level 23:', forumName(phPower[9].name), forumAdvantageText(1, 9, phPowerAdvantage[9])));
-		result.push(forumEntry(1, 'Level 26:', forumName(phPower[10].name), forumAdvantageText(1, 10, phPowerAdvantage[10])));
-		result.push(forumEntry(1, 'Level 29:', forumName(phPower[11].name), forumAdvantageText(1, 11, phPowerAdvantage[11])));
-		result.push(forumEntry(1, 'Level 32:', forumName(phPower[12].name), forumAdvantageText(1, 12, phPowerAdvantage[12])));
-		result.push(forumEntry(1, 'Level 35:', forumName(phPower[13].name), forumAdvantageText(1, 13, phPowerAdvantage[13])));
-		result.push(forumEntry(1, 'Level 38:', forumName(phPower[14].name), forumAdvantageText(1, 14, phPowerAdvantage[14])));
-		result.push(forumEntry(1, 'Adv. Points:', statAdvantagePoints + '/' + maxAdvantagePointsTotal));
-		result.push(forumNewline(1));
-	}
-	result.push(forumHeader(1, 'Travel Powers'));
-	result.push(forumEntry(1, 'Level 6:', forumName(phTravelPower[1].name), forumAdvantageText(2, 1, phTravelPowerAdvantage[1])));
-	result.push(forumEntry(1, 'Level 35:', forumName(phTravelPower[2].name), forumAdvantageText(2, 2, phTravelPowerAdvantage[2])));
-	result.push(forumNewline(1));
-	result.push(forumHeader(1, 'Specializations'));
-	for (var i = 1; i <= 3; i++)
-	{
-		var specializationTree = phSpecializationTree[i];
-		var mask = phSpecialization[i];
-		var specializationList = specializationTree.specializationList;
-		var specializationPointList = specializationTree.getSpecializationList(mask);
-		for (var j = 0; j < specializationList.length - 1; j++)
-		{
-			if (specializationPointList[j] > 0)
-			{
-				result.push(forumEntry(1, specializationTree.name + ':', forumName(specializationList[j].name), '(' + specializationPointList[j] + '/' + specializationList[j].maxPoints + ')'));
-			}
-		}
-	}
-	if (phSpecializationTree[4].id != 0)
-	{
-		result.push(forumEntry(1, 'Mastery:', forumName(phSpecializationTree[4].name) + ' Mastery', '(1/1)'));
-	}
-	forumPreview.innerHTML = result.join('');
+	document.getElementById("forumPreview").innerHTML = getExportString(1);
 }
 window['forumPreview'] = forumPreview;
 
 // forum export
 function setForumExportType(forumType)
 {
-	forumExportType = forumType;
-	SaveData("forumType", forumType);
+	prefs.forumExportType = forumType;
+	saveSettings();
 }
 window['setForumExportType'] = setForumExportType;
 
 function selectForumExportType(forumType)
 {
-	document.getElementById('exportType_' + forumExportType).setAttribute('class', 'button');
+	document.getElementById('exportType_' + prefs.forumExportType).setAttribute('class', 'button');
 	setForumExportType(forumType);
-	document.getElementById('exportType_' + forumExportType).setAttribute('class', 'selectedButton');
+	document.getElementById('exportType_' + prefs.forumExportType).setAttribute('class', 'selectedButton');
 	showView('Export');
 }
 window['selectForumExportType'] = selectForumExportType;
 
-function forumExport()
+function getExportString(forumTypeNum)
 {
-	var forumType = LoadData("forumType");
-	var forumTypeNum;
-	if (forumType == undefined) forumType = forumExportType;
-	setForumExportType(forumType);
-	if (forumType == 'co') forumTypeNum = 2;			// html <b><font color="#ff0000">Bold Red</font></b>
-	else if (forumType == 'txt') forumTypeNum = 3;		// plain text
-	else if (forumType == 'phpbbs') forumTypeNum = 4;	// phpbb [b][color=#ff0000]Bold Red[/color][/b]
-	else if (forumType == 'markdown') forumTypeNum = 5;	// markdown **bold**
-	else forumTypeNum = 3;
-	document.getElementById('exportType_' + forumType).setAttribute('class', 'selectedButton');
-	var forumText = document.getElementById('forumText');
 	var result = [];
-	var buildName = (phName == "") ? "(Unnamed Build)" : phName;
+	var buildName = (PH.name == "") ? "(Unnamed Build)" : PH.name;
 
 	switch (forumTypeNum)
 	{
-	case 2:
-		result.push('<b><u><a href="' + phBuildLink + '">' + buildName + ' - ' + phArchetype.name + '</a></u></b>' + forumNewline(forumTypeNum));
-		break;
-	case 3:
-		result.push(buildName + ' - ' + phArchetype.name + forumNewline(forumTypeNum) + forumNewline(forumTypeNum));
-		result.push('Link to this build: ' + phBuildLink + forumNewline(forumTypeNum));
-		break;
-	case 4:
-		result.push('[b][u][url=' + phBuildLink + ']' + phName + '[/url][/u][/b]' + forumNewline(forumTypeNum));
-		break;
-	case 5:
-		result.push('__**' + buildName + ' - ' + phArchetype.name + '**__' + forumNewline(forumTypeNum) + forumNewline(forumTypeNum));
-		result.push('Link to this build: __' + phBuildLink + '__' + forumNewline(forumTypeNum));
-		break;
+		case 0: 
+			result.push(buildName + " - " + PH.archetype.name + " (" + PH.role.name + ")" + forumNewline(forumTypeNum) + forumNewline(forumTypeNum));
+			result.push("Link to this build: " + PH.buildLink + forumNewline(forumTypeNum));
+			break;
+		case 1:
+			result.push("<a class='forumLink' href='" + PH.buildLink + "'>" + buildName + " - " + PH.archetype.name + "</a> <span class='forumThird'>(" + PH.role.name + ")</span>"  + forumNewline(forumTypeNum));
+			break;
+		case 2:
+			result.push("<b><u><a href='" + PH.buildLink + "'>" + buildName + " - " + PH.archetype.name + "</a></u></b> <i>(" + PH.role.name + ")</i>"  + forumNewline(forumTypeNum));
+			break;
+		case 3:
+			result.push("[b][u][url=" + PH.buildLink + "]" + PH.name + "[/url][/u][/b] [i]" + PH.role.name + "[/i]" + forumNewline(forumTypeNum));
+			break;
+		case 4:
+			result.push("__**" + buildName + " - " + PH.archetype.name + "**__ *(" + PH.role.name +")*" + forumNewline(forumTypeNum) + forumNewline(forumTypeNum));
+			result.push("Link to this build: __" + PH.buildLink + "__" + forumNewline(forumTypeNum));
+			break;
 	}
-	result.push('v' + appVersion + '-' + buildVersion + forumNewline(forumTypeNum));
+	result.push("v" + app.version + ":" + HCData.version + forumNewline(forumTypeNum));
 	result.push(forumNewline(forumTypeNum));
-	result.push(forumHeader(forumTypeNum, 'Super Stats'));
-	result.push(forumEntry(forumTypeNum, 'Level 6:', forumName(phSuperStat[1].name), '(Primary)'));
-	result.push(forumEntry(forumTypeNum, 'Level 10:', forumName(phSuperStat[2].name), '(Secondary)'));
-	result.push(forumEntry(forumTypeNum, 'Level 15:', forumName(phSuperStat[3].name), '(Secondary)'));
+	result.push(forumHeader(forumTypeNum, "Super Stats"));
+	result.push(forumEntry(forumTypeNum, "Level 6:", forumName(PH.superStat[1].name), "(Primary)"));
+	result.push(forumEntry(forumTypeNum, "Level 10:", forumName(PH.superStat[2].name), "(Secondary)"));
+	result.push(forumEntry(forumTypeNum, "Level 15:", forumName(PH.superStat[3].name), "(Secondary)"));
 	result.push(forumNewline(forumTypeNum));
-	result.push(forumHeader(forumTypeNum, 'Talents'));
-	result.push(forumEntry(forumTypeNum, 'Level 1:', forumName(phInnateTalent[1].name), forumTalentStatText(phInnateTalent[1].extra)));
-	if (phArchetype.id > 1)
+	result.push(forumHeader(forumTypeNum, "Talents"));
+	result.push(forumEntry(forumTypeNum, "Level 1:", forumName(PH.innateTalent[1].name), forumTalentStatText(Aesica.dataHarness.InnateTalent.extra(PH.innateTalent[1]))));
+	if (PH.archetype.id > 1)
 	{
-		result.push(forumEntry(forumTypeNum, 'Level 7:', forumName(phTalent[1].name), forumTalentStatText(phTalent[1].extra)));
-		result.push(forumEntry(forumTypeNum, 'Level 12:', forumName(phTalent[2].name), forumTalentStatText(phTalent[2].extra)));
-		result.push(forumEntry(forumTypeNum, 'Level 15:', forumName(phTalent[3].name), forumTalentStatText(phTalent[3].extra)));
-		result.push(forumEntry(forumTypeNum, 'Level 20:', forumName(phTalent[4].name), forumTalentStatText(phTalent[4].extra)));
-		result.push(forumEntry(forumTypeNum, 'Level 25:', forumName(phTalent[5].name), forumTalentStatText(phTalent[5].extra)));
-		result.push(forumEntry(forumTypeNum, 'Level 30:', forumName(phTalent[6].name), forumTalentStatText(phTalent[6].extra)));
+		result.push(forumEntry(forumTypeNum, "Level 7:", forumName(PH.talent[1].name), forumTalentStatText(Aesica.dataHarness.Talent.extra(PH.talent[1]))));
+		result.push(forumEntry(forumTypeNum, "Level 12:", forumName(PH.talent[2].name), forumTalentStatText(Aesica.dataHarness.Talent.extra(PH.talent[2]))));
+		result.push(forumEntry(forumTypeNum, "Level 15:", forumName(PH.talent[3].name), forumTalentStatText(Aesica.dataHarness.Talent.extra(PH.talent[3]))));
+		result.push(forumEntry(forumTypeNum, "Level 20:", forumName(PH.talent[4].name), forumTalentStatText(Aesica.dataHarness.Talent.extra(PH.talent[4]))));
+		result.push(forumEntry(forumTypeNum, "Level 25:", forumName(PH.talent[5].name), forumTalentStatText(Aesica.dataHarness.Talent.extra(PH.talent[5]))));
+		result.push(forumEntry(forumTypeNum, "Level 30:", forumName(PH.talent[6].name), forumTalentStatText(Aesica.dataHarness.Talent.extra(PH.talent[6]))));
 		result.push(forumNewline(forumTypeNum));
 	}
 	else
 	{
-		result.push(forumEntry(forumTypeNum, 'Level 6:', forumName(phTalent[1].name), forumTalentStatText(phTalent[1].extra)));
-		result.push(forumEntry(forumTypeNum, 'Level 9:', forumName(phTalent[2].name), forumTalentStatText(phTalent[2].extra)));
-		result.push(forumEntry(forumTypeNum, 'Level 12:', forumName(phTalent[3].name), forumTalentStatText(phTalent[3].extra)));
-		result.push(forumEntry(forumTypeNum, 'Level 15:', forumName(phTalent[4].name), forumTalentStatText(phTalent[4].extra)));
-		result.push(forumEntry(forumTypeNum, 'Level 18:', forumName(phTalent[5].name), forumTalentStatText(phTalent[5].extra)));
-		result.push(forumEntry(forumTypeNum, 'Level 21:', forumName(phTalent[6].name), forumTalentStatText(phTalent[6].extra)));
+		result.push(forumEntry(forumTypeNum, "Level 6:", forumName(PH.talent[1].name), forumTalentStatText(Aesica.dataHarness.Talent.extra(PH.talent[1]))));
+		result.push(forumEntry(forumTypeNum, "Level 9:", forumName(PH.talent[2].name), forumTalentStatText(Aesica.dataHarness.Talent.extra(PH.talent[2]))));
+		result.push(forumEntry(forumTypeNum, "Level 12:", forumName(PH.talent[3].name), forumTalentStatText(Aesica.dataHarness.Talent.extra(PH.talent[3]))));
+		result.push(forumEntry(forumTypeNum, "Level 15:", forumName(PH.talent[4].name), forumTalentStatText(Aesica.dataHarness.Talent.extra(PH.talent[4]))));
+		result.push(forumEntry(forumTypeNum, "Level 18:", forumName(PH.talent[5].name), forumTalentStatText(Aesica.dataHarness.Talent.extra(PH.talent[5]))));
+		result.push(forumEntry(forumTypeNum, "Level 21:", forumName(PH.talent[6].name), forumTalentStatText(Aesica.dataHarness.Talent.extra(PH.talent[6]))));
 		result.push(forumNewline(forumTypeNum));
 	}
-	result.push(forumHeader(forumTypeNum, 'Powers'));
-	result.push(forumEntry(forumTypeNum, 'Level 1:', forumName(phPower[1].name), forumAdvantageText(1, 1, phPowerAdvantage[1])));
-	result.push(forumEntry(forumTypeNum, 'Level 1:', forumName(phPower[2].name), forumAdvantageText(1, 2, phPowerAdvantage[2])));
-	result.push(forumEntry(forumTypeNum, 'Level 6:', forumName(phPower[3].name), forumAdvantageText(1, 3, phPowerAdvantage[3])));
-	result.push(forumEntry(forumTypeNum, 'Level 8:', forumName(phPower[4].name), forumAdvantageText(1, 4, phPowerAdvantage[4])));
-	result.push(forumEntry(forumTypeNum, 'Level 11:', forumName(phPower[5].name), forumAdvantageText(1, 5, phPowerAdvantage[5])));
-	result.push(forumEntry(forumTypeNum, 'Level 14:', forumName(phPower[6].name), forumAdvantageText(1, 6, phPowerAdvantage[6])));
-	result.push(forumEntry(forumTypeNum, 'Level 17:', forumName(phPower[7].name), forumAdvantageText(1, 7, phPowerAdvantage[7])));
-	if (phArchetype.id > 1)
+	result.push(forumHeader(forumTypeNum, "Powers"));
+	result.push(forumEntry(forumTypeNum, "Level 1:", forumName(PH.power[1].name), forumAdvantageText(1, 1, PH.powerAdvantage[1])));
+	result.push(forumEntry(forumTypeNum, "Level 1:", forumName(PH.power[2].name), forumAdvantageText(1, 2, PH.powerAdvantage[2])));
+	result.push(forumEntry(forumTypeNum, "Level 6:", forumName(PH.power[3].name), forumAdvantageText(1, 3, PH.powerAdvantage[3])));
+	result.push(forumEntry(forumTypeNum, "Level 8:", forumName(PH.power[4].name), forumAdvantageText(1, 4, PH.powerAdvantage[4])));
+	result.push(forumEntry(forumTypeNum, "Level 11:", forumName(PH.power[5].name), forumAdvantageText(1, 5, PH.powerAdvantage[5])));
+	result.push(forumEntry(forumTypeNum, "Level 14:", forumName(PH.power[6].name), forumAdvantageText(1, 6, PH.powerAdvantage[6])));
+	result.push(forumEntry(forumTypeNum, "Level 17:", forumName(PH.power[7].name), forumAdvantageText(1, 7, PH.powerAdvantage[7])));
+	if (PH.archetype.id > 1)
 	{
-		result.push(forumEntry(forumTypeNum, 'Level 21:', forumName(phPower[8].name), forumAdvantageText(1, 8, phPowerAdvantage[8])));
-		result.push(forumEntry(forumTypeNum, 'Level 25:', forumName(phPower[9].name), forumAdvantageText(1, 9, phPowerAdvantage[9])));
-		result.push(forumEntry(forumTypeNum, 'Level 30:', forumName(phPower[10].name), forumAdvantageText(1, 10, phPowerAdvantage[10])));
-		result.push(forumEntry(forumTypeNum, 'Level 35:', forumName(phPower[11].name), forumAdvantageText(1, 11, phPowerAdvantage[11])));
-		result.push(forumEntry(forumTypeNum, 'Level 40:', forumName(phPower[12].name), forumAdvantageText(1, 12, phPowerAdvantage[12])));
+		result.push(forumEntry(forumTypeNum, "Level 21:", forumName(PH.power[8].name), forumAdvantageText(1, 8, PH.powerAdvantage[8])));
+		result.push(forumEntry(forumTypeNum, "Level 25:", forumName(PH.power[9].name), forumAdvantageText(1, 9, PH.powerAdvantage[9])));
+		result.push(forumEntry(forumTypeNum, "Level 30:", forumName(PH.power[10].name), forumAdvantageText(1, 10, PH.powerAdvantage[10])));
+		result.push(forumEntry(forumTypeNum, "Level 35:", forumName(PH.power[11].name), forumAdvantageText(1, 11, PH.powerAdvantage[11])));
+		result.push(forumEntry(forumTypeNum, "Level 40:", forumName(PH.power[12].name), forumAdvantageText(1, 12, PH.powerAdvantage[12])));
 	}
 	else
 	{
-		result.push(forumEntry(forumTypeNum, 'Level 20:', forumName(phPower[8].name), forumAdvantageText(1, 8, phPowerAdvantage[8])));
-		result.push(forumEntry(forumTypeNum, 'Level 23:', forumName(phPower[9].name), forumAdvantageText(1, 9, phPowerAdvantage[9])));
-		result.push(forumEntry(forumTypeNum, 'Level 26:', forumName(phPower[10].name), forumAdvantageText(1, 10, phPowerAdvantage[10])));
-		result.push(forumEntry(forumTypeNum, 'Level 29:', forumName(phPower[11].name), forumAdvantageText(1, 11, phPowerAdvantage[11])));
-		result.push(forumEntry(forumTypeNum, 'Level 32:', forumName(phPower[12].name), forumAdvantageText(1, 12, phPowerAdvantage[12])));
-		result.push(forumEntry(forumTypeNum, 'Level 35:', forumName(phPower[13].name), forumAdvantageText(1, 13, phPowerAdvantage[13])));
-		result.push(forumEntry(forumTypeNum, 'Level 38:', forumName(phPower[14].name), forumAdvantageText(1, 14, phPowerAdvantage[14])));
+		result.push(forumEntry(forumTypeNum, "Level 20:", forumName(PH.power[8].name), forumAdvantageText(1, 8, PH.powerAdvantage[8])));
+		result.push(forumEntry(forumTypeNum, "Level 23:", forumName(PH.power[9].name), forumAdvantageText(1, 9, PH.powerAdvantage[9])));
+		result.push(forumEntry(forumTypeNum, "Level 26:", forumName(PH.power[10].name), forumAdvantageText(1, 10, PH.powerAdvantage[10])));
+		result.push(forumEntry(forumTypeNum, "Level 29:", forumName(PH.power[11].name), forumAdvantageText(1, 11, PH.powerAdvantage[11])));
+		result.push(forumEntry(forumTypeNum, "Level 32:", forumName(PH.power[12].name), forumAdvantageText(1, 12, PH.powerAdvantage[12])));
+		result.push(forumEntry(forumTypeNum, "Level 35:", forumName(PH.power[13].name), forumAdvantageText(1, 13, PH.powerAdvantage[13])));
+		result.push(forumEntry(forumTypeNum, "Level 38:", forumName(PH.power[14].name), forumAdvantageText(1, 14, PH.powerAdvantage[14])));
 	}
 
-	result.push(forumEntry(forumTypeNum, 'Adv. Points:', statAdvantagePoints + '/' + maxAdvantagePointsTotal));
+	result.push(forumEntry(forumTypeNum, "Adv. Points:", statAdvantagePoints + "/" + maxAdvantagePointsTotal));
 	result.push(forumNewline(forumTypeNum));
 
-	result.push(forumHeader(forumTypeNum, 'Travel Powers'));
-	result.push(forumEntry(forumTypeNum, 'Level 6:', forumName(phTravelPower[1].name), forumAdvantageText(2, 1, phTravelPowerAdvantage[1])));
-	result.push(forumEntry(forumTypeNum, 'Level 35:', forumName(phTravelPower[2].name), forumAdvantageText(2, 2, phTravelPowerAdvantage[2])));
+	result.push(forumHeader(forumTypeNum, "Travel Powers"));
+	result.push(forumEntry(forumTypeNum, "Level 6:", forumName(PH.travelPower[1].name), forumAdvantageText(2, 1, PH.travelPowerAdvantage[1])));
+	result.push(forumEntry(forumTypeNum, "Level 35:", forumName(PH.travelPower[2].name), forumAdvantageText(2, 2, PH.travelPowerAdvantage[2])));
 	result.push(forumNewline(forumTypeNum));
-	result.push(forumHeader(forumTypeNum, 'Specializations'));
+	result.push(forumHeader(forumTypeNum, "Specializations"));
 	for (var i = 1; i <= 3; i++)
 	{
-		var specializationTree = phSpecializationTree[i];
-		var mask = phSpecialization[i];
+		var specializationTree = PH.specializationTree[i];
+		var mask = PH.specialization[i];
 		var specializationList = specializationTree.specializationList;
-		var specializationPointList = specializationTree.getSpecializationList(mask);
+		var specializationPointList = Aesica.dataHarness.SpecializationTree.getSpecializationList(specializationTree, mask);
 		for (var j = 0; j < specializationList.length - 1; j++)
 		{
 			if (specializationPointList[j] > 0)
 			{
-				result.push(forumEntry(forumTypeNum, specializationTree.name + ':', forumName(specializationList[j].name), '(' + specializationPointList[j] + '/' + specializationList[j].maxPoints + ')'));
+				result.push(forumEntry(forumTypeNum, specializationTree.name + ":", forumName(specializationList[j].name), "(" + specializationPointList[j] + "/" + specializationList[j].maxPoints + ")"));
 			}
 		}
 	}
-	if (phSpecializationTree[4].id != 0)
+	if (PH.specializationTree[4].id != 0)
 	{
-		result.push(forumEntry(forumTypeNum, 'Mastery:', forumName(phSpecializationTree[4].name) + ' Mastery', '(1/1)'));
+		result.push(forumEntry(forumTypeNum, "Mastery:", forumName(PH.specializationTree[4].name) + " Mastery", "(1/1)"));
 	}
+	result.push(forumNewline(forumTypeNum));
+	result.push(forumHeader(forumTypeNum, "Devices"));
+	for (var i = 1; i < PH.device.length; i++)
+	{
+		if (PH.device[i].id > 0) result.push(forumEntry(forumTypeNum, "Slot " + i + ": ", forumName(PH.device[i].name)));
+	}
+	
+	return result.join("");
+}
 
-	forumText.innerHTML = result.join('');
+function forumExport()
+{
+	var forumType = Aesica.HCEngine.loadData("forumType");
+	var forumTypeNum;
+	if (forumType == undefined) forumType = prefs.forumExportType;
+	if (forumType == "co") forumType = "phpbbs";							// patch for deprecated CO forums formatting
+	if (forumType == "codeprecated") forumTypeNum = EXPORT_TYPE_HTML_FORUM;// html <b><font color="#ff0000">Bold Red</font></b> no linebreaks
+	else if (forumType == "txt") forumTypeNum = EXPORT_TYPE_NONE;			// plain text
+	else if (forumType == "phpbbs") forumTypeNum = EXPORT_TYPE_BBCODE;		// phpbb [b][color=#ff0000]Bold Red[/color][/b]
+	else if (forumType == "markdown") forumTypeNum = EXPORT_TYPE_MARKDOWN;	// markdown **bold**
+	else if (forumType == "html") forumTypeNum = EXPORT_TYPE_HTML;			// html with line breaks <b><font color="#ff0000">Bold Red</font></b><br />
+	else forumTypeNum = EXPORT_TYPE_NONE;
+	document.getElementById("exportType_" + forumType).className = "selectedButton";
+	var forumText = document.getElementById("forumText");
+	setForumExportType(forumType);
+
+	forumText.innerHTML = getExportString(forumTypeNum);
 }
 window['forumExport'] = forumExport;
 
 // preferences
 function setPrefFontFamily(fontFamily)
 {
-	prefFontFamily = fontFamily;
-	SaveData("prefFontFamily", fontFamily);
-	document.getElementById('body').style.fontFamily = fontFamily + ', sans-serif';
-	document.getElementById('prefFontFamilyName').innerHTML = fontFamily;
+	prefs.fontFamily = fontFamily;
 	selectClearHideSections();
+	saveSettings();
+	updateSettingsDisplay();
 	//submitAnalytics(analyticsPrefCatagory, 'PrefFontFamily', fontFamily);
 }
 window['setPrefFontFamily'] = setPrefFontFamily;
@@ -3645,20 +3913,22 @@ function selectPrefFontFamily()
 	var iLength = prefFontFamilyList.length;
 	if (iLength > iMaxFontColumns * iFontsPerColumn) iLength = iMaxFontColumns * iFontsPerColumn;
 
-	ResetDialogBox();
-	SetDialogBoxHeader("Select Preset");
+	Aesica.HCEngine.resetDialogBox();
+	Aesica.HCEngine.setDialogBoxHeader("Select Preset");
 
 	mTable = document.createElement("table");
-	AddItemToDialogBox(mTable);
+	Aesica.HCEngine.addItemToDialogBox(mTable);
 
 	for (i = 0; i < iLength; i++)
 	{
 		iCurrentColumn = Math.floor(i / iFontsPerColumn);
 		mFont = document.createElement("a");
 		mFont.setAttribute("id", "selectPrefFontFamily" + i);
-		mFont.setAttribute("onclick", "setPrefFontFamily('" + prefFontFamilyList[i] + "')");
+		//mFont.setAttribute("onclick", "setPrefFontFamily('" + prefFontFamilyList[i] + "')");
 		mFont.setAttribute("style", "display: block; margin-right: 1em; font-family: " + prefFontFamilyList[i]);
 		mFont.innerHTML = prefFontFamilyList[i];
+		(function(i){ mFont.addEventListener("click", (function(){ setPrefFontFamily(prefFontFamilyList[i]); })); })(i);
+		
 
 		if (iCurrentColumn == 0)
 		{
@@ -3678,55 +3948,170 @@ window['selectPrefFontFamily'] = selectPrefFontFamily;
 
 function setPrefFontSize(fontSize)
 {
-	prefFontSize = fontSize;
-	SaveData("prefFontSize", fontSize);
-	document.getElementById('body').style.fontSize = fontSize + '%';
-	document.getElementById('prefFontSize').innerHTML = fontSize + '%';
+	if (fontSize > 0)
+	{
+		prefs.fontSize = fontSize;
+		saveSettings();
+		updateSettingsDisplay();
+	}
+	else
+	{
+		console.log("Font size cannot be set to 0 or below.")
+	}
 	//submitAnalytics(analyticsPrefCatagory, 'PrefFontSize', fontSize);
 }
 window['setPrefFontSize'] = setPrefFontSize;
 
 function selectPrefFontSize(change)
 {
-	setPrefFontSize(prefFontSize + change * 10);
+	setPrefFontSize(prefs.fontSize + change * 10);
 }
 window['selectPrefFontSize'] = selectPrefFontSize;
 
-// function populateFontList(fontList) {
-//     prefFontFamilyList = [];
-//     for (var key in fontList) {
-//         var fontName = fontList[key];
-//         fontName = fontName.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-//         if (!(fontName.match(/[_\-\s]Italic$/)
-//               || fontName.match(/[_\-\s](Demi)?[Bb]old$/)
-//               || fontName.match(/[_\-\s]Medium$/)
-//               || fontName.match(/[_\-\s](Ultra)?[Ll]ight$/)
-//               || fontName.match(/[_\-\s]Condensed$/))) {
-//             fontName = fontName.replace(/\s*Regular$/, '');
-//             prefFontFamilyList.add(fontName);
-//         }
-//     }
-// }
-// window['populateFontList'] = populateFontList;
 function setPrefPopupTips(popupTips)
 {
-	prefPopupTips = popupTips;
-	SaveData("prefPopupTips", popupTips);
-	document.getElementById('prefPopupTipsValue').innerHTML = prefPopupTipsList[popupTips];
+	prefs.popupTips = popupTips;
+	prefs.confirmSelections = (popupTips == 0) ? true : false;
+	saveSettings();
+	updateSettingsDisplay();
 	//submitAnalytics(analyticsPrefCatagory, 'PrefPopupTips', prefPopupTipsList[popupTips]);
 }
 window['setPrefPopupTips'] = setPrefPopupTips;
 
 function selectPrefPopupTips()
 {
-	setPrefPopupTips((prefPopupTips + 1) % 3);
+	setPrefPopupTips((prefs.popupTips + 1) % prefPopupTipsList.length);
 }
 window['selectPrefPopupTips'] = selectPrefPopupTips;
 
+function selectPrefIconSize()
+{
+	Aesica.HCEngine.resetDialogBox();
+	Aesica.HCEngine.setDialogBoxHeader("Icon Size");
+	Aesica.HCEngine.addItemToDialogBoxMenu(document.createElement("br"));
+	var mLabel = document.createElement("span");
+	mLabel.innerHTML = "Icon Size: ";
+	Aesica.HCEngine.addItemToDialogBoxMenu(mLabel);
+	var mWidth = document.createElement("input");
+	mWidth.placeholder = "width";
+	mWidth.maxLength = 3;
+	mWidth.id = "prefIconWidth";
+	mWidth.size = 3;
+	mWidth.value = prefs.iconWidth;
+	Aesica.HCEngine.addItemToDialogBoxMenu(mWidth);
+	var mSpan = document.createElement("span");
+	mSpan.innerHTML = " x ";
+	Aesica.HCEngine.addItemToDialogBoxMenu(mSpan);
+	var mHeight = document.createElement("input");
+	mHeight.placeholder = "width";
+	mHeight.maxLength = 3;
+	mHeight.id = "prefIconHeight";
+	mHeight.size = 3;
+	mHeight.value = prefs.iconHeight;
+	Aesica.HCEngine.addItemToDialogBoxMenu(mHeight);
+	var mText = document.createElement("p");
+	mText.className = "note";
+	mText.innerHTML = "* A page refresh is required before this setting can be properly applied.";
+	Aesica.HCEngine.addItemToDialogBoxMenu(mText);
+	var mConfirm = Aesica.HCEngine.createButton("Apply & Refresh", null, "selectConfirmButton", (function()
+	{
+		var iNewWidth = parseInt(document.getElementById("prefIconWidth").value);
+		var iNewHeight = parseInt(document.getElementById("prefIconHeight").value);
+		if (!isNaN(iNewWidth) && iNewWidth > 0) prefs.iconWidth = iNewWidth;
+		if (!isNaN(iNewHeight) && iNewHeight > 0) prefs.iconHeight = iNewHeight;
+		saveSettings();
+		window.location.href = PH.buildLink;
+	}));
+	Aesica.HCEngine.addItemToDialogBox(mConfirm);
+	showPositionSection("selectionWindow", true);
+}
+
+function selectPrefIconSizeAT()
+{
+	Aesica.HCEngine.resetDialogBox();
+	Aesica.HCEngine.setDialogBoxHeader("Archetype Icon Size");
+	Aesica.HCEngine.addItemToDialogBoxMenu(document.createElement("br"));
+	var mLabel = document.createElement("span");
+	mLabel.innerHTML = "Icon Size: ";
+	Aesica.HCEngine.addItemToDialogBoxMenu(mLabel);
+	var mWidth = document.createElement("input");
+	mWidth.placeholder = "width";
+	mWidth.maxLength = 3;
+	mWidth.id = "prefIconWidthAT";
+	mWidth.size = 3;
+	mWidth.value = prefs.iconWidthAT;
+	Aesica.HCEngine.addItemToDialogBoxMenu(mWidth);
+	var mSpan = document.createElement("span");
+	mSpan.innerHTML = " x ";
+	Aesica.HCEngine.addItemToDialogBoxMenu(mSpan);
+	var mHeight = document.createElement("input");
+	mHeight.placeholder = "width";
+	mHeight.maxLength = 3;
+	mHeight.id = "prefIconHeightAT";
+	mHeight.size = 3;
+	mHeight.value = prefs.iconHeightAT;
+	Aesica.HCEngine.addItemToDialogBoxMenu(mHeight);
+	var mText = document.createElement("p");
+	mText.className = "note";
+	mText.innerHTML = "* A page refresh is required before this setting can be properly applied.";
+	Aesica.HCEngine.addItemToDialogBoxMenu(mText);
+	var mConfirm = Aesica.HCEngine.createButton("Apply & Refresh", null, "selectConfirmButton", (function()
+	{
+		var iNewWidth = parseInt(document.getElementById("prefIconWidthAT").value);
+		var iNewHeight = parseInt(document.getElementById("prefIconHeightAT").value);
+		if (!isNaN(iNewWidth) && iNewWidth > 0) prefs.iconWidthAT = iNewWidth;
+		if (!isNaN(iNewHeight) && iNewHeight > 0) prefs.iconHeightAT = iNewHeight;
+		saveSettings();
+		window.location.href = PH.buildLink;
+	}));
+	Aesica.HCEngine.addItemToDialogBox(mConfirm);
+	showPositionSection("selectionWindow", true);
+}
+
+function setPrefIconSize(width, height)
+{
+	prefIconWidth = width;
+	prefIconHeight = height;
+	saveSettings();
+	updateSettingsDisplay();
+}
+
+function setPrefIconSizeAT(width, height)
+{
+	prefIconWidthAT = width;
+	prefIconHeightAT = height;
+	saveSettings();
+	updateSettingsDisplay();
+}
+
+function selectResetPrefDefaults()
+{
+	prefs = DEFAULT_SETTINGS;
+	saveSettings();
+	window.location.href = PH.buildLink;
+}
+
+function saveSettings()
+{
+	Aesica.HCEngine.saveData(SETTINGS_LABEL, JSON.stringify(prefs));
+}
+
+function updateSettingsDisplay()
+{
+	document.body.style.fontFamily = prefs.fontFamily;
+	document.body.style.fontSize = prefs.fontSize + '%';
+	document.getElementById("prefFontFamilyName").innerHTML = prefs.fontFamily;
+	document.getElementById("prefFontSize").innerHTML = prefs.fontSize + "%";
+	document.getElementById("prefPopupTipsValue").innerHTML = prefPopupTipsList[prefs.popupTips];
+	document.getElementById("prefIconSize").innerHTML = prefs.iconWidth + " x " + prefs.iconHeight;
+	document.getElementById("prefIconSizeAT").innerHTML = prefs.iconWidthAT + " x " + prefs.iconHeightAT;
+}
+/*
 function setPrefConfirmSelections(confirmSelections)
 {
+	
 	prefConfirmSelections = confirmSelections;
-	SaveData("prefConfirmSelections", confirmSelections);
+	AES.saveData("prefConfirmSelections", confirmSelections);
 	document.getElementById('prefConfirmSelectionsValue').innerHTML = (confirmSelections ? 'On' : 'Off');
 	//submitAnalytics(analyticsPrefCatagory, 'PrefConfirmSelections', (confirmSelections ? 'On' : 'Off'));
 }
@@ -3737,30 +4122,30 @@ function selectPrefConfirmSelections()
 	setPrefConfirmSelections(!prefConfirmSelections);
 }
 window['selectPrefConfirmSelections'] = selectPrefConfirmSelections;
+*/
 
 function setPrefDebugMode(confirmDebug)
 {
-	debug = confirmDebug > 0;
-	SaveData("prefDebugMode", debug);
-	//document.getElementById('prefDebugModeValue').innerHTML = (confirmDebug ? 'On' : 'Off');
+	prefs.debug = confirmDebug > 0;
+	saveSettings();
 }
 
 function setPrefAnalytics(analytics)
 {
 	/*
-	if (prefAnalytics && !analytics) submitAnalytics(analyticsPrefCatagory, 'PrefAnalytics', 'Off');
-	prefAnalytics = analytics;
-	SaveData("prefAnalytics", analytics);
+	if (prefs.analytics && !analytics) submitAnalytics(analyticsPrefCatagory, 'PrefAnalytics', 'Off');
+	prefs.analytics = analytics;
+	AES.saveData("prefAnalytics", analytics);
 	document.getElementById('prefAnalyticsValue').innerHTML = (analytics ? 'On' : 'Off');
 	submitAnalytics(analyticsPrefCatagory, 'PrefAnalytics', (analytics ? 'On' : 'Off'));
-	if (prefAnalytics && analytics) submitAnalytics(analyticsPrefCatagory, 'PrefAnalytics', 'On');
+	if (prefs.analytics && analytics) submitAnalytics(analyticsPrefCatagory, 'PrefAnalytics', 'On');
 	*/
 }
 window['setPrefAnalytics'] = setPrefAnalytics;
 
 function selectPrefAnalytics()
 {
-	setPrefAnalytics(!prefAnalytics);
+	setPrefAnalytics(!prefs.analytics);
 }
 window['selectPrefAnalytics'] = selectPrefAnalytics;
 
@@ -3811,6 +4196,7 @@ function showView(view)
 window['showView'] = showView;
 
 // data dump
+/* nope, goodbye~
 function dataDump()
 {
 	var win = window.open('', 'Data Dump');
@@ -3827,21 +4213,21 @@ function dataDump()
 	win.document.write('<h3><a onclick="document.getElementById(\'version-update\').scrollIntoView();">Version Update Data</a></h3>');
 	win.document.write('<hr>');
 	win.document.write('<h2 id="super-stat">Super Stat Data</h3>');
-	for (var i = 0; i < dataSuperStat.length; i++)
+	for (var i = 0; i < HCData.superStat.length; i++)
 	{
-		win.document.write('<b>dataSuperStat[' + i + ']</b> = ' + dataSuperStat[i].toString() + '<br />');
+		win.document.write('<b>dataSuperStat[' + i + ']</b> = ' + JSON.stringify(HCData.superStat[i]) + '<br />');
 	}
 	win.document.write('</table><hr>');
 	win.document.write('<h2 id="innate-talent">Innate Talent Data</h3>');
-	for (var i = 0; i < dataInnateTalent.length; i++)
+	for (var i = 0; i < HCData.innateTalent.length; i++)
 	{
-		win.document.write('<b>dataInnateTalent[' + i + ']</b> = ' + dataInnateTalent[i].toString() + '<br />');
+		win.document.write('<b>dataInnateTalent[' + i + ']</b> = ' + JSON.stringify(HCData.innateTalent) + '<br />');
 	}
 	win.document.write('<hr>');
 	win.document.write('<h2 id="talent">Talent Data</h3>');
-	for (var i = 0; i < dataTalent.length; i++)
+	for (var i = 0; i < HCData.talent.length; i++)
 	{
-		win.document.write('<b>dataTalent[' + i + ']</b> = ' + dataTalent[i].toString() + '<br />');
+		win.document.write('<b>dataTalent[' + i + ']</b> = ' + JSON.stringify(HCData.talent) + '<br />');
 	}
 	win.document.write('<hr>');
 	win.document.write('<h2 id="travel-power">Travel Power Data</h3>');
@@ -3869,7 +4255,7 @@ function dataDump()
 	}
 	win.document.write('<hr>');
 	win.document.write('<h2 id="archetype-group">Archetype Group Data</h3>');
-	for (var i = 0; i < dataArchetypeGroup.length; i++)
+	for (var i = 0; i < HCData.archetypeGroup.length; i++)
 	{
 		win.document.write('<b>dataArchetypeGroup[' + i + ']</b> = ' + dataArchetypeGroup[i].toString() + '<br />');
 	}
@@ -3881,9 +4267,9 @@ function dataDump()
 	}
 	win.document.write('<hr>');
 	win.document.write('<h2 id="specialization-tree">Specialization Tree Data</h3>');
-	for (var i = 0; i < dataSpecializationTree.length; i++)
+	for (var i = 0; i < HCData.specializationTree.length; i++)
 	{
-		win.document.write('<b>dataSpecializationTree[' + i + ']</b> = ' + dataSpecializationTree[i].toString() + '<br />');
+		win.document.write('<b>dataSpecializationTree[' + i + ']</b> = ' + JSON.stringify(HCData.specializationTree[i]) + '<br />');
 	}
 	win.document.write('<hr>');
 	win.document.write('<h2 id="version-update">Version Update Data</h3>');
@@ -3893,7 +4279,7 @@ function dataDump()
 	}
 	win.focus();
 }
-window['dataDump'] = dataDump;
+window['dataDump'] = dataDump;*/
 
 // coerce value to boolean
 function coerceToBoolean(value, defaultBoolean)
@@ -3906,35 +4292,66 @@ function coerceToBoolean(value, defaultBoolean)
 // setup preferences
 function setupPrefs()
 {
+	var loadedPrefs;
+	try
+	{
+		loadedPrefs = JSON.parse(Aesica.HCEngine.loadData(SETTINGS_LABEL));
+	}
+	catch(e)
+	{
+		console.log("Settings not found.  Loading defaults.");
+	}
+	if (!loadedPrefs) prefs = DEFAULT_SETTINGS;
+	else prefs = loadedPrefs;
+	saveSettings();
+	updateSettingsDisplay();
+
+	/*
 	// font family
-	var fontFamily = LoadData("prefFontFamily");
-	if (fontFamily == undefined) fontFamily = prefFontFamily;
+	var fontFamily = AES.loadData("prefFontFamily");
+	if (fontFamily == undefined) fontFamily = prefs.fontFamily;
 	setPrefFontFamily(fontFamily);
 	// font size
-	var fontSize = LoadData("prefFontSize");
-	if (fontSize == undefined || isNaN(fontSize)) fontSize = prefFontSize;
+	var fontSize = AES.loadData("prefFontSize");
+	if (fontSize == undefined || isNaN(fontSize)) fontSize = prefs.fontSize;
 	setPrefFontSize(parseInt(fontSize));
 	// popup tips
-	var popupTips = LoadData("prefPopupTips");
-	if (popupTips == undefined || isNaN(popupTips)) popupTips = prefPopupTips;
+	var popupTips = AES.loadData("prefPopupTips");
+	if (popupTips == undefined || isNaN(popupTips)) popupTips = prefs.popupTips;
 	else popupTips = parseInt(popupTips);
 	setPrefPopupTips(popupTips);
 	// confirm selections
-	var confirmSelections = LoadData("prefConfirmSelections");
-	if (confirmSelections == undefined) confirmSelections = prefConfirmSelections;
-	else confirmSelections = coerceToBoolean(confirmSelections, prefConfirmSelections);
-	setPrefConfirmSelections(confirmSelections);
+	var confirmSelections = AES.loadData("prefConfirmSelections");
+	if (confirmSelections == undefined) confirmSelections = prefs.confirmSelections;
+	else confirmSelections = coerceToBoolean(confirmSelections, prefs.confirmSelections);
+	// icon size
+	var iconWidth = AES.loadData("prefIconWidth");
+	var iconHeight = AES.loadData("prefIconHeight");
+	if (iconWidth == undefined || isNaN(iconWidth)) iconWidth = prefIconWidth;
+	else iconWidth = parseInt(iconWidth);
+	if (iconHeight == undefined || isNaN(iconHeight)) iconHeight = prefIconHeight;
+	else iconHeight = parseInt(iconHeight);
+	setPrefIconSize(iconWidth, iconHeight);
+	// at icon size
+	var iconWidthAT = AES.loadData("prefIconWidthAT");// xxx
+	var iconHeightAT = AES.loadData("prefIconHeightAT");
+	if (iconWidthAT == undefined || isNaN(iconWidthAT)) iconWidthAT = prefIconWidthAT;
+	else iconWidthAT = parseInt(iconWidthAT);
+	if (iconHeightAT == undefined || isNaN(iconHeightAT)) iconHeightAT = prefIconHeightAT;
+	else iconHeightAT = parseInt(iconHeightAT);
+	setPrefIconSizeAT(iconWidthAT, iconHeightAT);
+	//setPrefConfirmSelections(confirmSelections);
 	// debug mode
-	var debugMode = LoadData("prefDebugMode");
+	var debugMode = AES.loadData("prefDebugMode");
 	if (debugMode == undefined) debugMode = debug;
 	else debugMode = coerceToBoolean(debugMode, debug);
 	setPrefDebugMode(debugMode);
-
+*/
 	// analytics - removed
 /*
-   var analytics = LoadData("prefAnalytics");
-   if (analytics == undefined) analytics = prefAnalytics;
-   else analytics = coerceToBoolean(analytics, prefAnalytics);
+   var analytics = AES.loadData("prefAnalytics");
+   if (analytics == undefined) analytics = prefs.analytics;
+   else analytics = coerceToBoolean(analytics, prefs.analytics);
    setPrefAnalytics(analytics);
  */
 }
@@ -3946,6 +4363,9 @@ function start()
 	// setup preferences
 	setupPrefs();
 
+	// setup edit view
+	Aesica.HCEngine.setupEditor();
+
 	// setup header/footer
 	document.getElementById('header').style.display = '';
 	document.getElementById('footer').style.display = '';
@@ -3954,45 +4374,23 @@ function start()
 	showView('Edit');
 
 	// setup version
-	document.getElementById("releaseDate").innerHTML = releaseDate;
-	document.getElementById("appVersion").innerHTML = appVersion;
-	document.getElementById("dataVersion").innerHTML = buildVersion;
+	document.getElementById("releaseDate").innerHTML = app.releaseDate;
+	document.getElementById("appVersion").innerHTML = app.version;
+	document.getElementById("dataVersion").innerHTML = HCData.version;
 
 	// setup name
-	document.getElementById('fieldName').firstChild.data = phName;
+	document.getElementById('fieldName').firstChild.data = PH.name;
 	document.getElementById('sectionDisplayName').style.display = '';
-	document.getElementById('editName').value = phName;
+	document.getElementById('editName').value = PH.name;
 	document.getElementById('sectionEditName').style.display = 'none';
 	setTitle();
 
-	// setup archetype
-	var mArchetypeDisplay = document.getElementById('fieldArchetype');
-	mArchetypeDisplay.innerHTML = phArchetype.desc + "&nbsp;" + phArchetype.name;
-	setOnmouseoverPopupL1(mArchetypeDisplay, "<b>" + phArchetype.name + "</b><br /><br />" + phArchetype.tip);
+	// setup archetype and role;
+	setArchetype(1);
+	setRole(1);
 
-	/*
-	   // setup super stats
-	   setupSuperStats();
-
-	   // setup innate talents
-	   setupInnateTalents();
-
-	   // setup talents
-	   setupTalents();
-
-	   // setup travel powers
-	   setupTravelPowers();
-
-	   // setup frameworks
-	   setupFrameworks();
-	 */
-	// setup powers
-	// powers are setup when a framework is selected with the `selectFramework' function
-	//hideSection('selectionPower');
-	//hideSection('selectionPowerAdvantage');
-
-	// setup archetypes
-	//setupArchtypes();
+	// build lookup name tables
+	Aesica.dataHarness.buildLookupTables();
 
 	// parse url
 	parseUrlParams(window.location.href);
@@ -4004,26 +4402,26 @@ function start()
 	submitBuild();
 	
 	// setup saved data
-	RefreshSaveList();
-	if (LocalStorageSupported()) SetUpSaveTools();
+	Aesica.HCEngine.refreshSaveList();
+	if (Aesica.HCEngine.localStorageSupported()) Aesica.HCEngine.setUpSaveTools();
 
 	// setup data reference stuffs
-	InitReferenceSheet();
+	Aesica.HCEngine.initReferenceSheet();
 
-	// show debug tab if debug mode is true
-	if (debug)
+	// show debug stuff
+	if (prefs.debug)
 	{
 		document.getElementById("showViewDebug").style.visibility = "visible";
-		document.getElementById("title").innerHTML = siteName + " [Beta]";
+		document.getElementById("titleDebugMode").innerHTML = "(Debug Mode)";
 	}
 
-	// show version
-	document.getElementById("titleVersion").innerHTML = "Last updated: " + releaseDate + " - v" + appVersion + "-" + buildVersion;
+	// all ready! <3
+	Aesica.HCEngine.writeMessage("Ready", true);
 
 }
 window['start'] = start;
 
-window.onload = start;
+window.addEventListener("load", start);
 
 //==============================================================================
 // powerhouse.js ends here

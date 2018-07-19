@@ -368,7 +368,7 @@ dataVersionUpdate[dataVersionUpdate.length] = new VersionUpdate(
             // move The Savage: Aspect of the Bestial archtype power from level 40 (11th now 12th power) to level 14 (6th power)
             if (value['type'] == 'power' && archetype == 22 && pos == 24 && framework == 25 && power == 11) {
                 setAdvantage(1, 6, value['mask']);
-                return phPowerAdvantage[12];
+                return PH.powerAdvantage[12];
             }
             // move The Cursed: Aspect of the Infernal archtype power from level 27 (9th now 10th power) to level 14 (6th power)
             if (value['type'] == 'power' && archetype == 26 && pos == 22 && framework == 26 && power == 16) {
@@ -1217,7 +1217,7 @@ dataVersionUpdate[dataVersionUpdate.length] = new VersionUpdate(
         case 'framework': return value['framework'];
         case 'power':
 			var power = value['power'];
-            if (codeNum1 == 23 || codeNum2 >= 22) power++; // moonstruck inserted after Howl in the doge framework.  Much woof, so howl, very moon, wow.
+            if (codeNum1 == 23 && codeNum2 >= 22) power++; // moonstruck inserted after Howl in the doge framework.  Much woof, so howl, very moon, wow.
             return power;		
 		case 'mask': return value['mask'];
         case 'specializationTree': return value['specializationTree'];
@@ -1300,6 +1300,86 @@ dataVersionUpdate[dataVersionUpdate.length] = new VersionUpdate(
 			}
             return power;		
 		case 'mask': return value['mask'];
+        case 'specializationTree': return value['specializationTree'];
+        case 'specialization': return value['specialization'];
+        }
+    });
+	
+// version 28 => 29 (Unarmed shenanigans)
+dataVersionUpdate[dataVersionUpdate.length] = new VersionUpdate(
+    dataVersionUpdate.length, 12,
+    function(thing, value) {
+        var codeNum1 = (value['code1'] == undefined) ? 0 : urlCodeToNum(value['code1']); // framework
+        var codeNum2 = (value['code2'] == undefined) ? 0 : urlCodeToNum(value['code2']); // power
+        switch (thing) {
+        case 'data': return value['data'];
+        case 'pos': return value['pos'];
+        case 'i': return value['i'];
+        case 'inc': return value['inc'];
+        case 'code1': return value['code1'];
+        case 'code2': return value['code2'];
+        case 'code3': return value['code3'];
+        case 'code4': return value['code4'];
+        case 'archetype': return value['archetype'];
+        case 'superStat': return value['superStat'];
+        case 'innateTalent': return value['innateTalent'];
+        case 'talent': return value['talent'];
+        case 'travelPower': return value['travelPower'];
+        case 'framework': return value['framework'];
+        case 'power':
+			var power = value['power'];
+			if (codeNum1 == 11 && codeNum2 == 5) power++; // add bladed cyclone (dual blades)
+			if (codeNum1 == 12 && codeNum2 == 4) power++; // add bladed cyclone (claws)
+			if (codeNum1 == 13 && codeNum2 == 6) power++; // add bladed cyclone (single blade)
+			if (codeNum1 == 14)
+			{
+				if (codeNum2 >= 3) power++; // add elbow slam (t1)
+				if (codeNum2 >= 6) power++; // add bladed cyclone (unarmed)
+				if (codeNum2 >= 18) power++; // add chi manipulation
+				if (codeNum2 == 21) power = 3; // move elbow slam to t1
+				if (codeNum2 >= 22) power--; // elbow slam left a hole
+			}
+            return power;		
+		case 'mask': return value['mask']
+        case 'specializationTree': return value['specializationTree'];
+        case 'specialization': return value['specialization'];
+        }
+	});
+	
+	
+// version 29 => 30 (Single Blade)
+dataVersionUpdate[dataVersionUpdate.length] = new VersionUpdate(
+    dataVersionUpdate.length, 12,
+    function(thing, value) {
+        var codeNum1 = (value['code1'] == undefined) ? 0 : urlCodeToNum(value['code1']); // framework
+        var codeNum2 = (value['code2'] == undefined) ? 0 : urlCodeToNum(value['code2']); // power
+        switch (thing) {
+        case 'data': return value['data'];
+        case 'pos': return value['pos'];
+        case 'i': return value['i'];
+        case 'inc': return value['inc'];
+        case 'code1': return value['code1'];
+        case 'code2': return value['code2'];
+        case 'code3': return value['code3'];
+        case 'code4': return value['code4'];
+        case 'archetype': return value['archetype'];
+        case 'superStat': return value['superStat'];
+        case 'innateTalent': return value['innateTalent'];
+        case 'talent': return value['talent'];
+        case 'travelPower': return value['travelPower'];
+        case 'framework': return value['framework'];
+        case 'power':
+			var power = value['power'];
+			if (codeNum1 == 13)
+			{
+				if (codeNum2 >= 15) power++; // added Deflect
+				if (codeNum2 >= 21) power++; // added Laughing Zephyr (lol who names these?)
+				if (codeNum2 >= 26) power++; // added Crimson Bloom
+				if (codeNum2 >= 27) power++; // added Tornado Slash
+			}
+			if (codeNum1 == 23 && codeNum2 >= 23) power++; // add last stand
+            return power;		
+		case 'mask': return value['mask']
         case 'specializationTree': return value['specializationTree'];
         case 'specialization': return value['specialization'];
         }

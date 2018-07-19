@@ -1,5 +1,29 @@
 ## Changelog for HeroCreator
 
+**v3.01.30** - 7/18/2018 - Aesica
+ - YUUUUGE update!  Please read this even if you normally don't bother.  Thanks! :D
+ - Added new Unarmed powers (from a previous patch)
+ - Added new Single Blade powers
+ - Added a few extra straggler powers (Catastrophic Onslaught, Last Stand)
+ - Updated various powers and advantages changed by both the Unarmed and Single Blade revamps
+ - Added The Samurai archetype
+ - Added a travel power type selection system, similar to that used by standard powers.  You no longer have to hunt through a giant blob of random flight powers to find that one superspeed variant you may want.
+ - Added a role selector, including an 'any/multiple' for multi-role characters
+ - Fixed a bunch of broken power (and Sorcery) icons, excluding Whirling Dragon Strike and Devastating Strike for now.
+ - Updated Darkness to display the newer, more detailed tooltips (it was already halfway there anyway)
+ - Added a system for selecting devices, although there's still lots of devices that aren't yet added.  These will be added over time
+ - Fixed some annoyances with how the forum export system was rendering data (showing "(advantages)" when no advantages were selected)
+ - When selecting become devices, you can preview the powers and stat changes they give you (onslaught grond and medusa are still showing placeholders because they're not yet complete)
+ - When a Mastery has been set, you can now view its tooltip on the main editor page instead of having to click on it.
+ - Updated the export options to reflect the forums changing from fake html to bbcode.  If your settings were currently set to use forum html, it should automatically switch to bbcode.  The old forum html option is still there if people want to use it for some reason, but it's no longer being supported or improved.
+ - Replaced the version/date readout on the main page with a status display for preload/load/build parse operations.  More useful than the "something went horribly wrong" message that was used to display load problems before.  The version/date can still be viewed under the 'About' section like always.
+ - Removed improper advantages from Thundering Reeturn.  Copy/paste strikes again!
+ - Fixed a bug where The Void would switch to Endurance specialization, despite having Ego as a primary superstat.
+ - Under the hood, everything besides powers, advantages, travelpowers, and travelpoweradvantages are stored in a more compact and efficient JSON format.  Powers/etc will be transitioned
+ - Added a (very basic) logo image--Yaay! :3  (I'll make a better one later)
+ - Fixed a bunch of stupid typos, but there's probably still a bunch more.
+ - Misc behind-the-scene changes no one cares about.
+---
 **v2.3.2.27** - 11/25/2017 - Aesica
  - Added the new Fire powers:  Fiery Will, Rise From the Ashes, Flame Prison, Incinerate, and Meteor Blaze.
  - Updated the various powers and advantages changed by the Fire revamp.

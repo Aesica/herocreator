@@ -8,8 +8,6 @@ HeroCreator is an open-source HTML/Javascript character planner for Champions On
 
 Text descriptions and graphics are Copyright ©2009 Cryptic Studios, Inc. and are used as per their terms of service.
 
-Lexia Font is Copyright ©2004 Keith Bates and is used in accordance with the license.
-
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
