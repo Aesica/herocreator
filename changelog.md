@@ -1,4 +1,5 @@
 ## Changelog for HeroCreator
+<<<<<<< HEAD
 
 **v3.01.30** - 7/18/2018 - Aesica
  - YUUUUGE update!  Please read this even if you normally don't bother.  Thanks! :D
@@ -23,6 +24,14 @@
  - Added a (very basic) logo image--Yaay! :3  (I'll make a better one later)
  - Fixed a bunch of stupid typos, but there's probably still a bunch more.
  - Misc behind-the-scene changes no one cares about.
+=======
+**v2.3.2.28** - 12/11/2017 - Aesica
+ - Added the new Fire healing powers:  Warmth, Hearth, Smoldering, Nova Flare, Fiery Embrace
+ - Added The Blazing archetype
+ - Added The Blazing innate talent
+ - Updated the advantages of several powers to reflect the most recent additions
+ - Fixed Overdrive's description to state that it favors Endurance over Recovery
+>>>>>>> 307323146aa0f029902fcfadc58a4051a1c68d05
 ---
 **v2.3.2.27** - 11/25/2017 - Aesica
  - Added the new Fire powers:  Fiery Will, Rise From the Ashes, Flame Prison, Incinerate, and Meteor Blaze.
