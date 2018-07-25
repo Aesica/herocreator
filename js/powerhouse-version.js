@@ -3,11 +3,11 @@
  *
  * PowerHouse Version Javascript
  *
- * Author: Kyle W T Sherman
- *
- * Contributor(s):  Aesica
- *
- * Time-stamp: <2016-01-30 20:06:47 (kyle)>
+ * Original Author: Kyle W T Sherman
+ * http://nullware.com
+ * 
+ * Current Author & Maintainer:  Aesica
+ * http://aesica.net/co
  *============================================================================*/
 
 //==============================================================================

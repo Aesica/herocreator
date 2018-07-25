@@ -1,11 +1,13 @@
 /*
  * powerhouse.css
  *
- * PowerHouse CSS
+ * HeroCreator Stylesheet
  *
- * Author: Kyle W T Sherman
- *
- * Time-stamp: <2016-01-30 11:47:59 (kyle)>
+ * Original Author: Kyle W T Sherman
+ * http://nullware.com
+ * 
+ * Current Author & Maintainer:  Aesica
+ * http://aesica.net/co
  */
 
 
@@ -306,6 +308,10 @@ table {
 	color: #aaa;
 }
 
+input {
+	font-family: inherit;
+}
+
 input, textarea {
 	background-color: #000;
 	border-radius: 10px;
@@ -318,6 +324,22 @@ input, textarea {
 textarea {
 	width: 98%;
 	height: 40rem;
+}
+
+#buildNoteEditor {
+	font-size: 85%;
+	font-family: inherit;
+	width: 20rem;
+	height: 6rem;
+}
+
+#buildNoteButton {
+	width: 20rem;
+	display: block;
+}
+
+#buildNoteHelp {
+	width: 20rem;
 }
 
 .dataButton {

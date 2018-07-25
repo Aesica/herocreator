@@ -11,14 +11,14 @@
 	</script>
 	<title>HeroCreator</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="js/powerhouse.css" />
-	<script type="text/javascript" src="js/spritesheet.js"></script>
-	<script type="text/javascript" src="js/hc-extender.js"></script>
-	<script type="text/javascript" src="js/powerhouse-data.js"></script>
-	<script type="text/javascript" src="js/hc-data.js"></script>
-	<script type="text/javascript" src="js/hc-data-harness.js"></script>
-	<script type="text/javascript" src="js/powerhouse-version.js"></script>
-	<script type="text/javascript" src="js/powerhouse.js"></script>
+	<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="js/powerhouse.css?v=3.10" />
+	<script type="text/javascript" src="js/spritesheet.js?v=3.10"></script>
+	<script type="text/javascript" src="js/hc-extender.js?v=3.10"></script>
+	<script type="text/javascript" src="js/powerhouse-data.js?v=3.10"></script>
+	<script type="text/javascript" src="js/hc-data.js?v=30"></script>
+	<script type="text/javascript" src="js/hc-data-harness.js?v=3.10"></script>
+	<script type="text/javascript" src="js/powerhouse-version.js?v=30"></script>
+	<script type="text/javascript" src="js/powerhouse.js?v=3.10"></script>
 </head>
 <body>
 	<div id="body" class="main">
@@ -117,6 +117,8 @@
 			<div id="sectionPower" class="section"></div>
 			
 			<div class="section note">Advantage points: <span id="advantagePoints">0</span></div>
+
+			<div id="sectionBuildNote" class="section"></div>
 		</div>
 
 		<div style="clear:both"></div>
@@ -149,11 +151,11 @@
 	<div id="rightType" class="right" style="padding-top: 1.2em">
 		<span class="note">
 			Export Type:&nbsp;
-			<a id="exportType_phpbbs" class="button" onclick="selectForumExportType('phpbbs')" onmouseover="popupL1(exportTips[EXPORT_TYPE_BBCODE]);" onmouseout="popout();">BBCode</a> -
-			<a id="exportType_markdown" class="button" onclick="selectForumExportType('markdown')" onmouseover="popupL1(exportTips[EXPORT_TYPE_MARKDOWN]);" onmouseout="popout();">Markdown</a> -
-			<a id="exportType_txt" class="button" onclick="selectForumExportType('txt')" onmouseover="popupL1(exportTips[EXPORT_TYPE_NONE]);" onmouseout="popout();">Plain Text</a> -
-			<a id="exportType_html" class="button" onclick="selectForumExportType('html')" onmouseover="popupL1(exportTips[EXPORT_TYPE_HTML]);" onmouseout="popout();">HTML</a> -
-			<a id="exportType_codeprecated" class="button" onclick="selectForumExportType('codeprecated')" onmouseover="popupL1(exportTips[EXPORT_TYPE_HTML_FORUM]);" onmouseout="popout();">Pseudo-HTML</a>
+			<a id="exportType_phpbbs" class="button" onclick="selectForumExportType('phpbbs')" onmouseover="popupL1(app.system.export.tip[app.system.export.type.bbcode]);" onmouseout="popout();">BBCode</a> -
+			<a id="exportType_markdown" class="button" onclick="selectForumExportType('markdown')" onmouseover="popupL1(app.system.export.tip[app.system.export.type.markdown]);" onmouseout="popout();">Markdown</a> -
+			<a id="exportType_txt" class="button" onclick="selectForumExportType('txt')" onmouseover="popupL1(app.system.export.tip[app.system.export.type.none]);" onmouseout="popout();">Plain Text</a> -
+			<a id="exportType_html" class="button" onclick="selectForumExportType('html')" onmouseover="popupL1(app.system.export.tip[app.system.export.type.html]);" onmouseout="popout();">HTML</a> -
+			<a id="exportType_codeprecated" class="button" onclick="selectForumExportType('codeprecated')" onmouseover="popupL1(app.system.export.tip[app.system.export.type.htmlForum]);" onmouseout="popout();">Pseudo-HTML</a>
 		</span>
 	</div>
 	<div style="clear:both"></div>

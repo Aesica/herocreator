@@ -1,3 +1,14 @@
+/*==============================================================================
+ * hc-data-harness.js
+ * 
+ * Current Author & Maintainer:  Aesica
+ * http://aesica.net/co
+ ==============================================================================*/
+ 
+//==============================================================================
+// Static classes for manipulating the newer JSON data format
+//==============================================================================
+
 var Aesica = Aesica || {};
 Aesica.dataHarness = Aesica.dataHarness || {};
 (function($$)
@@ -189,9 +200,9 @@ Aesica.dataHarness = Aesica.dataHarness || {};
 		{
 			return numToUrlCode(superStat.id);
 		}
-		static abbrev(superStat)
+		static abbrev(superStat, letterCount=3)
 		{
-			return superStat.name.substr(0, 3);
+			return superStat.name.substr(0, letterCount);
 		}
 		static icon(superStat)
 		{
@@ -504,7 +515,7 @@ Aesica.dataHarness = Aesica.dataHarness || {};
 			HCLookup.power[HCData.power[i].name] = i;
 			if (HCData.power[i].id != i) console.log("Warning: Power ID mismatch for " + HCData.power[i].name + " (id:" + HCData.power[i].id + ", i:" + i + ")");
 		}
-		console.log("Lookup tables: Processed " + i + " powers.");
+		if (prefs.debug) console.log("Lookup tables: Processed " + i + " powers.");
 	}
 	$$.buildLookupTables = buildLookupTables;
 

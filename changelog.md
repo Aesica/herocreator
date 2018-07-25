@@ -1,5 +1,13 @@
 ## Changelog for HeroCreator
-<<<<<<< HEAD
+**v3.10.30** - 7/24/2018 - Aesica
+ - Added an "Additional Notes" section, allowing for brief, 140-character descriptions.  Note that the more you type, the longer the url.
+ - Added Lightning Speed, Electric Speed, Wild Speed, and Stoic Flight to the travel power list
+ - Added a thing that *might* prevent annoying cache issues with future version changes
+ - Fixed a few improperly-categorized travel powers
+ - Fixed a bug that was messing up preview tooltips for saved builds.  Note that the saved builds themselves were never affected, but you'll need to load/save again before they display correctly again
+ - Added a missing description alias for Shredded
+ - Hid the Become Hotdog Vendor test device because the world just isn't ready for that kind of power yet
+ - Other minor fixes, corrections, etc
 
 **v3.01.30** - 7/18/2018 - Aesica
  - YUUUUGE update!  Please read this even if you normally don't bother.  Thanks! :D
@@ -24,14 +32,6 @@
  - Added a (very basic) logo image--Yaay! :3  (I'll make a better one later)
  - Fixed a bunch of stupid typos, but there's probably still a bunch more.
  - Misc behind-the-scene changes no one cares about.
-=======
-**v2.3.2.28** - 12/11/2017 - Aesica
- - Added the new Fire healing powers:  Warmth, Hearth, Smoldering, Nova Flare, Fiery Embrace
- - Added The Blazing archetype
- - Added The Blazing innate talent
- - Updated the advantages of several powers to reflect the most recent additions
- - Fixed Overdrive's description to state that it favors Endurance over Recovery
->>>>>>> 307323146aa0f029902fcfadc58a4051a1c68d05
 ---
 **v2.3.2.27** - 11/25/2017 - Aesica
  - Added the new Fire powers:  Fiery Will, Rise From the Ashes, Flame Prison, Incinerate, and Meteor Blaze.

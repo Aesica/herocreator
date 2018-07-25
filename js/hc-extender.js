@@ -1,15 +1,13 @@
 /*==============================================================================
  * hc-extender.js
- *
- * Author: Aesica
- *
- * Time-stamp: <2016-08-01 (Aesica)>
- *============================================================================*/
+ * 
+ * Current Author & Maintainer:  Aesica
+ * http://aesica.net/co
+ ==============================================================================*/
 
 //==============================================================================
 // Additional functionality without adding more functions/etc to powerhouse.js
 //==============================================================================
-
 var Aesica = Aesica || {};
 Aesica.HCEngine = Aesica.HCEngine || {};
 (function($$)
@@ -287,6 +285,17 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 		mItem1.appendChild(mItem2);
 		mSection.appendChild(mItem1);
 
+		// build note
+		mSection = document.getElementById("sectionBuildNote");
+		mItem1 = Aesica.HCEngine.createButton("Additional Notes", "buildNoteButton", "button", selectBuildNote);
+		mItem2 = document.createElement("span");
+		mItem2.id = "buildNote";
+		mItem2.className = "buttonText";
+		mItem1.addEventListener("click", selectBuildNote);
+		mItem1.appendChild(document.createElement("br"));
+		mItem1.appendChild(mItem2);
+		mSection.appendChild(mItem1);
+
 		// settings
 		document.getElementById("fontPlus").appendChild(getDescNode("plus", null, false, true));
 		document.getElementById("fontMinus").appendChild(getDescNode("minus", null, false, true));
@@ -368,7 +377,7 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 		var iWidth = (isATIcon) ? prefs.iconWidthAT : prefs.iconWidth;
 		var iHeight = (isATIcon) ? prefs.iconHeightAT : prefs.iconHeight;
 		var oSpriteData;
-		if (!spriteData.frames[icon]) icon = isATIcon ? DEFAULT_ICON_NAME_AT : DEFAULT_ICON_NAME;
+		if (!spriteData.frames[icon]) icon = isATIcon ? app.system.defaultIcon.archetype : app.system.defaultIcon.power;
 		oSpriteData = spriteData.frames[icon].frame;
 		mCanvas.width = iWidth;
 		mCanvas.height = iHeight;
@@ -554,6 +563,36 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 		return mReturn;
 	}
 	$$.createButton = createButton;
+
+	function urlSafeBtoa(sData)
+	{
+		var sReturn = btoa(sData);
+		var rxPlus = /\+/g; // convert to -
+		var rxSlash = /\//g; // convert to _
+		var rxEqual = /\=/g; // convert to ~
+		sReturn = sReturn.replace(rxPlus, "-").replace(rxSlash, "_").replace(rxEqual, "~");
+		return sReturn;
+	}
+	$$.urlSafeBtoa = urlSafeBtoa
+
+	function urlSafeAtob(sData)
+	{
+		var sReturn = "";
+		var rxPlus = /\-/g;
+		var rxSlash = /\_/g;
+		var rxEqual = /\~/g;
+		sReturn = sData.replace(rxPlus, "+").replace(rxSlash, "/").replace(rxEqual, "=");
+		try 
+		{
+			sReturn = atob(sReturn);
+		}
+		catch(e)
+		{
+			console.log("Invalid base64: " + sData);
+		}
+		return sReturn;
+	}
+	$$.urlSafeAtob = urlSafeAtob
 
 	////////////////// Custom Font stuff////////////////////////////
 
@@ -840,7 +879,7 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 			mNode = document.createElement("span");
 			mNode.setAttribute("id", "saveCounterLabel");
 			mNode.setAttribute("class", "saveLoadButton");
-			mNode.innerHTML = "Saved Data (" + iLength + "/" + iMaxSaveSlots + ")";
+			mNode.innerHTML = "Saved Data (" + iLength + "/" + app.system.maxSaveSlots + ")";
 			mTd.appendChild(mNode);
 			mTr.appendChild(mTd);
 			mTable.appendChild(mTr);
@@ -865,12 +904,12 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 					mTd.appendChild(mNode);
 				})(i);
 				mNode = createButton(((oSave.name == "") ? "(No Name)" : oSave.name), "", "saveLoadButton", null);
-				mNode.setAttribute("href", siteUrl + aSaveData[i].url);
+				mNode.setAttribute("href", app.system.siteUrl + aSaveData[i].url);
 				setOnmouseoverPopupL1(mNode, aSaveData[i].desc);
 				mTd.appendChild(mNode);
 			}
 			
-			if (iLength < iMaxSaveSlots)
+			if (iLength < app.system.maxSaveSlots)
 			{
 				mTr = document.createElement("tr");
 				mTd = document.createElement("td");
@@ -961,7 +1000,7 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 		var aATLevels = [0, 1, 1, 6, 8, 11, 14, 17, 21, 25, 30, 35, 40];
 		var aLevels;
 		var rxQuoteFix = /'/g;
-		if (PH.archetype != dataArchetype[1])
+		if (PH.archetype != HCData.archetype[1])
 		{
 			aLevels = aATLevels;
 		}
@@ -974,12 +1013,12 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 		for (i = 1; i < iLength; i++)
 		{
 			if (i > 1) sReturn += ", ";
-			sReturn += NullFix(PH.superStat[i].abbrev, "???");
+			sReturn += NullFix(Aesica.dataHarness.SuperStat.abbrev(PH.superStat[i]), "???");
 		}
 		sReturn += "<br /><b>Specs:</b>  ";
-		sReturn += NullFix(PH.specializationTree[SPECIALIZATION_ROLE1].name, "???") + ", ";
-		sReturn += NullFix(PH.specializationTree[SPECIALIZATION_ROLE2].name, "???") + "<br /><b>Mastery:</b>  ";
-		sReturn += NullFix(PH.specializationTree[SPECIALIZATION_MASTERY].name, "???") + "<br /><br />";
+		sReturn += NullFix(PH.specializationTree[app.system.specialization.role[0]].name, "???") + ", ";
+		sReturn += NullFix(PH.specializationTree[app.system.specialization.role[1]].name, "???") + "<br /><b>Mastery:</b>  ";
+		sReturn += NullFix(PH.specializationTree[app.system.specialization.mastery].name, "???") + "<br /><br />";
 		iLength = aLevels.length;;
 		for (i = 1; i < iLength; i++)
 		{
@@ -1205,7 +1244,7 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 		if (isNaN(iSpec))
 		{
 			iStart = 0;
-			iLength = dataSpecializationTree.length;
+			iLength = HCData.specializationTree.length;
 		}
 		else
 		{
@@ -1214,7 +1253,7 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 		}
 		for (i = iStart; i < iLength; i++)
 		{
-			oTree = dataSpecializationTree[i];
+			oTree = HCData.specializationTree[i];
 			sReturn += "\n" + oTree.name + " [" + i + "]";
 			iTreeLength = oTree.specializationList.length;
 			for (j = 0; j < iTreeLength; j++)
@@ -1244,7 +1283,7 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 	// magic numbers are fine because debug function:  0 = innate talent, else = talent
 	function listTalents(iType=0)
 	{
-		var aList = (iType == 0) ? dataInnateTalent : dataTalent;
+		var aList = (iType == 0) ? HCData.innateTalent : HCData.talent;
 		var i;
 		var iLength = aList.length;
 		var sReturn = EchoVersion() + "\n" + (iType == 0 ? "Innate " : "") + "Talents\nid code name extra";
@@ -1285,11 +1324,11 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 	function listArchetypes()
 	{
 		var i;
-		var iLength = dataArchetype.length;
+		var iLength = HCData.archetype.length;
 		var sReturn = EchoVersion() + "\nArchetypes\nid code name";
 		for (i = 0; i < iLength; i++)
 		{
-			sReturn += "\n[" + dataArchetype[i].id + "][" + dataArchetype[i].code() + "] " + dataArchetype[i].name;
+			sReturn += "\n[" + HCData.archetype[i].id + "][" + HCData.archetype[i].code() + "] " + HCData.archetype[i].name;
 		}
 		return sReturn;
 	}
@@ -1310,33 +1349,13 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 
 	function superStatsToJSON()
 	{
-		/*
-		var i;
-		var iLength = dataSuperStat.length;
-		var sReturn = "\t\"superstats\":\n\t[\n";
-		for (i = 0; i < iLength; i++)
-		{
-			sReturn += "\t\t{" + JSONize("shortname", dataSuperStat[i].abbrev) + ", " + JSONize("name", dataSuperStat[i].name) + ", " + JSONize("tree", 0) + "," + JSONize("desc", dataSuperStat[i].tip) + "}" + ((i < iLength - 1) ? "," : "") + "\n";
-		}
-		sReturn += "\t]";
-		*/
-		return JSON.stringify(dataSuperStat);
+		return JSON.stringify(HCData.superStat);
 	}
 	$$.superStatsToJSON = superStatsToJSON;
 
 	function archetypesToJSON()
 	{
-		/*
-		var i;
-		var iLength = dataArchetype.length;
-		var sReturn = "\t\"archetypes\":\n\t[\n";
-		for (i = 0; i < iLength; i++)
-		{
-			sReturn += "\t\t{" + JSONize("name", dataArchetype[i].name) + "," + JSONize("role", 0) + "," + JSONize("superstats", []) + "," + JSONize("innate", 0) + "," + JSONize("powers", []) + "," + JSONize("specializations", []) + "," + JSONize("desc", dataArchetype[i].tip) + "}" + ((i < iLength - 1) ? "," : "") + "\n";
-		}
-		sReturn += "\t]";
-		*/
-		return JSON.stringify(dataArchetype);
+		return JSON.stringify(HCData.archetype);
 	}
 	$$.archetypesToJSON = archetypesToJSON;
 
@@ -1344,7 +1363,7 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 	{
 		//var sReturn = "Manual entry required. :(\n\n"
 		//sReturn += "Suggested Format:\n\tTree(name, specializationlist[], desc)\n\t\tSpecialization(name, tier, points, desc)";
-		return JSON.stringify(dataSpecializationTree);
+		return JSON.stringify(HCData.specializationTree);
 	}
 	$$.specializationsToJSON = specializationsToJSON;
 
@@ -1352,15 +1371,15 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 	{
 		/*
 		var i;
-		var iLength = dataTalent.length;
+		var iLength = HCData.talent.length;
 		var sReturn = "\t\"talents\":\n\t[\n";
 		for (i = 0; i < iLength; i++)
 		{
-			sReturn += "\t\t{" + JSONize("name", dataTalent[i].name) + "," + JSONize("desc", dataTalent[i].extra) + "}" + ((i < iLength - 1) ? "," : "") + "\n";
+			sReturn += "\t\t{" + JSONize("name", HCData.talent[i].name) + "," + JSONize("desc", HCData.talent[i].extra) + "}" + ((i < iLength - 1) ? "," : "") + "\n";
 		}
 		sReturn += "\t]";
 		*/
-		return JSON.stringify(dataTalent);
+		return JSON.stringify(HCData.talent);
 	}
 	$$.talentsToJSON = talentsToJSON;
 
@@ -1390,15 +1409,15 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 	{
 		/*
 		var i;
-		var iLength = dataInnateTalent.length;
+		var iLength = HCData.innateTalent.length;
 		var sReturn = "\t\"innatetalents\":\n\t[\n";
 		for (i = 0; i < iLength; i++)
 		{
-			sReturn += "\t\t{" + JSONize("name", dataInnateTalent[i].name) + "," + JSONize("desc", dataInnateTalent[i].tip) + "}" + ((i < iLength - 1) ? "," : "") + "\n";
+			sReturn += "\t\t{" + JSONize("name", HCData.innateTalent[i].name) + "," + JSONize("desc", HCData.innateTalent[i].tip) + "}" + ((i < iLength - 1) ? "," : "") + "\n";
 		}
 		sReturn += "\t]";
 		*/
-		return JSON.stringify(dataInnateTalent);
+		return JSON.stringify(HCData.innateTalent);
 	}
 	$$.innateTalentsToJSON = innateTalentsToJSON;
 
@@ -1426,13 +1445,12 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 
 	function exportArchetypes()
 	{
-		var i, iLength = dataArchetype.length;
+		var i, iLength = HCData.archetype.length;
 		var sReturn = "Processing " + iLength + " archetypes...\n";
 		var aResults = [];
-		console.log(iLength);
 		for (i = 0; i < iLength; i++)
 		{
-			aResults.push(dataArchetype[i]);
+			aResults.push(HCData.archetype[i]);
 		}
 		sReturn += aResults.join(",\n");
 		return sReturn;

@@ -1,3 +1,11 @@
+/*==============================================================================
+ * hc-data.js
+ *
+ * HeroCreator JSON Datafile
+ *
+ * Author:  Aesica
+ * http://aesica.net/co
+ *============================================================================*/
 var HCLookup = {"note":"**CONTENT IS AUTO GENERATED** - name-to-id lookup tables for: archetype group, superstats, innate talent, talent, power, and specialization tree to be inserted here"};
 const HCData = 
 {
@@ -889,7 +897,7 @@ const HCData =
 			{"travelPowerRef":25},
 			{"travelPowerRef":39}
 		]},
-		{"id":48,"icon":"Any_Generic","rarity":0,"type":1,"source":0,"name":"Become Hotdog Vendor","cost":[1],"toolTip":"","stats":{"str":700,"dex":700,"con":700,"int":700,"ego":700,"pre":700,"rec":700,"end":700},"powers":
+		{"id":48,"hidden":true,"icon":"Any_Generic","rarity":0,"type":1,"source":0,"name":"Become Hotdog Vendor","cost":[1],"toolTip":"","stats":{"str":700,"dex":700,"con":700,"int":700,"ego":700,"pre":700,"rec":700,"end":700},"powers":
 		[
 			{"name":"Street Meat Aura","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Passive (Support)","tags":"Slotted Support Passive/Energy Form","toolTip":"Keeps you and your allies well fed with questionable biomatter.  Prolonged exposure will make you sick to your stomach."},
 			{"name":"Hotdog Throw","icon":"Any_Generic","activate":0.5,"charge":1.5,"maintain":0,"chargeMin":0,"cost":25,"cooldown":0,"range":"Targets foe/100 feet","tags":"Blast/Sausage","toolTip":"Deals Hotdog damage and has a 25-100% chance (based on charge time) to apply a stack of Ketchup, Mustard, Relish, or Week-Old Onion Stench to the target.  Hitting the same target with 20 more consecutive Hotdog Throws within a short period of time allows them to use the Ultimate Selfie power."}

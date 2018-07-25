@@ -4,10 +4,12 @@
  * PowerHouse Data Javascript
  *
  * Original Author: Kyle W T Sherman
- *
- * Contributor(s):  Aesica
- *
- * Time-stamp: <2016-02-17 23:15:53 (kyle)>
+ * http://nullware.com
+ * 
+ * Current Author & Maintainer:  Aesica
+ * http://aesica.net/co
+ * 
+ * Note:  This file and data format are being phased out
  *============================================================================*/
 
 //==============================================================================
@@ -1242,7 +1244,7 @@ dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, T
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE, 'Magic Carpet');
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE, 'Jet Pack', null, 'Somewhat less maneuverable than standard Flight, but faster.', 'Grants +30 Flight Speed while active.  Outside of combat, you build up speed over time.  After 4 seconds, you gain +17 Flight Speed.  After 10 seconds, you gain an additional +17 Flight Speed.<br /><br />While active, you suffer a -12% penalty to Power Cost Discount and your Energy Building strength is reduced by 15%.');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_FREE, 'Jet Pack', null, 'Somewhat less maneuverable than standard Flight, but faster.', 'Grants +30 Flight Speed while active.  Outside of combat, you build up speed over time.  After 4 seconds, you gain +17 Flight Speed.  After 10 seconds, you gain an additional +17 Flight Speed.<br /><br />While active, you suffer a -12% penalty to Power Cost Discount and your Energy Building strength is reduced by 15%.');
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE, 'Heroic Flight');
 dataTravelPower[dataTravelPower.length-1].insertAdvantage('Fanfare', 0, 'Adds fanfare music to the activation of the power.');
@@ -1390,6 +1392,16 @@ dataTravelPower[dataTravelPower.length-1].insertAdvantage(dataPowerAlias['Flippi
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TELEPORT, null, 'Mind Blink', 'Teleportation', null, null, ['Alien Invader Lockbox']);
 
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, null, "Lightning Speed", "MachSpeed", null, null, ["Blockbuster Lockbox"]);
+dataTravelPower[dataTravelPower.length-1].insertAdvantage(dataPowerAlias["Impact"].name, 2, dataPowerAlias["Impact"].tip);
+
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, null, "Electric Speed", "MachSpeed", null, null, ["Blockbuster Lockbox"]);
+dataTravelPower[dataTravelPower.length-1].insertAdvantage(dataPowerAlias["Impact"].name, 2, dataPowerAlias["Impact"].tip);
+
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, null, "Stoic Flight", "Flight", null, null, ["Shaolin Lockbox"]);
+
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, TP_UNLOCK_CSTORE, "Wild Speed", "MachSpeed");
+
 
 //==============================================================================
 // Power Sets
@@ -1514,35 +1526,36 @@ dataPowerAlias["Stand Your Ground"] = new PowerAlias(new PowerAdvantage("Stand Y
 // Replace all "text only" aliases with this newer model
 const EFFECT_ALIAS =
 {
-	"Lithe":"Lithe gives you a 12% Dodge chance for 12 seconds and counts as a Chi Energy effect.",
-	"Demolish":"Demolish causes affected targets to suffer -12% to Crushing resistance and -6% to all Physical resistance for 15 seconds.",
-	"Trauma":"Trauma ends any healing over time effects on your target and causes them to receive only 50% benefit from any other incoming heals.",
-	"ClingingFlames":"Clinging Flames deals Fire damage every 2 seconds for 12 seconds, with a chance to leap to other nearby targets.  Clinging Flames is a Burning effect.",
-	"PyrePatch":"The Pyre Patch persists on the ground for 10 seconds,  Every second, it deals Fire damage and has a 10% chance to apply Clinging Flames to enemies standing in it.  You can only have one Pyre Patch active at a time.",
-	"ChiFlame":"Chi Flame deals Dimensional damage every 2 seconds and reduces the target's resistance against your Chi Power abilities for 12 seconds.  Counts as a Chi Energy effect.",
-	"Disorient":"Disorient reduces the target's damage by 10% and their movement speed by 15% for 12 seconds.",
-	"Interrupt":"Interrupt only works against lower-ranked targets once every 8 seconds.",
-	"NimbleMovement":"Nimble Movement gives you 50% Avoidance and lasts for 12 seconds.",
-	"GhostlyStrikes":"A portion of this damage is now dealt as Dimensional damage.  This increases the overall damage slightly and counts as a Chi Power effect.",
-	"DragonRush":"Dragon Rush reduces the cost of your melee powers by 15% and restores energy every second, scaling with your Dexterity.",
-	"Devoid":"Devoid reduces resistance to Dimensional damage by 18% and lasts for 12 seconds.",
-	"UltimateChallenge":"Applies a large threat over time effect to your target.  This effect stacks with Challenge.",
-	"Bleed":"Bleed deals Slashing damage every second for 16 sec, can stack up to 5 times, and is considered a Wound effect.",
-	"DeadlyPoison":"Deadly Poison deals Toxic damage every second for 16 sec, can stack up to 5 times, and is considered a Poison effect.",
-	"ChargedUp":"Charged Up increases your Running Speed by 60%, your Jump Height by 6%, and your Flying Speed by 6%.  This effect lasts 10 seconds.",
-	"Despondency":"Despondency reduces the target's chance to Dodge by an amount scaling with your Strength, lasts for 10 seconds, and is considered a Mental State.",
-	"Fear":"Fear reduces the damage targets deal by 10%, lasts for 12 seconds, and is considered a Mental State.",
-	"SwallowtailCut":"Swallowtail Cut deals 5% of the target's Health every 2 seconds for 16 seconds.",
-	"TWST":"Wipes all Threat from your primary target and places you in Stealth for 3 seconds. Shares a 30 second cooldown with other Threat Wipe abilities.",
-	"TWAoE":"Wipes all of your Threat from nearby foes, places you in Stealth for 3 seconds, and attempts to placate the target, making them unable to attack you.  Placate only works on weaker foes, such as Henchmen, Villains, and Enforcers.  Shares a 30 second cooldown with other Threat Wipe abilities.",
-	"StimPack":"Grants you a short heal over time, healing for an additional amount if your health is low.  This effect shares a short internal cooldown with other similar advantages.",
-	"Aegis":"Aegis gives you +15% resistance to all damage for 15 seconds.",
-	"OpenWound":"Open Wound has a 25% chance to apply a stack of Bleed to the target every 2 seconds for 10 seconds.",
-	"Dependency":"Dependency causes the affected target to heal you or one of your nearby allies for a small amount over 20 seconds.  Can stack up to 3 times.",
-	"Overpower":"Overpower reduces all damage resistance by 20% for 12 seconds.",
 	"ADCD":"Activates a shared cooldown of 30 seconds with other Active Defense powers.",
 	"AOCD":"Activates a shared cooldown of 30 seconds with other Active Offense powers.",
-	"AUCD":"Activates a shared cooldown of 30 seconds with other Active Defense and Active Offense powers."
+	"AUCD":"Activates a shared cooldown of 30 seconds with other Active Defense and Active Offense powers.",
+	"Aegis":"Aegis gives you +15% resistance to all damage for 15 seconds.",
+	"Bleed":"Bleed deals Slashing damage every second for 16 sec, can stack up to 5 times, and is considered a Wound effect.",
+	"ChargedUp":"Charged Up increases your Running Speed by 60%, your Jump Height by 6%, and your Flying Speed by 6%.  This effect lasts 10 seconds.",
+	"ChiFlame":"Chi Flame deals Dimensional damage every 2 seconds and reduces the target's resistance against your Chi Power abilities for 12 seconds.  Counts as a Chi Energy effect.",
+	"ClingingFlames":"Clinging Flames deals Fire damage every 2 seconds for 12 seconds, with a chance to leap to other nearby targets.  Clinging Flames is a Burning effect.",
+	"DeadlyPoison":"Deadly Poison deals Toxic damage every second for 16 sec, can stack up to 5 times, and is considered a Poison effect.",
+	"Demolish":"Demolish causes affected targets to suffer -12% to Crushing resistance and -6% to all Physical resistance for 15 seconds.",
+	"Dependency":"Dependency causes the affected target to heal you or one of your nearby allies for a small amount over 20 seconds.  Can stack up to 3 times.",
+	"Despondency":"Despondency reduces the target's chance to Dodge by an amount scaling with your Strength, lasts for 10 seconds, and is considered a Mental State.",
+	"Devoid":"Devoid reduces resistance to Dimensional damage by 18% and lasts for 12 seconds.",
+	"Disorient":"Disorient reduces the target's damage by 10% and their movement speed by 15% for 12 seconds.",
+	"DragonRush":"Dragon Rush reduces the cost of your melee powers by 15% and restores energy every second, scaling with your Dexterity.",
+	"Fear":"Fear reduces the damage targets deal by 10%, lasts for 12 seconds, and is considered a Mental State.",
+	"GhostlyStrikes":"A portion of this damage is now dealt as Dimensional damage.  This increases the overall damage slightly and counts as a Chi Power effect.",
+	"Interrupt":"Interrupt only works against lower-ranked targets once every 8 seconds.",
+	"Lithe":"Lithe gives you a 12% Dodge chance for 12 seconds and counts as a Chi Energy effect.",
+	"NimbleMovement":"Nimble Movement gives you 50% Avoidance and lasts for 12 seconds.",
+	"OpenWound":"Open Wound has a 25% chance to apply a stack of Bleed to the target every 2 seconds for 10 seconds.",
+	"Overpower":"Overpower reduces all damage resistance by 20% for 12 seconds.",
+	"PyrePatch":"The Pyre Patch persists on the ground for 10 seconds,  Every second, it deals Fire damage and has a 10% chance to apply Clinging Flames to enemies standing in it.  You can only have one Pyre Patch active at a time.",
+	"SwallowtailCut":"Swallowtail Cut deals 5% of the target's Health every 2 seconds for 16 seconds.",
+	"StimPack":"Grants you a short heal over time, healing for an additional amount if your health is low.  This effect shares a short internal cooldown with other similar advantages.",
+	"Shredded":"Shredded causes affected targets to suffer -12% to Slashing resistance and 6% to Physical resistance for 12 seconds.",
+	"Trauma":"Trauma ends any healing over time effects on your target and causes them to receive only 50% benefit from any other incoming heals.",
+	"TWAoE":"Wipes all of your Threat from nearby foes, places you in Stealth for 3 seconds, and attempts to placate the target, making them unable to attack you.  Placate only works on weaker foes, such as Henchmen, Villains, and Enforcers.  Shares a 30 second cooldown with other Threat Wipe abilities.",
+	"TWST":"Wipes all Threat from your primary target and places you in Stealth for 3 seconds. Shares a 30 second cooldown with other Threat Wipe abilities.",
+	"UltimateChallenge":"Applies a large threat over time effect to your target.  This effect stacks with Challenge."
 };
 
 dataPowerAlias["R2"] = new PowerAlias(new PowerAdvantage("Rank 2", 2, null, "Increases the strength of the power by 20%."));
@@ -5270,7 +5283,7 @@ dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructo
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
 dataRequireGroupPower[dataPower.length-1] = 'supernatural';
 
-dataPower[dataPower.length] = new Power(6, 23, 2, "Resurgence", 0, 0, 0, 0, 0, 90, "Targets Self", "Active Defense/Self Heal/Increased Health", "Heals you for 50/75/100% of your Mmaximum Health and increases your Maximum Health by a moderate amount for 15 seconds.<br /><br />Also causes Regeneration to heal for more if using it." + dataPowerAlias["ADCD"].tip);
+dataPower[dataPower.length] = new Power(6, 23, 2, "Resurgence", 0, 0, 0, 0, 0, 90, "Targets Self", "Active Defense/Self Heal/Increased Health", "Heals you for 50/75/100% of your Maximum Health and increases your Maximum Health by a moderate amount for 15 seconds.<br /><br />Also causes Regeneration to heal for more if using it." + dataPowerAlias["ADCD"].tip);
 dataPower[dataPower.length-1].iconOverride = "Supernatural_Resurgence";
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, dataPowerAlias['Evanescent Emergence'].name, dataPowerAlias['Evanescent Emergence'].desc, 2, null, dataPowerAlias['Evanescent Emergence'].tip));
 dataPowerAlias["Resurgence"] = new PowerAlias(dataPower[dataPower.length-1]);
