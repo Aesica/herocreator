@@ -1793,6 +1793,7 @@ function selectBuildNote()
 	Aesica.HCEngine.addItemToDialogBox(mCancel);
 	Aesica.HCEngine.addItemToDialogBox(mSave);
 	showPositionSection("selectionWindow", true);
+	txtEditor.focus();
 }
 
 function updateBuildNoteCharCount()
@@ -1810,8 +1811,16 @@ function setBuildNote()
 	var iNoteLength = sNote.length;
 	if (iNoteLength > app.system.noteLimit) sNote = sNote.substr(0, app.system.noteLimit);
 	PH.buildNote = sNote;
-	document.getElementById("buildNote").innerHTML = sNote;
+	updateBuildNote(sNote);
 	selectClear();
+}
+
+function updateBuildNote(sNote)
+{
+	var rxLt = /\</g;
+	var rxGt = /\>/g;
+	var rxAmp = /\&/g;
+	document.getElementById("buildNote").innerHTML = sNote.replace(rxAmp, "&amp;").replace(rxLt, "&lt;").replace(rxGt, "&gt;");
 }
 
 // archetype power functions
@@ -3150,7 +3159,7 @@ function parseUrlParams(url)
 				break;
 			case "e": // for build note
 				PH.buildNote = Aesica.HCEngine.urlSafeAtob(pair[1]);
-				document.getElementById("buildNote").innerHTML = PH.buildNote;
+				updateBuildNote(PH.buildNote);
 			}
 		}
 	}
