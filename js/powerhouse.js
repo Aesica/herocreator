@@ -3886,6 +3886,12 @@ function getExportString(forumTypeNum)
 	{
 		if (PH.device[i].id > 0) result.push(forumEntry(forumTypeNum, "Slot " + i + ": ", forumName(PH.device[i].name)));
 	}
+	if (PH.buildNote != "" && PH.buildNote)
+	{
+		result.push(forumNewline(forumTypeNum));
+		result.push(forumHeader(forumTypeNum, "Additional Notes:"));
+		result.push(PH.buildNote);
+	}
 	
 	return result.join("");
 }
