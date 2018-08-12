@@ -1,4 +1,8 @@
 ## Changelog for HeroCreator
+**v3.11.30** - 8/11/2018 - Aesica
+ - Updated the Sorcery framework to use the modern tooltip system
+ - Various minor bugs have been addressed
+
 **v3.10.30** - 7/24/2018 - Aesica
  - Added an "Additional Notes" section, allowing for brief, 140-character descriptions.  Note that the more you type, the longer the url.
  - Added Lightning Speed, Electric Speed, Wild Speed, and Stoic Flight to the travel power list

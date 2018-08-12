@@ -13,7 +13,7 @@
 // system config data
 const app = 
 {
-	"version":3.10,
+	"version":3.11,
 	"releaseDate":"7/17/2018",
 	"system":
 	{
