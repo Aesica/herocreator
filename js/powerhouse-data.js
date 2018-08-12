@@ -1857,7 +1857,7 @@ dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Force S
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'Entropic Collapse', 'Entropic Collapse', 2, null, 'Your Force Snap now causes a collapse of energy around your target, Knocking Down other nearby foes.'));
+dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'Entropic Collapse', 'Entropic Collapse', 1, null, 'Your Force Snap now causes a collapse of energy around your target, Knocking Down other nearby foes.'));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, 'Recharge', 'Recharge', 2, null, dataPowerAlias['SP'].tip));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(5, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
 
