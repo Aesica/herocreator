@@ -6,10 +6,15 @@
  * Author:  Aesica
  * http://aesica.net/co
  *============================================================================*/
+// HCLookup currently has:  power, travelPower
 var HCLookup = {"note":"**CONTENT IS AUTO GENERATED** - name-to-id lookup tables for: archetype group, superstats, innate talent, talent, power, and specialization tree to be inserted here"};
 const HCData = 
 {
 	"version":30,
+	"alert":
+	{
+		"message":null,
+	},
 	"rarity":
 	[
 		{"id":0,"name":"Common","className":"rarityCommon"},
@@ -147,8 +152,8 @@ const HCData =
 		{"id":4,"name":"Intelligence","info":"Affects the hero's power cooldown length, Stealth Detection, and the Energy Cost of their powers.","forms":["Concentration","Particle Accelerator","Manipulator","Spellcaster"],"primaryEUs":["Molecular Self-Assembly","Conjuring"],"secondaryEUs":null},
 		{"id":5,"name":"Ego","info":"Improves Ranged Damage, Ranged Knocks, and Hold Resistance.","forms":["Chilled Form","Concentration"],"primaryEUs":["Hunter's Instinct"],"secondaryEUs":null},
 		{"id":6,"name":"Presence","info":"Improves Healing Strength, Hold Duration, and Crowd Control Resistance.","forms":["Manipulator","Compassion"],"primaryEUs":["Telepathic Reverberation"],"secondaryEUs":null},
-		{"id":7,"name":"Recovery","info":"Sets the hero's Equilibrium, increases rate of Energy generated from Energy building attacks, and grants a small increase to Maximum Energy.","forms":["Compassion"],"primaryEUs":["Ionic Reverberation","Killer Instinct","Overdrive","Relentless","Telekinetic Reverberation","Supernatural Power"],"secondaryEUs":["Thermal Reverberation","Wind Reverberation","Icy Embrace","Hunter's Instinct","Molecular Self-Assembly","Unified Theory","Steadfast","Telepathic Reverberation","Spirit Reverberation","Conjuring","Wild Thing","Mephitic"]},
-		{"id":8,"name":"Endurance","info":"Affects a hero's Maximum Energy and rate of energy generated from fighting attacks.","forms":["Power Source"],"primaryEUs":["Ionic Reverberation","Thermal Reverberation","Wind Reverberation","Icy Embrace","Unified Theory","Wild Thing","Mephitic"],"secondaryEUs":["Overdrive","Relentless","Telekinetic Reverberation"]}
+		{"id":7,"name":"Recovery","info":"Sets the hero's Equilibrium, increases rate of Energy generated from Energy building attacks, and grants a small increase to Maximum Energy.","forms":["Fiery Will","Smoldering","Compassion"],"primaryEUs":["Ionic Reverberation","Killer Instinct","Relentless","Chi Manipulation","Telekinetic Reverberation","Supernatural Power"],"secondaryEUs":["Thermal Reverberation","Wind Reverberation","Icy Embrace","Hunter's Instinct","Molecular Self-Assembly","Overdrive","Unified Theory","Steadfast","Telepathic Reverberation","Spirit Reverberation","Conjuring","Wild Thing","Mephitic"]},
+		{"id":8,"name":"Endurance","info":"Affects a hero's Maximum Energy and rate of energy generated from fighting attacks.","forms":["Power Source"],"primaryEUs":["Ionic Reverberation","Thermal Reverberation","Wind Reverberation","Icy Embrace","Overdrive","Unified Theory","Wild Thing","Mephitic"],"secondaryEUs":["Killer Instinct","Relentless","Chi Manipulation","Telekinetic Reverberation"]}
 	],
 	"innateTalent":
 	[
@@ -428,7 +433,7 @@ const HCData =
 			{"id":3,"tier":1,"maxPoints":2,"name":"Elusive","icon":"MartialArts_LightningReflexes","tip":"Increases your Resistance to AoE attacks by 10/20%."},
 			{"id":4,"tier":2,"maxPoints":2,"name":"Reactive Strikes","icon":"HeavyWeapon_Guard","tip":"Single Target attacks made against you have a 10% chance to deal 10/20% of that Damage back to the attacker as Penetrating Damage. (Penetrating Damage is only resisted by Resistance to all damage, and ignores half of that Resistance. Penetrating Damage also ignores half of the absorption provided by Shields."},
 			{"id":5,"tier":2,"maxPoints":2,"name":"Tenacious","icon":"Might_Clobber","tip":"Whenever you take Damage, you gain 5/10 Offense. This effect lasts 15 seconds, stacks up to 5 times, and can only occur once per second."},
-			{"id":6,"tier":2,"maxPoints":3,"name":"Upper Hand","icon":"HeavyWeapon_Bludgeon","tip":"Increases Melee Damage you deal to targets affected by Disorient, Bleed, Shredded, Ego Leech, and Stagger by 2/4/6%."},
+			{"id":6,"tier":2,"maxPoints":3,"name":"Upper Hand","icon":"HeavyWeapon_Bludgeon","tip":"Increases Melee Damage you deal to targets affected by Demolish, Shredded, Disintegrate, No Quarter, Stress, and Stagger by 2/4/6%."},
 			{"id":7,"tier":2,"maxPoints":3,"name":"The Best Defense","icon":"Munitions_KillerInstinct","tip":"You gain 33/67/100% of your Defense as Offense."},
 			{"id":8,"tier":3,"maxPoints":1,"name":"Warden Mastery","icon":"blank","tip":"Increases the Damage of your Combo powers by 10%, and whenever you finish a Combo you gain a stack of Grit. Grit increases your Damage Resistance by 3%, and stacks up to 3 times."}
 		]},
@@ -495,26 +500,57 @@ const HCData =
 	],
 	"alias":
 	{
-		"Lithe":"Lithe gives you a 12% Dodge chance for 12 seconds and counts as a Chi Energy effect.",
-		"Demolish":"Demolish causes affected targets to suffer -12% to Crushing resistance and -6% to all Physical resistance for 15 seconds.",
-		"Trauma":"Trauma ends any healing over time effects on your target and causes them to receive only 50% benefit from any other incoming heals.",
-		"ClingingFlames":"Clinging Flames deals Fire damage every 2 seconds for 12 seconds, with a chance to leap to other nearby targets.  Clinging Flames is a Burning effect.",
-		"PyrePatch":"The Pyre Patch persists on the ground for 10 seconds,  Every second, it deals Fire damage and has a 10% chance to apply Clinging Flames to enemies standing in it.  You can only have one Pyre Patch active at a time.",
-		"ChiFlame":"Chi Flame deals Dimensional damage every 2 seconds and reduces the target's resistance against your Chi Power abilities for 12 seconds.  Counts as a Chi Energy effect.",
-		"Disorient":"Disorient reduces the target's damage by 10% and their movement speed by 15% for 12 seconds.",
-		"Interrupt":"Interrupt only works against lower-ranked targets once every 8 seconds.",
-		"NimbleMovement":"Nimble Movement gives you 50% Avoidance and lasts for 12 seconds.",
-		"GhostlyStrikes":"A portion of this damage is now dealt as Dimensional damage.  This increases the overall damage slightly and counts as a Chi Power effect.",
-		"DragonRush":"Dragon Rush reduces the cost of your melee powers by 15% and restores energy every second, scaling with your Dexterity.",
-		"Devoid":"Devoid reduces resistance to Dimensional damage by 18% and lasts for 12 seconds.",
-		"UltimateChallenge":"Applies a large threat over time effect to your target.  This effect stacks with the Challenge.",
+		"ADCD":"Activates a shared cooldown of 30 seconds with other Active Defense powers.",
+		"AOCD":"Activates a shared cooldown of 30 seconds with other Active Offense powers.",
+		"AUCD":"Activates a shared cooldown of 30 seconds with other Active Defense and Active Offense powers.",
+		"Aegis":"Aegis gives you +15% resistance to all damage for 15 seconds.",
+		"Bane":"Bane causes the target to be affected by a random debuff.",
 		"Bleed":"Bleed deals Slashing damage every second for 16 sec, can stack up to 5 times, and is considered a Wound effect.",
-		"DeadlyPoison":"Deadly Poison deals Slashing damage every second for 16 sec, can stack up to 5 times, and is considered a Poison effect.",
+		"BurnThrough":"Burn Through reduces resistance to Particle and Crushing damage by 18% and lasts for 15 seconds.",
 		"ChargedUp":"Charged Up increases your Running Speed by 60%, your Jump Height by 6%, and your Flying Speed by 6%.  This effect lasts 10 seconds.",
-		"Despondency":"Despondency reduces the target's chance to Dodge by an amount scaling with your Strength, lasts for 10 seconds, and is considered a Mental State.",
-		"Fear":"Fear reduces the damage targets deal by 10%, lasts for 12 seconds, and is considered a Mental State.",
+		"ChiFlame":"Chi Flame deals Dimensional damage every 2 seconds and reduces the target's resistance against your Chi Power abilities for 12 seconds.  Counts as a Chi Energy effect.",
 		"Chill":"Chill reduces the target's movement by 42% and occasionally traps them in an Ice Cage.",
-		"ColdSnap":"Increases the power of Shatter and Ice Barrier."
+		"ClingingFlames":"Clinging Flames deals Fire damage every 2 seconds for 12 seconds, with a chance to leap to other nearby targets.  Clinging Flames is a Burning effect.",
+		"ColdSnap":"Increases the power of Shatter and Ice Barrier.",
+		"Confused":"Confused targets attack other targets at random.",
+		"Daze":"Dazed targets suffer -10% to all damage strength and -15% to movement speed for 12 sec.",
+		"DeadlyPoison":"Deadly Poison deals Toxic damage every second for 16 sec, can stack up to 5 times, and is considered a Poison effect.",
+		"Demolish":"Demolish causes affected targets to suffer -12% to Crushing resistance and -6% to all Physical resistance for 15 seconds.",
+		"Dependency":"Dependency causes the affected target to heal you or one of your nearby allies for a small amount over 20 seconds.  Can stack up to 3 times.",
+		"Despondency":"Despondency reduces the target's chance to Dodge by an amount scaling with your Strength, lasts for 10 seconds, and is considered a Mental State.",
+		"DeviceTravelPower":"Counts as using a Rank 3 Travel Power by the same name.  Note that some types, such as Teleports, have slightly different cooldowns mechanics.",
+		"Devoid":"Devoid reduces resistance to Dimensional damage by 18% and lasts for 12 seconds.",
+		"Disorient":"Disorient reduces the target's damage by 10% and their movement speed by 15% for 12 seconds.",
+		"DragonRush":"Dragon Rush reduces the cost of your melee powers by 15% and restores energy every second, scaling with your Dexterity.",
+		"Fear":"Fear reduces the damage targets deal by 10%, lasts for 12 seconds, and is considered a Mental State.",
+		"GhostlyStrikes":"A portion of this damage is now dealt as Dimensional damage.  This increases the overall damage slightly and counts as a Chi Power effect.",
+		"HealingRune":"Healing Rune lasts for 10 seconds and heal nearby allies for a small amount every second.  Summoning a Healing Rune counts as an Enchantment.",
+		"Hexed":"Hexed lasts for 12 seconds and reduces the target's resistance to Magic damage by -18%.  Hexed is a Curse.",
+		"Illumination":"Illumination lasts for 20 seconds and increases any direct healing the target receives by 3%.  Illumination is an Enchantment.",
+		"Illuminated":"Illuminated lasts for 20 seconds and gives the target a 15% chance to apply Mend to anyone attacking it.  Mend lasts for 8 seconds and heals targets for a small amount of Health every 2 seconds.  Illuminated is a Curse.",
+		"Interrupt":"Interrupt only works against lower-ranked targets once every 8 seconds.",
+		"Jinxed":"Jinxed gives the target a -10% penalty to all damage strength and -15% to movement for 8 seconds, and upon expiring, the target is Knocked Down.  Jinx is considered a Curse.",
+		"LightEverlasting":"Light Everlasting lasts for 10 seconds and heals for a small amount every second.  Light Everlasting is an Enchantment.",
+		"Lithe":"Lithe gives you a 12% Dodge chance for 12 seconds and counts as a Chi Energy effect.",
+		"LoyalSidekick":"This device summons a Loyal Sidekick to fight by your side.<br />- Sidekick is a Controllable Pet<br />- Will despawn after 15 minutes and go on cooldown.<br />- Does not work in PvP.<br />- Only one Sidekick/Henchman may be active at a time.",
+		"MysticTransference":"Reduces the number of Sigils summoned to 2, but they can now be used alongside your other Sigils.  This also lowers the base charge time to 0.83, the cost to 26 energy, and the cooldown to 10 seconds.",
+		"Mystified":"Mystified lasts 15 seconds and reduces the cost of your Sorcery, Celestial, Darkness, and Infernal powers by 3%, stacking up to 3 times.  Mystified is an Enchantment.",
+		"NimbleMovement":"Nimble Movement gives you 50% Avoidance and lasts for 12 seconds.",
+		"NG":"Nailed to the Ground removes and locks out all Travel Powers for 5 sec.",
+		"OpenWound":"Open Wound has a 25% chance to apply a stack of Bleed to the target every 2 seconds for 10 seconds.",
+		"Overpower":"Overpower reduces all damage resistance by 20% for 12 seconds.",
+		"PlasmaBurn":"Plasma Burn deals Particle damage every second for 16 sec, can stack up to 5 times, and is considered a Radiation effect.",
+		"PyrePatch":"The Pyre Patch persists on the ground for 10 seconds,  Every second, it deals Fire damage and has a 10% chance to apply Clinging Flames to enemies standing in it.  You can only have one Pyre Patch active at a time.",
+		"SwallowtailCut":"Swallowtail Cut deals 5% of the target's Health every 2 seconds for 16 seconds.",
+		"Stagger":"Stagger reduces the target's damage resistance by 2% and movement speed by 25% per stack.  Stacks up to 3 times and lasts for 12 sec",
+		"StimPack":"Grants you a short heal over time, healing for an additional amount if your health is low.  This effect shares a short internal cooldown with other similar advantages.",
+		"Shredded":"Shredded causes affected targets to suffer -12% to Slashing resistance and 6% to Physical resistance for 12 seconds.",
+		"Trauma":"Trauma ends any healing over time effects on your target and causes them to receive only 50% benefit from any other incoming heals.",
+		"TWAoE":"Wipes all of your Threat from affected foes, places you in Stealth for 3/4/5 (based on Rank) seconds, and attempts to placate the target, making them unable to attack you.  Placate only works on weaker foes, such as Henchmen, Villains, and Enforcers.  Shares a 30 second cooldown with other Threat Wipe abilities.",
+		"TWST":"Wipes all Threat from your primary target and places you in Stealth for 3/4/5 (based on Rank) seconds. Shares a 30 second cooldown with other Threat Wipe abilities.",
+		"UltimateChallenge":"Applies a large threat over time effect to your target.  This effect stacks with Challenge.",
+		"UnboundRitual":"Causes the pet summoned by this Ritual to no longer be bound to the circle. This allows the summon to follow you around wherever you may go, and your pet no longer goes away when another Ritual pet is summoned. This advantage also adds an Energy Cost to this summon power."
+	
 	},
 	"powerUnlock":
 	{
@@ -547,10 +583,10 @@ const HCData =
 	"binding":
 	[
 		null,
-		"Bind to Character on Pickup",
-		"Bind to Character on Equip",
-		"Bind to Account on Pickup",
-		"Bind to Account on Equip"
+		{"id":"btcop","name":"Bind to Character on Pickup"},
+		{"id":"btcoe","name":"Bind to Character on Equip"},
+		{"id":"btaop","name":"Bind to Account on Pickup"},
+		{"id":"btaoe","name":"Bind to Account on Equip"},
 	],
 	"deviceType":
 	[
@@ -566,6 +602,7 @@ const HCData =
 		{"id":9,"name":"Travel Power","icon":"TravelPower_Flight","tip":"These devices are mobility based.  Many of them are similar to Travel Powers."},
 		{"id":10,"name":"Teleport","icon":"TravelPower_Teleportation","tip":"Teleportation devices are useful for quickly getting around in the world."},
 		{"id":11,"name":"Fun","icon":"Any_Generic","tip":"Fun devices are just that--fun items which have no effect on your combat prowess."},
+		{"id":12,"name":"Quest Item","icon":"Any_Generic","tip":"These are devices used for specific quests, such as Onslaught or BITE."},
 	],
 	"deviceSource":
 	[
@@ -576,9 +613,17 @@ const HCData =
 		{"id":4,"icon":"Any_Generic","name":"Recognition Vendor","currency":["SCR","GCR"]},
 		{"id":5,"icon":"Any_Generic","name":"Gold Bonus Vendor","currency":"Resources"},
 		{"id":6,"icon":"Any_Generic","name":"Collector's Store","currency":["Gold Foil Special Item Series A Voucher", "Gold Foil Special Item Series B Voucher","Purple Foil Special Item Series A Voucher","Purple Foil Special Item Series B Voucher"]},
-		{"id":7,"icon":"Any_Generic","name":"Onslaught Vendor","currency":null},
+		{"id":7,"icon":"Any_Generic","name":"Onslaught Vendor","currency":["Guardian Token","Villain Token"]},
 		{"id":8,"icon":"Any_Generic","name":"Blood Moon","currency":"Turakian Coins"},
-		{"id":9,"icon":"Any_Generic","name":"Nightmare Invasion","currency":"Celestial Coins"}
+		{"id":9,"icon":"Any_Generic","name":"Nightmare Invasion","currency":"Elysium Coins"},
+		{"id":10,"icon":"Any_Generic","name":"Vendor","currency":"Resources"},
+		{"id":11,"icon":"Any_Generic","name":"Anniversary Event","currency":"Anniversary Favor"},
+		{"id":12,"icon":"Any_Generic","name":"Winter Event","currency":"Winter Charm"},
+		{"id":13,"icon":"Any_Generic","name":"Foxbatcon","currency":"Foxbat Cred"},
+		{"id":14,"icon":"Any_Generic","name":"Patriot Event","currency":"Patriot Token"},
+		{"id":15,"icon":"Any_Generic","name":"Circus Malvanum","currency":"Circus Malvanum Gears"},
+		{"id":16,"icon":"Any_Generic","name":"Dev Vendor","currency":"Dev Token"},
+		{"id":17,"icon":"Any_Generic","name":"Nemesis Vendor","currency":"Nemesis Token"},
 	],
 	"device":
 	[
@@ -608,30 +653,30 @@ const HCData =
 		{"id":23,"icon":"Any_Generic","rarity":4,"type":5,"source":5,"bound":1,"name":"Heroic Resonance","requiredPerk":"Tremendous","cost":0,"uniqueEquipped":false,"noCooldownReduction":true,"toolTip":"","powers":{"name":"Heroic Resonance","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":600,"range":"Targets Self","tags":"","toolTip":"Restores 100% Health and Energy."}},
 		{"id":24,"icon":"Any_Generic","rarity":3,"type":1,"source":2,"bound":4,"name":"Become Lemurian Power Armor Purple","cost":120,"toolTip":"","stats":{"str":65,"dex":65,"con":205,"int":245,"ego":65,"pre":65,"rec":65,"end":205},"powers":
 		[
-			{"powerRef":225},
-			{"powerRef":573},
+			{"powerRef":"Invulnerability"},
+			{"powerRef":"Eldritch Shield"},
 			{"name":"Mystic Bolts","icon":"Any_Generic","activate":[0.5,0.34],"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets foe/50 feet","tags":"Energy Builder/Ranged Damage","toolTip":"Deals Magic damage and generates energy.  The first shot deals more damage, restores more energy, and has a 20% chance to apply a stack of Plasma Burn.  %PlasmaBurn%"},
 			{"name":"Magic Beam","icon":"Any_Generic","activate":0.25,"charge":0,"maintain":5,"chargeMin":0,"cost":[13,4.6],"cooldown":0,"range":"Affects foe (5 max)/50 feet/3 foot Cylinder","tags":"Hand Slot/Ranged AoE Damage","toolTip":"Deals Magic damage to all targets every 0.25 seconds.<br /><br />Counts as a Hand Slot power."},
 			{"name":"Magic Cannon","icon":"Any_Generic","activate":0.5,"charge":0,"maintain":3,"chargeMin":0,"cost":[50,0],"cooldown":0,"range":"Targets foe (5 max)/100 feet/10 foot Sphere","tags":"Shoulder Slot/Ranged AoE Damage/Knock Back","toolTip":"After 4 seconds, fires a rocket which deals Crushing and Magic damage to foes near the target.  In addition, each target has a 20% chance to be Knocked Back 24 feet.<br /><br />Counts as a Shoulder Slot power."},
 			{"name":"Magic Missile Barrage","icon":"Any_Generic","activate":0.5,"charge":0,"maintain":4,"chargeMin":0,"cost":[50,0],"cooldown":0,"range":"Targets foe (5 max)/100 feet/10 foot Sphere","tags":"Chest Slot/Ranged AoE Damage/Knock Back","toolTip":"Deals Magic damage every second to all targets.<br /><br />Counts as a Chest Slot power."},
 			{"name":"Magical Force Bubble","icon":"Any_Generic","activate":0.67,"charge":1.83,"maintain":0,"chargeMin":1.83,"cost":17,"cooldown":9.2,"range":"Targets foe/50 feet","tags":"Hold","toolTip":"Paralyzes the target for 18 seconds.  Damage the target takes is reduced by 50% by the field, but the Paralyze is also harder to break because of the field.<br /><br />The Force Field portion of this power has no effect against Onslaught Villains and Cosmic ranked enemies."},
-			{"travelPowerRef":49}
+			{"travelPowerRef":"Energy Slide"}
 		]},
 		{"id":25,"icon":"Any_Generic","rarity":3,"type":1,"source":2,"bound":4,"name":"Become Lemurian Power Armor Teal","cost":120,"toolTip":"","stats":{"str":65,"dex":65,"con":205,"int":245,"ego":65,"pre":65,"rec":65,"end":205},"powers":
 		[
-			{"powerRef":225},
-			{"powerRef":573},
+			{"powerRef":"Invulnerability"},
+			{"powerRef":"Eldritch Shield"},
 			{"name":"Mystic Bolts","icon":"Any_Generic","activate":[0.5,0.34],"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets foe/50 feet","tags":"Energy Builder/Ranged Damage","toolTip":"Deals Magic damage and generates energy.  The first shot deals more damage, restores more energy, and has a 20% chance to apply a stack of Plasma Burn.  %PlasmaBurn%"},
 			{"name":"Magic Beam","icon":"Any_Generic","activate":0.25,"charge":0,"maintain":5,"chargeMin":0,"cost":[13,4.6],"cooldown":0,"range":"Affects foe (5 max)/50 feet/3 foot Cylinder","tags":"Hand Slot/Ranged AoE Damage","toolTip":"Deals Magic damage to all targets every 0.25 seconds.<br /><br />Counts as a Hand Slot power."},
 			{"name":"Magic Cannon","icon":"Any_Generic","activate":0.5,"charge":0,"maintain":3,"chargeMin":0,"cost":[50,0],"cooldown":0,"range":"Targets foe (5 max)/100 feet/10 foot Sphere","tags":"Shoulder Slot/Ranged AoE Damage/Knock Back","toolTip":"After 4 seconds, fires a rocket which deals Crushing and Magic damage to foes near the target.  In addition, each target has a 20% chance to be Knocked Back 24 feet.<br /><br />Counts as a Shoulder Slot power."},
 			{"name":"Magic Missile Barrage","icon":"Any_Generic","activate":0.5,"charge":0,"maintain":4,"chargeMin":0,"cost":[50,0],"cooldown":0,"range":"Targets foe (5 max)/100 feet/10 foot Sphere","tags":"Chest Slot/Ranged AoE Damage/Knock Back","toolTip":"Deals Magic damage every second to all targets.<br /><br />Counts as a Chest Slot power."},
 			{"name":"Magical Force Bubble","icon":"Any_Generic","activate":0.67,"charge":1.83,"maintain":0,"chargeMin":1.83,"cost":17,"cooldown":9.2,"range":"Targets foe/50 feet","tags":"Hold","toolTip":"Paralyzes the target for 18 seconds.  Damage the target takes is reduced by 50% by the field, but the Paralyze is also harder to break because of the field.<br /><br />The Force Field portion of this power has no effect against Onslaught Villains and Cosmic ranked enemies."},
-			{"travelPowerRef":49}
+			{"travelPowerRef":"Energy Slide"}
 		]},
 		{"id":26,"icon":"Any_Generic","rarity":3,"type":1,"source":2,"bound":4,"name":"Become Djinn: Crimson","cost":120,"toolTip":"","stats":{"str":102,"dex":142,"con":242,"int":102,"ego":242,"pre":102,"rec":122,"end":282},"powers":
 		[
-			{"powerRef":568},
-			{"powerRef":40},
+			{"powerRef":"Aura of Primal Majesty"},
+			{"powerRef":"Fire Shield"},
 			{"name":"Wind Lash","icon":"Any_Generic","activate":[0.5,0.34],"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets foe/50 feet","tags":"Energy Builder/Ranged Damage","toolTip":"Deals Crushing damage and generates energy.  The first shot deals more damage, restores more energy, and has a 20% chance to Knock Back the target."},
 			{"name":"Scimitar Tempest","icon":"Any_Generic","activate":0.67,"charge":0,"maintain":0,"chargeMin":0,"cost":20,"cooldown":0,"range":"Targets foe (5 max)/10 feet/120 degree Cone","tags":"Melee AoE Damage","toolTip":"Deals Fire damage to all targets, increasing with each hit in the combo."},
 			{"name":"Sand Lunge","icon":"Any_Generic","activate":0.5,"charge":0,"maintain":0,"chargeMin":0,"cost":16,"cooldown":2.9,"range":"Targets foe/60 feet","tags":"Lunge/Melee Damage","toolTip":"Lunges at the target, dealing Crushing damage and Snaring them for 19 seconds.<br /><br />Stuns your target for 2.7 seconds if you lunge from more than 20 feet away."},
@@ -639,12 +684,12 @@ const HCData =
 			{"name":"Scimitar of the Storm","icon":"DualBlades_EyeoftheStorm","activate":0.5,"charge":0,"maintain":5.5,"chargeMin":0,"cost":[7.7,5.2],"cooldown":0,"range":"Affects foe (5 max)/10 foot Sphere","tags":"AoE Damage/Damage Shield","toolTip":"Deals Fire damage (scaling down per pulse) every 0.5 seconds to all targets and absorbs damage (scaling up per pulse) dealt to you."},
 			{"name":"Warlock's Blades","icon":"Sorcery_WarlocksBlades","activate":0.57,"charge":1,"maintain":0,"chargeMin":1,"cost":34,"cooldown":19,"range":"Targets Self","tags":"Uncontrolled Pet","toolTip":"Summons flaming blades to attack your foes.  The Blades hit up to 3 targets for Magic damage."},
 			{"name":"Wind Hold","icon":"Wind_Tornado","activate":0.67,"charge":1.83,"maintain":0,"chargeMin":1.83,"cost":26,"cooldown":9.6,"range":"Targets foe/50 feet","tags":"Hold","toolTip":"Paralyzes the target for 19 seconds."},
-			{"travelPowerRef":1}
+			{"travelPowerRef":"Flight"}
 		]},
 		{"id":27,"icon":"Any_Generic","rarity":3,"type":1,"source":2,"bound":4,"name":"Become Djinn: Classic","cost":120,"toolTip":"","stats":{"str":102,"dex":142,"con":242,"int":102,"ego":242,"pre":102,"rec":122,"end":282},"powers":
 		[
-			{"powerRef":568},
-			{"powerRef":40},
+			{"powerRef":"Aura of Primal Majesty"},
+			{"powerRef":"Fire Shield"},
 			{"name":"Wind Lash","icon":"Any_Generic","activate":[0.5,0.34],"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets foe/50 feet","tags":"Energy Builder/Ranged Damage","toolTip":"Deals Crushing damage and generates energy.  The first shot deals more damage, restores more energy, and has a 20% chance to Knock Back the target."},
 			{"name":"Scimitar Tempest","icon":"Any_Generic","activate":0.67,"charge":0,"maintain":0,"chargeMin":0,"cost":20,"cooldown":0,"range":"Targets foe (5 max)/10 feet/120 degree Cone","tags":"Melee AoE Damage","toolTip":"Deals Fire damage to all targets, increasing with each hit in the combo."},
 			{"name":"Sand Lunge","icon":"Any_Generic","activate":0.5,"charge":0,"maintain":0,"chargeMin":0,"cost":16,"cooldown":2.9,"range":"Targets foe/60 feet","tags":"Lunge/Melee Damage","toolTip":"Lunges at the target, dealing Crushing damage and Snaring them for 19 seconds.<br /><br />Stuns your target for 2.7 seconds if you lunge from more than 20 feet away."},
@@ -652,138 +697,138 @@ const HCData =
 			{"name":"Scimitar of the Storm","icon":"DualBlades_EyeoftheStorm","activate":0.5,"charge":0,"maintain":5.5,"chargeMin":0,"cost":[7.7,5.2],"cooldown":0,"range":"Affects foe (5 max)/10 foot Sphere","tags":"AoE Damage/Damage Shield","toolTip":"Deals Fire damage (scaling down per pulse) every 0.5 seconds to all targets and absorbs damage (scaling up per pulse) dealt to you."},
 			{"name":"Warlock's Blades","icon":"Sorcery_WarlocksBlades","activate":0.57,"charge":1,"maintain":0,"chargeMin":1,"cost":34,"cooldown":19,"range":"Targets Self","tags":"Uncontrolled Pet","toolTip":"Summons flaming blades to attack your foes.  The Blades hit up to 3 targets for Magic damage."},
 			{"name":"Wind Hold","icon":"Wind_Tornado","activate":0.67,"charge":1.83,"maintain":0,"chargeMin":1.83,"cost":26,"cooldown":9.6,"range":"Targets foe/50 feet","tags":"Hold","toolTip":"Paralyzes the target for 19 seconds."},
-			{"travelPowerRef":1}
+			{"travelPowerRef":"Flight"}
 		]},
 		{"id":28,"icon":"Any_Generic","rarity":3,"type":1,"source":2,"bound":4,"name":"Become Djinn: Diabolic","cost":120,"toolTip":"","stats":{"str":102,"dex":142,"con":242,"int":102,"ego":242,"pre":102,"rec":122,"end":282},"powers":
 		[
-			{"powerRef":568},
-			{"powerRef":40},
+			{"powerRef":"Aura of Primal Majesty"},
+			{"powerRef":"Fire Shield"},
 			{"name":"Wind Lash","icon":"Any_Generic","activate":[0.5,0.34],"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets foe/50 feet","tags":"Energy Builder/Ranged Damage","toolTip":"Deals Crushing damage and generates energy.  The first shot deals more damage, restores more energy, and has a 20% chance to Knock Back the target."},
 			{"name":"Scimitar Tempest","icon":"Any_Generic","activate":0.67,"charge":0,"maintain":0,"chargeMin":0,"cost":20,"cooldown":0,"range":"Targets foe (5 max)/10 feet/120 degree Cone","tags":"Melee AoE Damage","toolTip":"Deals Fire damage to all targets, increasing with each hit in the combo."},
 			{"name":"Sand Lunge","icon":"Any_Generic","activate":0.5,"charge":0,"maintain":0,"chargeMin":0,"cost":16,"cooldown":2.9,"range":"Targets foe/60 feet","tags":"Lunge/Melee Damage","toolTip":"Lunges at the target, dealing Crushing damage and Snaring them for 19 seconds.<br /><br />Stuns your target for 2.7 seconds if you lunge from more than 20 feet away."},
 			{"name":"Wind Breath","icon":"Wind_WindBreath","activate":0.5,"charge":0,"maintain":5,"chargeMin":0,"cost":[15,15],"cooldown":0,"range":"Targets foe (5 max)/50 feet/45 degree Cone","tags":"Ranged AoE Damage","toolTip":"Deals Cold damage (increasing with each pulse) every 0.5 seconds to all targets and Repels them away from you."},
 			{"name":"Scimitar of the Storm","icon":"DualBlades_EyeoftheStorm","activate":0.5,"charge":0,"maintain":5.5,"chargeMin":0,"cost":[7.7,5.2],"cooldown":0,"range":"Affects foe (5 max)/10 foot Sphere","tags":"AoE Damage/Damage Shield","toolTip":"Deals Fire damage (scaling down per pulse) every 0.5 seconds to all targets and absorbs damage (scaling up per pulse) dealt to you."},
-			{"powerRef":588},
+			{"name":"Warlock's Blades","icon":"Sorcery_WarlocksBlades","activate":0.57,"charge":1,"maintain":0,"chargeMin":1,"cost":34,"cooldown":19,"range":"Targets Self","tags":"Uncontrolled Pet","toolTip":"Summons flaming blades to attack your foes.  The Blades hit up to 3 targets for Magic damage."},
 			{"name":"Wind Hold","icon":"Wind_Tornado","activate":0.67,"charge":1.83,"maintain":0,"chargeMin":1.83,"cost":26,"cooldown":9.6,"range":"Targets foe/50 feet","tags":"Hold","toolTip":"Paralyzes the target for 19 seconds."},
-			{"travelPowerRef":1}
+			{"travelPowerRef":"Flight"}
 		]},
 		{"id":29,"icon":"Any_Generic","rarity":4,"type":1,"source":1,"bound":4,"name":"Become Gladiator Imperator","cost":300000,"toolTip":"Note:  This form is huge.","stats":{"str":245,"dex":105,"con":205,"int":65,"ego":65,"pre":65,"rec":65,"end":205},"powers":
 		[
-			{"powerRef":500},
-			{"powerRef":501},
+			{"powerRef":"Unstoppable"},
+			{"powerRef":"Retaliation"},
 			{"name":"Brawl","icon":"Any_Generic","activate":[0.48,0.36],"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets foe/50 feet","tags":"Energy Builder/Melee Damage","toolTip":"Deals Crushing damage and generates energy.  The first hit has a 15% chance to Disorient the target."},
 			{"name":"Beatdown","icon":"Might_Beatdown","activate":[0.5,0.5,0.67],"charge":0,"maintain":0,"chargeMin":0,"cost":[11,9.9,8.8],"cooldown":0,"range":"Targets foe/14 feet","tags":"Melee Damage/Stagger/Combo","toolTip":"Deals Crushing damage, increasing with each hit in the combo."},
 			{"name":"Kick","icon":"Any_Generic","activate":0.5,"charge":0.5,"maintain":0,"chargeMin":0,"cost":[15,22],"cooldown":0,"range":"Targets foe/14 feet","tags":"Melee Damage/Knock Back","toolTip":"Deals Crushing damage and the target is Repelled based on charge time.  If fully charged, the target is instead Knocked Back."},
 			{"name":"Haymaker","icon":"Any_Generic","activate":0.67,"charge":1.83,"maintain":0,"chargeMin":0,"cost":[28,78],"cooldown":0,"range":"Targets foe/14 feet","tags":"Melee Damage/Knock Back","toolTip":"Deals Crushing damage and your target is Knocked Back."},
-			{"powerRef":503},
-			{"travelPowerRef":2}
+			{"powerRef":"Enrage"},
+			{"travelPowerRef":"Superjump"}
 		]},
 		{"id":30,"icon":"Any_Generic","rarity":4,"type":1,"source":1,"bound":4,"name":"Become Robot Samurai","cost":300000,"toolTip":"","stats":{"str":125,"dex":245,"con":205,"int":65,"ego":165,"pre":65,"rec":65,"end":105},"powers":
 		[
-			{"powerRef":367},
-			{"powerRef":457},
+			{"powerRef":"Way of the Warrior"},
+			{"powerRef":"Guard"},
 			{"name":"Strike","icon":"HeavyWeapon_Bludgeon","activate":0.5,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets foe (5 max)/10 feet/3 foot Cylinder","tags":"","toolTip":"Deals Slashing damage and generates energy.  Every other attack has a 15% chance to apply a stack of Bleed to the target."},
 			{"name":"Cleave","icon":"HeavyWeapon_Cleave","activate":[0.83,0.83,1],"charge":0,"maintain":0,"chargeMin":0,"cost":[27,24,22],"cooldown":0,"range":"Targets foe (5 max)/10 feet/360 degree Cone","tags":"Melee AoE Damage/Combo","toolTip":"Deals Slashing damage and has a 60/80/100% chance (based on combo hit) to apply Enraged!  If your primary target is Bleeding, the chance to apply Enraged is doubled."},
 			{"name":"Lunge","icon":"HeavyWeapon_Lunge","activate":0.5,"charge":0,"maintain":0,"chargeMin":0,"cost":12,"cooldown":2.9,"range":"Targets foe/60 foot Lunge","tags":"Lunge/Bleed","toolTip":"Lunges at the target, dealing Slashing damage and Snaring them for 19 seconds.  If you lunge from more than 20 feet away, your target gains a stack of Bleed."},
 			{"name":"Skewer","icon":"HeavyWeapon_Skewer","activate":0.67,"charge":0.83,"maintain":0,"chargeMin":0,"cost":[31-44],"cooldown":0,"range":"Targets foe (5 max)/10 feet/3 foot Cylinder","tags":"Melee AoE Damage/Bleed","toolTip":"Deals Slashing damage to your primary target and 67% as much damage to secondary targets.  Has a 22-50% chance to apply a stack of Bleed to affected targets."},
 			{"name":"Annihilate","icon":"HeavyWeapon_Annihilate","activate":0.83,"charge":1.17,"maintain":0,"chargeMin":0,"cost":[35,51],"cooldown":0,"range":"Targets foe/10 feet","tags":"Melee Damage/Knock Back","toolTip":"Deals Slashing damage and your target is knocked back."},
 			{"name":"Reaper's Embrace","icon":"SingleBlade_ReapersEmbrace","activate":0.67,"charge":0.83,"maintain":0,"chargeMin":0,"cost":[41-63],"cooldown":0,"range":"Targets foe/10 feet","tags":"Melee Damage/Bleed","toolTip":"Deals Slashing damage to the target.  Consumes all Bleed effects on the target and deals Piercing damage for each one consumed."},
-			{"powerRef":380},
-			{"travelPowerRef":27}
+			{"powerRef":"Bountiful Chi Resurgence"},
+			{"travelPowerRef":"Lightning Flash"}
 		]},
 		{"id":31,"icon":"Any_Generic","rarity":4,"type":1,"source":1,"bound":4,"name":"Become Security Process","cost":300000,"toolTip":"","stats":{"str":65,"dex":145,"con":165,"int":105,"ego":245,"pre":65,"rec":65,"end":165},"powers":
 		[
-			{"powerRef":225},
-			{"powerRef":228},
+			{"powerRef":"Invulnerability"},
+			{"powerRef":"Energy Shield"},
 			{"name":"Data Spam","icon":"Force_ForceBolts","activate":[0.5,0.34],"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets foe/50 feet","tags":"Energy Builder/Ranged Damage","toolTip":"Deals Particle damage and generates energy.  The first hit has a 20% chance to Knock Back the target."},
 			{"name":"Data Blast","icon":"Force_ForceBlast","activate":0.5,"charge":1.5,"maintain":0,"chargeMin":0,"cost":[15-38],"cooldown":0,"range":"Targets foe/100 feet","tags":"Ranged Damage/Knock Back/Blast","toolTip":"Deals Particle damage and the target is Knocked Back."},
 			{"name":"Data Burst","icon":"Force_ForceEruption","activate":0.5,"charge":1,"maintain":0,"chargeMin":0,"cost":[15-29],"cooldown":0,"range":"Affects foe (5 max)/10 foot Sphere","tags":"Ranged AoE Damage/Knock Back","toolTip":"Deals Particle damage to nearby foes.  If charged over 50%, targets are also Knocked Back."},
 			{"name":"Denial of Service","icon":"Force_ForceCascade","activate":0.67,"charge":2.33,"maintain":0,"chargeMin":0,"cost":[80-229],"cooldown":0,"range":"Targets foe (5 max)/100 feet/5 foot Cylinder","tags":"Ranged Damage/Knock Back","toolTip":"Deals Particle damage to all targets and they are Knocked Back."},
 			{"name":"Checksum Bits","icon":"Any_Generic","activate":0.87,"charge":2,"maintain":0,"chargeMin":2,"cost":29,"cooldown":0,"range":"Targets Self","tags":"Controllable Pet","toolTip":"Summons 2 Checksum Bits.<br /><br />The Checksum Bits will use a Healing Beam on friendly targets in an area, healing them every 0.5 seconds."},
-			{"travelPowerRef":16}
+			{"travelPowerRef":"Lightspeed"}
 		]},
 		{"id":32,"icon":"Any_Generic","rarity":3,"type":1,"source":1,"bound":4,"name":"Become Black Talon Mk II","cost":200000,"toolTip":"","stats":{"str":65,"dex":85,"con":245,"int":65,"ego":205,"pre":65,"rec":205,"end":105},"powers":
 		[
-			{"powerRef":224},
-			{"powerRef":228},
+			{"powerRef":"Targeting Computer"},
+			{"powerRef":"Energy Shield"},
 			{"name":"Assault Cannon","icon":"Munitions_Gunslinger","activate":0.5,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets foe/50 feet","tags":"Energy Builder/Ranged Damage","toolTip":"Deals Piercing damage and generates energy.  Each subsquent hit deals more damage and restores more energy than the first.<br /><br />Has a 50% chance to ricochet to a nearby foe within 12 feet, dealing Piercing damage to them as well."},
 			{"name":"Beatdown","icon":"Any_Generic","activate":[0.5,0.5],"charge":0,"maintain":0,"chargeMin":0,"cost":[11,9.9],"cooldown":0,"range":"Targets foe/10 feet","tags":"Melee Damage/Stagger/Combo","toolTip":"Deals Crushing damage to the target."},
 			{"name":"Cannon Spray","icon":"Any_Generic","activate":0.5,"charge":0,"maintain":4,"chargeMin":0,"cost":[12,7.5],"cooldown":0,"range":"Targets foe (5 max)/50 feet/45 degree Cone","tags":"Ranged AoE Damage","toolTip":"Deals Piercing damage every 0.5 seconds to all targets."},
 			{"name":"Mighty Kick","icon":"Might_MightyKick","activate":0.5,"charge":0.5,"maintain":0,"chargeMin":0,"cost":[15,22],"cooldown":0,"range":"Targets foe/10 feet","tags":"Melee Damage/Knock Back","toolTip":"Deals Crushing damage and the target is Repelled.  If fully charged, the target is instead Knocked Back."},
 			{"name":"Micro Munitions","icon":"PowerArmor_MicroMunitions","activate":1,"charge":0,"maintain":5,"chargeMin":0,"cost":[42,31],"cooldown":0,"range":"Targets foe (5 max)/100 feet/15 foot Sphere","tags":"Ranged AoE Damage","toolTip":"Deals Crushing damage every second to all targets."},
-			{"powerRef":169},
-			{"powerRef":164},
+			{"powerRef":"Support Drones"},
+			{"powerRef":"Tanglecoil Launcher"},
 			{"name":"Orbital Cannon Mk II","icon":"Gadgeteering_OrbitalCannon","activate":0.67,"charge":2.33,"maintain":0,"chargeMin":2.33,"cost":67,"cooldown":20,"range":"Targets foe/100 feet","tags":"Ranged AoE Damage/Plasma Burn","toolTip":"Deals heavy Particle damage to all foes in range after 4.5 seconds.  After the initial hit, the beam will chase your target, dealing Particle damage every second for 9 seconds.<br /><br />Each hit has a chance to apply a stack of Plasma Burn.  %PlasmaBurn%"},
 			{"name":"Destroyer Wave","icon":"Any_Generic","activate":0.83,"charge":1.17,"maintain":0,"chargeMin":0,"cost":[60,102],"cooldown":15,"range":"Affects foe (5 max)/25 foot Sphere","tags":"Ranged AoE Damage/Knock Back","toolTip":"Deals Particle damage and Repels all targets.  If charged at least 50%, each target is instead Knocked Back."},
-			{"travelPowerRef":12}
+			{"travelPowerRef":"Rocket Jump"}
 		]},
 		{"id":33,"icon":"Any_Generic","rarity":3,"type":1,"source":1,"bound":4,"name":"Become Resistance Command Leader Robot","cost":200000,"toolTip":"Notes:  Many of its power tooltips are lacking descriptions and the toggled powers on this device are usable at the same time as any of its other powers, including its energy builder and block.  These are most likely bugs.","stats":{"str":65,"dex":105,"con":205,"int":65,"ego":205,"pre":65,"rec":65,"end":245},"powers":
 		[
-			{"powerRef":225},
-			{"powerRef":228},
-			{"powerRef":60},
+			{"powerRef":"Invulnerability"},
+			{"powerRef":"Energy Shield"},
+			{"powerRef":"Force Bolts"},
 			{"name":"Fist Rocket","icon":"Any_Generic","activate":0.5,"charge":1.5,"maintain":0,"chargeMin":0,"cost":[17,42],"cooldown":0,"range":"Targets foe/100 feet","tags":"Ranged Damage/Knock Back/Blast","toolTip":"Deals Crushing damage to the target."},
 			{"name":"Launcher","icon":"Any_Generic","activate":0.83,"charge":1,"maintain":0,"chargeMin":0,"cost":[16,67],"cooldown":0,"range":"Affects foe (5 max)/10 foot Sphere","tags":"Melee AoE Damage/Knock","toolTip":"Deals Crushing damage to targets."},
 			{"name":"Repulsor","icon":"PowerArmor_ConcussorBeam","activate":0.5,"charge":0,"maintain":5,"chargeMin":0,"cost":[21,11],"cooldown":0,"range":"Targets foe/50 feet","tags":"","toolTip":"Deals Particle damage to the target.  (Despite the name and ingame tooltip, this power does not actually Repel)"},
 			{"name":"Storm","icon":"Electricity_Thunderstrike","activate":0.5,"charge":0,"maintain":4,"chargeMin":0,"cost":[24,12],"cooldown":0,"range":"Affects foe/15 foot Sphere","tags":"","toolTip":"Deals Electrical damage and has a 20% chance to arc to nearby foes."},
 			{"name":"Eye Laser","icon":"PowerArmor_EyeBeam","activate":0.5,"charge":0,"maintain":9,"chargeMin":0,"cost":[21,11],"cooldown":0,"range":"Targets foe/100 feet","tags":"","toolTip":"Deals Particle damage to the target."},
-			{"travelPowerRef":11}
+			{"travelPowerRef":"Jet Boots"}
 		]},
 		{"id":34,"icon":"Any_Generic","rarity":3,"type":1,"source":1,"bound":4,"name":"Become Cybernetic Ninja Red","cost":200000,"toolTip":"","stats":{"str":245,"dex":205,"con":85,"int":65,"ego":65,"pre":65,"rec":65,"end":205},"powers":
 		[
 			{"name":"Ninja Reflexes","icon":"MartialArts_LightningReflexes","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Passive (Defensiv)","tags":"Slotted Defensive Passive","toolTip":"Increases your Dodge by 25%.<br /><br />Increases your Avoidance by 50% and your Avoidance Rating by 153.<br /><br />Increases your resistance to all damage over time effects by 50%.<br /><br />Whenever you are hit, your chance to dodge increases by 0.5%.  Dodging will reset this escalating bonus."},
-			{"powerRef":228},
+			{"powerRef":"Energy Shield"},
 			{"name":"Lightspeed Blade","icon":"LaserSword_LaserEdge","activate":0.47,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets foe/10 feet","tags":"Energy Builder/Melee Damage","toolTip":"Deals Particle damage to the target and generates energy.  The first hit deals more damage and generates more energy than subsequent hits."},
 			{"name":"Laser Blade","icon":"LaserSword_LightspeedStrike","activate":0.5,"charge":0,"maintain":0,"chargeMin":0,"cost":16,"cooldown":0,"range":"Targets foe (5 max)/10 feet/120 degree Cone","tags":"Melee Damage","toolTip":"Deals Particle damage to all targets.  Each hit has a 20% chance to apply a stack of Plasma Burn. %PlasmaBurn%"},
 			{"name":"Particle Sweep","icon":"LaserSword_LightwaveSlash","activate":0.67,"charge":0.83,"maintain":0,"chargeMin":0,"cost":[31,51],"cooldown":0,"range":"Affects foe (5 max)/10 foot Sphere","tags":"Melee AoE Damage/Bleed","toolTip":"Deals Particle damage to all targets.<br /><br />Has a 50-100% chance (based on charge time) to apply Plasma Burn who are not currently affected by it. %PlasmaBurn%"},
 			{"name":"Wrist Rocket","icon":"Any_Generic","activate":0.5,"charge":1.5,"maintain":0,"chargeMin":0,"cost":[16,46],"cooldown":0,"range":"targets foe/100 feet","tags":"Ranged Damage/Interrupt/Blast","toolTip":"Deals Particle damage and has a 25-100% chance to Interrupt the target, based on charge time.  Higher ranked targets cannot be interrupted.<br /><br />When fully cahrged, this power can detonate 5 stacks of Plasma Burn to deal additional Particle damage."},
 			{"name":"Energy Detonation","icon":"PowerArmor_EnergyWave","activate":0.83,"charge":1.17,"maintain":0,"chargeMin":0,"cost":[60,102],"cooldown":15,"range":"Affects foe (5 amx)/25 foot Sphere","tags":"Ranged AoE Damage/Knock Back","toolTip":"Deals Particle damage and Repels all targets.  If charged at least 50%, each target is Knocked Back.<br /><br />When fully cahrged, this power can detonate 5 stacks of Plasma Burn to deal additional Particle damage and restores Energy to you."},
 			{"name":"Laser Skewer","icon":"Any_Generic","activate":0.67,"charge":0.83,"maintain":0,"chargeMin":0,"cost":[31,44],"cooldown":15,"range":"Targets foe (5 amx)/10 feet/3 foot Cylinder","tags":"Melee AoE Damage/Bleed","toolTip":"Deals Particle damage to your primary target, and slightly less Particle damage to secondary targets.<br /><br />When hitting more than 1 target, has a 22-50% chance to apply a stack of Particle Burn."},
-			{"powerRef":249},
+			{"powerRef":"Cybernetic Tether"},
 			{"name":"Evasive Flip","icon":"Archery_EvasiveManeuvers","activate":0.67,"charge":0,"maintain":0,"chargeMin":0,"cost":10,"cooldown":18,"range":"Targets foe/100 feet/40 foot Lunge","tags":"Reverse Lunge/Self Buff","toolTip":"Lunge away from your target and applies Evasive Maneuvers to you, increasing your chance to dodge attacks by 19% for 6 seconds."},
 			{"name":"Dual Wrist Rocket Barrage","icon":"PowerArmor_DualWristRocketBarrage","activate":0.5,"charge":0,"maintain":0,"chargeMin":0,"cost":[21,15],"cooldown":0,"range":"targets foe/50 feet","tags":"Ranged Damage/Buff","toolTip":"Deals Particle damage every 0.5 seconds and has a chance to apply 1 stack of Particle Burn every second.<br /><br />This power can detonate 5 stacks of Particle Burn to deal additional Particle damage and reduce the target's resistance to Particle damage by 5%.  This can stack up to 5 times."},
-			{"travelPowerRef":6}
+			{"travelPowerRef":"Athletics"}
 		]},
 		{"id":35,"icon":"Any_Generic","rarity":3,"type":1,"source":1,"bound":4,"name":"Become Cybernetic Ninja Yellow","cost":200000,"toolTip":"","stats":{"str":245,"dex":205,"con":85,"int":65,"ego":65,"pre":65,"rec":65,"end":205},"powers":
 		[
 			{"name":"Ninja Reflexes","icon":"MartialArts_LightningReflexes","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Passive (Defensiv)","tags":"Slotted Defensive Passive","toolTip":"Increases your Dodge by 25%.<br /><br />Increases your Avoidance by 50% and your Avoidance Rating by 153.<br /><br />Increases your resistance to all damage over time effects by 50%.<br /><br />Whenever you are hit, your chance to dodge increases by 0.5%.  Dodging will reset this escalating bonus."},
-			{"powerRef":228},
+			{"powerRef":"Energy Shield"},
 			{"name":"Lightspeed Blade","icon":"LaserSword_LaserEdge","activate":0.47,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets foe/10 feet","tags":"Energy Builder/Melee Damage","toolTip":"Deals Particle damage to the target and generates energy.  The first hit deals more damage and generates more energy than subsequent hits."},
 			{"name":"Laser Blade","icon":"LaserSword_LightspeedStrike","activate":0.5,"charge":0,"maintain":0,"chargeMin":0,"cost":16,"cooldown":0,"range":"Targets foe (5 max)/10 feet/120 degree Cone","tags":"Melee Damage","toolTip":"Deals Particle damage to all targets.  Each hit has a 20% chance to apply a stack of Plasma Burn. %PlasmaBurn%"},
 			{"name":"Particle Sweep","icon":"LaserSword_LightwaveSlash","activate":0.67,"charge":0.83,"maintain":0,"chargeMin":0,"cost":[31,51],"cooldown":0,"range":"Affects foe (5 max)/10 foot Sphere","tags":"Melee AoE Damage/Bleed","toolTip":"Deals Particle damage to all targets.<br /><br />Has a 50-100% chance (based on charge time) to apply Plasma Burn who are not currently affected by it. %PlasmaBurn%"},
 			{"name":"Wrist Rocket","icon":"Any_Generic","activate":0.5,"charge":1.5,"maintain":0,"chargeMin":0,"cost":[16,46],"cooldown":0,"range":"targets foe/100 feet","tags":"Ranged Damage/Interrupt/Blast","toolTip":"Deals Particle damage and has a 25-100% chance to Interrupt the target, based on charge time.  Higher ranked targets cannot be interrupted.<br /><br />When fully cahrged, this power can detonate 5 stacks of Plasma Burn to deal additional Particle damage."},
 			{"name":"Energy Detonation","icon":"PowerArmor_EnergyWave","activate":0.83,"charge":1.17,"maintain":0,"chargeMin":0,"cost":[60,102],"cooldown":15,"range":"Affects foe (5 amx)/25 foot Sphere","tags":"Ranged AoE Damage/Knock Back","toolTip":"Deals Particle damage and Repels all targets.  If charged at least 50%, each target is Knocked Back.<br /><br />When fully cahrged, this power can detonate 5 stacks of Plasma Burn to deal additional Particle damage and restores Energy to you."},
 			{"name":"Laser Skewer","icon":"Any_Generic","activate":0.67,"charge":0.83,"maintain":0,"chargeMin":0,"cost":[31,44],"cooldown":15,"range":"Targets foe (5 amx)/10 feet/3 foot Cylinder","tags":"Melee AoE Damage/Bleed","toolTip":"Deals Particle damage to your primary target, and slightly less Particle damage to secondary targets.<br /><br />When hitting more than 1 target, has a 22-50% chance to apply a stack of Particle Burn."},
-			{"powerRef":249},
+			{"powerRef":"Cybernetic Tether"},
 			{"name":"Evasive Flip","icon":"Archery_EvasiveManeuvers","activate":0.67,"charge":0,"maintain":0,"chargeMin":0,"cost":10,"cooldown":18,"range":"Targets foe/100 feet/40 foot Lunge","tags":"Reverse Lunge/Self Buff","toolTip":"Lunge away from your target and applies Evasive Maneuvers to you, increasing your chance to dodge attacks by 19% for 6 seconds."},
 			{"name":"Dual Wrist Rocket Barrage","icon":"PowerArmor_DualWristRocketBarrage","activate":0.5,"charge":0,"maintain":0,"chargeMin":0,"cost":[21,15],"cooldown":0,"range":"targets foe/50 feet","tags":"Ranged Damage/Buff","toolTip":"Deals Particle damage every 0.5 seconds and has a chance to apply 1 stack of Particle Burn every second.<br /><br />This power can detonate 5 stacks of Particle Burn to deal additional Particle damage and reduce the target's resistance to Particle damage by 5%.  This can stack up to 5 times."},
-			{"travelPowerRef":6}
+			{"travelPowerRef":"Athletics"}
 		]},
 		{"id":36,"icon":"Any_Generic","rarity":3,"type":1,"source":1,"bound":4,"name":"Become Cybernetic Ninja White","cost":200000,"toolTip":"","stats":{"str":245,"dex":205,"con":85,"int":65,"ego":65,"pre":65,"rec":65,"end":205},"powers":
 		[
 			{"name":"Ninja Reflexes","icon":"MartialArts_LightningReflexes","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Passive (Defensive)","tags":"Slotted Defensive Passive","toolTip":"Increases your Dodge by 25%.<br /><br />Increases your Avoidance by 50% and your Avoidance Rating by 153.<br /><br />Increases your resistance to all damage over time effects by 50%.<br /><br />Whenever you are hit, your chance to dodge increases by 0.5%.  Dodging will reset this escalating bonus."},
-			{"powerRef":228},
+			{"powerRef":"Energy Shield"},
 			{"name":"Lightspeed Blade","icon":"LaserSword_LaserEdge","activate":0.47,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets foe/10 feet","tags":"Energy Builder/Melee Damage","toolTip":"Deals Particle damage to the target and generates energy.  The first hit deals more damage and generates more energy than subsequent hits."},
 			{"name":"Laser Blade","icon":"LaserSword_LightspeedStrike","activate":0.5,"charge":0,"maintain":0,"chargeMin":0,"cost":16,"cooldown":0,"range":"Targets foe (5 max)/10 feet/120 degree Cone","tags":"Melee Damage","toolTip":"Deals Particle damage to all targets.  Each hit has a 20% chance to apply a stack of Plasma Burn. %PlasmaBurn%"},
 			{"name":"Particle Sweep","icon":"LaserSword_LightwaveSlash","activate":0.67,"charge":0.83,"maintain":0,"chargeMin":0,"cost":[31,51],"cooldown":0,"range":"Affects foe (5 max)/10 foot Sphere","tags":"Melee AoE Damage/Bleed","toolTip":"Deals Particle damage to all targets.<br /><br />Has a 50-100% chance (based on charge time) to apply Plasma Burn who are not currently affected by it. %PlasmaBurn%"},
 			{"name":"Wrist Rocket","icon":"Any_Generic","activate":0.5,"charge":1.5,"maintain":0,"chargeMin":0,"cost":[16,46],"cooldown":0,"range":"targets foe/100 feet","tags":"Ranged Damage/Interrupt/Blast","toolTip":"Deals Particle damage and has a 25-100% chance to Interrupt the target, based on charge time.  Higher ranked targets cannot be interrupted.<br /><br />When fully cahrged, this power can detonate 5 stacks of Plasma Burn to deal additional Particle damage."},
 			{"name":"Energy Detonation","icon":"PowerArmor_EnergyWave","activate":0.83,"charge":1.17,"maintain":0,"chargeMin":0,"cost":[60,102],"cooldown":15,"range":"Affects foe (5 amx)/25 foot Sphere","tags":"Ranged AoE Damage/Knock Back","toolTip":"Deals Particle damage and Repels all targets.  If charged at least 50%, each target is Knocked Back.<br /><br />When fully cahrged, this power can detonate 5 stacks of Plasma Burn to deal additional Particle damage and restores Energy to you."},
 			{"name":"Laser Skewer","icon":"Any_Generic","activate":0.67,"charge":0.83,"maintain":0,"chargeMin":0,"cost":[31,44],"cooldown":15,"range":"Targets foe (5 amx)/10 feet/3 foot Cylinder","tags":"Melee AoE Damage/Bleed","toolTip":"Deals Particle damage to your primary target, and slightly less Particle damage to secondary targets.<br /><br />When hitting more than 1 target, has a 22-50% chance to apply a stack of Particle Burn."},
-			{"powerRef":249},
+			{"powerRef":"Cybernetic Tether"},
 			{"name":"Evasive Flip","icon":"Archery_EvasiveManeuvers","activate":0.67,"charge":0,"maintain":0,"chargeMin":0,"cost":10,"cooldown":18,"range":"Targets foe/100 feet/40 foot Lunge","tags":"Reverse Lunge/Self Buff","toolTip":"Lunge away from your target and applies Evasive Maneuvers to you, increasing your chance to dodge attacks by 19% for 6 seconds."},
 			{"name":"Dual Wrist Rocket Barrage","icon":"PowerArmor_DualWristRocketBarrage","activate":0.5,"charge":0,"maintain":0,"chargeMin":0,"cost":[21,15],"cooldown":0,"range":"targets foe/50 feet","tags":"Ranged Damage/Buff","toolTip":"Deals Particle damage every 0.5 seconds and has a chance to apply 1 stack of Particle Burn every second.<br /><br />This power can detonate 5 stacks of Particle Burn to deal additional Particle damage and reduce the target's resistance to Particle damage by 5%.  This can stack up to 5 times."},
-			{"travelPowerRef":6}
+			{"travelPowerRef":"Athletics"}
 		]},
 		{"id":37,"icon":"Any_Generic","rarity":3,"type":1,"source":1,"bound":4,"name":"Become Frank","cost":200000,"toolTip":"","stats":{"str":245,"dex":105,"con":205,"int":65,"ego":65,"pre":65,"rec":65,"end":205},"powers":
 		[
-			{"powerRef":500},
-			{"powerRef":501},
-			{"powerRef":489},
+			{"powerRef":"Unstoppable"},
+			{"powerRef":"Retaliation"},
+			{"powerRef":"Clobber"},
 			{"name":"Beatdown","icon":"Might_Beatdown","activate":[0.5,0.5],"charge":0,"maintain":0,"chargeMin":0,"cost":[11,9.9],"cooldown":0,"range":"Targets foe/10 feet","tags":"Melee Damage/Stagger/Combo","toolTip":"Deals Crushing damage to the target."},
 			{"name":"Kick","icon":"Might_MightyKick","activate":0.5,"charge":0.5,"maintain":0,"chargeMin":0,"cost":[15,22],"cooldown":0,"range":"Targets foe/10 feet","tags":"Melee Damage/Knock Back","toolTip":"Deals Crushing damage and the target is Repelled.  If fully charged, the target is Knocked Back instead."},
-			{"name":"Sparkstorm","icon":"Electricity_Sparkstorm","activate":0.5,"charge":0,"maintain":4,"chargeMin":0,"cost":[24,12],"cooldown":0,"range":"Affects foe (5 max)/15 feet","tags":"Ranged AoE Damage/Arc","toolTip":"Deals Electrical damage every 0.5 seconds to nearby targets while toggled on.  Each hit has a 10% chance to Arc to a nearby foe, dealing Electrical damage to them.<br /><br />Each hit has a 10% chance to apply Negative Ions to targets.  %NegativeIons%"},
-			{"powerRef":506},
-			{"travelPowerRef":2}
+			{"name":"Sparkstorm","icon":"Electricity_Sparkstorm","activate":0.5,"charge":0,"maintain":4,"chargeMin":0,"cost":[24,12],"cooldown":0,"range":"Affects foe (5 max)/15 feet","tags":"Ranged AoE Damage/Arc","toolTip":"Deals Electrical damage every 0.5 seconds to nearby targets while toggled on.  Each hit has a 10% chance to Arc to a nearby foe, dealing Electrical damage to them.<br /><br />Each hit has a 10% chance to apply Negative Ions to targets."},
+			{"powerRef":"Thunderclap"},
+			{"travelPowerRef":"Superjump"}
 		]},
 		{"id":38,"icon":"Any_Generic","rarity":3,"type":1,"source":1,"bound":4,"name":"Become Ghost","cost":200000,"toolTip":"","stats":{"str":65,"dex":65,"con":85,"int":205,"ego":245,"pre":105,"rec":145,"end":165},"powers":
 		[
@@ -793,42 +838,42 @@ const HCData =
 			{"name":"Ghostly Wail","icon":"Any_Generic","activate":0.5,"charge":1.5,"maintain":0,"chargeMin":0,"cost":[12,34],"cooldown":0,"range":"Targets foe/100 feet","tags":"Ranged Damage/Fear/Blast","toolTip":"Deals Dimensional damage and applies Devoid to the target. %Devoid%<br /><br />Also has a 25-100% chance (based on charge time) to apply Fear to your target.  %Fear%"},
 			{"name":"Ghostly Embrace","icon":"Any_Generic","activate":0.5,"charge":0,"maintain":5,"chargeMin":0,"cost":[10,10],"cooldown":0,"range":"Targets foe (5 max)/50 feet/45 degree Cone","tags":"Ranged AoE Damage","toolTip":"Deals Dimensional damage to all targets every 0.5 seconds, increasing per pulse.  Each hit has a 20% chance to apply Fear to targets.  %Fear%"},
 			{"name":"Ecto Choke","icon":"Any_Generic","activate":0.67,"charge":0,"maintain":5,"chargeMin":0,"cost":[11,11],"cooldown":9.3,"range":"Targets foe/50 feet","tags":"Ranged Damage/Incapacitate","toolTip":"Deals Dimensional damage (based on pulse) to the target and has a 20% chance to apply a stack of Ego Leech to you.<br /><br />Maintaining this power for more than 1 second Incapacitates the target, refreshing the strength of the Incapacitate per tick."},
-			{"powerRef":631},
-			{"travelPowerRef":1}
+			{"powerRef":"Devour Essence"},
+			{"travelPowerRef":"Flight"}
 		]},
 		{"id":39,"icon":"Any_Generic","rarity":3,"type":1,"source":1,"bound":4,"name":"Become Mummy","cost":200000,"toolTip":"","stats":{"str":65,"dex":105,"con":285,"int":65,"ego":205,"pre":65,"rec":85,"end":165},"powers":
 		[
-			{"powerRef":639},
+			{"powerRef":"Pestilence"},
 			{"name":"Ancestral Void","icon":"Darkness_EbonVoid","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets Self","tags":"Block","toolTip":"Grants 360% bonus resistance to all damage while blocking.<br /><br />Receiving damage will cause you to deal Dimensional damage to the attacker and heal you for a small amount.  This effect can only occur once every second."},
-			{"powerRef":628},
+			{"powerRef":"Infernal Bolts"},
 			{"name":"Insect Breath","icon":"InfernalSupernatural_VenomousBreath","activate":0.5,"charge":0,"maintain":5,"chargeMin":0,"cost":[17,9.2],"cooldown":0,"range":"Targets foe (5 max)/50 feet/45 degree Cone","tags":"Ranged AoE Damage/Poison","toolTip":"Deals Toxic damage and has a 15% chance to apply a stack of Deadly Poison to targets every 0.5 seconds.  %DeadlyPoison%"},
 			{"name":"Insect Swarm","icon":"InfernalSupernatural_InsectSwarm","activate":0.67,"charge":1.83,"maintain":0,"chargeMin":1.83,"cost":26,"cooldown":9.8,"range":"Targets nondestructible foe/50 feet","tags":"Hold","toolTip":"Paralyzes the target for 18 seconds."},
-			{"powerRef":635},
-			{"powerRef":653},
-			{"travelPowerRef":25},
-			{"travelPowerRef":39}
+			{"powerRef":"Condemn"},
+			{"powerRef":"Defile"},
+			{"travelPowerRef":"Scarab Flight"},
+			{"travelPowerRef":"Scarab Tunneling"}
 		]},
 		{"id":40,"icon":"Any_Generic","rarity":3,"type":1,"source":1,"bound":4,"name":"Become Gingerbread Man","cost":200000,"toolTip":"","stats":{"str":65,"dex":145,"con":165,"int":105,"ego":245,"pre":65,"rec":65,"end":165},"powers":
 		[
 			{"name":"Can't Catch Me!","icon":"Might_Defiance","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Passive (Defensive)","tags":"Slotted Defensive Passive","toolTip":"Passively provides you with 3 stacks of the Defiant buff.  Whenever you take damage, you gain some energy and an additional stack of Defiant.<br /><br />Defiant stacks up to 6 times and each stack provides you with resistance to all damage."},
-			{"powerRef":501},
-			{"powerRef":451},
+			{"powerRef":"Retaliation"},
+			{"powerRef":"Bludgeon"},
 			{"name":"Cleave","icon":"HeavyWeapons_Cleave","activate":[0.83,0.83,1],"charge":0,"maintain":0,"chargeMin":0,"cost":[30,27,24],"cooldown":0,"range":"10 feet/360 degree Cone","tags":"Melee AoE Damage/Combo","toolTip":"Deals Crushing damage and has a 30/40/50% chance to Knock Down targets, based on the number of combo hits.  If your main target is Disoriented, the chance to Knock Down is doubled.<br /><br />Has a 25/50/100% chance to apply Clinging Flames to targets.  %ClingingFlames%"},
-			{"powerRef":467},
+			{"powerRef":"Brimstone"},
 			{"name":"Delicious Strike","icon":"Any_Generic","activate":0.83,"charge":0,"maintain":0,"chargeMin":0,"cost":40,"cooldown":7.8,"range":"10 feet/360 degree Cone","tags":"Melee Damage/Knock Upward","toolTip":"Deals Crushing and Fire damage to targets and they are Knocked Upward.  Refreshes all stacks of Reckless on you.<br /><br />If your target is Disoriented, this attack deals an additional 15% damage and the Knock Up height is doubled."},
 			{"name":"Candy Bullets","icon":"Any_Generic","activate":0.5,"charge":0,"maintain":4,"chargeMin":0,"cost":[13,8.3],"cooldown":0,"range":"50 feet/45 degree Cone","tags":"Ranged AoE Damage","toolTip":"Deals Piercing damage to targets every 0.5 seconds."},
-			{"travelPowerRef":26}
+			{"travelPowerRef":"Blazing Speed"}
 		]},
 		{"id":41,"icon":"Any_Generic","rarity":3,"type":1,"source":1,"bound":4,"name":"Become Toy Soldier","cost":200000,"toolTip":"","stats":{"str":65,"dex":145,"con":165,"int":105,"ego":245,"pre":65,"rec":65,"end":165},"powers":
 		[
 			{"name":"Munitions Expert","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Passive (Offensive)","tags":"Slotted Offensive Passive","toolTip":"You deal an additional 20% Physical and 10% Non-Physical damage with all attacks.  Your Dodge chance is increased by 12%.<br /><br />When using attacks besides Energy Builders, you gain a single stack of Audacity.  Each stack grants +6% Avoidance, +6 Intelligence, and +6 Ego.  Audacity can stack up to 3 times."},
 			{"name":"Steam Powered Deflector","icon":"PowerArmor_EnergyShield","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets Self","tags":"Block","toolTip":"Grants 380% bonus resistance to all damage while blocking."},
-			{"powerRef":180},
+			{"powerRef":"Steady Shot"},
 			{"name":"Rifle Butt","icon":"Munitions_RifleButt","activate":0.5,"charge":0,"maintain":0,"chargeMin":0,"cost":15,"cooldown":0,"range":"Targets foe/10 feet","tags":"Melee Damage/Knock","toolTip":"Deals Crushing damage to the target and they are Knocked Down."},
 			{"name":"Smoke Grenade","icon":"Munitions_SmokeGrenade","activate":0.67,"charge":0,"maintain":0,"chargeMin":0,"cost":33,"cooldown":15,"range":"Targets foe/50 feet","tags":"Ranged AoE Perception Debuff","toolTip":"Creates a Smoke Cloud that debuffs affected targets' Perception by 1200%."},
 			{"name":"Bomb Toss","icon":"Any_Generic","activate":0.67,"charge":0,"maintain":0,"chargeMin":0,"cost":48,"cooldown":5.9,"range":"Targets foe (5 max)/50 feet/15 foot Sphere","tags":"Ranged AoE Perception Debuff","toolTip":"Deals Fire damage and all targets are Knocked Back."},
 			{"name":"Steam Powered Gatling Gun","icon":"Munitions_GatlingGun","activate":0.5,"charge":0,"maintain":5.5,"chargeMin":0,"cost":[6.2,21],"cooldown":0,"range":"Targets foe (5 max)/100 feet/3 foot Cylinder","tags":"Ranged Damage","toolTip":"Deals Piercing damage to all targets four times every 0.5 seconds."},
-			{"travelPowerRef":22}
+			{"travelPowerRef":"Jet Pack"}
 		]},
 		{"id":42,"icon":"Any_Generic","rarity":3,"type":1,"source":1,"bound":4,"name":"Become Snowman","cost":200000,"toolTip":"","stats":{"str":65,"dex":145,"con":165,"int":105,"ego":245,"pre":65,"rec":65,"end":165},"powers":
 		[
@@ -836,43 +881,43 @@ const HCData =
 			{"name":"Snow Shield","icon":"Ice_IceShield","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets Self","tags":"Block","toolTip":"Grants 360% bonus resistance to all damage while blocking.  Has a 35% chance to apply Chill to foes that attack you in melee range.  %Chill%"},
 			{"name":"Snowball Throw","icon":"Any_Generic","activate":[0.47,0.3],"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets foe/50 feet","tags":"Energy Builder/Ranged Damage","toolTip":"Deals Cold damage and generates energy.  The first hit deals more damage, recovers more energy, and has a 20% chance to apply Chill to the target.  %Chill%"},
 			{"name":"Snow Blast","icon":"Any_Generic","activate":[0.5],"charge":1.5,"maintain":0,"chargeMin":0,"cost":[13,32],"cooldown":0,"range":"Targets foe/100 feet","tags":"Ranged Damage/Chill/Blast","toolTip":"Deals Cold damage and has a 25-100% chance (based on charge time) to apply Chill to the target.  %Chill%<br /><br />Charge damage is increased if you are affected by Cold Snap."},
-			{"powerRef":102},
+			{"powerRef":"Shatter"},
 			{"name":"Snow Breath","icon":"Any_Generic","activate":0.5,"charge":0,"maintain":5,"chargeMin":0,"cost":[13,13],"cooldown":0,"range":"Targets foe (5 max)/45 degree Cone","tags":"Ranged AoE Damage/Chill","toolTip":"Deals Cold damage (based on pulse) every 0.5 seconds to all targets.  Has a 25% chance to apply Chill to affected targets.  %Chill%"},
-			{"powerRef":112},
-			{"travelPowerRef":29}
+			{"powerRef":"Snow Storm"},
+			{"travelPowerRef":"Snowball Roll"}
 		]},
 		{"id":43,"icon":"Any_Generic","rarity":4,"type":1,"source":6,"name":"Become Celestial","cost":1,"toolTip":"","stats":{"str":65,"dex":105,"con":165,"int":65,"ego":245,"pre":65,"rec":85,"end":245},"powers":
 		[
-			{"powerRef":522},
-			{"powerRef":515},
-			{"powerRef":516},
-			{"powerRef":517},
-			{"powerRef":518},
+			{"powerRef":"Seraphim"},
+			{"powerRef":"Radiance"},
+			{"powerRef":"Rebuke"},
+			{"powerRef":"Celestial Conduit"},
+			{"powerRef":"Vengeance"},
 			{"name":"Light's Embrace","icon":"Framework_Celestial","activate":0.83,"charge":2,"maintain":0,"chargeMin":2,"cost":24,"cooldown":20,"range":"Affects anything except Self (5 max)/25 foot Sphere","tags":"","toolTip":"Heals nearby allies and deals Dimensional damage to foes.  This power deals double damage to Zombies and resurrects fallen allies."},
-			{"travelPowerRef":1}
+			{"travelPowerRef":"Flight"}
 		]},
 		{"id":44,"icon":"Any_Generic","rarity":4,"type":1,"source":6,"name":"Become Workshop Elf","cost":1,"toolTip":"","stats":{"str":85,"dex":205,"con":205,"int":65,"ego":245,"pre":65,"rec":85,"end":105},"powers":
 		[
 			{"name":"Munitions Expert","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Passive (Offensive)","tags":"Slotted Offensive Passive","toolTip":"You deal an additional 20% Physical and 10% Non-Physical damage with all attacks.  Your Dodge chance is increased by 12%.<br /><br />When using attacks besides Energy Builders, you gain a single stack of Audacity.  Each stack grants +6% Avoidance, +6 Intelligence, and +6 Ego.  Audacity can stack up to 3 times."},
 			{"name":"Polar Wind Barrier","icon":"Wind_WindShield","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Affects non-destructible foe (5 max)","tags":"Block","toolTip":"While blocking, grants 360% resistance to all damage, increases your resistance to Holds and Knocks, and reduces your movement speed. <br /><br />Features:<br />+ Repels foes in front of you, as well as foes that attack you."},
-			{"powerRef":180},
-			{"powerRef":149},
+			{"powerRef":"Steady Shot"},
+			{"powerRef":"Grapple Gun Pull"},
 			{"name":"Exploding Present","icon":"Any_Generic","activate":0.67,"charge":0,"maintain":0,"chargeMin":0,"cost":48,"cooldown":5.9,"range":"Targets foe (5 max)/50 feet/15 foot Sphere","tags":"Ranged AoE Damage/Knock Back","toolTip":"Deals Fire damage and knocks targets back."},
 			{"name":"Air Rifle","icon":"Munitions_SniperRifle","activate":1,"charge":3,"maintain":0,"chargeMin":3,"cost":55,"cooldown":0,"range":"Targets foe/120 feet","tags":"Ranged Damage/Stun","toolTip":"Deals heavy Piercing damage and Stuns the target.  Taking any damage will interrupt charging."},
-			{"powerRef":170},
+			{"powerRef":"Attack Toys"},
 			{"name":"Silver Bell","icon":"Any_Generic","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":9.8,"range":"Affects friend (5 max)/50 feet/300 foot Sphere","tags":"Buff","toolTip":"All teammates deal 5% more damage for the next 30 seconds."},
-			{"travelPowerRef":22}
+			{"travelPowerRef":"Jet Pack"}
 		]},
 		{"id":45,"icon":"Any_Generic","rarity":3,"type":1,"source":6,"name":"Become Evil Frank","cost":[,,,1],"toolTip":"","stats":{"str":245,"dex":105,"con":205,"int":65,"ego":65,"pre":65,"rec":65,"end":205},"powers":
 		[
-			{"powerRef":500},
-			{"powerRef":501},
-			{"powerRef":489},
+			{"powerRef":"Unstoppable"},
+			{"powerRef":"Retaliation"},
+			{"powerRef":"Clobber"},
 			{"name":"Beatdown","icon":"Might_Beatdown","activate":[0.5,0.5],"charge":0,"maintain":0,"chargeMin":0,"cost":[11,9.9],"cooldown":0,"range":"Targets foe/10 feet","tags":"Melee Damage/Stagger/Combo","toolTip":"Deals Crushing damage to the target."},
 			{"name":"Kick","icon":"Might_MightyKick","activate":0.5,"charge":0.5,"maintain":0,"chargeMin":0,"cost":[15,22],"cooldown":0,"range":"Targets foe/10 feet","tags":"Melee Damage/Knock Back","toolTip":"Deals Crushing damage and the target is Repelled.  If fully charged, the target is Knocked Back instead."},
-			{"name":"Sparkstorm","icon":"Electricity_Sparkstorm","activate":0.5,"charge":0,"maintain":4,"chargeMin":0,"cost":[24,12],"cooldown":0,"range":"Affects foe (5 max)/15 feet","tags":"Ranged AoE Damage/Arc","toolTip":"Deals Electrical damage every 0.5 seconds to nearby targets while toggled on.  Each hit has a 10% chance to Arc to a nearby foe, dealing Electrical damage to them.<br /><br />Each hit has a 10% chance to apply Negative Ions to targets.  %NegativeIons%"},
-			{"powerRef":506},
-			{"travelPowerRef":2}
+			{"name":"Sparkstorm","icon":"Electricity_Sparkstorm","activate":0.5,"charge":0,"maintain":4,"chargeMin":0,"cost":[24,12],"cooldown":0,"range":"Affects foe (5 max)/15 feet","tags":"Ranged AoE Damage/Arc","toolTip":"Deals Electrical damage every 0.5 seconds to nearby targets while toggled on.  Each hit has a 10% chance to Arc to a nearby foe, dealing Electrical damage to them.<br /><br />Each hit has a 10% chance to apply Negative Ions to targets."},
+			{"powerRef":"Thunderclap"},
+			{"travelPowerRef":"Superjump"}
 		]},
 		{"id":46,"icon":"Any_Generic","rarity":3,"type":1,"source":6,"name":"Become Evil Ghost","cost":[,,,1],"toolTip":"","stats":{"str":65,"dex":65,"con":85,"int":205,"ego":245,"pre":105,"rec":145,"end":165},"powers":
 		[
@@ -882,27 +927,23 @@ const HCData =
 			{"name":"Ghostly Wail","icon":"Any_Generic","activate":0.5,"charge":1.5,"maintain":0,"chargeMin":0,"cost":[12,34],"cooldown":0,"range":"Targets foe/100 feet","tags":"Ranged Damage/Fear/Blast","toolTip":"Deals Dimensional damage and applies Devoid to the target. %Devoid%<br /><br />Also has a 25-100% chance (based on charge time) to apply Fear to your target.  %Fear%"},
 			{"name":"Ghostly Embrace","icon":"Any_Generic","activate":0.5,"charge":0,"maintain":5,"chargeMin":0,"cost":[10,10],"cooldown":0,"range":"Targets foe (5 max)/50 feet/45 degree Cone","tags":"Ranged AoE Damage","toolTip":"Deals Dimensional damage to all targets every 0.5 seconds, increasing per pulse.  Each hit has a 20% chance to apply Fear to targets.  %Fear%"},
 			{"name":"Ecto Choke","icon":"Any_Generic","activate":0.67,"charge":0,"maintain":5,"chargeMin":0,"cost":[11,11],"cooldown":9.3,"range":"Targets foe/50 feet","tags":"Ranged Damage/Incapacitate","toolTip":"Deals Dimensional damage (based on pulse) to the target and has a 20% chance to apply a stack of Ego Leech to you.<br /><br />Maintaining this power for more than 1 second Incapacitates the target, refreshing the strength of the Incapacitate per tick."},
-			{"powerRef":631},
-			{"travelPowerRef":1}
+			{"powerRef":"Devour Essence"},
+			{"travelPowerRef":"Flight"}
 		]},
 		{"id":47,"icon":"Any_Generic","rarity":3,"type":1,"source":6,"name":"Become Evil Mummy","cost":[,,,1],"toolTip":"","stats":{"str":65,"dex":105,"con":285,"int":65,"ego":205,"pre":65,"rec":85,"end":165},"powers":
 		[
-			{"powerRef":639},
+			{"powerRef":"Pestilence"},
 			{"name":"Ancestral Void","icon":"Darkness_EbonVoid","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets Self","tags":"Block","toolTip":"Grants 360% bonus resistance to all damage while blocking.<br /><br />Receiving damage will cause you to deal Dimensional damage to the attacker and heal you for a small amount.  This effect can only occur once every second."},
-			{"powerRef":628},
+			{"powerRef":"Infernal Bolts"},
 			{"name":"Insect Breath","icon":"InfernalSupernatural_VenomousBreath","activate":0.5,"charge":0,"maintain":5,"chargeMin":0,"cost":[17,9.2],"cooldown":0,"range":"Targets foe (5 max)/50 feet/45 degree Cone","tags":"Ranged AoE Damage/Poison","toolTip":"Deals Toxic damage and has a 15% chance to apply a stack of Deadly Poison to targets every 0.5 seconds.  %DeadlyPoison%"},
 			{"name":"Insect Swarm","icon":"InfernalSupernatural_InsectSwarm","activate":0.67,"charge":1.83,"maintain":0,"chargeMin":1.83,"cost":26,"cooldown":9.8,"range":"Targets nondestructible foe/50 feet","tags":"Hold","toolTip":"Paralyzes the target for 18 seconds."},
-			{"powerRef":635},
-			{"powerRef":653},
-			{"travelPowerRef":25},
-			{"travelPowerRef":39}
+			{"powerRef":"Condemn"},
+			{"powerRef":"Defile"},
+			{"travelPowerRef":"Scarab Flight"},
+			{"travelPowerRef":"Scarab Tunneling"}
 		]},
-		{"id":48,"hidden":true,"icon":"Any_Generic","rarity":0,"type":1,"source":0,"name":"Become Hotdog Vendor","cost":[1],"toolTip":"","stats":{"str":700,"dex":700,"con":700,"int":700,"ego":700,"pre":700,"rec":700,"end":700},"powers":
-		[
-			{"name":"Street Meat Aura","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Passive (Support)","tags":"Slotted Support Passive/Energy Form","toolTip":"Keeps you and your allies well fed with questionable biomatter.  Prolonged exposure will make you sick to your stomach."},
-			{"name":"Hotdog Throw","icon":"Any_Generic","activate":0.5,"charge":1.5,"maintain":0,"chargeMin":0,"cost":25,"cooldown":0,"range":"Targets foe/100 feet","tags":"Blast/Sausage","toolTip":"Deals Hotdog damage and has a 25-100% chance (based on charge time) to apply a stack of Ketchup, Mustard, Relish, or Week-Old Onion Stench to the target.  Hitting the same target with 20 more consecutive Hotdog Throws within a short period of time allows them to use the Ultimate Selfie power."}
-		]},
-		{"id":49,"icon":"Any_Generic","rarity":4,"type":1,"source":7,"bound":1,"name":"Become Onslaught: Gravitar","cost":null,"toolTip":"Once used, this device disappears if you die, change zones, toggle it off, or 15 minutes have elapsed.  It also disappears after 30 total minutes have passed.<br /><br />While active, you cannot interact with other objects or NPCs.","stats":{"str":5,"dex":5,"con":5,"int":5,"ego":5,"pre":5,"rec":5,"end":5},"powers":
+		{"id":48,"icon":"Any_Generic","rarity":0,"type":9,"source":0,"bound":0,"name":"Vehicle Stub","toolTip":"This is a placeholder for your vehicle of choice."},
+		{"id":49,"icon":"Any_Generic","rarity":4,"type":12,"source":7,"bound":1,"name":"Become Onslaught: Gravitar","cost":null,"toolTip":"Once used, this device disappears if you die, change zones, toggle it off, or 15 minutes have elapsed.  It also disappears after 30 total minutes have passed.<br /><br />While active, you cannot interact with other objects or NPCs.","stats":{"str":5,"dex":5,"con":5,"int":5,"ego":5,"pre":5,"rec":5,"end":5},"powers":
 		[
 			{"name":"Gravity Well","icon":"Force_PersonalForceField","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Passive","tags":"","toolTip":"Gravitar's basic attacks cause the target to become a Gravity Well who pulls in nearby allies.  This effect stacks and increases in intensity.  Some of her powers can detonate Gravity Well for increased damage.  Each time she detonates a stack of Gravity well, she gains a stack of Gravitational Force.  When she reaches certain thresholds of Gravitational Force, she unlocks new powers."},
 			{"name":"Grav Bolt","icon":"Force_ForceBolts","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets foe/200 feet","tags":"Energy Builder/Ranged Damage","toolTip":"Deals Crushing damage, applies Gravity Well to the target, and refreshes existing stacks of Gravity Well.  Gravity Well lasts 15 seconds and pulls enemies toward the target.  The strength of this pull is based on the number of stacks."},
@@ -915,86 +956,324 @@ const HCData =
 			{"name":"Grav Flight","icon":"TravelPower_Flight","activate":0,"charge":2,"maintain":0,"chargeMin":0,"cost":0,"cooldown":210,"range":"Targets Self","tags":"Travel Power","toolTip":"Take flight for 8 seconds."},
 			
 		]},
-		{"id":50,"icon":"Any_Generic","rarity":4,"type":1,"source":7,"bound":1,"name":"Become Onslaught: Grond","cost":null,"toolTip":"Once used, this device disappears if you die, change zones, toggle it off, or 15 minutes have elapsed.  It also disappears after 30 total minutes have passed.<br /><br />While active, you cannot interact with other objects or NPCs.","stats":{"str":5,"dex":5,"con":5,"int":5,"ego":5,"pre":5,"rec":5,"end":5},"powers":
+		{"id":50,"icon":"Any_Generic","rarity":4,"type":12,"source":7,"bound":1,"name":"Become Onslaught: Grond","cost":null,"toolTip":"Once used, this device disappears if you die, change zones, toggle it off, or 15 minutes have elapsed.  It also disappears after 30 total minutes have passed.<br /><br />While active, you cannot interact with other objects or NPCs.","stats":{"str":5,"dex":5,"con":5,"int":5,"ego":5,"pre":5,"rec":5,"end":5},"powers":
 		[
-			{"name":"Gravity Well","icon":"Force_PersonalForceField","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Passive","tags":"","toolTip":"Gravitar's basic attacks cause the target to become a Gravity Well who pulls in nearby allies.  This effect stacks and increases in intensity.  Some of her powers can detonate Gravity Well for increased damage.  Each time she detonates a stack of Gravity well, she gains a stack of Gravitational Force.  When she reaches certain thresholds of Gravitational Force, she unlocks new powers."},
-			{"name":"Grav Bolt","icon":"Force_ForceBolts","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets foe/200 feet","tags":"Energy Builder/Ranged Damage","toolTip":"Deals Crushing damage, applies Gravity Well to the target, and refreshes existing stacks of Gravity Well.  Gravity Well lasts 15 seconds and pulls enemies toward the target.  The strength of this pull is based on the number of stacks."},
+			{"name":"Radiate Fury","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Passive","tags":"","toolTip":"As Grond takes damage, his damage dealt and damage taken increase.  When he reaches certain levels of Radiate Fury, he gains new powers.  When he reaches 100 Radiate Fury, it resets."},
+			{"name":"Radiating Strike","icon":"Any_Generic","activate":2,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets foe/15 feet","tags":"","toolTip":"Deals Crushing and Particle damage to the target."},
+			{"name":"Nuclear Debris","icon":"Any_Generic","activate":2,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":2,"range":"Targets foe/250 feet","tags":"","toolTip":"Deals Crushing and Particle damage to the target."},
+			{"name":"Roaring Fury","icon":"Any_Generic","activate":1,"charge":1.5,"maintain":0,"chargeMin":0,"cost":0,"cooldown":15,"range":"Affects foe/200 foot Sphere","tags":"","toolTip":"Deals Crushing and Particle damage to targets and stuns them briefly.<br /><br />Unlocks at 15 Fury."},
+			{"name":"Nuclear Shockwave","icon":"Might_NuclearShockwave","activate":1,"charge":1.5,"maintain":0,"chargeMin":0,"cost":0,"cooldown":12,"range":"Affects foe/75 feet/20 foot Cylinder","tags":"","toolTip":"Deals heavy Crushing and Particle damage to targets and stuns them briefly.<br /><br />Unlocks at 30 Fury."},
+			{"name":"Atom Splitting Fist","icon":"Any_Generic","activate":1,"charge":1.5,"maintain":0,"chargeMin":0,"cost":0,"cooldown":20,"range":"Affects foe (1 max)/100 feet/30 foot Cylinder","tags":"","toolTip":"Deals massive Crushing and Particle damage to the nearest target.<br /><br />Unlocks at 50 Fury."},
+			{"name":"Radiation Ground Pound","icon":"Any_Generic","activate":1,"charge":0,"maintain":2.5,"chargeMin":0,"cost":0,"cooldown":20,"range":"Affects foe/75 feet/65 foot Sphere","tags":"","toolTip":"Deals Crushing and Particle damage to the target while maintained.  At the end of the maintain, foefs within 40 feet are briefly stunned.<br /><br />Unlocks at 75 Fury."},
+			{"name":"Unleashed Nuclear Fury","icon":"Any_Generic","activate":1,"charge":1.5,"maintain":0,"chargeMin":0,"cost":0,"cooldown":60,"range":"Affects foe/60 foot Sphere","tags":"","toolTip":"Deals heavy Crushing and Particle damage to targets.  After using this power, Grond is drained of his Fury and deals 20% less damage for the next 10 seconds.<br /><br />Unlocks at 90 Fury."},
+			{"name":"Massive Leap","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":210,"range":"Targets Self","tags":"Travel Power","toolTip":"Reduces Grond's damage drastically, but allows him to leap much higher and further for the next 8 seconds."},
 		]},
-		{"id":51,"icon":"Any_Generic","rarity":4,"type":1,"source":7,"bound":1,"name":"Become Onslaught: Medusa","cost":null,"toolTip":"Once used, this device disappears if you die, change zones, toggle it off, or 15 minutes have elapsed.  It also disappears after 30 total minutes have passed.<br /><br />While active, you cannot interact with other objects or NPCs.","stats":{"str":5,"dex":5,"con":5,"int":5,"ego":5,"pre":5,"rec":5,"end":5},"powers":
+		{"id":51,"icon":"Any_Generic","rarity":4,"type":12,"source":7,"bound":1,"name":"Become Onslaught: Medusa","cost":null,"toolTip":"Once used, this device disappears if you die, change zones, toggle it off, or 15 minutes have elapsed.  It also disappears after 30 total minutes have passed.<br /><br />While active, you cannot interact with other objects or NPCs.","stats":{"str":5,"dex":5,"con":5,"int":5,"ego":5,"pre":5,"rec":5,"end":5},"powers":
 		[
-			{"name":"Gravity Well","icon":"Force_PersonalForceField","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Passive","tags":"","toolTip":"Gravitar's basic attacks cause the target to become a Gravity Well who pulls in nearby allies.  This effect stacks and increases in intensity.  Some of her powers can detonate Gravity Well for increased damage.  Each time she detonates a stack of Gravity well, she gains a stack of Gravitational Force.  When she reaches certain thresholds of Gravitational Force, she unlocks new powers."},
-			{"name":"Grav Bolt","icon":"Force_ForceBolts","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets foe/200 feet","tags":"Energy Builder/Ranged Damage","toolTip":"Deals Crushing damage, applies Gravity Well to the target, and refreshes existing stacks of Gravity Well.  Gravity Well lasts 15 seconds and pulls enemies toward the target.  The strength of this pull is based on the number of stacks."},
+			{"name":"Mind Spikes","icon":"Framework_Telepathy","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Passive","tags":"","toolTip":"A close range telekinetic fighter, Medusa drains energy from foes she strikes as well as slowing their charge speed and reducing their energy equilibriums for 6 seconds.  The more times she strikes a particular foe, the more severe this effect becomes, stunning them for 6 seconds when it reaches 10 stacks.  When she stuns a foe this way, she unlocks a new power."},
+			{"name":"Tk Flurry","icon":"Framework_Telekinesis","activate":0.5,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets foe/10 feet","tags":"Energy Builder/Melee Damage","toolTip":"Deals Ego Damage.  Every other strike applies Mind Spikes to the target."},
+			{"name":"Tk Breaker","icon":"Telekinesis_EgoBladeBreach","activate":0.67,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":6,"range":"Affects foe/20 feet/120 degree Cone","tags":"","toolTip":"Deals Ego damage and applies Mind Spikes to the target."},
+			{"name":"Tk Spear","icon":"Telekinesis_TelekineticLance","activate":0.5,"charge":0.5,"maintain":0,"chargeMin":0,"cost":0,"cooldown":9,"range":"Targets foe/250 feet/15 foot Sphere","tags":"Energy Builder/Melee Damage","toolTip":"Deals Ego damage to foes, roots them for 4 seconds, and applies 2 stacks of Mind Spikes."},
+			{"name":"Tk Shatter","icon":"Telekinesis_TelekineticBurst","activate":0.67,"charge":1.5,"maintain":0,"chargeMin":0,"cost":0,"cooldown":22,"range":"Targets foe/200 feet","tags":"Energy Builder/Melee Damage","toolTip":"Deals Ego damage to the target and doubles the number of Mind Spikes affecting them."},
+			{"name":"Tk Wave","icon":"Telepathy_EgoPlacate","activate":1,"charge":0.5,"maintain":0,"chargeMin":0,"cost":0,"cooldown":40,"range":"Affects foe/120 foot Sphere","tags":"Energy Builder/Melee Damage","toolTip":"Deals Ego damage to targets, drains their Energy, sets their Equilibrum to 0 for 3 seconds, and applies Mind Spikes.<br /><br />Unlocks at 2 stuns."},
+			{"name":"Tk Lunge","icon":"Telekinesis_EgoBladeDash","activate":0.67,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":14,"range":"Targets foe/60 feet/60 foot lunge","tags":"Energy Builder/Melee Damage","toolTip":"Lunges to the target, dealing Ego damage and applying Mind Spikes.  Using this power resets the cooldown on Tk Breaker.<br /><br />Unlocks at 4 stuns."},
+			{"name":"Tk Eruption","icon":"Telekinesis_TelekineticBarrage","activate":0.5,"charge":1.5,"maintain":0,"chargeMin":0,"cost":0,"cooldown":60,"range":"Affects foe/120 foot Sphere","tags":"Energy Builder/Melee Damage","toolTip":"Deals Ego damage to targets.  This damage is increased per stack of Mind Spikes on targets.<br /><br />Unlocks at 5 stuns."},
+			{"name":"Mind Warp","icon":"TravelPower_LightningFlash","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":210,"range":"Targets Self","tags":"Travel Power","toolTip":"You phase out of this plane, temporarily gaining +60 Flight Speed while out of phase.  While out of phase, it is incredibly difficult for anyone else to notice you.  You can only stay out of phase for a short time before reappearing."},
 		]},
 		{"id":52,"icon":"Any_Generic","rarity":4,"type":1,"source":1,"bound":4,"name":"Become Doomlord","cost":300000,"toolTip":"","stats":{"str":65,"dex":105,"con":165,"int":65,"ego":245,"pre":65,"rec":85,"end":245},"powers":
 		[
 			{"name":"Shadow Shroud","icon":"Shadow_ShadowShroud","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Passive","tags":"Slotted Offensive Passive/Energy Form","toolTip":"You deal an additional 142% Paranormal damage, gain 35% Paranormal resistance, an additional 148% Dimensional damage resistance, and gain a small amount of energy when you take Dimensional damage.<br /><br />In addition, you gain +12 Aggression Stealth and +120 Perception Stealth, making it harder for foes to see you.  Your threat is also reduced by 12%.  Whenever you deal damage, you have a chance to be healed for 2.6% of your maximum health.  This effect can only happen once every 3 seconds.<br /><br />You affect nearby foes with Death Shroud, dealing Dimensional daamge every 2 seconds.  The amount of damage increases as the target's health decreases.  This effect is disabled when not in combat.<br /><br />Directly attacking a foe affected by Death Shroud also applies a stack of Necrotic Web.  Necrotic Web increases Dimensional Damage per satck, stacks up to 5 times, and lasts 15 seconds."},
-			{"powerRef":534},
+			{"powerRef":"Shadow Bolt"},
 			{"name":"Dark Blast","icon":"Shadow_ShadowBlast","activate":0.83,"charge":2.33,"maintain":0,"chargeMin":0,"cost":[17,65],"cooldown":0,"range":"Targets foe/100 feet","tags":"Ranged Damage/Fear","toolTip":"Deals Dimensional damage to the target."},
-			{"powerRef":537},
+			{"powerRef":"Shadow Embrace"},
 			{"name":"Devour Essence","icon":"InfernalSupernatural_DevourEssence","activate":0.5,"charge":0,"maintain":4,"chargeMin":0,"cost":[25,15],"cooldown":0,"range":"Targets foe/10 feet","tags":"Melee Damage/Self Heal","toolTip":"Deals Dimensional damage to the target and heals you every 0.5 seconds while maintained.  Your target is also Snared for 3.3 seconds."},
 			{"name":"Death's Embrace","icon":"Framework_Darkness","activate":0.83,"charge":2,"maintain":0,"chargeMin":2,"cost":24,"cooldown":20,"range":"Affects anything except Self (5 max)/25 foot Sphere","tags":"","toolTip":"Heals nearby allies and deals Dimensional damage to foes.  This power deals double damage to Zombies and resurrects fallen allies."},
-			{"travelPowerRef":1},
+			{"travelPowerRef":"Flight"},
 		]},
-		{"id":53,"icon":"Any_Generic","rarity":4,"type":1,"source":0,"name":"Become Vampire","cost":0,"toolTip":"","stats":{"str":85,"dex":165,"con":205,"int":65,"ego":205,"pre":85,"rec":65,"end":225},"powers":
+		{"id":53,"icon":"Any_Generic","rarity":3,"type":1,"source":8,"bound":1,"name":"Become Vampire","cost":300,"toolTip":"A version that doesn't bind also exists from past Blood Moon events, however it is no longer available.","stats":{"str":85,"dex":165,"con":205,"int":65,"ego":205,"pre":85,"rec":65,"end":225},"powers":
 		[
-			{"powerRef":638},
-			{"powerRef":542},
-			{"powerRef":628},
+			{"powerRef":"Regeneration"},
+			{"powerRef":"Ebon Void"},
+			{"powerRef":"Infernal Bolts"},
 			{"name":"Hemo Burst","icon":"Any_Generic","activate":0.5,"charge":1.5,"maintain":0,"chargeMin":0,"cost":[17,48],"cooldown":0,"range":"Targets foe/100 feet","tags":"Ranged Damage/Fear/Blast","toolTip":"Deals Toxic damage and applies Devoid to the target.  %Devoid%.<br /><br />Also has a 25-100% chance (based on charge time) to apply Fear to the target.  %Fear%"},
 			{"name":"Beast Form","icon":"BestialSupernatural_Thrash","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":29,"range":"Affects foe (5 max)/15 foot Sphere","tags":"","toolTip":"Transforms you into a monstrous bat creature, enhancing your Strength and Constitution.  It also changes many of your abilities.<br /><br />When activated, you deal Toxic damage to nearby foes, they are Knocked Back, and affected by Fear.  %Fear%<br /><br />This form is difficult to maintain and will drain your energy based on how long it you maintain it."},
-			{"name":"Lifedrain","icon":"Any_Generic","activate":0.5,"charge":0,"maintain":4,"chargeMin":0,"cost":[22,17],"cooldown":0,"range":"Targets foe/50 feet","tags":"Deals Toxic damage to the target and heals you every 0.5 seconds."},
-			{"powerRef":635},
-			{"powerRef":539},
-			{"powerRef":650},
-			{"powerRef":651},
-			{"powerRef":653},
-			{"travelPowerRef":38},
+			{"name":"Lifedrain","icon":"Any_Generic","activate":0.5,"charge":0,"maintain":4,"chargeMin":0,"cost":[22,17],"cooldown":0,"range":"Targets foe/50 feet","tags":"","toolTip":"Deals Toxic damage to the target and heals you every 0.5 seconds."},
+			{"powerRef":"Condemn"},
+			{"powerRef":"Shadow Shroud"},
+			{"powerRef":"Soul Mesmerism"},
+			{"powerRef":"Defile"},
+			{"powerRef":"Resurgence"},
+			{"travelPowerRef":"Bat Flight"},
 		]},
 		{"id":54,"icon":"Any_Generic","rarity":4,"type":1,"source":9,"bound":1,"name":"Become Chaos Demon: Green","cost":300,"toolTip":"","stats":{"str":65,"dex":105,"con":205,"int":65,"ego":205,"pre":65,"rec":85,"end":245},"powers":
 		[
-			{"powerRef":540},
-			{"powerRef":544},
-			{"powerRef":542},
-			{"powerRef":534},
-			{"powerRef":535},
-			{"powerRef":537},
-			{"powerRef":538},
-			{"powerRef":550},
-			{"powerRef":553},
-			{"powerRef":545},
-			{"powerRef":549},
-			{"travelPowerRef":1},
+			{"powerRef":"Shadow Form"},
+			{"powerRef":"Spirit Reverberation"},
+			{"powerRef":"Ebon Void"},
+			{"powerRef":"Shadow Bolt"},
+			{"powerRef":"Shadow Blast"},
+			{"powerRef":"Shadow Embrace"},
+			{"powerRef":"Grasping Shadows"},
+			{"powerRef":"Ebon Rift"},
+			{"powerRef":"Summon Shadows"},
+			{"powerRef":"Lifedrain"},
+			{"powerRef":"Ebon Ruin"},
+			{"travelPowerRef":"Flight"},
 		]},
 		{"id":55,"icon":"Any_Generic","rarity":4,"type":1,"source":9,"bound":1,"name":"Become Chaos Demon: Purple","cost":300,"toolTip":"","stats":{"str":65,"dex":105,"con":205,"int":65,"ego":205,"pre":65,"rec":85,"end":245},"powers":
 		[
-			{"powerRef":540},
-			{"powerRef":544},
-			{"powerRef":542},
-			{"powerRef":534},
-			{"powerRef":535},
-			{"powerRef":537},
-			{"powerRef":538},
-			{"powerRef":550},
-			{"powerRef":553},
-			{"powerRef":545},
-			{"powerRef":549},
-			{"travelPowerRef":1},
+			{"powerRef":"Shadow Form"},
+			{"powerRef":"Spirit Reverberation"},
+			{"powerRef":"Ebon Void"},
+			{"powerRef":"Shadow Bolt"},
+			{"powerRef":"Shadow Blast"},
+			{"powerRef":"Shadow Embrace"},
+			{"powerRef":"Grasping Shadows"},
+			{"powerRef":"Ebon Rift"},
+			{"powerRef":"Summon Shadows"},
+			{"powerRef":"Lifedrain"},
+			{"powerRef":"Ebon Ruin"},
+			{"travelPowerRef":"Flight"},
 		]},
 		{"id":56,"icon":"Any_Generic","rarity":4,"type":1,"source":9,"bound":1,"name":"Become Chaos Demon: Red","cost":300,"toolTip":"","stats":{"str":65,"dex":105,"con":205,"int":65,"ego":205,"pre":65,"rec":85,"end":245},"powers":
 		[
-			{"powerRef":540},
-			{"powerRef":544},
-			{"powerRef":542},
-			{"powerRef":534},
-			{"powerRef":535},
-			{"powerRef":537},
-			{"powerRef":538},
-			{"powerRef":550},
-			{"powerRef":553},
-			{"powerRef":545},
-			{"powerRef":549},
-			{"travelPowerRef":1},
+			{"powerRef":"Shadow Form"},
+			{"powerRef":"Spirit Reverberation"},
+			{"powerRef":"Ebon Void"},
+			{"powerRef":"Shadow Bolt"},
+			{"powerRef":"Shadow Blast"},
+			{"powerRef":"Shadow Embrace"},
+			{"powerRef":"Grasping Shadows"},
+			{"powerRef":"Ebon Rift"},
+			{"powerRef":"Summon Shadows"},
+			{"powerRef":"Lifedrain"},
+			{"powerRef":"Ebon Ruin"},
+			{"travelPowerRef":"Flight"},
 		]},
+		{"id":57,"icon":"Any_Generic","rarity":3,"type":6,"source":8,"bound":1,"name":"Amazing Grace","requiredPerk":null,"cost":200,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Amazing Grace","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":180,"range":"Targets Self","tags":"","toolTip":"+20% Dodge Chance for 15 sec.<br />+1 Jump Traction for 15 sec.<br />+10 Jump Speed for 15 sec.<br />+10 Jump Height for 15 sec.<br />+50% Run Speed for 15 sec.<br /><br />Places all Active Defense powers on a 20 second cooldown."}},
+		{"id":58,"icon":"Any_Generic","rarity":3,"type":8,"source":8,"bound":1,"name":"Archer's Memory","requiredPerk":null,"cost":200,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Archer's Memory","icon":"Any_Generic","activate":1,"charge":0,"maintain":10,"chargeMin":0,"cost":0,"cooldown":60,"range":"Targets foe (5 max)/100 feet/15 foot Sphere","tags":"","toolTip":"Deals Magic damage every second to all targets.<br /><br/>Has a 30% chance per tick to deal additional Magic damage up to twice each period."}},
+		{"id":59,"icon":"Any_Generic","rarity":3,"type":7,"source":8,"bound":1,"name":"Center of Gravity","requiredPerk":null,"cost":200,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Center of Gravity","icon":"Any_Generic","activate":0.83,"charge":1,"maintain":0,"chargeMin":0,"cost":0,"cooldown":30,"range":"Affects foe (5 max)/20 foot Sphere","tags":"","toolTip":"Deals Crushing damage and knocks all targets toward you."}},
+		{"id":60,"icon":"Any_Generic","rarity":3,"type":7,"source":8,"bound":1,"name":"Coward's Lament","requiredPerk":null,"cost":200,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Coward's Lament","icon":"Any_Generic","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":30,"range":"Affects foe (5 max)/50 feet/60 degree Cone","tags":"","toolTip":"Deals Ego damage and knocks targets toward you."}},
+		{"id":61,"icon":"Any_Generic","rarity":3,"type":7,"source":8,"bound":1,"name":"Eroded Shard","requiredPerk":null,"cost":200,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Eroded Shard","icon":"Any_Generic","activate":0.83,"charge":0,"maintain":4,"chargeMin":0,"cost":0,"cooldown":60,"range":"Affects foe (5 max)/15 foot Sphere","tags":"","toolTip":"Knocks and Repels foes away from you while toggled on.<br /><br />At the end of this power's duration, deals Magic damage to targets around you.<br /><br />This power can be toggled on and used alongside other powers."}},
+		{"id":62,"icon":"Any_Generic","rarity":3,"type":7,"source":8,"bound":1,"name":"Fists of Complmiance","requiredPerk":null,"cost":200,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Fists of Compliance","icon":"Any_Generic","activate":0.5,"charge":0,"maintain":4,"chargeMin":0,"cost":0,"cooldown":60,"range":"Targets foe (5 max)/50 feet/90 degree Cone","tags":"","toolTip":"Deals Sonic damage every 0.5 seconds and has a 33% chance to Knock enemies toward you while maintained.<br /><br />Snares targets, reducing foe travel speed by 100% for 16 sec."}},
+		{"id":63,"icon":"Any_Generic","rarity":3,"type":8,"source":8,"bound":1,"name":"Hacked Orbital Cannon Codes","requiredPerk":null,"cost":200,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Hacked Orbital Cannon Codes","icon":"Any_Generic","activate":0.67,"charge":2.33,"maintain":0,"chargeMin":2.33,"cost":0,"cooldown":60,"range":"Targets foe (5 max)/100 feet/10 foot Sphere","tags":"","toolTip":"This power must be fully charged to activate.<br /><br />Deals heavy Particle damage to foes after a 4.5 second delay."}},
+		{"id":64,"icon":"Any_Generic","rarity":3,"type":6,"source":8,"bound":1,"name":"Nimbus of Force","requiredPerk":null,"cost":200,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Nimbus of Force","icon":"Any_Generic","activate":0.67,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":180,"range":"Targets living player (5 max)/50 foot Sphere","tags":"","toolTip":"Gives nearby players an absorption shield.  This shield persists for up to 15 seconds."}},
+		{"id":65,"icon":"Any_Generic","rarity":3,"type":8,"source":8,"bound":1,"name":"Radion's Revenge","requiredPerk":null,"cost":200,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Radion's Revenge","icon":"Any_Generic","activate":0.67,"charge":0,"maintain":2.5,"chargeMin":0,"cost":0,"cooldown":60,"range":"Affects nondestructible foe/(5 max)","tags":"","toolTip":"Deals Particle damage and applies Burn Through to targets every 0.5 seconds.  %BurnThrough%"}},
+		{"id":66,"icon":"Any_Generic","rarity":3,"type":7,"source":8,"bound":1,"name":"Revenancy","requiredPerk":null,"cost":200,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Revenancy","icon":"Any_Generic","activate":0.83,"charge":2.17,"maintain":0,"chargeMin":2.17,"cost":0,"cooldown":90,"range":"Targets foe (5 max)/50 feet/15 foot Sphere","tags":"","toolTip":"Paralyzes all targets for 9.7 sec.  Targets are also affected by Fear.  %Fear%"}},
+		{"id":67,"icon":"Any_Generic","rarity":3,"type":3,"source":8,"bound":1,"name":"Revenant of Fireflight","requiredPerk":null,"cost":200,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Revenant of Fireflight","icon":"Any_Generic","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Creates a Revenant of Fireflight for 30 seconds."}},
+		{"id":68,"icon":"Any_Generic","rarity":3,"type":5,"source":8,"bound":1,"name":"Supernatural Possession","requiredPerk":null,"cost":200,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Supernatural Possession","icon":"Any_Generic","activate":1,"charge":0,"maintain":5,"chargeMin":0,"cost":0,"cooldown":2,"range":"Targets foe/50 feet","tags":"","toolTip":"Deals Toxic damage and heals up to 5 allies around you in a 15 foot sphere every second for 9 seconds."}},
+		{"id":69,"icon":"Any_Generic","rarity":3,"type":8,"source":8,"bound":1,"name":"Will of the Tiger Cub","requiredPerk":null,"cost":200,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Will of the Tiger Cub","icon":"Any_Generic","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":60,"range":"Targets foe/10 feet","tags":"","toolTip":"Deals Slashing damage and applies Bleed and Shredded to the target.  %Bleed%  %Shredded%"}},
+		{"id":70,"icon":"Any_Generic","rarity":3,"type":7,"source":8,"bound":1,"name":"Pestilent Cloud","requiredPerk":null,"cost":200,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Pestilent Cloud","icon":"Any_Generic","activate":2,"charge":0,"maintain":10,"chargeMin":0,"cost":0,"cooldown":60,"range":"Affects nondestructible foe (5 max)/10 foot Sphere","tags":"","toolTip":"Deals Toxic damage every 2 seconds to nearby foes while toggled on.  Affected targets are Snared.<br /><br/>When toggled on for the full duration, briefly stuns nearby foes."}},
+		{"id":71,"icon":"Any_Generic","rarity":3,"type":7,"source":8,"bound":1,"name":"Zombie Bone","requiredPerk":null,"cost":0,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"This device can be obtained by completing the Dead Reckoner perk during the Blood Moon event.","powers":{"name":"Zombie Bone","icon":"Any_Generic","activate":0.83,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":45,"range":"Targets foe/100 feet","tags":"","toolTip":"Deals Crushing damage to the target.<br /><br />Has a 25% chance to apply Jinxed to the target.  %Jinxed%"}},
+		{"id":72,"icon":"Any_Generic","rarity":4,"type":12,"source":8,"bound":1,"name":"Talbot's Talisman","cost":0,"toolTip":"This device only lasts 24 hours and is used for BITE.  It is only available during Blood Moon and can only be used in Canadian Wilderness and Southwest Desert.  Once activated, it cannot be toggled off until either 30 minutes pass or you die.","stats":{"str":5,"dex":5,"con":5,"int":5,"ego":5,"pre":5,"rec":5,"end":5},"powers":
+		[
+			{"name":"Rend","icon":"BestialSupernatural_Rend","activate":0.3,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets foe/10 feet","tags":"","toolTip":"Deals 154 Slashing damage to the target.  Applies Bleed, which deals additional 31 Slashing damage every 3 sec for 15 sec.<br /><br />Grants a stack of Rage, increasing your damage for a short time and stacks up to 3 times."},
+			{"name":"Consume","icon":"BestialSupernatural_Bite","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets foe/10 feet","tags":"","toolTip":"Deals 308 Piercing damage to the target.  Biting a Bleeding target applies Bloodlust to you, healing you for +76 health every sec for 15 sec.  This consumes 1 stack of Bleed on the target.<br /><br />Grants a stack of Rage, increasing your damage for a short time and stacks up to 3 times."},
+			{"name":"Pounce","icon":"BestialSupernatural_Pounce","activate":0.5,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":15,"range":"Targets foe/10 feet/50 foot Lunge","tags":"","toolTip":"Deals 462 Slashing damage to the target.<br /><br />Grants a stack of Rage, increasing your damage for a short time and stacks up to 3 times."},
+			{"name":"Howl","icon":"BestialSupernatural_Howl","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":30,"range":"Affects friend (5 max)/30 foot Sphere","tags":"","toolTip":"Increases the damage of all nearby Werewolves.  This bonus stacks with Howl from other Werewolves.<br /><br />Grants a stack of Rage, increasing your damage for a short time and stacks up to 3 times."},
+			{"name":"Frenzy","icon":"BestialSupernatural_Frenzy","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets foe/10 feet","tags":"","toolTip":"Deals 154 Slashing damage to the target.  The damage of this power is increased by your Rage stacks."},
+			{"name":"Rake","icon":"Any_Generic","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":30,"range":"Targets foe/10 feet","tags":"","toolTip":"Deals 462 Slashing damage and Holds the target for 3 sec.  The duration of the Hold is increased by the number of your Rage stacks."},
+		]},		
+		{"id":73,"icon":"Any_Generic","rarity":4,"type":12,"source":8,"bound":1,"name":"Sol Amulet","cost":0,"toolTip":"This device only lasts 24 hours and is used for BITE.  It is only available during Blood Moon and can only be used in Canadian Wilderness and Southwest Desert.  Once activated, it cannot be toggled off until either 30 minutes pass or you die.","stats":{"str":5,"dex":5,"con":5,"int":5,"ego":5,"pre":5,"rec":5,"end":5},"powers":
+		[
+			{"name":"Hunter's Saber","icon":"Any_Generic","activate":0.5,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0.5,"range":"Targets foe/7 feet","tags":"","toolTip":"Deals 462 Slashing damage to the target, or 1221 Slashing damage to the target if used from Stealth.<br /><br />Vpplies Virtuous if you are not affected by Resolute."},
+			{"name":"Purge","icon":"Any_Generic","activate":0.5,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":10,"range":"Affects foe (5 max)/10 foot Sphere","tags":"","toolTip":"Deals 616 Slashing damage to targets, knocks them back, and ends Bloodlust if they are affected by it.<br /><br />Requires Virtuous.<br />Ends Virtuous and applies Resolute."},
+			{"name":"Net","icon":"Any_Generic","activate":0.5,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":8,"range":"Targets foe/50 feet","tags":"","toolTip":"Roots the target for 8 seconds.<br /><br /><br /><br />Requires Virtuous.<br />Ends Virtuous and applies Resolute."},
+			{"name":"Silver Bullet","icon":"Any_Generic","activate":0.5,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":1,"range":"Targets foe/50 feet","tags":"","toolTip":"Deals 550 Piercing damage to the target.  Targets below 25% health are instantly killed.<br /><br />Requires Resolute.<br />Ends Resolute."},
+			{"name":"Holy Water","icon":"Any_Generic","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":8,"range":"Targets foe (5 max)/15 feet/90 degree Cone","tags":"","toolTip":"Deals 110 Dimensional damage every 1 sec and Snares targets for 16 sec.<br /><br />Requires Resolute.<br />Ends Resolute."},
+			{"name":"Shield of Faith","icon":"Any_Generic","activate":0.5,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":10,"range":"Targets Self","tags":"","toolTip":"Absorbs up to 1740 damage, lasting for 15 seconds.<br /><br />Requires Resolute.<br />Ends Resolute."},
+		]},
+		{"id":74,"icon":"Any_Generic","rarity":3,"type":1,"source":8,"bound":1,"name":"Become Werewolf: Brown","cost":300,"toolTip":"","stats":{"str":245,"dex":105,"con":205,"int":65,"ego":65,"pre":65,"rec":65,"end":205},"powers":
+		[
+			{"powerRef":"Regeneration"},
+			{"powerRef":"Retaliation"},
+			{"powerRef":"Bestial Fury"},
+			{"powerRef":"Shred"},
+			{"powerRef":"Frenzy"},
+			{"powerRef":"Pounce"},
+			{"powerRef":"Bite"},
+			{"powerRef":"Howl"},
+			{"powerRef":"Massacre"},
+			{"powerRef":"Aspect of the Bestial"},
+			{"travelPowerRef":"Acrobatics"},
+		]},
+		{"id":75,"icon":"Any_Generic","rarity":3,"type":1,"source":8,"bound":1,"name":"Become Werewolf: Black","cost":300,"toolTip":"","stats":{"str":245,"dex":105,"con":205,"int":65,"ego":65,"pre":65,"rec":65,"end":205},"powers":
+		[
+			{"powerRef":"Regeneration"},
+			{"powerRef":"Retaliation"},
+			{"powerRef":"Bestial Fury"},
+			{"powerRef":"Shred"},
+			{"powerRef":"Frenzy"},
+			{"powerRef":"Pounce"},
+			{"powerRef":"Bite"},
+			{"powerRef":"Howl"},
+			{"powerRef":"Massacre"},
+			{"powerRef":"Aspect of the Bestial"},
+			{"travelPowerRef":"Acrobatics"},
+		]},
+		{"id":76,"icon":"Any_Generic","rarity":3,"type":1,"source":8,"bound":1,"name":"Become Werewolf: Arctic","cost":300,"toolTip":"","stats":{"str":245,"dex":105,"con":205,"int":65,"ego":65,"pre":65,"rec":65,"end":205},"powers":
+		[
+			{"powerRef":"Regeneration"},
+			{"powerRef":"Retaliation"},
+			{"powerRef":"Bestial Fury"},
+			{"powerRef":"Shred"},
+			{"powerRef":"Frenzy"},
+			{"powerRef":"Pounce"},
+			{"powerRef":"Bite"},
+			{"powerRef":"Howl"},
+			{"powerRef":"Frost Breath"},
+			{"powerRef":"Aspect of the Bestial"},
+			{"travelPowerRef":"Acrobatics"},
+		]},
+		{"id":77,"icon":"Any_Generic","rarity":3,"type":1,"source":8,"bound":1,"name":"Become Werewolf: Orange","cost":300,"toolTip":"","stats":{"str":245,"dex":105,"con":205,"int":65,"ego":65,"pre":65,"rec":65,"end":205},"powers":
+		[
+			{"powerRef":"Regeneration"},
+			{"powerRef":"Retaliation"},
+			{"powerRef":"Bestial Fury"},
+			{"powerRef":"Shred"},
+			{"powerRef":"Frenzy"},
+			{"powerRef":"Pounce"},
+			{"powerRef":"Bite"},
+			{"powerRef":"Howl"},
+			{"powerRef":"Massacre"},
+			{"powerRef":"Aspect of the Bestial"},
+			{"travelPowerRef":"Acrobatics"},
+		]},
+		{"id":78,"icon":"Any_Generic","rarity":4,"type":7,"source":8,"bound":1,"name":"Banishment","requiredPerk":null,"cost":300,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Infernal Banishment","icon":"Any_Generic","activate":0.83,"charge":1.67,"maintain":0,"chargeMin":1.67,"cost":0,"cooldown":60,"range":"Targets foe (5 max)/50 feet/20 foot Sphere","tags":"","toolTip":"Deals Toxic damage to targets.  The primary target is briefly Stunned and secondary targets are Paralyzed for 12 seconds."}},
+		{"id":79,"icon":"Any_Generic","rarity":2,"type":9,"source":2,"bound":2,"name":"Vesperine Cloak","requiredPerk":null,"cost":50,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Vesperine Flight Toggle","icon":"Any_Generic","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":1,"range":"Targets Self","tags":"","toolTip":"Grants +20 Flight Speed while active.<br /><br />You cannot elevate more than 15 feet from the ground with this.  Counts as a Travel Power."}},
+		{"id":80,"icon":"Any_Generic","rarity":2,"type":7,"source":2,"bound":2,"name":"Perpetrator Incapacitation Device","requiredPerk":null,"cost":50,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Ravenswood Perpetrator Incapacitation Device","icon":"Any_Generic","activate":1,"charge":1,"maintain":0,"chargeMin":1,"cost":0,"cooldown":15,"range":"Targets foe (10 max)/80 feet/15 foot Sphere","tags":"","toolTip":"Deals Electrical(?) damage to targets.  The primary target is Stunned and secondary targets are Dazed."}},
+		{"id":81,"icon":"Any_Generic","rarity":2,"type":7,"source":2,"bound":2,"name":"Alien Crystal","requiredPerk":null,"cost":50,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Alien Crystal","icon":"Any_Generic","activate":1.75,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets nondestructible foe (5 max)/50 feet/90 degree Cone","tags":"","toolTip":"Applies Confuse to foes in a cone in front of you."}},
+		{"id":82,"icon":"Any_Generic","rarity":2,"type":5,"source":2,"bound":2,"name":"Asclepial Serum","requiredPerk":null,"cost":50,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Asclepial Serum","icon":"Any_Generic","activate":0.5,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Heals you for a small amount every second, gives you +25% resistance to all damage, and deals Toxic damage to foes within 10 feet of you every 2 seconds for 30 seconds."}},
+		{"id":83,"icon":"Any_Generic","rarity":2,"type":7,"source":2,"bound":2,"name":"Telekinetic Force Field Inducer","requiredPerk":null,"cost":50,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Telekinetic Force Field Inducer","icon":"Any_Generic","activate":0.67,"charge":1.83,"maintain":0,"chargeMin":1.83,"cost":32,"cooldown":30,"range":"Targets nondestructible foe/50 feet","tags":"","toolTip":"Paralyzes the target for up to 12 seconds."}},
+		{"id":84,"icon":"Any_Generic","rarity":2,"type":8,"source":2,"bound":2,"name":"Cloak of the Infinite Planes","requiredPerk":null,"cost":50,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Rune Blade","icon":"Any_Generic","activate":[0.7,0.7,0.7],"charge":0,"maintain":0,"chargeMin":0,"cost":[18,16,14],"cooldown":0,"range":"Targets foe (5 max)/10 feet/180 degree Cone/300 degree Cone/45 degree Cone","tags":"","toolTip":"Deals Magical damage and has a 10/15/20% chance (based on combo hit) to apply Bane to targets.  %Bane%"}},
+		{"id":85,"icon":"Any_Generic","rarity":2,"type":7,"source":2,"bound":2,"name":"Contained Radiation","requiredPerk":null,"cost":50,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Contained Radiation","icon":"Any_Generic","activate":0.6,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":45,"range":"Targets foe/100 feet","tags":"","toolTip":"Deals Particle damage and Knocks Back the target."}},
+		{"id":86,"icon":"Any_Generic","rarity":2,"type":6,"source":2,"bound":2,"name":"Demonic Flesh Graft","requiredPerk":null,"cost":50,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Demonic Flesh Graft","icon":"Any_Generic","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":180,"range":"Targets Self","tags":"","toolTip":"Absorbs up to a moderate amount of damage."}},
+		{"id":87,"icon":"Any_Generic","rarity":2,"type":4,"source":2,"bound":2,"name":"Elder Worm Humidity Dome","requiredPerk":null,"cost":50,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Energy Form Passive","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Passive","tags":"","toolTip":"When your Endurance threshold is reached, you gain +10% Resistance to all damage."}},
+		{"id":88,"icon":"Any_Generic","rarity":2,"type":3,"source":2,"bound":2,"name":"Khusor's Doom","requiredPerk":null,"cost":50,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Khusor's Doom","icon":"Any_Generic","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Creates a level 40 Gnasher for 60 sec.<br />Creates a level 40 Gnasher for 60 sec.<br />50% chance Creates a level 40 Gnasher for 60 sec.<br />50% chance Creates a level 40 Gnasher for 60 sec.<br />50% chance Creates a level 40 Gnasher for 60 sec.<br />50% chance Creates a level 40 Gnasher for 60 sec."}},
+		{"id":89,"icon":"Any_Generic","rarity":2,"type":4,"source":2,"bound":2,"name":"Nightmare Generator","requiredPerk":null,"cost":50,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Nightmare Generator Enhancement","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Passive","tags":"","toolTip":"When attacking, you have a 1% chance to summon a Stalking Horror for 60 sec.<br /><br />This creature can use the following attacks:<br />Ego Claw: Deals Ego damage, plus a small amount of Ego Damage over 2 sec.<br />Ego Bite: Deals Ego damage.<br />Ego Lunge: Deals Ego damage.<br />Ego Drain: Deals Ego damage and has 10% chance to apply Disorient to targets."}},
+		{"id":90,"icon":"Any_Generic","rarity":2,"type":3,"source":2,"bound":2,"name":"Ragged Proletariat's Armband","requiredPerk":null,"cost":50,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Ragged Proletariat's Armband","icon":"Any_Generic","activate":1.3,"charge":2,"maintain":0,"chargeMin":2,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Summons 3 level 40 Zombies for 60 sec."}},
+		{"id":91,"icon":"Any_Generic","rarity":2,"type":3,"source":2,"bound":2,"name":"Prototype Psi-Bomb","requiredPerk":null,"cost":50,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Prototype Psi-Bomb","icon":"Any_Generic","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":60,"range":"Targets Self","tags":"","toolTip":"Creates a level 40 Prototype Psi-Bomb for 15 sec, releasing gas that inhibits resistance to Psionics."}},
+		{"id":92,"icon":"Any_Generic","rarity":2,"type":3,"source":2,"bound":2,"name":"Shadow Pact","requiredPerk":null,"cost":50,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Shadow Pact","icon":"Any_Generic","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":90,"range":"Targets Self","tags":"","toolTip":"Creates a level 40 Shadow Rift for 15 sec."}},
+		{"id":93,"icon":"Any_Generic","rarity":2,"type":8,"source":2,"bound":2,"name":"Thunderbolt Wand","requiredPerk":null,"cost":50,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Thunderbolt Wand","icon":"Any_Generic","activate":0.83,"charge":2,"maintain":0,"chargeMin":0,"cost":0,"cooldown":60,"range":"Targets foe/50 feet","tags":"","toolTip":"Deals Electrical damage and can arc to 3 additional targets.  The primary target is Dazed.  %Daze%"}},
+		{"id":94,"icon":"Any_Generic","rarity":2,"type":5,"source":2,"bound":2,"name":"Void Possession","requiredPerk":null,"cost":50,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Void Possession Maintain","icon":"Any_Generic","activate":1,"charge":0,"maintain":5,"chargeMin":0,"cost":0,"cooldown":90,"range":"Affects nondestructible foe (5 max)/15 foot Sphere","tags":"","toolTip":"Heals you for a small amount every second and you gain 100% resistance to all damage while maintaining this power.  Nearby foes are affected by Fear. %Fear%"}},
+		{"id":95,"icon":"Any_Generic","rarity":2,"type":9,"source":1,"bound":2,"name":"Anti-Graviton Generator","requiredPerk":null,"cost":100000,"uniqueEquipped":false,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Anti-Graviton Generator Toggle","icon":"Any_Generic","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":1,"range":"Targets Self","tags":"","toolTip":"Grants +20 Flight Speed while active.<br /><br />You cannot elevate more than 15 feet from the ground with this.  Counts as a Travel Power."}},
+		{"id":96,"icon":"Any_Generic","rarity":2,"type":6,"source":1,"bound":2,"name":"Experimental Artificial Life Injection","requiredPerk":null,"cost":100000,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Experimental Artificial Life Injection","icon":"Any_Generic","activate":1.5,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Gives you +100% resistance to all damage for 12 sec."}},
+		{"id":97,"icon":"Any_Generic","rarity":2,"type":3,"source":1,"bound":2,"name":"Dr. Destroyer's Head","requiredPerk":null,"cost":100000,"uniqueEquipped":false,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Dr. Destroyer's Head","icon":"Any_Generic","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Creates a level 40 Dr. Destroyer's Head for 60 sec."}},
+		{"id":98,"icon":"Any_Generic","rarity":2,"type":8,"source":1,"bound":2,"name":"Echo's Stick","requiredPerk":null,"cost":100000,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Echo's Stick Maintain","icon":"Any_Generic","activate":1,"charge":0,"maintain":10,"chargeMin":0,"cost":0,"cooldown":60,"range":"Targets foe (5 max)/100 feet/ 20 foot Sphere","tags":"","toolTip":"Deals Slashing damage to foes every second while maintained.  Each tick has a 20% chance to apply Stagger to targets.  %Stagger%<br /><br />After you stop maintaining this power, its effects persist for a few seconds based on how long it was maintained."}},
+		{"id":99,"icon":"Any_Generic","rarity":2,"type":8,"source":1,"bound":2,"name":"Electric Storm","requiredPerk":null,"cost":100000,"uniqueEquipped":false,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Electric Storm Maintain","icon":"Any_Generic","activate":0.5,"charge":2,"maintain":10,"chargeMin":2,"cost":0,"cooldown":60,"range":"Affects nondestructible foe (5 max)/25 foot Sphere","tags":"","toolTip":"Deals Electrical damage and has a 10% chance to apply Negative Ions to targets every 0.5 sec."}},
+		{"id":100,"icon":"Any_Generic","rarity":2,"type":6,"source":1,"bound":2,"name":"Energy Absorbing Crashsuit","requiredPerk":null,"cost":100000,"uniqueEquipped":false,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Recharge","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":105,"range":"Targets Self","tags":"","toolTip":"Recover 100% Energy."}},
+		{"id":101,"icon":"Any_Generic","rarity":2,"type":8,"source":1,"bound":2,"name":"Experimental Plasma Rifle","requiredPerk":null,"cost":100000,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Experimental Plasma Rifle Maintain","icon":"Any_Generic","activate":0.5,"charge":0,"maintain":4,"chargeMin":0,"cost":0,"cooldown":45,"range":"Targets foe/100 feet","tags":"","toolTip":"Deals Particle damage and has a 25% chance to apply a stack of Plasma Burn every 0.5 sec.  %PlasmaBurn%"}},
+		{"id":102,"icon":"Any_Generic","rarity":2,"type":8,"source":1,"bound":2,"name":"Gunslinger's Legacy","requiredPerk":null,"cost":100000,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Gunslinger's Legacy Maintain","icon":"Any_Generic","activate":0.5,"charge":0,"maintain":3,"chargeMin":0,"cost":0,"cooldown":60,"range":"Targets foe (5 max)/50 feet/60 degree Cone","tags":"","toolTip":"Deals Piercing damage twice every 0.5 sec."}},
+		{"id":103,"icon":"Any_Generic","rarity":2,"type":8,"source":1,"bound":2,"name":"Mutagenic Infection","requiredPerk":null,"cost":100000,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Mutagenic Infection Toggle","icon":"Any_Generic","activate":1,"charge":0,"maintain":30,"chargeMin":0,"cost":0,"cooldown":120,"range":"Affects nondestructible foe (5 max)","tags":"","toolTip":"Deals Toxic damage and has a 10% chance to apply Deadly Poison to affected targets every second while toggled on.  %DeadlyPoison%"}},
+		{"id":104,"icon":"Any_Generic","rarity":2,"type":7,"source":1,"bound":2,"name":"Plasmite","requiredPerk":null,"cost":100000,"uniqueEquipped":false,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Plasmite","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":60,"range":"Targets Self","tags":"","toolTip":"Creates a delayed-detonation plasmite explosive that damages and Knocks Back foes."}},
+		{"id":105,"icon":"Any_Generic","rarity":2,"type":7,"source":1,"bound":2,"name":"Poisoned Shuriken","requiredPerk":null,"cost":100000,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Poisoned Shuriken","icon":"Any_Generic","activate":0.5,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":25,"range":"Targets foe/100 feet","tags":"","toolTip":"Deals Slashing damage to the target, Stuns them for 1 second, and applies a stack of Deadly Poison.  %DeadlyPoison%"}},
+		{"id":106,"icon":"Any_Generic","rarity":2,"type":3,"source":1,"bound":2,"name":"Psionic Echoes","requiredPerk":null,"cost":100000,"uniqueEquipped":false,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Psionic Echoes","icon":"Any_Generic","activate":1.67,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets foe/50 feet","tags":"","toolTip":"Creates 2 level 40 Pisonic Echoes to attack the target for 30 seconds."}},
+		{"id":107,"icon":"Any_Generic","rarity":2,"type":3,"source":1,"bound":2,"name":"Reprogrammed Cowboy Robot","requiredPerk":null,"cost":100000,"uniqueEquipped":false,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Reprogrammed Cowboy Robot","icon":"Any_Generic","activate":1.3,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Creates a level 40 Reprogrammed Prospector for 60 sec."}},
+		{"id":108,"icon":"Any_Generic","rarity":2,"type":4,"source":1,"bound":2,"name":"Primus Spark Shield","requiredPerk":null,"cost":100000,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Sparks Passive","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Passive","tags":"","toolTip":"Deals 15% of the actual damage you take back to the attacker.  This damage can be resisted."}},
+		{"id":109,"icon":"Any_Generic","rarity":2,"type":8,"source":1,"bound":2,"name":"Terak Generator","requiredPerk":null,"cost":100000,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Terak Generator Maintain","icon":"Any_Generic","activate":0.5,"charge":0,"maintain":5,"chargeMin":0,"cost":0,"cooldown":45,"range":"Targets foe/Affects nondestructible foe (5 max)/50 feet/60 degree Cone","tags":"","toolTip":"Deals Electrical damage and has a 10% chance to apply Negative Ions to targets."}},
+		{"id":110,"icon":"Any_Generic","rarity":2,"type":7,"source":1,"bound":2,"name":"Viper Brainscrambler","requiredPerk":null,"cost":100000,"uniqueEquipped":false,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Brainscrambler","icon":"Any_Generic","activate":0.5,"charge":1,"maintain":0,"chargeMin":1,"cost":0,"cooldown":45,"range":"Targets foe/100 feet","tags":"","toolTip":"Deals Ego damage and has a 50% chance to Confuse your target for 10 sec.  %Confused%"}},
+		{"id":111,"icon":"Any_Generic","rarity":2,"type":7,"source":4,"bound":2,"name":"Devouring Shadows","requiredPerk":"Portal Destructor","cost":350,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Devouring Shadows","icon":"Any_Generic","activate":0.83,"charge":1.17,"maintain":0,"chargeMin":0,"cost":0,"cooldown":20,"range":"Targets foe/50 feet","tags":"","toolTip":"Deals Dimensional damage, has a 45-100% chance to apply Fear, and they are Knocked To you. %Fear%<br /><br />Also applies Nailed to the Ground.  %NG%"}},
+		{"id":112,"icon":"Any_Generic","rarity":2,"type":7,"source":4,"bound":2,"name":"Trident of the Elemental Master","requiredPerk":"Guppy","cost":350,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Trident of the Elemental Master","icon":"Any_Generic","activate":0.83,"charge":2,"maintain":0,"chargeMin":0,"cost":0,"cooldown":45,"range":"Targets foe/50 feet","tags":"","toolTip":"Deals Electrical damage, has a 50% chance to apply Negative Ions, and can arc to 3 additional targets.<br /><br />Applies Drained to the target, reducing Run Speed, Jump Speed, Jump Height, and Flight Speed by 200% for 5 sec."}},
+		{"id":113,"icon":"Any_Generic","rarity":2,"type":3,"source":4,"bound":2,"name":"Beneficient Construct","requiredPerk":"Emyprean Construct Victory","cost":350,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Beneficient Construct","icon":"Any_Generic","activate":0.83,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Creates a level 40 Beneficient Construct for 21 sec that heals nearby allies every 3 seconds."}},
+		{"id":114,"icon":"Any_Generic","rarity":2,"type":4,"source":4,"bound":2,"name":"Blood of Corruption","requiredPerk":"Vanquished Bloodstone","cost":350,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Blood of Corruption Passive","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Passive","tags":"","toolTip":"Has a 5% chance to Stun foes for 1 sec.<br /><br />Has a 5% chance to Corrupt Henchmen and Villain rank enemies for 10 sec.  Corrupted foes are forced to fight for you and suffer a percentage of their maximum health when the effect expires."}},
+		{"id":115,"icon":"Any_Generic","rarity":2,"type":4,"source":4,"bound":2,"name":"Cerebro-Stimulator","requiredPerk":"Vanquished Menton","cost":350,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Cerebro-Stimulator Enhancement","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Passive","tags":"","toolTip":"Has a 1% chance to create a level 40 Larval Terror for 60 sec.<br /><br />Larval terror can attack foes for moderately strong Ego damage."}},
+		{"id":116,"icon":"Any_Generic","rarity":2,"type":8,"source":4,"bound":2,"name":"Charm of the Wind","requiredPerk":"Vanquished Galeforce","cost":350,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Charm of the Wind Maintain","icon":"Any_Generic","activate":1,"charge":0,"maintain":5,"chargeMin":0,"cost":0,"cooldown":60,"range":"Affects foe (5 max)/15 foot Sphere","tags":"","toolTip":"Deals Cold damage and has a 25% chance to apply Chill every 1 sec."}},
+		{"id":117,"icon":"Any_Generic","rarity":2,"type":3,"source":4,"bound":2,"name":"Necrull's Skull","requiredMission":"Death's Door","cost":350,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Necrull's Skull","icon":"Any_Generic","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Gives you the Necrull's Skull buff for 60 sec.  While active, being damaged can trigger the following:<br /><br />66% chance to create a level 40 Zombie for 30 sec.<br />33% chance to create a level 40 Shade for 30 sec.<br /><br />You can only have 1 Zombie and 1 Shade active at a time."}},
+		{"id":118,"icon":"Any_Generic","rarity":2,"type":9,"source":4,"bound":2,"name":"Feline Metabolic Serum","requiredMission":"A Cat's Tale","cost":350,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Feline Metabolic Serum Toggle","icon":"Any_Generic","activate":2,"charge":1.5,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets Self","tags":"","toolTip":"While toggled on:<br />-15% Energy Strength<br />-12% Power Cost Discount<br />+3.3% Dodge Chance<br />+10/10/10 Run Speed<br />+10/20/10 Flight Speed<br />+10/10/10 Jump Speed<br />+10/10/10 Jump Height<br />+1 Jump Traction"}},
+		{"id":119,"icon":"Any_Generic","rarity":2,"type":6,"source":4,"bound":2,"name":"Gadroon Force Tech","requiredMission":"Spaceship Scuttling","cost":350,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Gadroon Force Field","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":60,"range":"Targets Self","tags":"","toolTip":"Gives you +25% resistance to all damage and +3.1% Energy every 1 sec for 15 sec."}},
+		{"id":120,"icon":"Any_Generic","rarity":2,"type":6,"source":4,"bound":2,"name":"Force Shield Belt","requiredMission":"Brain Storming","cost":350,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Force Shield Belt","icon":"Any_Generic","activate":0.83,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":180,"range":"Targets Self","tags":"","toolTip":"Absorbs a moderate amount of damage."}},
+		{"id":121,"icon":"Any_Generic","rarity":2,"type":3,"source":4,"bound":2,"name":"Invocation of the Eclipse","requiredMission":"Krim Crown Coda","cost":350,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Invocation of the Eclipse","icon":"Any_Generic","activate":2,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":90,"range":"Targets Self","tags":"","toolTip":"Summons 5 Eclipse Entites around you.  When an enemy comes with 15 feet of an Eclipse Entity, it explodes, dealing Dimensional damage to up to 5 enemies within range."}},
+		{"id":122,"icon":"Any_Generic","rarity":2,"type":3,"source":4,"bound":2,"name":"Horn of Allegiance","requiredMission":"Beating the Beastmaster!","cost":350,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Horn of Allegiance","icon":"Any_Generic","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Creates a level 40 Hyena Hybrid for 60 sec.<br />Creates a level 40 Hyena Hybrid for 60 sec.<br />50% chance to create a level 40 Hyena Hybrid for 60 sec.<br />25% chance to create a level 40 Hyena Hybrid for 60 sec."}},
+		{"id":123,"icon":"Any_Generic","rarity":2,"type":7,"source":4,"bound":2,"name":"Rhino Helm","requiredPerk":"Vanquished White Rhino","cost":350,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Rhino Charge","icon":"Any_Generic","activate":0.67,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":60,"range":"Targets foe/100 feet/100 foot Lunge","tags":"","toolTip":"Deals Crushing damage to the target.  Also, they are Knocked Back and Disoriented.  %Disorient%"}},
+		{"id":124,"icon":"Any_Generic","rarity":2,"type":8,"source":4,"bound":2,"name":"Bear Spear","requiredPerk":"Manimal Crossing","cost":350,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Bear Spear","icon":"Any_Generic","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":25,"range":"Targets Self","tags":"","toolTip":"Deals Piercing damage and applies Bleed to the target.  %Bleed%"}},
+		{"id":125,"icon":"Any_Generic","rarity":2,"type":3,"source":4,"bound":2,"name":"Manimal Control","requiredPerk":"Manimal Triumph","cost":350,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Slaver Remote","icon":"Any_Generic","activate":1.3,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Creates a level 40 Rat Hybrid for 60 sec.<br />Creates a level 40 Bird for 60 sec.<br />50% chance to create a level 40 Rat Hybrid for 60 sec.<br />50% chance to create a level 40 Bird for 60 sec.<br />50% chance to create a level 40 Stag for 60 sec."}},
+		{"id":126,"icon":"Any_Generic","rarity":2,"type":7,"source":4,"bound":2,"name":"Lasso","requiredPerk":"Sheriff","cost":350,"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Lasso","icon":"Any_Generic","activate":1,"charge":2,"maintain":0,"chargeMin":0,"cost":0,"cooldown":25,"range":"Targets foe/100 feet","tags":"","toolTip":"Your target is Knocked To you."}},
+		{"id":127,"icon":"Any_Generic","rarity":2,"type":10,"source":4,"bound":2,"name":"Qliphothic Warzone Transport","requiredMission":"The Long War","cost":350,"uniqueEquipped":false,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Warp to Qliphothic Warzone","icon":"Any_Generic","activate":0.5,"charge":4.5,"maintain":0,"chargeMin":4.5,"cost":0,"cooldown":0,"range":"Targets Self","tags":"","toolTip":"Transports you to the Qliphothic Warzone."}},
+		{"id":128,"icon":"Any_Generic","rarity":2,"type":10,"source":4,"bound":2,"name":"Snake Gulch Transport","requiredPerk":"Shadow Rider","cost":350,"uniqueEquipped":false,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Warp to Snake Gulch","icon":"Any_Generic","activate":0.5,"charge":4.5,"maintain":0,"chargeMin":4.5,"cost":0,"cooldown":0,"range":"Targets Self","tags":"","toolTip":"Transports you to Snake Gulch."}},
+		{"id":129,"icon":"Any_Generic","rarity":4,"type":2,"source":6,"bound":2,"name":"Loyal Sidekick: Shoki","cost":1,"uniqueEquipped":false,"noCooldownReduction":true,"toolTip":"%LoyalSidekick%","powers":{"name":"Loyal Sidekick: Shoki Toggle","icon":"Any_Generic","activate":1,"charge":0,"maintain":900,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Type:  Tank/Support<br /><br />Uses close-range Toxic martial arts attacks and can apply Deadly Poison to targets.<br /><br />Occasionally summons Kyuu, a demon thta heals nearby allies in a large radius."}},
+		{"id":130,"icon":"Any_Generic","rarity":4,"type":2,"source":6,"bound":2,"name":"Loyal Sidekick: Blaise","cost":1,"uniqueEquipped":false,"noCooldownReduction":true,"toolTip":"%LoyalSidekick%","powers":{"name":"Loyal Sidekick: Blaise Toggle","icon":"Any_Generic","activate":1,"charge":0,"maintain":900,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Type:  Damage/Support<br /><br />Uses close-range Fire attacks and can apply Clinging Flames to targets.  Also occasionally heals nearby allies."}},
+		{"id":131,"icon":"Any_Generic","rarity":4,"type":2,"source":6,"bound":2,"name":"Loyal Sidekick: The Amp","cost":1,"uniqueEquipped":false,"noCooldownReduction":true,"toolTip":"%LoyalSidekick%","powers":{"name":"Loyal Sidekick: The Amp Toggle","icon":"Any_Generic","activate":1,"charge":0,"maintain":900,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Type:  Damage/Support<br /><br />Uses Electrical attacks and can apply Negative Ions to targets."}},
+		{"id":132,"icon":"Any_Generic","rarity":4,"type":2,"source":6,"bound":2,"name":"Loyal Sidekick: Cultros","cost":1,"uniqueEquipped":false,"noCooldownReduction":true,"toolTip":"%LoyalSidekick%","powers":{"name":"Loyal Sidekick: Cultros Toggle","icon":"Any_Generic","activate":1,"charge":0,"maintain":900,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Type:  Damage/Support<br /><br />Uses close-range telekinetic blades and can apply both Dependency and Snares to targets."}},
+		{"id":133,"icon":"Any_Generic","rarity":4,"type":2,"source":6,"bound":2,"name":"Loyal Sidekick: Errorlevel","cost":1,"uniqueEquipped":false,"noCooldownReduction":true,"toolTip":"%LoyalSidekick%","powers":{"name":"Sidekick: Errorlevel Toggle","icon":"Any_Generic","activate":1,"charge":0,"maintain":900,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Type:  Damage<br /><br />Uses close-range energy claw attacks and can apply Plasma Burn to targets."}},
+		{"id":134,"icon":"Any_Generic","rarity":4,"type":2,"source":6,"bound":2,"name":"Loyal Sidekick: Watt Earp","cost":1,"uniqueEquipped":false,"noCooldownReduction":true,"toolTip":"%LoyalSidekick%","powers":{"name":"Sidekick: Watt Earp Toggle","icon":"Any_Generic","activate":1,"charge":0,"maintain":900,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Type:  Damage<br /><br />Uses pistols and explosives, and can apply Bleed and Clinging Flames to targets."}},
+		{"id":135,"icon":"Any_Generic","rarity":4,"type":2,"source":6,"bound":2,"name":"Loyal Sidekick: Valiant","cost":1,"uniqueEquipped":false,"noCooldownReduction":true,"toolTip":"%LoyalSidekick%","powers":{"name":"Sidekick: Valiant Toggle","icon":"Any_Generic","activate":1,"charge":0,"maintain":900,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Type:  Damage<br /><br />Uses adorable teddy bear punch attacks and can apply Disorient to targets."}},
+		{"id":136,"icon":"Any_Generic","rarity":4,"type":2,"source":6,"bound":2,"name":"Loyal Sidekick: Anapa","cost":1,"uniqueEquipped":false,"noCooldownReduction":true,"toolTip":"%LoyalSidekick%","powers":{"name":"Sidekick: Anapa Toggle","icon":"Any_Generic","activate":1,"charge":0,"maintain":900,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Type:  Damage/Support<br /><br />Uses magic attacks and can apply Illumination(or Illuminated?) and Jinxed to targets."}},
+		{"id":137,"icon":"Any_Generic","rarity":4,"type":2,"source":6,"bound":2,"name":"Loyal Sidekick: Windchill","cost":1,"uniqueEquipped":false,"noCooldownReduction":true,"toolTip":"%LoyalSidekick%","powers":{"name":"Sidekick: Windchill Toggle","icon":"Any_Generic","activate":1,"charge":0,"maintain":900,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Type:  Damage<br /><br />Uses ranged Cold attacks and can apply Chill to targets."}},
+		{"id":138,"icon":"Any_Generic","rarity":4,"type":4,"source":6,"bound":2,"name":"Voltanic Potential","cost":[null,1],"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Voltanic Potential Passive","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Passive","tags":"","toolTip":"+5% Resistance to all Energy damage.<br /><br />While in combat, has 5% chance every 2 sec to deal Electrical damage to foes within 25 feet of you."}},
+		{"id":139,"icon":"Any_Generic","rarity":4,"type":4,"source":6,"bound":2,"name":"Anagogic Aspect","cost":[null,1],"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Anagogic Aura Passive","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Passive","tags":"","toolTip":"+5 Resistance to all Paranormal damage.<br /><br />While you are in combat and your Energy is above 75%:  Has a 5% chance every 1 sec to summon a Gremlin for 60 seconds.  You cannot have more than one Gremlin active at a time.<br /><br />The Gremlin deals Dimensional damage to foes."}},
+		{"id":140,"icon":"Any_Generic","rarity":4,"type":4,"source":6,"bound":2,"name":"Benign Symbiote","cost":[null,1],"uniqueEquipped":true,"noCooldownReduction":false,"toolTip":"","powers":{"name":"Benign Symbiote Passive","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Passive","tags":"","toolTip":"+5 Resistance to Ego damage.<br />+5 Resistance to Dimensional damage.<br />+5 Resistance to Toxic damage.<br /><br />While you are in combat and your Energy is above 75%:  Has a 10% chance every 1 sec to heal you for a small amount every 1 sec for 9 sec."}},
+		{"id":141,"icon":"Any_Generic","rarity":4,"type":4,"source":6,"bound":2,"name":"Prototype Emergency Orbital Howitzer","cost":[null,1],"toolTip":"","powers":{"name":"Prototype Emergency Orbital Howitzer Passive","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Passive","tags":"","toolTip":"+5% Resistance to all Energy damage.<br /><br />While you are in combat and your Energy is below 25%:  Has a 5% chance every 1 sec to blast foes in a 15 foot radius around you for heavy Particle damage, knocking them back."}},
+		{"id":142,"icon":"Any_Generic","rarity":4,"type":10,"source":6,"bound":2,"name":"Fighting Dojo Transport","cost":[null,1],"toolTip":"","powers":{"name":"Warp to Fighting Dojo","icon":"Any_Generic","activate":0.5,"charge":4.5,"maintain":0,"chargeMin":4.5,"cost":0,"cooldown":0,"range":"Targets Self","tags":"","toolTip":"Teleports you to the Fighting Dojo."}},
+		{"id":143,"icon":"Any_Generic","rarity":4,"type":10,"source":6,"bound":2,"name":"Arcana Library Transport","cost":[null,1],"toolTip":"","powers":{"name":"Warp to Arcana Library","icon":"Any_Generic","activate":0.5,"charge":4.5,"maintain":0,"chargeMin":4.5,"cost":0,"cooldown":0,"range":"Targets Self","tags":"","toolTip":"Teleports you to the Arcana Lab."}},
+		{"id":144,"icon":"Any_Generic","rarity":4,"type":10,"source":6,"bound":2,"name":"Mutations Lab Transport","cost":[null,1],"toolTip":"","powers":{"name":"Warp to Mutations Lab","icon":"Any_Generic","activate":0.5,"charge":4.5,"maintain":0,"chargeMin":4.5,"cost":0,"cooldown":0,"range":"Targets Self","tags":"","toolTip":"Teleports you to the Mutations Lab."}},
+		{"id":145,"icon":"Any_Generic","rarity":4,"type":10,"source":6,"bound":2,"name":"Minefield Transport","cost":[null,1],"requiredLevel":34,"toolTip":"","powers":{"name":"Warp to The Minefield","icon":"Any_Generic","activate":0.5,"charge":4.5,"maintain":0,"chargeMin":4.5,"cost":0,"cooldown":0,"range":"Targets Self","tags":"","toolTip":"Teleports you to the Minefield."}},
+		{"id":146,"icon":"Any_Generic","rarity":4,"type":10,"source":6,"bound":2,"name":"Powerhouse Theatre Transport","cost":[null,1],"toolTip":"","powers":{"name":"Warp to Powerhouse Theatre","icon":"Any_Generic","activate":0.5,"charge":4.5,"maintain":0,"chargeMin":4.5,"cost":0,"cooldown":0,"range":"Targets Self","tags":"","toolTip":"Teleports you to the Powerhoues Theatre."}},
+		{"id":147,"icon":"Any_Generic","rarity":4,"type":10,"source":6,"bound":2,"name":"UNTIL Headquarters Transport","cost":[null,1],"requiredLevel":6,"toolTip":"","powers":{"name":"Warp to UNTIL Headquarters","icon":"Any_Generic","activate":0.5,"charge":4.5,"maintain":0,"chargeMin":4.5,"cost":0,"cooldown":0,"range":"Targets Self","tags":"","toolTip":"Teleports you to UNTIL Headquarters."}},
+		{"id":148,"icon":"Any_Generic","rarity":3,"type":10,"source":6,"bound":2,"name":"Farlong Device","cost":[null,null,null,1],"toolTip":"","powers":{"name":"Warp to Zone Transportation Hub","icon":"Any_Generic","activate":0.5,"charge":4.5,"maintain":0,"chargeMin":4.5,"cost":0,"cooldown":0,"range":"Targets Self","tags":"","toolTip":"Teleports you to the nearest Transportation Jet."}},
+		{"id":149,"icon":"Any_Generic","rarity":3,"type":10,"source":6,"bound":2,"name":"Spacial Manipulator","cost":[null,null,null,1],"toolTip":"","powers":{"name":"Warp to Powerhouse","icon":"Any_Generic","activate":0.5,"charge":4.5,"maintain":0,"chargeMin":4.5,"cost":0,"cooldown":0,"range":"Targets Self","tags":"","toolTip":"Teleports you to the nearest Poewrhouse."}},
+		{"id":150,"icon":"Any_Generic","rarity":3,"type":10,"source":6,"bound":2,"name":"Carl's Gym Transport","cost":[null,null,null,1],"toolTip":"","powers":{"name":"Warp to Carl's Gym","icon":"Any_Generic","activate":0.5,"charge":4.5,"maintain":0,"chargeMin":4.5,"cost":0,"cooldown":0,"range":"Targets Self","tags":"","toolTip":"Teleports you to Carl's Gym."}},
+		{"id":151,"icon":"Any_Generic","rarity":3,"type":10,"source":6,"bound":2,"name":"Club Caprice Transport","cost":[null,null,null,1],"toolTip":"","powers":{"name":"Warp to Club Caprice","icon":"Any_Generic","activate":0.5,"charge":4.5,"maintain":0,"chargeMin":4.5,"cost":0,"cooldown":0,"range":"Targets Self","tags":"","toolTip":"Teleports you to Club Caprice.  Don't forget to use protection."}},
+		{"id":152,"icon":"Any_Generic","rarity":3,"type":10,"source":6,"bound":2,"name":"Sherrera's Bar Transport","cost":[null,null,null,1],"toolTip":"","powers":{"name":"Warp to Sherrera's","icon":"Any_Generic","activate":0.5,"charge":4.5,"maintain":0,"chargeMin":4.5,"cost":0,"cooldown":0,"range":"Targets Self","tags":"","toolTip":"Teleports you to Sherrera's Bar."}},
+		{"id":153,"icon":"Any_Generic","rarity":3,"type":10,"source":6,"bound":2,"name":"Enchanted Foundry Transport","cost":[null,null,null,1],"toolTip":"","powers":{"name":"Warp to Enchanted Foundry","icon":"Any_Generic","activate":0.5,"charge":4.5,"maintain":0,"chargeMin":4.5,"cost":0,"cooldown":0,"range":"Targets Self","tags":"","toolTip":"Teleports you to the Enchanted Foundry."}},
+		{"id":154,"icon":"Any_Generic","rarity":3,"type":10,"source":6,"bound":2,"name":"MCPD Special Task Force Armory Transport","cost":[null,null,null,1],"toolTip":"","powers":{"name":"Warp to MCPD Special Task Force Armory","icon":"Any_Generic","activate":0.5,"charge":4.5,"maintain":0,"chargeMin":4.5,"cost":0,"cooldown":0,"range":"Targets Self","tags":"","toolTip":"Teleports you to the MCPD Special Task Force Armory."}},
+		{"id":155,"icon":"Any_Generic","rarity":3,"type":10,"source":6,"bound":2,"name":"Invention Workshop Transport","cost":[null,null,null,1],"toolTip":"","powers":{"name":"Warp to Invention Workshop","icon":"Any_Generic","activate":0.5,"charge":4.5,"maintain":0,"chargeMin":4.5,"cost":0,"cooldown":0,"range":"Targets Self","tags":"","toolTip":"Teleports you to the Invention Workshop."}},
+		{"id":156,"icon":"TravelPower_Superspeed","rarity":4,"type":9,"source":6,"bound":2,"name":"Lightning Speed","cost":1,"toolTip":"%DeviceTravelPower%","powers":{"name":"Lightning Speed Toggle","icon":"Any_Generic","activate":0,"charge":1.5,"maintain":0,"chargeMin":0,"cost":0,"cooldown":1,"range":"Targets Self","tags":"","toolTip":"Type:  Superspeed"}},
+		{"id":157,"icon":"TravelPower_MachSpeed","rarity":4,"type":9,"source":6,"bound":2,"name":"Electric Speed","cost":1,"toolTip":"%DeviceTravelPower%","powers":{"name":"Electric Speed Toggle","icon":"Any_Generic","activate":0,"charge":1.5,"maintain":0,"chargeMin":0,"cost":0,"cooldown":1,"range":"Targets Self","tags":"","toolTip":"Type:  Superspeed"}},
+		{"id":158,"icon":"TravelPower_Teleportation","rarity":4,"type":9,"source":6,"bound":2,"name":"Mind Blink","cost":1,"toolTip":"%DeviceTravelPower%","powers":{"name":"Mind Blink Toggle","icon":"Any_Generic","activate":0,"charge":0,"maintain":3,"chargeMin":0,"cost":0,"cooldown":15,"range":"Targets Self","tags":"","toolTip":"Type:  Teleport"}},
+		{"id":159,"icon":"TravelPower_Hoverboard","rarity":4,"type":9,"source":6,"bound":2,"name":"Steampunk Hoverboard","cost":1,"toolTip":"%DeviceTravelPower%","powers":{"name":"Steampunk Hoverboard Toggle","icon":"Any_Generic","activate":0,"charge":1.5,"maintain":0,"chargeMin":0,"cost":0,"cooldown":1,"range":"Targets Self","tags":"","toolTip":"Type:  Hoverboard Flight"}},
+		{"id":160,"icon":"TravelPower_Teleportation","rarity":4,"type":9,"source":6,"bound":2,"name":"Upload Teleport","cost":1,"toolTip":"%DeviceTravelPower%","powers":{"name":"Upload Toggle","icon":"Any_Generic","activate":0,"charge":0,"maintain":3,"chargeMin":0,"cost":0,"cooldown":15,"range":"Targets Self","tags":"","toolTip":"Type:  Teleport"}},
+		{"id":161,"icon":"TravelPower_Superspeed","rarity":4,"type":9,"source":6,"bound":2,"name":"Frost Speed","cost":1,"toolTip":"%DeviceTravelPower%","powers":{"name":"Frost Speed Speed Toggle","icon":"Any_Generic","activate":0,"charge":1.5,"maintain":0,"chargeMin":0,"cost":0,"cooldown":1,"range":"Targets Self","tags":"","toolTip":"Type:  Superspeed"}},
+		{"id":162,"icon":"TravelPower_MachSpeed","rarity":4,"type":9,"source":6,"bound":2,"name":"Cold Snap Speed","cost":1,"toolTip":"%DeviceTravelPower%","powers":{"name":"Cold Snap Speed Toggle","icon":"Any_Generic","activate":0,"charge":1.5,"maintain":0,"chargeMin":0,"cost":0,"cooldown":1,"range":"Targets Self","tags":"","toolTip":"Type:  Superspeed"}},
+		{"id":163,"icon":"TravelPower_Flight","rarity":4,"type":9,"source":6,"bound":2,"name":"Arcane Flight","cost":1,"toolTip":"%DeviceTravelPower%","powers":{"name":"Arcane Flight Toggle","icon":"Any_Generic","activate":0,"charge":1.5,"maintain":0,"chargeMin":0,"cost":0,"cooldown":1,"range":"Targets Self","tags":"","toolTip":"Type:  Flight"}},
+		{"id":164,"icon":"Any_Generic","rarity":4,"type":6,"source":6,"bound":2,"name":"Target Locked","cost":1,"uniqueEquipped":true,"toolTip":"%DeviceTravelPower%","powers":{"name":"Target Locked","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":45,"range":"Targets nondestructible foe (10 max)/120 feet/50 foot Sphere","tags":"","toolTip":"+15% all damage strength, gain energy upon defeating foes, and threat is reduced (or increased if using the tank role) by 25% for 10 sec."}},
+		{"id":165,"icon":"Any_Generic","rarity":4,"type":6,"source":6,"bound":2,"name":"Draysha Supercharge","cost":1,"uniqueEquipped":true,"toolTip":"%DeviceTravelPower%","powers":{"name":"Draysha Supercharge Toggle","icon":"Any_Generic","activate":1,"charge":0,"maintain":20,"chargeMin":0,"cost":0,"cooldown":90,"range":"Targets Self","tags":"","toolTip":"Toggling this device on will cause you to gain +15% all damage strength, +1% SpeedCharge, +4 Energy, +20% resistance to all Knock, and +2.5% power recharge speed every second.  These effects stack every for second this device is toggled on.<br /><br />Deals Toxic damage to you and causes healing to be 2.5% less effective against you every second.  These effects stack for every second this device is toggled on.<br /><br />After 20 sec, you take a large amount of Toxic damage.<br /><br />The damage this device deals to you cannot be dodged or resisted, and it ignores shields."}},
+		{"id":166,"icon":"TravelPower_Flight","rarity":4,"type":9,"source":2,"bound":1,"name":"Stoic Flight","cost":500,"toolTip":"%DeviceTravelPower%","requiredPower":"Stoic Flight","powers":{"name":"Stoic Flight Toggle","icon":"Any_Generic","activate":0,"charge":1.5,"maintain":0,"chargeMin":0,"cost":0,"cooldown":1,"range":"Targets Self","tags":"","toolTip":"Type:  Flight"}},
+		{"id":167,"icon":"TravelPower_EnergySlide","rarity":4,"type":9,"source":2,"bound":1,"name":"Scorching Slide","cost":500,"toolTip":"%DeviceTravelPower%","requiredPower":"Stoic Flight","powers":{"name":"Scorching Slide Toggle","icon":"Any_Generic","activate":0,"charge":1.5,"maintain":0,"chargeMin":0,"cost":0,"cooldown":1,"range":"Targets Self","tags":"","toolTip":"Type:  Acrobatics (Slide)"}},
+		{"id":168,"icon":"TravelPower_Superspeed","rarity":4,"type":9,"source":3,"bound":2,"name":"Blazing Speed","cost":1500,"toolTip":"%DeviceTravelPower%","powers":{"name":"Blazing Speed Toggle","icon":"Any_Generic","activate":0,"charge":1.5,"maintain":0,"chargeMin":0,"cost":0,"cooldown":1,"range":"Targets Self","tags":"","toolTip":"Type:  Superspeed"}},
+		{"id":169,"icon":"TravelPower_HyperBall","rarity":4,"type":9,"source":3,"bound":2,"name":"Fireball Roll","cost":1500,"toolTip":"%DeviceTravelPower%","powers":{"name":"Fireball Roll Toggle","icon":"Any_Generic","activate":0,"charge":1.5,"maintain":0,"chargeMin":0,"cost":0,"cooldown":1,"range":"Targets Self","tags":"","toolTip":"Type:  Superspeed (Roll)"}},
+		{"id":170,"icon":"TravelPower_MachSpeed","rarity":4,"type":9,"source":3,"bound":2,"name":"Prism Speed","cost":1500,"toolTip":"%DeviceTravelPower%","powers":{"name":"Prism Speed Toggle","icon":"Any_Generic","activate":0,"charge":1.5,"maintain":0,"chargeMin":0,"cost":0,"cooldown":1,"range":"Targets Self","tags":"","toolTip":"Type:  Superspeed"}},
+		{"id":171,"icon":"TravelPower_Flight","rarity":4,"type":9,"source":3,"bound":2,"name":"Rainbow Cloud Flight","cost":1500,"toolTip":"%DeviceTravelPower%","powers":{"name":"Rainbow Cloud Flight Toggle","icon":"Any_Generic","activate":0,"charge":1.5,"maintain":0,"chargeMin":0,"cost":0,"cooldown":1,"range":"Targets Self","tags":"","toolTip":"Type:  Flight"}},
+		{"id":172,"icon":"TravelPower_Flight","rarity":4,"type":9,"source":3,"bound":2,"name":"Rainbow Flight","cost":1500,"toolTip":"%DeviceTravelPower%","powers":{"name":"Rainbow Flight Toggle","icon":"Any_Generic","activate":0,"charge":1.5,"maintain":0,"chargeMin":0,"cost":0,"cooldown":1,"range":"Targets Self","tags":"","toolTip":"Type:  Flight"}},
+		{"id":173,"icon":"TravelPower_Superspeed","rarity":4,"type":9,"source":3,"bound":2,"name":"Rainbow Speed","cost":1500,"toolTip":"%DeviceTravelPower%","powers":{"name":"Rainbow Toggle","icon":"Any_Generic","activate":0,"charge":1.5,"maintain":0,"chargeMin":0,"cost":0,"cooldown":1,"range":"Targets Self","tags":"","toolTip":"Type:  Superspeed"}},
+		{"id":174,"icon":"TravelPower_MachSpeed","rarity":4,"type":9,"source":3,"bound":2,"name":"Scorching Speed","cost":1500,"toolTip":"%DeviceTravelPower%","powers":{"name":"Scorching Speed Toggle","icon":"Any_Generic","activate":0,"charge":1.5,"maintain":0,"chargeMin":0,"cost":0,"cooldown":1,"range":"Targets Self","tags":"","toolTip":"Type:  Superspeed"}},
+		{"id":175,"hidden":true,"icon":"Any_Generic","rarity":0,"type":1,"source":0,"name":"Become Hotdog Vendor","cost":[1],"toolTip":"","stats":{"str":700,"dex":700,"con":700,"int":700,"ego":700,"pre":700,"rec":700,"end":700},"powers":
+		[
+			{"name":"Street Meat Aura","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Passive (Support)","tags":"Slotted Support Passive/Energy Form","toolTip":"Keeps you and your allies well fed with questionable biomatter.  Prolonged exposure will make you sick to your stomach."},
+			{"name":"Hotdog Throw","icon":"Any_Generic","activate":0.5,"charge":1.5,"maintain":0,"chargeMin":0,"cost":25,"cooldown":0,"range":"Targets foe/100 feet","tags":"Blast/Sausage","toolTip":"Deals Hotdog damage and has a 25-100% chance (based on charge time) to apply a stack of Ketchup, Mustard, Relish, or Week-Old Onion Stench to the target.  Hitting the same target with 20 more consecutive Hotdog Throws within a short period of time allows them to use the Ultimate Selfie power."}
+		]},
+		{"id":176,"icon":"Any_Generic","rarity":4,"type":10,"source":3,"bound":2,"name":"Project Greenskin Transport","cost":600,"toolTip":"","powers":{"name":"Teleport to Project Greenskin","icon":"Any_Generic","activate":0.5,"charge":4.5,"maintain":0,"chargeMin":4.5,"cost":0,"cooldown":0,"range":"Targets Self","tags":"","toolTip":"Teleports you to Project Greenskin in the Desert, near the Powerhouse."}},
+		{"id":177,"icon":"Any_Generic","rarity":4,"type":10,"source":3,"bound":2,"name":"Renaissance Center Transport","cost":600,"toolTip":"","powers":{"name":"Teleport to Ren Center","icon":"Any_Generic","activate":0.5,"charge":4.5,"maintain":0,"chargeMin":4.5,"cost":0,"cooldown":0,"range":"Targets Self","tags":"","toolTip":"Teleports you to the Renaissance Center in Millennium City, near the Powerhouse."}},
+		{"id":178,"icon":"Any_Generic","rarity":4,"type":10,"source":3,"bound":2,"name":"Project Steelhead Transport","cost":600,"toolTip":"","powers":{"name":"Teleport to Project Steelhead","icon":"Any_Generic","activate":0.5,"charge":4.5,"maintain":0,"chargeMin":4.5,"cost":0,"cooldown":0,"range":"Targets Self","tags":"","toolTip":"Teleports you to Project Steelhead in Canada, near the Powerhouse."}},
+		{"id":179,"icon":"Any_Generic","rarity":4,"type":10,"source":3,"bound":2,"name":"Summon Team","cost":600,"toolTip":"","powers":{"name":"Summon Team","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets Team","tags":"","toolTip":"Teleports your entire team to your location."}},
+		{"id":180,"icon":"Any_Generic","rarity":4,"type":10,"source":3,"bound":2,"name":"Teleport To Teammate","cost":600,"toolTip":"","powers":{"name":"Teleport to Teammate","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets Teammate","tags":"","toolTip":"Teleports you to any teammate."}},
+		{"id":181,"icon":"Any_Generic","rarity":4,"type":2,"source":3,"bound":2,"name":"Loyal Sidekick: Agate","cost":1500,"noCooldownReduction":true,"toolTip":"%LoyalSidekick%<br /><br />This device also includes the 'Wolf 2' Tail costume unlock","powers":{"name":"Loyal Sidekick: Agate","icon":"Any_Generic","activate":1,"charge":0,"maintain":900,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Type:  DPS/Support<br /><br />Uses Cold attacks and can apply Chilled and Fear to targets.<br /><br />Some of his attacks can heal him."}},
+		{"id":182,"icon":"Any_Generic","rarity":4,"type":2,"source":3,"bound":2,"name":"Loyal Sidekick: Duratok","cost":1500,"noCooldownReduction":true,"toolTip":"%LoyalSidekick%","powers":{"name":"Loyal Sidekick: Duratok","icon":"Any_Generic","activate":1,"charge":0,"maintain":900,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Type:  Tank<br /><br />Uses Heavy Weapon attacks, generates increased Threat, and can apply Stagger to targets."}},
+		{"id":183,"icon":"Any_Generic","rarity":4,"type":2,"source":3,"bound":2,"name":"Loyal Sidekick: Emily Lovett","cost":1500,"noCooldownReduction":true,"toolTip":"%LoyalSidekick%","powers":{"name":"Loyal Sidekick: Emily Lovett","icon":"Any_Generic","activate":1,"charge":0,"maintain":900,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Type:  Support<br /><br />Uses ranged Darkness attacks, can drain life, and can apply Fear to targets."}},
+		{"id":184,"icon":"Any_Generic","rarity":4,"type":2,"source":3,"bound":2,"name":"Loyal Sidekick: Harajuku Twins","cost":1500,"noCooldownReduction":true,"toolTip":"%LoyalSidekick%<br /><br />Includes the following costume unlocks:<br />- 'Waist Bag' Leg Accessory<br />- 'Bat-Wing Scythe' Heavy Weapon skin<br />- 'Harajuku' Heavy Machine Gun skin.","powers":{"name":"Loyal Sidekick: Harajuku Twins","icon":"Any_Generic","activate":1,"charge":0,"maintain":900,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Type:  Damage<br /><br />Shizuko uses pistols and a minigun, can Hold, debuff damage, and apply Bleed to enemies.<br /><br />Rin uses a heavy scythe, can stagger targets, and also will leap onto any enemy Shizuko marks as 'Kawaii.'<br /><br />Both sidekicks have less health than typical stand-alone sidekicks."}},
+		{"id":185,"icon":"Any_Generic","rarity":4,"type":2,"source":3,"bound":2,"name":"Loyal Sidekick: Indy Kid","cost":1500,"noCooldownReduction":true,"toolTip":"%LoyalSidekick%<br /><br />This device also includes the 'Knee Pads' costume unlock.","powers":{"name":"Loyal Sidekick: Indy Kid","icon":"Any_Generic","activate":1,"charge":0,"maintain":900,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Type:  Damage<br /><br />Uses unarmed attacks and can apply Disorient to targets."}},
+		{"id":186,"icon":"Any_Generic","rarity":4,"type":2,"source":3,"bound":2,"name":"Loyal Sidekick: Pistol Whip","cost":1500,"noCooldownReduction":true,"toolTip":"%LoyalSidekick%<br /><br />This device also includes the 'Tech Belt' costume unlock.","powers":{"name":"Loyal Sidekick: Pistol Whip","icon":"Any_Generic","activate":1,"charge":0,"maintain":900,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Type:  Damage<br /><br />Uses guns and can apply Bleed to targets."}},
+		{"id":187,"icon":"Any_Generic","rarity":4,"type":2,"source":3,"bound":2,"name":"Loyal Sidekick: R.O.D.","cost":1500,"noCooldownReduction":true,"toolTip":"%LoyalSidekick%","powers":{"name":"Loyal Sidekick: R.O.D.","icon":"Any_Generic","activate":1,"charge":0,"maintain":900,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Type:  Damage<br /><br />Uses plasma guns and can apply Plasma Burn to targets."}},
+		{"id":188,"icon":"Any_Generic","rarity":4,"type":2,"source":3,"bound":2,"name":"Loyal Sidekick: Reprogrammed Spider Unit","cost":1500,"noCooldownReduction":true,"toolTip":"%LoyalSidekick%<br /><br />This device also includes the 'Mechanon Spider' back piece costume unlock.","powers":{"name":"Loyal Sidekick: Reprogrammed Spider Unit","icon":"Any_Generic","activate":1,"charge":0,"maintain":900,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Type:  Damage<br /><br />Uses electrical attacks and can apply Negative Ions to targets."}},
+		{"id":189,"icon":"Any_Generic","rarity":4,"type":2,"source":3,"bound":2,"name":"Loyal Sidekick: Zhuyin","cost":1500,"noCooldownReduction":true,"toolTip":"%LoyalSidekick%<br /><br />Includes the following costume unlocks:<br />- 'Celestial Dragon' Head<br />- 'Celestial Dragon' Horns","powers":{"name":"Loyal Sidekick: Zhuyin","icon":"Any_Generic","activate":1,"charge":0,"maintain":900,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Type:  Damage/Support<br /><br />Uses Celestial and Fire attacks and can apply both Illumination (Illuminated?) and Clinging Flames to targets."}},
+		{"id":190,"icon":"Any_Generic","rarity":4,"type":11,"source":10,"bound":1,"name":"Fun Nullifier Device","cost":50000,"uniqueEquipped":true,"toolTip":"Makes you boring AF by blocking the effects of various fun/vanity devices while equipped."},
+		{"id":191,"icon":"Any_Generic","rarity":4,"type":11,"source":3,"bound":2,"name":"Magnifier","cost":900,"toolTip":"","powers":{"name":"Magnifier","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets Self","tags":"","toolTip":"Makes your character larger."}},
+		{"id":192,"icon":"Any_Generic","rarity":4,"type":11,"source":3,"bound":2,"name":"Shrinker","cost":900,"toolTip":"","powers":{"name":"Shrinker","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":0,"range":"Targets Self","tags":"","toolTip":"Makes your character smaller."}},
+		{"id":193,"icon":"Any_Generic","rarity":4,"type":11,"source":3,"bound":2,"name":"Party Bomb","cost":500,"toolTip":"","powers":{"name":"Party Bomb","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":30,"range":"Targets friends/15 foot Sphere","tags":"","toolTip":"Causes all affected targets to burst into dance beneath a disco ball."}},
+		{"id":194,"icon":"Any_Generic","rarity":4,"type":11,"source":5,"bound":1,"name":"Fun Cannon","cost":0,"toolTip":"","powers":{"name":"Mandatory Fun","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":10,"range":"Targets anything but you (3 max)/50 feet/3 foot Cylinder","tags":"","toolTip":"Fires a blast of fun.  Affected targets must have fun for 30 sec."}},
+		{"id":195,"icon":"Any_Generic","rarity":4,"type":11,"source":5,"bound":1,"name":"Tinfoil Hat Ray","cost":0,"toolTip":"","powers":{"name":"Tinfoil Protection","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":10,"range":"Targets anything but you/30 feet","tags":"","toolTip":"Grants affected allies +5% resistance to Ego damage for 20 sec."}},
+		{"id":196,"icon":"Any_Generic","rarity":3,"type":11,"source":5,"bound":1,"name":"Limited Edition Cowboyification Ray","cost":0,"toolTip":"","powers":{"name":"Cowboyification","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":10,"range":"Targets anything but you/50 feet","tags":"","toolTip":"Turns the target into a cowboy for 20 sec."}},
+		{"id":197,"icon":"Any_Generic","rarity":3,"type":11,"source":0,"bound":1,"name":"Therakiel's Sword?","cost":0,"toolTip":"Formerly available during Foxbatcon on April 1st","powers":{"name":"???","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":10,"range":"Targets anything but you/10 feet","tags":"","toolTip":"Hits the target with a squeaky toy sword attack."}},
+		{"id":198,"icon":"Any_Generic","rarity":3,"type":11,"source":11,"bound":1,"name":"The Family-Size Anniversary Regenerating Water Balloon Brought To You By Foxbat!","cost":350,"toolTip":"","powers":{"name":"Super Balloon","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":10,"range":"Targets anything but you/100 feet","tags":"","toolTip":"Throws a large water balloon at the target area.  Victims main gay a Water Balloon or Giant Water Balloon.  Has a 25% chance to fail and land on you instead when used."}},
+		{"id":199,"icon":"Any_Generic","rarity":2,"type":11,"source":11,"bound":1,"name":"The Anniversary Regenerating Water Balloon Brought To You By Foxbat!","cost":350,"toolTip":"","powers":{"name":"Water Balloon","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":10,"range":"Targets anything but you/100 feet","tags":"","toolTip":"Throws a water balloon at the target area.  Victims main gay a Water Balloon."}},
+		{"id":200,"icon":"Any_Generic","rarity":2,"type":11,"source":11,"bound":1,"name":"Permanent Personal Party Ball","cost":0,"toolTip":"","powers":{"name":"Permanent Party Ball","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":20,"range":"Targets Self","tags":"","toolTip":"Makes you burst into dance beneath a disco ball...all by yourself."}},
+		{"id":201,"icon":"Any_Generic","rarity":2,"type":11,"source":11,"bound":1,"name":"Regenerating Taco","cost":0,"toolTip":"This does not count toward Taco-based perk objectives.","powers":{"name":"Throw Taco","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":10,"range":"Targets anything but you/100 feet","tags":"","toolTip":"Hurls a taco at the target, making a nice splattery noise."}},
+		{"id":202,"icon":"Any_Generic","rarity":2,"type":6,"source":11,"bound":1,"name":"Frosty Beverage","cost":0,"toolTip":"This does not count toward Anniversary Soda consumption objectives.","powers":{"name":"Drink","icon":"Any_Generic","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":10,"range":"Affects living player (5 max)/25 foot Sphere","tags":"","toolTip":"Applies Energize to nearby allies, granting them +2% Maximum Energy for 30 sec.  This effect does not stack."}},
+		{"id":203,"icon":"Any_Generic","rarity":2,"type":11,"source":11,"bound":1,"name":"Crate of Water Balloons","cost":0,"toolTip":"The balloons from this do not count toward water balloon objectives.","powers":{"name":"Create Crate of Water Balloons","icon":"Any_Generic","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Deploys a crate of cheap water balloons that anyone can grab and use.  These weter balloons cannot be spawned in a player's inventory when thrown."}},
+		{"id":204,"icon":"Any_Generic","rarity":4,"type":11,"source":13,"bound":1,"name":"Backup! - Foxbat","cost":0,"noCooldownReduction":true,"toolTip":"","powers":{"name":"Backup! - Foxbat","icon":"Any_Generic","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":180,"range":"Targets Self","tags":"","toolTip":"Summon Foxbat to your side for 15 sec for some comic relief."}},
+		{"id":205,"icon":"Any_Generic","rarity":2,"type":11,"source":12,"bound":1,"name":"Permanent Snowball","cost":0,"toolTip":"","powers":{"name":"Permanent Snowball","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":5,"range":"Targets anything but you","tags":"","toolTip":"Hurl a snowball at the target.  Victims may gain a Snowball."}},
+		{"id":206,"icon":"Any_Generic","rarity":2,"type":6,"source":14,"bound":1,"name":"Fireworks","cost":0,"toolTip":"","powers":{"name":"Fireworks","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":10,"range":"Targets any living player (5 max)","tags":"","toolTip":"Applies Inspiration to nearby allies, granting them +3% all damage strength for 30 sec.  This effect does not stack."}},
+		{"id":207,"icon":"Any_Generic","rarity":2,"type":6,"source":14,"bound":1,"name":"Sparkle Fireworks","cost":0,"toolTip":"","powers":{"name":"Sparkle Fireworks","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":10,"range":"Targets any living player (5 max)","tags":"","toolTip":"Applies Energize to nearby allies, granting them +2% Maximum Energy for 30 sec.  This effect does not stack."}},
+		
 	],
 	"travelAdvantage":
 	[

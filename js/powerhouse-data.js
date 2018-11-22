@@ -253,7 +253,8 @@ class PowerAdvantage
 			iLength = aMatchList.length;
 			for (i = 0; i < iLength; i++)
 			{
-				testString = testString.replace(aMatchList[i], EFFECT_ALIAS[aMatchList[i].substr(1, aMatchList[i].length - 2)]);
+				//testString = testString.replace(aMatchList[i], EFFECT_ALIAS[aMatchList[i].substr(1, aMatchList[i].length - 2)]);
+				testString = testString.replace(aMatchList[i], HCData.alias[aMatchList[i].substr(1, aMatchList[i].length - 2)]);
 			}
 		}
 		return testString;
@@ -690,7 +691,8 @@ class Power
 			iLength = aMatchList.length;
 			for (i = 0; i < iLength; i++)
 			{
-				testString = testString.replace(aMatchList[i], EFFECT_ALIAS[aMatchList[i].substr(1, aMatchList[i].length - 2)]);
+				//testString = testString.replace(aMatchList[i], EFFECT_ALIAS[aMatchList[i].substr(1, aMatchList[i].length - 2)]);
+				testString = testString.replace(aMatchList[i], HCData.alias[aMatchList[i].substr(1, aMatchList[i].length - 2)]);
 			}
 		}
 		return testString;
@@ -1524,49 +1526,7 @@ dataPowerAlias["Stand Your Ground"] = new PowerAlias(new PowerAdvantage("Stand Y
 //------------------------------------------------------------------------------
 // TODO:  Nondestructive regex-based replacement on tooltip generation > destructive string concatenations
 // Replace all "text only" aliases with this newer model
-const EFFECT_ALIAS =
-{
-	"ADCD":"Activates a shared cooldown of 30 seconds with other Active Defense powers.",
-	"AOCD":"Activates a shared cooldown of 30 seconds with other Active Offense powers.",
-	"AUCD":"Activates a shared cooldown of 30 seconds with other Active Defense and Active Offense powers.",
-	"Aegis":"Aegis gives you +15% resistance to all damage for 15 seconds.",
-	"Bleed":"Bleed deals Slashing damage every second for 16 sec, can stack up to 5 times, and is considered a Wound effect.",
-	"ChargedUp":"Charged Up increases your Running Speed by 60%, your Jump Height by 6%, and your Flying Speed by 6%.  This effect lasts 10 seconds.",
-	"ChiFlame":"Chi Flame deals Dimensional damage every 2 seconds and reduces the target's resistance against your Chi Power abilities for 12 seconds.  Counts as a Chi Energy effect.",
-	"ClingingFlames":"Clinging Flames deals Fire damage every 2 seconds for 12 seconds, with a chance to leap to other nearby targets.  Clinging Flames is a Burning effect.",
-	"Confused":"Confused targets attack other targets at random.",
-	"DeadlyPoison":"Deadly Poison deals Toxic damage every second for 16 sec, can stack up to 5 times, and is considered a Poison effect.",
-	"Demolish":"Demolish causes affected targets to suffer -12% to Crushing resistance and -6% to all Physical resistance for 15 seconds.",
-	"Dependency":"Dependency causes the affected target to heal you or one of your nearby allies for a small amount over 20 seconds.  Can stack up to 3 times.",
-	"Despondency":"Despondency reduces the target's chance to Dodge by an amount scaling with your Strength, lasts for 10 seconds, and is considered a Mental State.",
-	"Devoid":"Devoid reduces resistance to Dimensional damage by 18% and lasts for 12 seconds.",
-	"Disorient":"Disorient reduces the target's damage by 10% and their movement speed by 15% for 12 seconds.",
-	"DragonRush":"Dragon Rush reduces the cost of your melee powers by 15% and restores energy every second, scaling with your Dexterity.",
-	"Fear":"Fear reduces the damage targets deal by 10%, lasts for 12 seconds, and is considered a Mental State.",
-	"GhostlyStrikes":"A portion of this damage is now dealt as Dimensional damage.  This increases the overall damage slightly and counts as a Chi Power effect.",
-	"HealingRune":"Healing Rune lasts for 10 seconds and heal nearby allies for a small amount every second.  Summoning a Healing Rune counts as an Enchantment.",
-	"Hexed":"Hexed lasts for 12 seconds and reduces the target's resistance to Magic damage by -18%.  Hexed is a Curse.",
-	"Illumination":"Illumination lasts for 20 seconds and increases any direct healing the target receives by 3%.  Illumination is an Enchantment.",
-	"Illuminated":"Illuminated lasts for 20 seconds and gives the target a 15% chance to apply Mend to anyone attacking it.  Mend lasts for 8 seconds and heals targets for a small amount of Health every 2 seconds.  Illuminated is a Curse.",
-	"Interrupt":"Interrupt only works against lower-ranked targets once every 8 seconds.",
-	"Jinxed":"Jinxed gives the target a -10% penalty to all damage strength and -15% to movement for 8 seconds, and upon expiring, the target is Knocked Down.  Jinx is considered a Curse.",
-	"LightEverlasting":"Light Everlasting lasts for 10 seconds and heals for a small amount every second.  Light Everlasting is an Enchantment.",
-	"Lithe":"Lithe gives you a 12% Dodge chance for 12 seconds and counts as a Chi Energy effect.",
-	"MysticTransference":"Reduces the number of Sigils summoned to 2, but they can now be used alongside your other Sigils.  This also lowers the base charge time to 0.83, the cost to 26 energy, and the cooldown to 10 seconds.",
-	"Mystified":"Mystified lasts 15 seconds and reduces the cost of your Sorcery, Celestial, Darkness, and Infernal powers by 3%, stacking up to 3 times.  Mystified is an Enchantment.",
-	"NimbleMovement":"Nimble Movement gives you 50% Avoidance and lasts for 12 seconds.",
-	"OpenWound":"Open Wound has a 25% chance to apply a stack of Bleed to the target every 2 seconds for 10 seconds.",
-	"Overpower":"Overpower reduces all damage resistance by 20% for 12 seconds.",
-	"PyrePatch":"The Pyre Patch persists on the ground for 10 seconds,  Every second, it deals Fire damage and has a 10% chance to apply Clinging Flames to enemies standing in it.  You can only have one Pyre Patch active at a time.",
-	"SwallowtailCut":"Swallowtail Cut deals 5% of the target's Health every 2 seconds for 16 seconds.",
-	"StimPack":"Grants you a short heal over time, healing for an additional amount if your health is low.  This effect shares a short internal cooldown with other similar advantages.",
-	"Shredded":"Shredded causes affected targets to suffer -12% to Slashing resistance and 6% to Physical resistance for 12 seconds.",
-	"Trauma":"Trauma ends any healing over time effects on your target and causes them to receive only 50% benefit from any other incoming heals.",
-	"TWAoE":"Wipes all of your Threat from affected foes, places you in Stealth for 3/4/5 (based on Rank) seconds, and attempts to placate the target, making them unable to attack you.  Placate only works on weaker foes, such as Henchmen, Villains, and Enforcers.  Shares a 30 second cooldown with other Threat Wipe abilities.",
-	"TWST":"Wipes all Threat from your primary target and places you in Stealth for 3/4/5 (based on Rank) seconds. Shares a 30 second cooldown with other Threat Wipe abilities.",
-	"UltimateChallenge":"Applies a large threat over time effect to your target.  This effect stacks with Challenge.",
-	"UnboundRitual":"Causes the pet summoned by this Ritual to no longer be bound to the circle. This allows the summon to follow you around wherever you may go, and your pet no longer goes away when another Ritual pet is summoned. This advantage also adds an Energy Cost to this summon power."
-};
+
 
 dataPowerAlias["R2"] = new PowerAlias(new PowerAdvantage("Rank 2", 2, null, "Increases the strength of the power by 20%."));
 dataPowerAlias["R3"] = new PowerAlias(new PowerAdvantage("Rank 3", 2, 1, "Increases the strength of the power by an additional 20%.  This bonus is cumulative with Rank 2."));
@@ -1706,12 +1666,15 @@ dataPower[dataPower.length] = new Power(1, 1, 4, "Fractal Aegis", 0.5, 0, 0, 0, 
 dataPower[dataPower.length-1].insertAdvantage("Chilling Reminder", 1, null, "%UltimateChallenge%");
 dataPowerAlias["Fractal Aegis"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(1, 1, 4, "Storm Strike", 0.5, 1.5, 0, 0, 119, 90, "Affects foe (10 max)/25 foot Sphere", "Ultimate/Ranged AoE Damage", "Deals Electrical damage to all targets and they are Knocked Down.<br /><br />Deals additional damage to all targets affected by Negative Ions, consuming them in the process.<br /><br />After 2 seconds, applies Negative Ions to affected targets." + Aesica.HCEngine.powerUnlocksFrom("Rave Lockbox"), Power.TYPE_NORMAL, true);
+dataPower[dataPower.length] = new Power(1, 1, 4, "Storm Strike", 0.5, 1.5, 0, 0, 108, 90, "Affects foe (10 max)/25 foot Sphere", "Ultimate/Ranged AoE Damage", "Deals Electrical damage to all targets and they are Knocked Down.<br /><br />Deals additional damage to all targets affected by Negative Ions, consuming them in the process.<br /><br />After 2 seconds, applies Negative Ions to affected targets." + Aesica.HCEngine.powerUnlocksFrom("Rave Lockbox"), Power.TYPE_NORMAL, true);
 dataPower[dataPower.length-1].insertAdvantage("Commanding Presence", 1, null, "%UltimateChallenge%");
 dataPowerAlias["Storm Strike"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(1, 1, 4, "Meteor Blaze", 0.5, 1.5, 0, 1.5, 98, 60, "Affects foe (10 max)/15 foot Sphere", "Ultimate/Ranged AoE Damage/Burning", "Deals Fire damage to all targets and they are Knocked Down.<br /><br />Creates a Pyre Patch beneath the target. %PyrePatch%" + Aesica.HCEngine.powerUnlocksFrom("Blazing Lockbox"), Power.TYPE_NORMAL, true);
+dataPower[dataPower.length] = new Power(1, 1, 4, "Meteor Blaze", 0.5, 1.5, 0, 1.5, 103, 60, "Affects foe (10 max)/15 foot Sphere", "Ultimate/Ranged AoE Damage/Burning", "Deals Fire damage to all targets and they are Knocked Down.<br /><br />Creates a Pyre Patch beneath the target. %PyrePatch%" + Aesica.HCEngine.powerUnlocksFrom("Blazing Lockbox"), Power.TYPE_NORMAL, true);
 dataPowerAlias["Meteor Blaze"] = new PowerAlias(dataPower[dataPower.length-1]);
+
+dataPower[dataPower.length] = new Power(1, 1, 4, "Whirlpool", 1, 0, 0, 0, 87, 90, "Affects foe (10 max)/15 foot Sphere", "Ultimate/Ranged AoE Damage/Burning", "Deals Fire damage to all targets and they are Knocked Down.<br /><br />Creates a Pyre Patch beneath the target. %PyrePatch%" + Aesica.HCEngine.powerUnlocksFrom("Blazing Lockbox"), Power.TYPE_NORMAL, true);
+dataPowerAlias["Whirlpool"] = new PowerAlias(dataPower[dataPower.length-1]);
 
 //------------------------------------------------------------------------------
 // Power Framework: Fire
@@ -1828,6 +1791,7 @@ dataPower[dataPower.length] = dataPowerAlias["Gravity Driver"].replicate(1, 2);
 dataPower[dataPower.length] = dataPowerAlias["Fractal Aegis"].replicate(1, 2);
 dataPower[dataPower.length] = dataPowerAlias["Storm Strike"].replicate(1, 2);
 dataPower[dataPower.length] = dataPowerAlias["Meteor Blaze"].replicate(1, 2);
+dataPower[dataPower.length] = dataPowerAlias["Whirlpool"].replicate(1, 2);
 
 //------------------------------------------------------------------------------
 // Power Framework: Force
@@ -1956,6 +1920,7 @@ dataPower[dataPower.length] = dataPowerAlias["Gravity Driver"].replicate(1, 3);
 dataPower[dataPower.length] = dataPowerAlias["Fractal Aegis"].replicate(1, 3);
 dataPower[dataPower.length] = dataPowerAlias["Storm Strike"].replicate(1, 3);
 dataPower[dataPower.length] = dataPowerAlias["Meteor Blaze"].replicate(1, 3);
+dataPower[dataPower.length] = dataPowerAlias["Whirlpool"].replicate(1, 3);
 
 //------------------------------------------------------------------------------
 // Power Framework: Wind
@@ -2055,6 +2020,7 @@ dataPower[dataPower.length] = dataPowerAlias["Gravity Driver"].replicate(1, 4);
 dataPower[dataPower.length] = dataPowerAlias["Fractal Aegis"].replicate(1, 4);
 dataPower[dataPower.length] = dataPowerAlias["Storm Strike"].replicate(1, 4);
 dataPower[dataPower.length] = dataPowerAlias["Meteor Blaze"].replicate(1, 4);
+dataPower[dataPower.length] = dataPowerAlias["Whirlpool"].replicate(1, 4);
 
 //------------------------------------------------------------------------------
 // Power Framework: Ice
@@ -2188,6 +2154,7 @@ dataPower[dataPower.length] = dataPowerAlias["Gravity Driver"].replicate(1, 5);
 dataPower[dataPower.length] = dataPowerAlias["Fractal Aegis"].replicate(1, 5);
 dataPower[dataPower.length] = dataPowerAlias["Storm Strike"].replicate(1, 5);
 dataPower[dataPower.length] = dataPowerAlias["Meteor Blaze"].replicate(1, 5);
+dataPower[dataPower.length] = dataPowerAlias["Whirlpool"].replicate(1, 5);
 
 //------------------------------------------------------------------------------
 // Power Set: Technology
@@ -2308,7 +2275,7 @@ dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructo
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(5, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
 
-dataPower[dataPower.length] = new Power(2, 6, 4, "Implosion Engine", 1, 0, 0, 0, 117, 90, "Targets foe/100 feet", "Ultimate/Ranged AoE Damage/Reverse Repel/Snare", "You throw an Implosion Engine, a device that generates a massive gravitational vortex in a very small area, sucking in nearby matter, and dealing significant Dimensional damage.<br /><br />CLICK<br />+ Create and throw an Implosion Engine at your target, dealing Crushing damage from the massive gravity waves, pulling them toward the Engine.<br />- This power is incapable of getting a Critical Hit.", Power.TYPE_NORMAL, true);
+dataPower[dataPower.length] = new Power(2, 6, 4, "Implosion Engine", 1, 0, 0, 0, 102, 90, "Targets foe/100 feet", "Ultimate/Ranged AoE Damage/Reverse Repel/Snare", "You throw an Implosion Engine, a device that generates a massive gravitational vortex in a very small area, sucking in nearby matter, and dealing significant Dimensional damage.<br /><br />CLICK<br />+ Create and throw an Implosion Engine at your target, dealing Crushing damage from the massive gravity waves, pulling them toward the Engine.<br />- This power is incapable of getting a Critical Hit.", Power.TYPE_NORMAL, true);
 dataPower[dataPower.length-1].insertAdvantage("Inverse Polarization Field", 2, null, "Just before self-destructing, the polarity of the gravitational field created by Implosion Engine will reverse, sending all affected enemies flying.");
 dataPowerAlias["Implosion Engine"] = new PowerAlias(dataPower[dataPower.length-1]);
 
@@ -2318,7 +2285,7 @@ dataPowerAlias["Mechanical Monstrosity"] = new PowerAlias(dataPower[dataPower.le
 dataPower[dataPower.length] = new Power(2, 6, 4, "Fire All Weapons", 0.5, 5, 0.5, 0, [68,49], 90, "Targets foe (10 max)/50 feet/120 degree Cone", "Ultimate", "Hand Slot - Shoulder Slot - Chest Slot<br /><br />Deals Particle damage to all targets.", Power.TYPE_NORMAL, true);
 dataPowerAlias["Fire All Weapons"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(2, 6, 4, "Meltdown", 0.67, 0.83, 0, 0.83, 160, 60, "Affects foe (10 max)/15 foot Sphere", "Ultimate/Melee AoE Damage", "Deals Particle damage to nearby targets and knocks them down.  The initial strike applies Plasma Burn immediately, with additional stacks being applied over 5 seconds." + Aesica.HCEngine.powerUnlocksFrom("Toybox"), Power.TYPE_NORMAL, true);
+dataPower[dataPower.length] = new Power(2, 6, 4, "Meltdown", 0.67, 0.83, 0, 0.83, 167, 60, "Affects foe (10 max)/15 foot Sphere", "Ultimate/Melee AoE Damage", "Deals Particle damage to nearby targets and knocks them down.  The initial strike applies Plasma Burn immediately, with additional stacks being applied over 5 seconds." + Aesica.HCEngine.powerUnlocksFrom("Toybox"), Power.TYPE_NORMAL, true);
 dataPowerAlias["Meltdown"] = new PowerAlias(dataPower[dataPower.length-1]);
 
 dataPower[dataPower.length] = new Power(2, 6, 4, "Showdown", 0.5, 5, 0.5, 0, [56,37], 90, "Affects foe (10 max)/50 feet/180 degree Cone", "Ultimate/Ranged AoE Damage/Root", "Deals Piercing damage and Roots targets for 8 seconds.  Each hit refreshes the Root duration." + Aesica.HCEngine.powerUnlocksFrom("Western Lockbox"), Power.TYPE_NORMAL, true);
@@ -3309,7 +3276,7 @@ dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 dataPowerAlias["Shuriken Storm"] = new PowerAlias(dataPower[dataPower.length-1]);
 dataRequireGroupPower[dataPower.length-1] = "martial arts";
 
-dataPower[dataPower.length] = new Power(3, 11, 4, "Fury of the Dragon", 0.5, 4, 0.5, 0, [39,15], 60, "Targets foe (10 max)/25 feet/60 degree Cone", "Ultimate/Melee AoE Damage", "Deals Crushing and Dimensional damage to all targets in front of you.  Affected targets are also Snared and affected by Chi Flame. %ChiFlame%<br /><br />The damage this power deals is based on the number of Focus stacks you have.<br /><br />You are immune to Control effects while channeling this power.", Power.TYPE_NORMAL, true);
+dataPower[dataPower.length] = new Power(3, 11, 4, "Fury of the Dragon", 0.5, 4, 0.5, 0, [55,15], 60, "Targets foe (10 max)/25 feet/60 degree Cone", "Ultimate/Melee AoE Damage", "Deals Crushing and Dimensional damage to all targets in front of you.  Affected targets are also Snared and affected by Chi Flame. %ChiFlame%<br /><br />The damage this power deals is based on the number of Focus stacks you have.<br /><br />You are immune to Control effects while channeling this power.", Power.TYPE_NORMAL, true);
 dataPower[dataPower.length-1].insertAdvantage("Real Ultimate Power", 2, null, "50% chance to apply Bleed to targets. %Bleed%");
 dataPowerAlias["Fury of the Dragon"] = new PowerAlias(dataPower[dataPower.length-1]);
 
@@ -3947,7 +3914,7 @@ dataPower[dataPower.length] = new Power(4, 15, 4, "Mental Impact", 0.67, 1.83, 0
 dataPower[dataPower.length-1].insertAdvantage("Leave a Mark", 1, null, "%UltimateChallenge%");
 dataPowerAlias["Mental Impact"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(4, 15, 4, "Ego Blade Pandemonium", 1, 8, 1, 0, [34,22], 60, "Affects foe (10 max)/10 foot Sphere", "Ultimate/Melee AoE Damage", "Deals Ego damage to targets every 1 sec.  Your chance to critically hit with this power is increased by 5% per stack of Ego Leech." + Aesica.HCEngine.powerUnlocksFrom("Alien Invader Lockbox"), Power.TYPE_NORMAL, true);
+dataPower[dataPower.length] = new Power(4, 15, 4, "Ego Blade Pandemonium", 1, 8, 1, 0, [31,20], 60, "Affects foe (10 max)/10 foot Sphere", "Ultimate/Melee AoE Damage", "Deals Ego damage to targets every 1 sec.  Your chance to critically hit with this power is increased by 5% per stack of Ego Leech." + Aesica.HCEngine.powerUnlocksFrom("Alien Invader Lockbox"), Power.TYPE_NORMAL, true);
 dataPower[dataPower.length-1].insertAdvantage("Leave a Mark", 1, null, "%UltimateChallenge%");
 dataPower[dataPower.length-1].insertAdvantage("Buzzsaw", 1, null, "Snares your targets, reducing their movement speed by 100% for 16 sec.");
 dataPowerAlias["Ego Blade Pandemonium"] = new PowerAlias(dataPower[dataPower.length-1]);
@@ -4275,7 +4242,7 @@ dataPower[dataPower.length] = new Power(5, 17, 4, "Power Chord", 0.5, 3, 0.3, 0,
 dataPower[dataPower.length-1].insertAdvantage("Rock Concert", 2, null, "Power Chord no longer gives you the Rocking Out buff.  Instead, Power Chord now applied Exhilarate to nearby allies.  Exhilarate increases their damage by a lesser amount and can stack up to 10 times.  It also gives them energy.");
 dataPowerAlias["Power Chord"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(5, 17, 4, "Catastrophic Onslaught", 0.5, 5, 0.5, 0, [43,16], 60, "Targets foe/10 feet", "Ultimate/Melee Damage", "Deals Crushing damage twice every 0.5 seconds and Roots the target for 5.3 seconds.<br /><br />After maintaining this power for 2 seconds, you become immune to most forms of Control effects and gain 200% resistance to all Knock effects until you stop maintaining this power.<br /><br />If this power is fully maintained:<br /><br />Deals Crushing damage to your primary target and half that amount in Crushing damage to secondary targets within 20 feet.<br /><br />Applies Overpower and Knocks targets upward. %Overpower%" + Aesica.HCEngine.powerUnlocksFrom("Blockbuster Lockbox"), Power.TYPE_NORMAL, true);
+dataPower[dataPower.length] = new Power(5, 17, 4, "Catastrophic Onslaught", 0.5, 5, 0.5, 0, [40,15], 60, "Targets foe/10 feet", "Ultimate/Melee Damage", "Deals Crushing damage twice every 0.5 seconds and Roots the target for 5.3 seconds.<br /><br />After maintaining this power for 2 seconds, you become immune to most forms of Control effects and gain 200% resistance to all Knock effects until you stop maintaining this power.<br /><br />If this power is fully maintained:<br /><br />Deals Crushing damage to your primary target and half that amount in Crushing damage to secondary targets within 20 feet.<br /><br />Applies Overpower and Knocks targets upward. %Overpower%" + Aesica.HCEngine.powerUnlocksFrom("Blockbuster Lockbox"), Power.TYPE_NORMAL, true);
 dataPowerAlias["Catastrophic Onslaught"] = new PowerAlias(dataPower[dataPower.length-1]);
 
 //------------------------------------------------------------------------------
@@ -4802,8 +4769,7 @@ dataPower[dataPower.length-1].insertAdvantage("Splatter", 2, null, "Instead of K
 dataPower[dataPower.length-1].insertAdvantage("Void Feast", 2, null, "Consumes all Fear effects on affected targets, healing you for each effect consumed.  This heal counts as a Life Drain.");
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
-//dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Shadow Eruption', '<div class="Sprite Darkness_ShadowEruption"></div>&nbsp;Shadow Eruption', 6, 21, pow++, 3, 'Darkness, 25 foot PbAoE Damage and Knockback<br /><br />Requires 5 powers from Darkness or 6 non-Energy Building powers from any framework.<br /><br />Deals shadow damage and knocks all affected enemies away from you.' + AES.powerUnlocksFrom(UNLOCK_RECOGNITION, "500/250", "SCR/GCR"));
-dataPower[dataPower.length] = new Power(6, 21, 3, "Shadow Eruption", 0.67, 1.83, 0, 0, [60,146], 10, "Affects foe (5 max)/25 foot Sphere", "Ranged AoE Damage/Knock Back", "Deals Dimensional damage and Knocks Back affected targets.");
+dataPower[dataPower.length] = new Power(6, 21, 3, "Shadow Eruption", 0.67, 1.83, 0, 0, [60,146], 10, "Affects foe (5 max)/25 foot Sphere", "Ranged AoE Damage/Knock Back", "Deals Dimensional damage and Knocks Back affected targets." + Aesica.HCEngine.powerUnlocksFrom(UNLOCK_RECOGNITION, "500/250", "SCR/GCR"));
 dataPower[dataPower.length-1].insertAdvantage("Blot", 2, null, "Stuns affected targets.");
 dataPower[dataPower.length-1].insertAdvantage("Work Up", 2, null, dataPowerAlias["SP"].tip);
 dataPower[dataPower.length-1].insertAdvantage("Drag Back", 2, null, "Shadow Eruption becomes a Knock Towards rather than Knock Away.");

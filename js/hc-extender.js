@@ -169,7 +169,7 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 
 		// device
 		mSection = document.getElementById("sectionDevice");
-		iLength = 4;
+		iLength = 5;
 		mTable = document.createElement("table");
 		for (i = 0; i < iLength; i++)
 		{
@@ -357,6 +357,25 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 	{
 		return new PowerAdvantage(id, alias.name, alias.desc, points, dependency, alias.tip);
 	}
+
+	function buildLookupTables()
+	{
+		delete HCLookup.note;
+		var i, iLength;
+		iLength = dataPower.length;
+		HCLookup.power = {};
+		for (i = 0; i < iLength; i++)
+		{
+			HCLookup.power[dataPower[i].name] = i;
+		}
+		iLength = dataTravelPower.length;
+		HCLookup.travelPower = {};
+		for (i = 0; i < iLength; i++)
+		{
+			HCLookup.travelPower[dataTravelPower[i].name] = i;
+		}
+	}
+	$$.buildLookupTables = buildLookupTables;
 
 	function petTip(petName, rank1desc, rank2desc, rank3desc, other=null)
 	{

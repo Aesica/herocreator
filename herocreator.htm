@@ -10,15 +10,16 @@
 		gtag('config', 'UA-55064869-1');
 	</script>
 	<title>HeroCreator</title>
-	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="js/powerhouse.css?v=3.10" />
-	<script type="text/javascript" src="js/spritesheet.js?v=3.10"></script>
-	<script type="text/javascript" src="js/hc-extender.js?v=3.10"></script>
-	<script type="text/javascript" src="js/powerhouse-data.js?v=3.10a"></script>
-	<script type="text/javascript" src="js/hc-data.js?v=30"></script>
-	<script type="text/javascript" src="js/hc-data-harness.js?v=3.10"></script>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="js/powerhouse.css?v=3.25" />
+	<script type="text/javascript" src="js/spritesheet.js?v=3.25"></script>
+	<script type="text/javascript" src="js/hc-extender.js?v=3.25"></script>
+	<script type="text/javascript" src="js/powerhouse-data.js?v=3.25"></script>
+	<script type="text/javascript" src="js/hc-data.js?v=30d"></script>
+	<script type="text/javascript" src="js/hc-data-harness.js?v=3.25"></script>
 	<script type="text/javascript" src="js/powerhouse-version.js?v=30"></script>
-	<script type="text/javascript" src="js/powerhouse.js?v=3.10b"></script>
+	<script type="text/javascript" src="js/powerhouse.js?v=3.25"></script>
 </head>
 <body>
 	<div id="body" class="main">
@@ -28,6 +29,7 @@
 				<span id="titleDebugMode" class="redText"></span>
 			</div>
 			<div id="titleMessage" class="titleMessageWorking">&nbsp;</div>
+			<div id="alertMessage" class="alertMessage"></div>
 			<div class="menu">
 				<a id="showViewData" class="button" onclick="Aesica.HCEngine.refreshSaveList(); showView('Data')" style="margin-right: 1em;">Data</a>
 				<a id="showViewEdit" class="button" onclick="showView('Edit')" style="margin-right: 1em;">Edit</a>
@@ -46,7 +48,7 @@
 		<div id="selectionWindow" class="selection" style="display: none;">
 			<div id="selectionWindowHeaderStrip">
 				<span id="selectionWindowHeader"></span>
-				<a class="closeButton" onclick="Aesica.HCEngine.setVisibility('selectionWindow', false);">❌</a>
+				<a class="closeButton" onclick="selectClear()">❌</a>
 			</div>
 			<div id="selectionWindowMenu"></div>
 			<div id="selectionWindowContainer"></div>

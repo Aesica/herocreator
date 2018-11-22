@@ -13,8 +13,8 @@
 // system config data
 const app = 
 {
-	"version":3.11,
-	"releaseDate":"7/17/2018",
+	"version":3.25,
+	"releaseDate":"11/22/2018",
 	"system":
 	{
 		"siteName":"HeroCreator",
@@ -266,7 +266,7 @@ PH.archetype = HCData.archetype[1];
 PH.role = HCData.archetypeGroup[1];
 PH.buildNote = "";
 PH.device = [];
-for (var i = 1; i <= 4; i++)
+for (var i = 1; i <= 5; i++)
 {
 	PH.device[i] = HCData.device[0];
 }
@@ -1742,24 +1742,28 @@ function selectDevicePowerPreview(e)
 	Aesica.HCEngine.resetDialogBox();
 	Aesica.HCEngine.setDialogBoxHeader(oDevice.name + " > Power List");
 	var i, mPower, iLength = oDevice.powers.length;
+	var oCurrent;
 	for (i = 0; i < iLength; i++)
 	{
 		mPower = document.createElement("a");
 		mPower.className = "button";
 		if (oDevice.powers[i].powerRef)
 		{
-			mPower.appendChild(Aesica.HCEngine.getDescNode(dataPower[oDevice.powers[i].powerRef].icon, dataPower[oDevice.powers[i].powerRef].name));
-			setOnmouseoverPopupL2(mPower, dataPower[oDevice.powers[i].powerRef].tip);
+			oCurrent = dataPower[HCLookup.power[oDevice.powers[i].powerRef]];
+			mPower.appendChild(Aesica.HCEngine.getDescNode(oCurrent.icon, oCurrent.name));
+			setOnmouseoverPopupL2(mPower, oCurrent.tip);
 		}
 		else if (oDevice.powers[i].travelPowerRef)
 		{
-			mPower.appendChild(Aesica.HCEngine.getDescNode(dataTravelPower[oDevice.powers[i].travelPowerRef].icon, dataTravelPower[oDevice.powers[i].travelPowerRef].name));
-			setOnmouseoverPopupL2(mPower, dataTravelPower[oDevice.powers[i].travelPowerRef].tip);
+			oCurrent = dataTravelPower[HCLookup.travelPower[oDevice.powers[i].travelPowerRef]];
+			mPower.appendChild(Aesica.HCEngine.getDescNode(oCurrent.icon, oCurrent.name));
+			setOnmouseoverPopupL2(mPower, oCurrent.tip);
 		}
 		else
 		{
 			mPower.appendChild(Aesica.HCEngine.getDescNode(oDevice.powers[i].icon, oDevice.powers[i].name));
-			setOnmouseoverPopupL2(mPower, "<b>" + oDevice.powers[i].name + "</b><br /><br />" + oDevice.powers[i].toolTip);
+			//setOnmouseoverPopupL2(mPower, "<b>" + oDevice.powers[i].name + "</b><br /><br />" + oDevice.powers[i].toolTip);
+			setOnmouseoverPopupL2(mPower, Aesica.dataHarness.Device.powerTip(oDevice.powers[i]));
 		}
 		Aesica.HCEngine.addItemToDialogBox(mPower);
 	}
@@ -3410,10 +3414,11 @@ function parseUrlParams(url)
 				}
 				inc = 1;
 				break;
-			case 31: // devices.  also not bothering with the version updater here
+			case 31: // devices.  not bothering with the version updater here because it won't be necessary
 			case 32:
 			case 33:
 			case 34:
+			case 35:
 				if (finalVersion)
 				{
 					var num = pos - 30;
@@ -4381,6 +4386,21 @@ function setupPrefs()
 }
 window['setupPrefs'] = setupPrefs;
 
+// alert message
+function showAlertMessage()
+{
+	var alertMessageBox = document.getElementById("alertMessage");
+	if (alertMessageBox)
+	{
+		if (HCData.alert)
+		{
+			alertMessageBox.innerHTML = (HCData.alert.message) ? HCData.alert.message : "";
+			alertMessageBox.className = alertMessageBox.innerHTML != "" ? "alertMessage" : "hidden";
+		}
+		else alertMessageBox.className = "hidden";
+	}
+}
+
 // start
 function start()
 {
@@ -4432,12 +4452,18 @@ function start()
 	// setup data reference stuffs
 	Aesica.HCEngine.initReferenceSheet();
 
+	// build lookup tables
+	Aesica.HCEngine.buildLookupTables()
+
 	// show debug stuff
 	if (prefs.debug)
 	{
 		document.getElementById("showViewDebug").style.visibility = "visible";
 		document.getElementById("titleDebugMode").innerHTML = "(Debug Mode)";
 	}
+
+	// show alert message if exists
+	showAlertMessage(true)
 
 	// all ready! <3
 	Aesica.HCEngine.writeMessage("Ready", true);

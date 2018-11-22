@@ -1,4 +1,11 @@
 ## Changelog for HeroCreator
+**v3.25.30** - 11/22/2018 - Aesica
+ - Added the Whirlpool ultimate
+ - Added the missing 5th device slot
+ - Added most of the worthwhile devices available ingame.  A few fun devices are still missing, and will be added in time
+ - Added the framework for special/important announcements in case such a thing is ever needed.  These will appear in a red banner at the top of the screen
+ - Other, minor fixes and such
+
 **v3.11.30** - 8/11/2018 - Aesica
  - Updated the Sorcery framework to use the modern tooltip system
  - Various minor bugs have been addressed

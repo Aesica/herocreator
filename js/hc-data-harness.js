@@ -114,21 +114,30 @@ Aesica.dataHarness = Aesica.dataHarness || {};
 			var i, iLength, sCost;
 			var sPowerList = "";
 			var mStats = document.createElement("table");
-			if (device.bound) sReturn += "<br />" + HCData.binding[device.bound];
-			if (device.toolTip) sReturn += "<br /><br />" + device.toolTip;
-			if (device.uniqueEquipped) sReturn += "<br /><br />You cannot have more than 1 of this device equipped.";
-			if (device.uniqueEquipped) sReturn += "<br /><br />This device is unaffected by cooldown reduction.";
+			if (device.bound) sReturn += "<br /><span class='" + HCData.binding[device.bound].id + "'>" + HCData.binding[device.bound].name + "</span><br />";
+			if (device.toolTip) sReturn += "<br />" + Device.applyAlias(device.toolTip) + "<br />";
+			if (device.uniqueEquipped) sReturn += "<br />You cannot have more than 1 of this device equipped.";
+			if (device.noCooldownReduction) sReturn += "<br />This device is unaffected by cooldown reduction.";
+			if (device.requiredLevel) sReturn += "<br />Must be at least level " + device.requiredLevel + " to use";
 			if (device.powers)
 			{
 				if (Array.isArray(device.powers))
 				{
-					sReturn += "<br /><br />This device replaces your stats and powers with the following:";
+					sReturn += "<hr />This device replaces your stats and powers with the following:";
 					iLength = device.powers.length;
 					sPowerList += "<ul>";
 					for (i = 0; i < iLength; i++)
 					{
-						if (device.powers[i].powerRef) sPowerList += "<li>" + dataPower[device.powers[i].powerRef].name + "</li>";
-						else if (device.powers[i].travelPowerRef) sPowerList += "<li>" + dataTravelPower[device.powers[i].travelPowerRef].name + "</li>";
+						if (device.powers[i].powerRef)
+						{
+							console.log(device.powers[i].powerRef)
+							sPowerList += "<li>" + dataPower[HCLookup.power[device.powers[i].powerRef]].name + "</li>";
+						}
+						else if (device.powers[i].travelPowerRef)
+						{
+							console.log(device.powers[i].travelPowerRef)
+							sPowerList += "<li>" + dataTravelPower[HCLookup.travelPower[device.powers[i].travelPowerRef]].name + "</li>";
+						}
 						else sPowerList += "<li>" + device.powers[i].name + "</li>";
 					}
 					sPowerList += "</ul>";
@@ -145,12 +154,12 @@ Aesica.dataHarness = Aesica.dataHarness || {};
 						mStats.appendChild(Aesica.HCEngine.createTableRow("Rec:", device.stats.rec));
 						mStats.appendChild(Aesica.HCEngine.createTableRow("End:", device.stats.end));
 					}
-					sReturn += "<table class='becomeDeviceTip'><tr><td><br />" + mStats.outerHTML + "</td><td>" + sPowerList + "</td></tr></table><br />";
+					sReturn += "<table class='becomeDeviceTip'><tr><td><br />" + mStats.outerHTML + "</td><td>" + sPowerList + "</td></tr></table><hr />";
 
 				}
 				else if (typeof device.powers === "object")
 				{
-					sReturn += "<br /><br />" + device.powers.toolTip + "<br /><br />";
+					sReturn += "<hr />" + Device.powerTip(device.powers) + "<hr />";
 				}
 			}
 			if (device.source)
@@ -183,9 +192,45 @@ Aesica.dataHarness = Aesica.dataHarness || {};
 						sReturn += " (" + device.cost + " " + HCData.deviceSource[device.source].currency + ")";
 					}
 				}
+				if (device.requiredPower) sReturn += "<br />'" + device.requiredPower + "' must be unlocked to purchase.";
+				if (device.requiredPerk) sReturn += "<br />Requires Perk: " + device.requiredPerk;
+				if (device.requiredMission) sReturn += "<br />Must Complete Mission: " + device.requiredMission;
 			}
 			return sReturn;
 		}
+
+		static powerTip(power)
+		{
+			var sReturn = "<span class='deviceName'>" + power.name + "</span><br /><br /><span class='deviceStats'>";
+			if (power.cost) sReturn += (Array.isArray(power.cost) ? power.cost.join("/") : power.cost) + " energy cost" + (power.chargeMin ? " (" + power.chargeMin + " min)" : "") + "<br />";
+			if (power.charge) sReturn += power.charge + " sec charge" + (power.chargeMin ? " (" + power.chargeMin + " min)" : "") + "<br />";
+			if (power.activate) sReturn += (Array.isArray(power.activate) ? power.activate.join("/") : power.activate) + " sec activate time" + (power.maintain ? " (" + power.maintain + " max)" : "")  + "<br />";
+			if (!power.activate && power.maintain) sReturn += "(" + power.maintain + " max)<br />";
+			if (power.range) sReturn += power.range.split("/").join("<br />") + "<br />";
+			if (power.cooldown) sReturn += power.cooldown + " sec cooldown" + "<br />";
+			sReturn += "<br /></span>" + Device.applyAlias(power.toolTip);
+			return sReturn;
+		}
+
+		static applyAlias(testString)
+		{
+			var rxTest = /%([A-Za-z0-9]+)%/g;
+			var i, iLength, aMatchList;
+			if (testString)
+			{
+				if (testString.search(rxTest) > -1)
+				{
+					aMatchList = testString.match(rxTest);
+					iLength = aMatchList.length;
+					for (i = 0; i < iLength; i++)
+					{
+						//testString = testString.replace(aMatchList[i], EFFECT_ALIAS[aMatchList[i].substr(1, aMatchList[i].length - 2)]);
+						testString = testString.replace(aMatchList[i], HCData.alias[aMatchList[i].substr(1, aMatchList[i].length - 2)]);
+					}
+				}
+			}
+			return testString;
+		}			
 
 		static code(device)
 		{

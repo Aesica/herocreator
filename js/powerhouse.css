@@ -273,13 +273,13 @@ table {
 
 .saveDeleteButton {
 	color: #f00;
-	text-shadow: 2px 2px 1px #000;
+	text-shadow: 1px 1px 0px #000, -1px 1px 0px #000, -1px -1px 0px #000, 1px -1px 0px #000;
 	margin-left: 1rem;
 }
 
 .saveReplaceButton {
 	color: #0f0;
-	text-shadow: 2px 2px 1px #000;
+	text-shadow: 1px 1px 0px #000, -1px 1px 0px #000, -1px -1px 0px #000, 1px -1px 0px #000;
 	margin-left: 1rem;
 }
 
@@ -386,7 +386,7 @@ textarea {
 }
 
 #selectionWindowHeader {
-    text-shadow: 2px 2px 1px #000;
+	text-shadow: 1px 1px 0px #000, -1px 1px 0px #000, -1px -1px 0px #000, 1px -1px 0px #000;
     color: #eee;
     margin-left: 0.3rem;
     margin-right: 1.5rem;
@@ -408,7 +408,7 @@ textarea {
 .closeButton {
 	color: #f00;
 	float: right;
-	text-shadow: 2px 2px 1px #000;
+	margin-top: -0.1rem;
     margin-right: 0.2rem;
 }
 
@@ -508,7 +508,7 @@ canvas.icon {
 }
 
 .rarityCommon {
-	color: #aad;
+	color: #ddf;
 }
 
 .rarityUncommon {
@@ -810,9 +810,47 @@ a.disabledButtonText:visited, a.disabledButtonText:hover, a.disabledButtonText:a
 	font-style: italic;
 }
 
+.deviceName {
+	font-weight: bold;
+	color: #ff8800;
+}
+.deviceStats {
+	color: #2f2;
+}
+.btcop {
+	color: #f22;
+}
+.btcoe {
+	color: #22f;
+}
+.btaop {
+	color: #f82;
+}
+.btaoe {
+	color: #2f2;
+}
+
 /*
  * Print
  */
+
+.alertMessage {
+	color: #fff;
+	background-color: #f00;
+	padding: 0.25rem;
+	margin-top: 0.35rem;
+	margin-bottom: 0.35rem;
+}
+
+ .alertMessage a {
+	color: #fff;
+	font-weight: normal;
+	text-decoration: underline;
+}
+
+.hidden {
+	display: none;
+}
 
 @media print {
     .title, .menu, .link, .invisible {
