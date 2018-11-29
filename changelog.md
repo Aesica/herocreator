@@ -4,6 +4,7 @@
  - Added some missing travel powers.  If I'm still missing any, let me know--I probably am.
  - Added missing icons from powers, specializations, as well as a few travel power icons.
  - Added some missing sources for the various ultimates.
+ - Fixed some tooltip mistakes for certain powers, including Whirlpool
 
 **v3.25.30** - 11/22/2018 - Aesica
  - Added the Whirlpool ultimate
