@@ -1189,6 +1189,7 @@ dataPowerAlias["Impact"] = PowerAlias.textOnly("Impact", "While this travel powe
 dataPowerAlias["Versatility"] = PowerAlias.textOnly("Versatility", "While this travel power is active, if you take damage you will receive a stack of Versatility, up to 5 stacks. Versatility increases your movement speed for a short time.");
 dataPowerAlias["Flippin"] = PowerAlias.textOnly("Flippin'", "While Swinging is active, you gain a bonus to your ability to dodge attacks.");
 dataPowerAlias["Earthen Embrace"] = PowerAlias.textOnly("Earthen Embrace", "While tunneling, you will gain a stack of Earthen Embrace every 3 seconds, up to 6 stacks. Earthen Embrace increases your resistance to all types of damage. These stacks will persist for a short time after you stop tunneling.");
+dataPowerAlias["Energy Rush"] = PowerAlias.textOnly("Energy Rush", "While out of combat, your base Energy Equilibrium is increased by 83% and your Energy Recovery is increased by 100%.");
 
 //------------------------------------------------------------------------------
 // Travel Power Data
@@ -1292,29 +1293,29 @@ dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, T
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TUNNELING, TP_UNLOCK_QSTORE, 'Ooze Tunneling');
 dataTravelPower[dataTravelPower.length-1].insertAdvantage(dataPowerAlias['Earthen Embrace'].name, 2, dataPowerAlias['Earthen Embrace'].tip);
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TUNNELING, TP_UNLOCK_QSTORE, 'Inky Ooze Tunneling', 'OozeTunneling');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TUNNELING, TP_UNLOCK_QSTORE, 'Inky Ooze Tunneling', 'TravelPower_OozeTunneling');
 dataTravelPower[dataTravelPower.length-1].insertAdvantage(dataPowerAlias['Earthen Embrace'].name, 2, dataPowerAlias['Earthen Embrace'].tip);
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TUNNELING, TP_UNLOCK_QSTORE, 'Metallic Ooze Tunneling', 'OozeTunneling');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TUNNELING, TP_UNLOCK_QSTORE, 'Metallic Ooze Tunneling', 'TravelPower_OozeTunneling');
 dataTravelPower[dataTravelPower.length-1].insertAdvantage(dataPowerAlias['Earthen Embrace'].name, 2, dataPowerAlias['Earthen Embrace'].tip);
 
 // TODO: get proper image
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SWINGING, TP_UNLOCK_QSTORE, 'Chain Swinging', 'Swinging');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SWINGING, TP_UNLOCK_QSTORE, 'Chain Swinging', 'TravelPower_Swinging');
 dataTravelPower[dataTravelPower.length-1].insertAdvantage(dataPowerAlias['Flippin'].name, 2, dataPowerAlias['Flippin'].tip);
 
 // TODO: get proper image
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SWINGING, TP_UNLOCK_QSTORE, 'Energy Swinging', 'Swinging');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SWINGING, TP_UNLOCK_QSTORE, 'Energy Swinging', 'TravelPower_Swinging');
 dataTravelPower[dataTravelPower.length-1].insertAdvantage(dataPowerAlias['Flippin'].name, 2, dataPowerAlias['Flippin'].tip);
 
 // TODO: get proper image
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SWINGING, TP_UNLOCK_QSTORE, 'Vine Swinging', 'Swinging');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SWINGING, TP_UNLOCK_QSTORE, 'Vine Swinging', 'TravelPower_Swinging');
 dataTravelPower[dataTravelPower.length-1].insertAdvantage(dataPowerAlias['Flippin'].name, 2, dataPowerAlias['Flippin'].tip);
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_LEGACY, 'Storm Rider', 'ElectroFlight');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_LEGACY, 'Storm Rider', 'TravelPower_ElectroFlight');
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, TP_UNLOCK_LEGACY, 'R.A.D. Sphere', 'HyperBall');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, TP_UNLOCK_LEGACY, 'R.A.D. Sphere', 'TravelPower_HyperBall');
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_LEGACY, 'Aethyric Incantation', 'MysticFlight');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_LEGACY, 'Aethyric Incantation', 'TravelPower_MysticFlight');
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_ATHLETICS, TP_UNLOCK_CSTORE, 'Energy Slide', null, null, 'Grants +20 Run Speed and +3 Jump Height while active.  Outside of combat, you build up speed and height over time.  After 4 seconds, you gain 17 Run Speed and +2.6 Jump Height.  After 10 seconds, you gain an additional 21 Run Speed and +2.6 Jump Height.<br /><br />While active, you suffer a -12% penalty to Power Cost Discount and your Energy Building strength is reduced by 15%.');
 
@@ -1334,75 +1335,83 @@ dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, T
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TELEPORT, TP_UNLOCK_CSTORE, 'Ninja Leaves');
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, null, 'Flag Flight', "Flight", null, null, ['Patriot event reward']);
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, null, 'Flag Flight', "TravelPower_Flight", null, null, ['Patriot event reward']);
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, null, 'Canadian Flag Flight', "Flight", null, null, ['Patriot event reward']);
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, null, 'Canadian Flag Flight', "TravelPower_Flight", null, null, ['Patriot event reward']);
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE, 'Hoverboard', null, 'This power is less maneuverable than standard Flight.', 'Grants +20 Flight Speed while active.  Outside of combat, you build up speed over time.  After 4 seconds, you gain +17 Flight Speed.  After 10 seconds, you gain an additional +21 Flight Speed.<br /><br />While active, you suffer a -9.4% penalty to Power Cost Discount and your Energy Building strength is reduced by 15%.');
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE, 'Tricolor Flight (Vertical)', "Flight");
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE, 'Tricolor Flight (Vertical)', "TravelPower_Flight");
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE, 'Tricolor Flight (Horizontal)', "Flight");
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE, 'Tricolor Flight (Horizontal)', "TravelPower_Flight");
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_COLLECTOR, 'Arcane Flight', "Flight", null, null, ['Arcane Lockbox']);
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_COLLECTOR, 'Arcane Flight', null, null, null, ['Arcane Lockbox']);
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, TP_UNLOCK_CSTORE, 'Tricolor Superspeed (Horizontal)', 'Superspeed');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, TP_UNLOCK_CSTORE, 'Tricolor Superspeed (Horizontal)', 'TravelPower_Superspeed');
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, TP_UNLOCK_CSTORE, 'Tricolor Superspeed (Vertical)', 'MachSpeed');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, TP_UNLOCK_CSTORE, 'Tricolor Superspeed (Vertical)', 'TravelPower_MachSpeed');
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, null, 'Frost Speed', 'Superspeed', null, null, ['Toybox']);
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, null, 'Frost Speed', null, null, null, ['Toybox']);
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, null, 'Cold Snap Speed', 'MachSpeed', null, null, ['Toybox']);
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, null, 'Cold Snap Speed', null, null, null, ['Toybox']);
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, TP_UNLOCK_CSTORE, 'Rainbow Speed', 'Superspeed');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, TP_UNLOCK_CSTORE, 'Rainbow Speed', 'TravelPower_Superspeed');
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, TP_UNLOCK_CSTORE, 'Prism Speed', 'MachSpeed');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, TP_UNLOCK_CSTORE, 'Prism Speed', 'TravelPower_MachSpeed');
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_ATHLETICS, TP_UNLOCK_CSTORE, 'Rainbow Acrobatics', "Acrobatics");
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_ATHLETICS, TP_UNLOCK_CSTORE, 'Rainbow Acrobatics', "TravelPower_Acrobatics");
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_ATHLETICS, TP_UNLOCK_CSTORE, 'Prism Athletics', "Athletics");
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_ATHLETICS, TP_UNLOCK_CSTORE, 'Prism Athletics', "TravelPower_Athletics");
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_ATHLETICS, TP_UNLOCK_CSTORE, 'Blazing Acrobatics', "Acrobatics");
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_ATHLETICS, TP_UNLOCK_CSTORE, 'Blazing Acrobatics', "TravelPower_Acrobatics");
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_ATHLETICS, TP_UNLOCK_CSTORE, 'Scorching Athletics', "Athletics");
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_ATHLETICS, TP_UNLOCK_CSTORE, 'Scorching Athletics', "TravelPower_Athletics");
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_JUMP, TP_UNLOCK_CSTORE, 'Rainbow Jump', 'Superjump');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_JUMP, TP_UNLOCK_CSTORE, 'Rainbow Jump', 'TravelPower_Superjump');
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TELEPORT, TP_UNLOCK_CSTORE, 'Phase Out', 'Teleportation');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TELEPORT, TP_UNLOCK_CSTORE, 'Phase Out', null);
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TELEPORT, null, 'Upload', 'Teleportation', null, null, ['Cybernetic Lockbox']);
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TELEPORT, null, 'Upload', null, null, null, ['Cybernetic Lockbox']);
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, TP_UNLOCK_CSTORE, 'Fireball Roll', 'MachSpeed');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, TP_UNLOCK_CSTORE, 'Fireball Roll', 'TravelPower_HyperBall');
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_ATHLETICS, null, 'Flag Acrobatics', "Acrobatics", null, null, ["Patriot event unlock"]);
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_ATHLETICS, null, 'Flag Acrobatics', "TravelPower_Acrobatics", null, null, ["Patriot event unlock"]);
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_ATHLETICS, null, 'Flag Athletics', "Athletics", null, null, ["Patriot event unlock"]);
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_ATHLETICS, null, 'Flag Athletics', "TravelPower_Athletics", null, null, ["Patriot event unlock"]);
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_ATHLETICS, null, 'Canadian Acrobatics', "Acrobatics", null, null, ["Patriot event unlock"]);
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_ATHLETICS, null, 'Canadian Acrobatics', "TravelPower_Acrobatics", null, null, ["Patriot event unlock"]);
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_ATHLETICS, null, 'Canadian Athletics', "Athletics", null, null, ["Patriot event unlock"]);
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_ATHLETICS, null, 'Canadian Athletics', "TravelPower_Athletics", null, null, ["Patriot event unlock"]);
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_JUMP, null, 'Flag Jump', "Acrobatics", null, null, ["Patriot event unlock"]);
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_JUMP, null, 'Flag Jump', "TravelPower_Acrobatics", null, null, ["Patriot event unlock"]);
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_JUMP, null, 'Canadian Flag Jump', "Athletics", null, null, ["Patriot event unlock"]);
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_JUMP, null, 'Canadian Flag Jump', "TravelPower_Athletics", null, null, ["Patriot event unlock"]);
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SWINGING, TP_UNLOCK_QSTORE, 'Fire Swinging', 'Swinging');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SWINGING, TP_UNLOCK_QSTORE, 'Fire Swinging', 'TravelPower_Swinging');
 dataTravelPower[dataTravelPower.length-1].insertAdvantage(dataPowerAlias['Flippin'].name, 2, dataPowerAlias['Flippin'].tip);
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SWINGING, TP_UNLOCK_QSTORE, 'Flaming Chain Swinging', 'Swinging');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SWINGING, TP_UNLOCK_QSTORE, 'Flaming Chain Swinging', 'TravelPower_Swinging');
 dataTravelPower[dataTravelPower.length-1].insertAdvantage(dataPowerAlias['Flippin'].name, 2, dataPowerAlias['Flippin'].tip);
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TELEPORT, null, 'Mind Blink', 'Teleportation', null, null, ['Alien Invader Lockbox']);
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TELEPORT, null, "Mind Blink", null, null, null, ['Alien Invader Lockbox']);
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, null, "Lightning Speed", "MachSpeed", null, null, ["Blockbuster Lockbox"]);
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, null, "Lightning Speed", null, null, null, ["Blockbuster Lockbox"]);
 dataTravelPower[dataTravelPower.length-1].insertAdvantage(dataPowerAlias["Impact"].name, 2, dataPowerAlias["Impact"].tip);
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, null, "Electric Speed", "MachSpeed", null, null, ["Blockbuster Lockbox"]);
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, null, "Electric Speed", null, null, null, ["Blockbuster Lockbox"]);
 dataTravelPower[dataTravelPower.length-1].insertAdvantage(dataPowerAlias["Impact"].name, 2, dataPowerAlias["Impact"].tip);
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, null, "Stoic Flight", "Flight", null, null, ["Shaolin Lockbox"]);
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, null, "Stoic Flight", null, null, null, ["Shaolin Lockbox"]);
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, TP_UNLOCK_CSTORE, "Wild Speed", "MachSpeed");
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, TP_UNLOCK_CSTORE, "Wild Speed", "TravelPower_MachSpeed");
+
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_ATHLETICS, null, "Scorching Slide", null, null, null, ["Buccaneer Lockbox"]);
+dataTravelPower[dataTravelPower.length-1].insertAdvantage(dataPowerAlias["Energy Rush"].name, 2, dataPowerAlias["Energy Rush"].tip);
+
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_ATHLETICS, null, "Surf Slide", null, null, null, ["Buccaneer Lockbox"]);
+dataTravelPower[dataTravelPower.length-1].insertAdvantage(dataPowerAlias["Energy Rush"].name, 2, dataPowerAlias["Energy Rush"].tip);
+
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, null, "Bubble Flight", null, null, null, ["Aquatic Lockbox"]);
 
 
 //==============================================================================
@@ -1666,14 +1675,14 @@ dataPower[dataPower.length] = new Power(1, 1, 4, "Fractal Aegis", 0.5, 0, 0, 0, 
 dataPower[dataPower.length-1].insertAdvantage("Chilling Reminder", 1, null, "%UltimateChallenge%");
 dataPowerAlias["Fractal Aegis"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(1, 1, 4, "Storm Strike", 0.5, 1.5, 0, 0, 108, 90, "Affects foe (10 max)/25 foot Sphere", "Ultimate/Ranged AoE Damage", "Deals Electrical damage to all targets and they are Knocked Down.<br /><br />Deals additional damage to all targets affected by Negative Ions, consuming them in the process.<br /><br />After 2 seconds, applies Negative Ions to affected targets." + Aesica.HCEngine.powerUnlocksFrom("Rave Lockbox"), Power.TYPE_NORMAL, true);
+dataPower[dataPower.length] = new Power(1, 1, 4, "Storm Strike", 0.5, 1.5, 0, 0, 108, 90, "Affects foe (10 max)/25 foot Sphere", "Ultimate/Ranged AoE Damage", "Deals Electrical damage to all targets and they are Knocked Down.<br /><br />Deals additional damage to all targets affected by Negative Ions, consuming them in the process.<br /><br />After 2 seconds, applies Negative Ions to affected targets." + Aesica.HCEngine.powerUnlocksFrom("Rave Lockbox or " + UNLOCK_COLLECTOR, 1, UNLOCK_PURPLE_FOIL), Power.TYPE_NORMAL, true);
 dataPower[dataPower.length-1].insertAdvantage("Commanding Presence", 1, null, "%UltimateChallenge%");
 dataPowerAlias["Storm Strike"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(1, 1, 4, "Meteor Blaze", 0.5, 1.5, 0, 1.5, 103, 60, "Affects foe (10 max)/15 foot Sphere", "Ultimate/Ranged AoE Damage/Burning", "Deals Fire damage to all targets and they are Knocked Down.<br /><br />Creates a Pyre Patch beneath the target. %PyrePatch%" + Aesica.HCEngine.powerUnlocksFrom("Blazing Lockbox"), Power.TYPE_NORMAL, true);
+dataPower[dataPower.length] = new Power(1, 1, 4, "Meteor Blaze", 0.5, 1.5, 0, 1.5, 103, 60, "Targets foe (10 max)/50 feet/15 foot Sphere", "Ultimate/Ranged AoE Damage/Burning", "Deals Fire damage to all targets and they are Knocked Down.<br /><br />Creates a Pyre Patch beneath the target. %PyrePatch%" + Aesica.HCEngine.powerUnlocksFrom("Blazing Lockbox or " + UNLOCK_COLLECTOR, 1, UNLOCK_PURPLE_FOIL), Power.TYPE_NORMAL, true);
 dataPowerAlias["Meteor Blaze"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(1, 1, 4, "Whirlpool", 1, 0, 0, 0, 87, 90, "Affects foe (10 max)/15 foot Sphere", "Ultimate/Ranged AoE Damage/Burning", "Deals Fire damage to all targets and they are Knocked Down.<br /><br />Creates a Pyre Patch beneath the target. %PyrePatch%" + Aesica.HCEngine.powerUnlocksFrom("Blazing Lockbox"), Power.TYPE_NORMAL, true);
+dataPower[dataPower.length] = new Power(1, 1, 4, "Whirlpool", 1, 0, 0, 0, 87, 90, "Targets foe/100 feet", "Ultimate/Ranged AoE Damage/Chill", "Creates a Whirlpool at the target's location.  The Whirlpool deals Cold damage every sec for 16 sec to targets within 25 feet.<br /><br />Affected targets are pulled toward the center and Chilled.  %Chill%<br /><br />Targets within 10  feet of the Whirlpool's center are Rooted for 13 sec." + Aesica.HCEngine.powerUnlocksFrom("Aquatic Lockbox"), Power.TYPE_NORMAL, true);
 dataPowerAlias["Whirlpool"] = new PowerAlias(dataPower[dataPower.length-1]);
 
 //------------------------------------------------------------------------------
@@ -2285,10 +2294,10 @@ dataPowerAlias["Mechanical Monstrosity"] = new PowerAlias(dataPower[dataPower.le
 dataPower[dataPower.length] = new Power(2, 6, 4, "Fire All Weapons", 0.5, 5, 0.5, 0, [68,49], 90, "Targets foe (10 max)/50 feet/120 degree Cone", "Ultimate", "Hand Slot - Shoulder Slot - Chest Slot<br /><br />Deals Particle damage to all targets.", Power.TYPE_NORMAL, true);
 dataPowerAlias["Fire All Weapons"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(2, 6, 4, "Meltdown", 0.67, 0.83, 0, 0.83, 167, 60, "Affects foe (10 max)/15 foot Sphere", "Ultimate/Melee AoE Damage", "Deals Particle damage to nearby targets and knocks them down.  The initial strike applies Plasma Burn immediately, with additional stacks being applied over 5 seconds." + Aesica.HCEngine.powerUnlocksFrom("Toybox"), Power.TYPE_NORMAL, true);
+dataPower[dataPower.length] = new Power(2, 6, 4, "Meltdown", 0.67, 0.83, 0, 0.83, 167, 60, "Affects foe (10 max)/15 foot Sphere", "Ultimate/Melee AoE Damage", "Deals Particle damage to nearby targets and knocks them down.  The initial strike applies Plasma Burn immediately, with additional stacks being applied over 5 seconds." + Aesica.HCEngine.powerUnlocksFrom("Toybox or " + UNLOCK_COLLECTOR, 1, UNLOCK_PURPLE_FOIL), Power.TYPE_NORMAL, true);
 dataPowerAlias["Meltdown"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(2, 6, 4, "Showdown", 0.5, 5, 0.5, 0, [56,37], 90, "Affects foe (10 max)/50 feet/180 degree Cone", "Ultimate/Ranged AoE Damage/Root", "Deals Piercing damage and Roots targets for 8 seconds.  Each hit refreshes the Root duration." + Aesica.HCEngine.powerUnlocksFrom("Western Lockbox"), Power.TYPE_NORMAL, true);
+dataPower[dataPower.length] = new Power(2, 6, 4, "Showdown", 0.5, 5, 0.5, 0, [56,37], 90, "Affects foe (10 max)/50 feet/180 degree Cone", "Ultimate/Ranged AoE Damage/Root", "Deals Piercing damage and Roots targets for 8 seconds.  Each hit refreshes the Root duration." + Aesica.HCEngine.powerUnlocksFrom("Western Lockbox or " + UNLOCK_COLLECTOR, 1, UNLOCK_PURPLE_FOIL), Power.TYPE_NORMAL, true);
 dataPower[dataPower.length-1].insertAdvantage("You Clean, We'll Sweep", 1, null, "%UltimateChallenge%");
 dataPowerAlias["Showdown"] = new PowerAlias(dataPower[dataPower.length-1]);
 
@@ -3280,14 +3289,14 @@ dataPower[dataPower.length] = new Power(3, 11, 4, "Fury of the Dragon", 0.5, 4, 
 dataPower[dataPower.length-1].insertAdvantage("Real Ultimate Power", 2, null, "50% chance to apply Bleed to targets. %Bleed%");
 dataPowerAlias["Fury of the Dragon"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(3, 11, 4, "Vorpal Blade", 1, 0, 0, 0, 92, 60, "Targets foe (10 max)/15 feet/15 foot Sphere", "Ultimate/Melee AoE Damage", "Deals Slashing damage to all targets, hitting 5 times and causing them to Bleed. %Bleed%<br /><br />The damage this power deals is based on the number of Focus stacks you have.", Power.TYPE_NORMAL, true);
+dataPower[dataPower.length] = new Power(3, 11, 4, "Vorpal Blade", 1, 0, 0, 0, 92, 60, "Targets foe (10 max)/15 feet/15 foot Sphere", "Ultimate/Melee AoE Damage", "Deals Slashing damage to all targets, hitting 5 times and causing them to Bleed. %Bleed%<br /><br />The damage this power deals is based on the number of Focus stacks you have." + Aesica.HCEngine.powerUnlocksFrom("Mayhem Lockbox or " + UNLOCK_COLLECTOR, 1, UNLOCK_PURPLE_FOIL), Power.TYPE_NORMAL, true);
 dataPowerAlias["Vorpal Blade"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(3, 11, 4, "Devastating Strike", 1.67, 0.83, 0, 0.83, 150, 60, "Targets foe/10 feet", "Ultimate/Melee AoE Damage", "Deals Crushing damage to your target, hitting 7 times.<br /><br />When this power finishes activation, up to 10 targets within 20 feet suffer Dimensional damage.  Affected targets are also Knocked Back and affected by Chi Flame.  %ChiFlame%<br /><br />Targets immune to Knock effects are instead Disoriented.  %Disorient%", Power.TYPE_NORMAL, true);
+dataPower[dataPower.length] = new Power(3, 11, 4, "Devastating Strike", 1.67, 0.83, 0, 0.83, 150, 60, "Targets foe/10 feet", "Ultimate/Melee AoE Damage", "Deals Crushing damage to your target, hitting 7 times.<br /><br />When this power finishes activation, up to 10 targets within 20 feet suffer Dimensional damage.  Affected targets are also Knocked Back and affected by Chi Flame.  %ChiFlame%<br /><br />Targets immune to Knock effects are instead Disoriented.  %Disorient%" + Aesica.HCEngine.powerUnlocksFrom("Shaolin Lockbox or " + UNLOCK_COLLECTOR, 1, UNLOCK_PURPLE_FOIL), Power.TYPE_NORMAL, true);
 dataPower[dataPower.length-1].insertAdvantage("Commanding Presence", 1, null, "%UltimateChallenge%");
 dataPowerAlias["Devastating Strike"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(3, 11, 4, "Whirling Dragon Strike", 1, 0, 0, 0, 122, 60, "Targets foe (10 max)/30 foot Lunge/20 foot Sphere", "Melee AoE Damage/Damage Resistance Debuff/Knock Down", "Lunges to your target and deals Slashing damage to your target as well as any nearby targets.  Hits 3 times.<br /><br />Affected targets are Knocked Down and affected by Overpower.  %Overpower%", Power.TYPE_NORMAL, true);
+dataPower[dataPower.length] = new Power(3, 11, 4, "Whirling Dragon Strike", 1, 0, 0, 0, 122, 60, "Targets foe (10 max)/30 foot Lunge/20 foot Sphere", "Melee AoE Damage/Damage Resistance Debuff/Knock Down", "Lunges to your target and deals Slashing damage to your target as well as any nearby targets.  Hits 3 times.<br /><br />Affected targets are Knocked Down and affected by Overpower.  %Overpower%" + Aesica.HCEngine.powerUnlocksFrom("Buccaneer Lockbox"), Power.TYPE_NORMAL, true);
 dataPower[dataPower.length-1].insertAdvantage("Commanding Presence", 1, null, "%UltimateChallenge%");
 dataPowerAlias["Whirling Dragon Strike"] = new PowerAlias(dataPower[dataPower.length-1]);
 
@@ -3910,11 +3919,11 @@ dataPower[dataPower.length] = new Power(4, 15, 4, "Mind Link", 0.5, 8, 0.5, 0, [
 dataPower[dataPower.length-1].insertAdvantage("Aggression Inhibitor", 2, null, "All damage you take while maintaining this power is reduced by 20%.");
 dataPowerAlias["Mind Link"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(4, 15, 4, "Mental Impact", 0.67, 1.83, 0, 1.83, 138, 90, "Targets foe (10 max)/100 feet/20 foot Sphere", "Ultimate/Ranged AoE Damage/Damage Resistance Debuff/Knock Down", "Deals Ego damage to foes.  Any foe damaged by this attack is Knocked Down and suffers 20% reduced damage resistance against all damage types for 12 seconds.  Gives you a atack of Ego Leech for every foe hit.  This power must be fully charged." + Aesica.HCEngine.powerUnlocksFrom("Cybernetic Lockbox"), Power.TYPE_NORMAL, true);
+dataPower[dataPower.length] = new Power(4, 15, 4, "Mental Impact", 0.67, 1.83, 0, 1.83, 138, 90, "Targets foe (10 max)/100 feet/20 foot Sphere", "Ultimate/Ranged AoE Damage/Damage Resistance Debuff/Knock Down", "Deals Ego damage to foes.  Any foe damaged by this attack is Knocked Down and suffers 20% reduced damage resistance against all damage types for 12 seconds.  Gives you a atack of Ego Leech for every foe hit.  This power must be fully charged." + Aesica.HCEngine.powerUnlocksFrom("Cybernetic Lockbox or " + UNLOCK_COLLECTOR, 1, UNLOCK_PURPLE_FOIL), Power.TYPE_NORMAL, true);
 dataPower[dataPower.length-1].insertAdvantage("Leave a Mark", 1, null, "%UltimateChallenge%");
 dataPowerAlias["Mental Impact"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(4, 15, 4, "Ego Blade Pandemonium", 1, 8, 1, 0, [31,20], 60, "Affects foe (10 max)/10 foot Sphere", "Ultimate/Melee AoE Damage", "Deals Ego damage to targets every 1 sec.  Your chance to critically hit with this power is increased by 5% per stack of Ego Leech." + Aesica.HCEngine.powerUnlocksFrom("Alien Invader Lockbox"), Power.TYPE_NORMAL, true);
+dataPower[dataPower.length] = new Power(4, 15, 4, "Ego Blade Pandemonium", 1, 8, 1, 0, [31,20], 60, "Affects foe (10 max)/10 foot Sphere", "Ultimate/Melee AoE Damage", "Deals Ego damage to targets every 1 sec.  Your chance to critically hit with this power is increased by 5% per stack of Ego Leech." + Aesica.HCEngine.powerUnlocksFrom("Alien Invader Lockbox or " + UNLOCK_COLLECTOR, 1, UNLOCK_PURPLE_FOIL), Power.TYPE_NORMAL, true);
 dataPower[dataPower.length-1].insertAdvantage("Leave a Mark", 1, null, "%UltimateChallenge%");
 dataPower[dataPower.length-1].insertAdvantage("Buzzsaw", 1, null, "Snares your targets, reducing their movement speed by 100% for 16 sec.");
 dataPowerAlias["Ego Blade Pandemonium"] = new PowerAlias(dataPower[dataPower.length-1]);
@@ -4242,8 +4251,8 @@ dataPower[dataPower.length] = new Power(5, 17, 4, "Power Chord", 0.5, 3, 0.3, 0,
 dataPower[dataPower.length-1].insertAdvantage("Rock Concert", 2, null, "Power Chord no longer gives you the Rocking Out buff.  Instead, Power Chord now applied Exhilarate to nearby allies.  Exhilarate increases their damage by a lesser amount and can stack up to 10 times.  It also gives them energy.");
 dataPowerAlias["Power Chord"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(5, 17, 4, "Catastrophic Onslaught", 0.5, 5, 0.5, 0, [40,15], 60, "Targets foe/10 feet", "Ultimate/Melee Damage", "Deals Crushing damage twice every 0.5 seconds and Roots the target for 5.3 seconds.<br /><br />After maintaining this power for 2 seconds, you become immune to most forms of Control effects and gain 200% resistance to all Knock effects until you stop maintaining this power.<br /><br />If this power is fully maintained:<br /><br />Deals Crushing damage to your primary target and half that amount in Crushing damage to secondary targets within 20 feet.<br /><br />Applies Overpower and Knocks targets upward. %Overpower%" + Aesica.HCEngine.powerUnlocksFrom("Blockbuster Lockbox"), Power.TYPE_NORMAL, true);
-dataPowerAlias["Catastrophic Onslaught"] = new PowerAlias(dataPower[dataPower.length-1]);
+dataPower[dataPower.length] = new Power(5, 17, 4, "Catastrophic Pummeling", 0.5, 5, 0.5, 0, [40,15], 60, "Targets foe/10 feet", "Ultimate/Melee Damage", "Deals Crushing damage twice every 0.5 seconds and Roots the target for 5.3 seconds.<br /><br />After maintaining this power for 2 seconds, you become immune to most forms of Control effects and gain 200% resistance to all Knock effects until you stop maintaining this power.<br /><br />If this power is fully maintained:<br /><br />Deals Crushing damage to your primary target and half that amount in Crushing damage to secondary targets within 20 feet.<br /><br />Applies Overpower and Knocks targets upward. %Overpower%" + Aesica.HCEngine.powerUnlocksFrom("Blockbuster Lockbox"), Power.TYPE_NORMAL, true);
+dataPowerAlias["Catastrophic Pummeling"] = new PowerAlias(dataPower[dataPower.length-1]);
 
 //------------------------------------------------------------------------------
 // Power Framework: Earth
@@ -4373,7 +4382,7 @@ dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructo
 
 dataPower[dataPower.length] = dataPowerAlias["Unleashed Rage"].replicate(5, 18);
 dataPower[dataPower.length] = dataPowerAlias["Power Chord"].replicate(5, 18);
-dataPower[dataPower.length] = dataPowerAlias["Catastrophic Onslaught"].replicate(5, 18);
+dataPower[dataPower.length] = dataPowerAlias["Catastrophic Pummeling"].replicate(5, 18);
 
 //------------------------------------------------------------------------------
 // Power Framework: Might
@@ -4560,7 +4569,7 @@ dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructo
 
 dataPower[dataPower.length] = dataPowerAlias["Unleashed Rage"].replicate(5, 19);
 dataPower[dataPower.length] = dataPowerAlias["Power Chord"].replicate(5, 19);
-dataPower[dataPower.length] = dataPowerAlias["Catastrophic Onslaught"].replicate(5, 19);
+dataPower[dataPower.length] = dataPowerAlias["Catastrophic Pummeling"].replicate(5, 19);
 
 //------------------------------------------------------------------------------
 // Power Set: Mystic
@@ -4686,8 +4695,6 @@ dataPowerAlias["Endbringers Grasp"] = new PowerAlias(dataPower[dataPower.length-
 
 dataPower[dataPower.length] = new Power(6, 20, 1, "Crashing Incantation", 0.67, 1.83, 0, 1.83, 138, 90, "Targets foe (10 max)/50 feet/20 foot Sphere", "Ultimate/Ranged AoE Damage/Corruption/Curse", "+ Deals Magic damage to targets within a 20 foot radius.<br />+ Applies Jinx to the target, reducing their movement by 15% for 8 seconds.  When the effect expires, affected foes are Knocked Down.<br />+ Jinx is a type of Curse.<br />+ Applies Overpower to affected targets. %Overpower" + Aesica.HCEngine.powerUnlocksFrom("Arcane Lockbox or " + UNLOCK_COLLECTOR, 1, UNLOCK_PURPLE_FOIL), Power.TYPE_NORMAL, true);
 dataPowerAlias["Crashing Incantation"] = new PowerAlias(dataPower[dataPower.length-1]);
-
-
 
 //------------------------------------------------------------------------------
 // Power Framework: Darkness

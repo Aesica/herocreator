@@ -1383,7 +1383,7 @@ dataVersionUpdate[dataVersionUpdate.length] = new VersionUpdate(
         case 'specializationTree': return value['specializationTree'];
         case 'specialization': return value['specialization'];
         }
-    });
+	});
 	
 //==============================================================================
 // Get Methods

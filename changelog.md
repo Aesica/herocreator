@@ -1,4 +1,10 @@
 ## Changelog for HeroCreator
+**v3.26.30** - 11/28/2018 - Aesica
+ - Fixed a bug where AT builds weren't loading properly from the previous version.  Current ones might break though
+ - Added some missing travel powers.  If I'm still missing any, let me know--I probably am.
+ - Added missing icons from powers, specializations, as well as a few travel power icons.
+ - Added some missing sources for the various ultimates.
+
 **v3.25.30** - 11/22/2018 - Aesica
  - Added the Whirlpool ultimate
  - Added the missing 5th device slot
