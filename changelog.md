@@ -1,4 +1,10 @@
 ## Changelog for HeroCreator
+**v3.26.30** - 12/22/2018 - Aesica
+ - Added the permanent snowball devices
+ - Fixed a bug where Mystic's ultimates were unintentionally flagged as Tier 1 powers
+ - Updated Avenger's Surprise Attack specialization to reflect the current ingame version
+ - Other minor things
+
 **v3.26.30** - 11/28/2018 - Aesica
  - Fixed a bug where AT builds weren't loading properly from the previous version.  Current ones might break though
  - Added some missing travel powers.  If I'm still missing any, let me know--I probably am.
