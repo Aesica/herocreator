@@ -13,8 +13,8 @@
 // system config data
 const app = 
 {
-	"version":3.26,
-	"releaseDate":"11/28/2018",
+	"version":3.27,
+	"releaseDate":"12/22/2018",
 	"system":
 	{
 		"siteName":"HeroCreator",

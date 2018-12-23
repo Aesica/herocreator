@@ -395,8 +395,8 @@ const HCData =
 			{"id":1,"tier":1,"maxPoints":3,"name":"Can't Touch This","icon":"Specialization_CantTouchThis","tip":"When your Energy Builder deals Damage it has a 33/67/100% chance to Daze your target for 4 seconds if they are more than 10 feet away from you. Dazed characters move 20% slower."},
 			{"id":2,"tier":1,"maxPoints":2,"name":"Anguish","icon":"Specialization_Anguish","tip":"Whenever you Critically Strike with a Ranged attack, you deal an additional N Penetrating Damage every 2 seconds for 6 seconds. (Penetrating Damage is only resisted by Resistance to all damage, and ignores half of that Resistance. Penetrating Damage also ignores half of the absorption provided by Shields.)"},
 			{"id":3,"tier":1,"maxPoints":3,"name":"Round 'em Up","icon":"Might_IronCyclone","tip":"Your AoE attacks cause your targets to take 1/2/3% more Damage from further AoE attacks you make. Stacks up to 3 times and lasts 10 seconds."},
-			{"id":4,"tier":2,"maxPoints":2,"name":"Surprise Attack","icon":"Electricity_Electrocute","tip":"Your Single Target attacks now have an additional 10/20% Critical Chance on targets above 90% Health."},
-			{"id":5,"tier":2,"maxPoints":3,"name":"Relentless Assault","icon":"InfernalSupernatural_AspectoftheInfernal","tip":"Your Maintained attacks increase your Offense by 10/20/30 for 8 seconds. Stacks up to 5 times."},
+			{"id":4,"tier":2,"maxPoints":2,"name":"Surprise Attack","icon":"Electricity_Electrocute","tip":"Striking a target above 90% Health with a single target attack now grants you an additional 5/10% Critical Chance for 4 sec."},
+			{"id":5,"tier":2,"maxPoints":3,"name":"Relentless Assault","icon":"Fire_AbsorbHeat","tip":"Your Maintained attacks increase your Offense by 10/20/30 for 8 seconds. Stacks up to 5 times."},
 			{"id":6,"tier":2,"maxPoints":2,"name":"Offensive Expertise","icon":"MartialArts_Intensity","tip":"Your Active Offense powers benefit from an additional 7/14% Power Recharge Reduction."},
 			{"id":7,"tier":2,"maxPoints":3,"name":"Preemptive Strike","icon":"Fire_ThrowFire","tip":"Your Ranged Blast attacks cause your next non-Blast Ranged attack to deal an additional 5/10/15% Base Damage."},
 			{"id":8,"tier":3,"maxPoints":1,"name":"Avenger Mastery","icon":"Role_RangedDamage","tip":"Whenever you get 2 Critical attacks within 5 seconds, your next Blast power has its Charge Time reduced by 50%."}
@@ -528,6 +528,7 @@ const HCData =
 		"Hexed":"Hexed lasts for 12 seconds and reduces the target's resistance to Magic damage by -18%.  Hexed is a Curse.",
 		"Illumination":"Illumination lasts for 20 seconds and increases any direct healing the target receives by 3%.  Illumination is an Enchantment.",
 		"Illuminated":"Illuminated lasts for 20 seconds and gives the target a 15% chance to apply Mend to anyone attacking it.  Mend lasts for 8 seconds and heals targets for a small amount of Health every 2 seconds.  Illuminated is a Curse.",
+		"Inspiration":"Inspiration grants +3% all damage strength and lasts 30 sec.  This effect does not stack.",
 		"Interrupt":"Interrupt only works against lower-ranked targets once every 8 seconds.",
 		"Jinxed":"Jinxed gives the target a -10% penalty to all damage strength and -15% to movement for 8 seconds, and upon expiring, the target is Knocked Down.  Jinx is considered a Curse.",
 		"LightEverlasting":"Light Everlasting lasts for 10 seconds and heals for a small amount every second.  Light Everlasting is an Enchantment.",
@@ -624,6 +625,7 @@ const HCData =
 		{"id":15,"icon":"Any_Generic","name":"Circus Malvanum","currency":"Circus Malvanum Gears"},
 		{"id":16,"icon":"Any_Generic","name":"Dev Vendor","currency":"Dev Token"},
 		{"id":17,"icon":"Any_Generic","name":"Nemesis Vendor","currency":"Nemesis Token"},
+		{"id":18,"icon":"Any_Generic","name":"High Noon at Snake Gulch","currency":"Snake Bucks"},
 	],
 	"device":
 	[
@@ -1270,10 +1272,12 @@ const HCData =
 		{"id":202,"icon":"Any_Generic","rarity":2,"type":6,"source":11,"bound":1,"name":"Frosty Beverage","cost":0,"toolTip":"This does not count toward Anniversary Soda consumption objectives.","powers":{"name":"Drink","icon":"Any_Generic","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":10,"range":"Affects living player (5 max)/25 foot Sphere","tags":"","toolTip":"Applies Energize to nearby allies, granting them +2% Maximum Energy for 30 sec.  This effect does not stack."}},
 		{"id":203,"icon":"Any_Generic","rarity":2,"type":11,"source":11,"bound":1,"name":"Crate of Water Balloons","cost":0,"toolTip":"The balloons from this do not count toward water balloon objectives.","powers":{"name":"Create Crate of Water Balloons","icon":"Any_Generic","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":300,"range":"Targets Self","tags":"","toolTip":"Deploys a crate of cheap water balloons that anyone can grab and use.  These weter balloons cannot be spawned in a player's inventory when thrown."}},
 		{"id":204,"icon":"Any_Generic","rarity":4,"type":11,"source":13,"bound":1,"name":"Backup! - Foxbat","cost":0,"noCooldownReduction":true,"toolTip":"","powers":{"name":"Backup! - Foxbat","icon":"Any_Generic","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":180,"range":"Targets Self","tags":"","toolTip":"Summon Foxbat to your side for 15 sec for some comic relief."}},
-		{"id":205,"icon":"Any_Generic","rarity":2,"type":11,"source":12,"bound":1,"name":"Permanent Snowball","cost":0,"toolTip":"","powers":{"name":"Permanent Snowball","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":5,"range":"Targets anything but you","tags":"","toolTip":"Hurl a snowball at the target.  Victims may gain a Snowball."}},
-		{"id":206,"icon":"Any_Generic","rarity":2,"type":6,"source":14,"bound":1,"name":"Fireworks","cost":0,"toolTip":"","powers":{"name":"Fireworks","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":10,"range":"Targets any living player (5 max)","tags":"","toolTip":"Applies Inspiration to nearby allies, granting them +3% all damage strength for 30 sec.  This effect does not stack."}},
+		{"id":205,"icon":"Any_Generic","rarity":2,"type":11,"source":12,"bound":1,"name":"Permanent Snowball","cost":100,"toolTip":"","powers":{"name":"Permanent Snowball","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":5,"range":"Targets anything but you","tags":"","toolTip":"Hurl a snowball at the target.  Victims may gain a Snowball."}},
+		{"id":206,"icon":"Any_Generic","rarity":2,"type":6,"source":14,"bound":1,"name":"Fireworks","cost":0,"toolTip":"","powers":{"name":"Fireworks","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":10,"range":"Targets any living player (5 max)","tags":"","toolTip":"Applies Inspiration to nearby allies.  %Inspiration%"}},
 		{"id":207,"icon":"Any_Generic","rarity":2,"type":6,"source":14,"bound":1,"name":"Sparkle Fireworks","cost":0,"toolTip":"","powers":{"name":"Sparkle Fireworks","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":10,"range":"Targets any living player (5 max)","tags":"","toolTip":"Applies Energize to nearby allies, granting them +2% Maximum Energy for 30 sec.  This effect does not stack."}},
-		
+		{"id":208,"icon":"Any_Generic","rarity":2,"type":8,"source":18,"bound":1,"name":"Branding Iron","cost":100,"toolTip":"","powers":{"name":"Branding Iron","icon":"Any_Generic","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":20,"range":"Targets foe","tags":"","toolTip":"Deals Fire damage and applies Clinging Flames to the target.  %ClingingFlames%"}},
+		{"id":209,"icon":"Any_Generic","rarity":2,"type":6,"source":14,"bound":1,"name":"Yodel","cost":100,"toolTip":"","powers":{"name":"Yodel","icon":"Any_Generic","activate":1,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":10,"range":"Affects friend (10 max)","tags":"","toolTip":"Applies Inspiration to nearby allies.  %Inspiration%"}},
+		{"id":210,"icon":"Any_Generic","rarity":3,"type":11,"source":12,"bound":1,"name":"Everlasting Super Snowball","cost":250,"toolTip":"","powers":{"name":"Super Snowball","icon":"Any_Generic","activate":0,"charge":0,"maintain":0,"chargeMin":0,"cost":0,"cooldown":5,"range":"Targets anything but you","tags":"","toolTip":"Throws a giant snowball at your targets.  Victims may gain a Snowball or Super Snowball."}},
 	],
 	"travelAdvantage":
 	[
