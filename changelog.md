@@ -1,5 +1,5 @@
 ## Changelog for HeroCreator
-**v3.26.30** - 12/22/2018 - Aesica
+**v3.27.30** - 12/22/2018 - Aesica
  - Added the permanent snowball devices
  - Fixed a bug where Mystic's ultimates were unintentionally flagged as Tier 1 powers
  - Updated Avenger's Surprise Attack specialization to reflect the current ingame version
