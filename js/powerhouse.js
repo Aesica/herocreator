@@ -13,8 +13,8 @@
 // system config data
 const app = 
 {
-	"version":3.27,
-	"releaseDate":"12/22/2018",
+	"version":3.29,
+	"releaseDate":"2/15/2019",
 	"system":
 	{
 		"siteName":"HeroCreator",
@@ -97,10 +97,11 @@ window['getCookie'] = getCookie;
 function numToUrlCode(num)
 {
 	var charCode = 0;
+	num = +num || 0;
 	if (num >= 0 && num <= 9) charCode = num + 48; // 0-9
 	else if (num >= 10 && num <= 35) charCode = num + 55; // A-Z
 	else if (num >= 36 && num <= 61) charCode = num + 61; // a-z
-	else throw 'numToUrlCode: num is out of valid range: ' + num;
+	else throw new Error('numToUrlCode: num is out of valid range: ' + num);
 	return String.fromCharCode(charCode);
 }
 window['numToUrlCode'] = numToUrlCode;
@@ -137,7 +138,7 @@ function urlCodeToNum(code)
 	if (charCode >= 48 && charCode <= 57) num = charCode - 48;
 	else if (charCode >= 65 && charCode <= 90) num = charCode - 55;
 	else if (charCode >= 97 && charCode <= 122) num = charCode - 61;
-	else throw 'urlCodeToNum: code is out of valid range: ' + code + ' (' + charCode + ')';
+	else throw new Error('urlCodeToNum: code is out of valid range: ' + code + ' (' + charCode + ')');
 	return num;
 }
 window['urlCodeToNum'] = urlCodeToNum;
@@ -2916,7 +2917,6 @@ function setupArchtypes()
 	Aesica.HCEngine.setDialogBoxHeader("Archetypes");
 
 	var i;
-	var iArchetypeCount = HCData.archetype.length;
 	var mCurrent;
 	var iLength = HCData.archetypeGroup.length;
 	var aContainers = [null];
@@ -2933,16 +2933,19 @@ function setupArchtypes()
 	}
 
 	// add new archetypes
-	for (i = 1; i < iArchetypeCount; i++)
+	for (i in HCData.archetype)
 	{
 		mContainer = aContainers[HCData.archetype[i].group];
-		if (mContainer.childNodes.length % (app.system.archetypeRowSize + 1) == 0) mContainer.appendChild(document.createElement("br"));
-		(function(i)
-		{
-			mCurrent = Aesica.HCEngine.createButton(Aesica.HCEngine.getDescNode(HCData.archetype[i].icon, null, true, true), "selectArchetype" + i, "", (function(){ setArchetype(i); }));
-		})(i);
-		setOnmouseoverPopupL1(mCurrent, "<b>" + HCData.archetype[i].name + "</b><br /><br />" + Aesica.dataHarness.Archetype.tip(HCData.archetype[i]));
-		mContainer.appendChild(mCurrent);
+		if (mContainer)
+			{
+			if (mContainer.childNodes.length % (app.system.archetypeRowSize + 1) == 0) mContainer.appendChild(document.createElement("br"));
+			(function(i)
+			{
+				mCurrent = Aesica.HCEngine.createButton(Aesica.HCEngine.getDescNode(HCData.archetype[i].icon, null, true, true), "selectArchetype" + i, "", (function(){ setArchetype(i); }));
+			})(i);
+			setOnmouseoverPopupL1(mCurrent, "<b>" + HCData.archetype[i].name + "</b><br /><br />" + Aesica.dataHarness.Archetype.tip(HCData.archetype[i]));
+			mContainer.appendChild(mCurrent);
+		}
 	}
 
 	Aesica.HCEngine.setVisibility("selectionWindow", true);

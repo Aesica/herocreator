@@ -3245,8 +3245,9 @@ dataPowerAlias["Relentless"] = new PowerAlias(dataPower[dataPower.length-1]);
 dataEnergyUnlockPower[dataPower.length-1] = true;
 dataRequireGroupPower[dataPower.length-1] = "martial arts";
 
-dataPower[dataPower.length] = new Power(3, 11, 2, "Dragon's Wrath", 0.67, 0.83, 0, 0, [36,61], 0, "Targets foe/10 feet", "Melee Damage/Rush", "Deals Slashing damage.<br /><br />When fully charged, grants you Dragon Rush for 1 second per stack of Focus you have.  %DragonRush%" );
+dataPower[dataPower.length] = new Power(3, 11, 2, "Dragon's Wrath", 0.67, 0.83, 0, 0, [36,61], 0, "Targets foe/10 feet", "Melee Damage", "Deals Slashing damage, ignoring 50% of their Resistance." );
 dataPower[dataPower.length-1].insertAdvantage("Tiger's Courage", 2, null, "Dragon's Wrath has its damage increased by a factor of your current chance to land a Critical Hit.");
+dataPower[dataPower.length-1].insertAdvantage("Dragon Rush", 3, null, "%DragonRush%");
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
 dataPower[dataPower.length] = new Power(3, 11, 2, "Rising Knee", 0.67, 0, 0, 0, 20, 3, "Targets foe/10 feet", "Melee Damage/Knock Down", "Deals Crushing damage and Knocks Down the target.", Power.TYPE_NORMAL, true);
@@ -3369,8 +3370,9 @@ dataPower[dataPower.length] = dataPowerAlias["Relentless"].replicate(3, 12);
 dataEnergyUnlockPower[dataPower.length-1] = true;
 dataRequireGroupPower[dataPower.length-1] = "martial arts";
 
-dataPower[dataPower.length] = new Power(3, 12, 2, "Dragon's Claws", 0.67, 0.83, 0, 0, [43-73], 0, "Targets foe/10 feet", "Melee Damage/Rush", "Deals Slashing damage.  This power gains +50% Critical Severity.<br /><br />When fully charged, grants you Dragon Rush for 1 second per stack of Focus you have. %DragonRush%");
+dataPower[dataPower.length] = new Power(3, 12, 2, "Dragon's Claws", 0.67, 0.83, 0, 0, [43-73], 0, "Targets foe/10 feet", "Melee Damage", "Deals Slashing damage.  This power gains +50% Critical Severity.");
 dataPower[dataPower.length-1].insertAdvantage("Vertebreak", 2, null, "Dragon's Claws will Knock Down the target 3 times over the 3 seconds following the attack. The Knock Down cannot occur more than once every 60 seconds.");
+dataPower[dataPower.length-1].insertAdvantage("Dragon Rush", 3, null, "%DragonRush%");
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
 dataPower[dataPower.length] = dataPowerAlias["Rising Knee"].replicate(3, 12);
@@ -3740,7 +3742,7 @@ dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructo
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(6, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(7, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Telekinesis', '<div class="Sprite Telekinesis_Telekinesis"></div>&nbsp;Telekinesis', 4, 15, pow++, 1, 'Telekinesis, 100 foot Ranged Single Target - Pick Up and Throw Damage<br /><br />Requires 1 power from Telekinesis or 2 non-Energy Building powers from any framework.<br /><br />Levitate a nearby object and hurl it at your target, dealing Crushing damage based on the size of the object.  Also deals Crushing damage to enemies near your target.');
+dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Telekinesis', '<div class="Sprite Telekinesis_Telekinesis"></div>&nbsp;Telekinesis', 4, 15, pow++, 1, "Telekinesis, 100 foot Ranged Single Target - Pick Up and Throw Damage<br /><br />Requires 1 power from Telekinesis or 2 non-Energy Building powers from any framework.<br /><br />Deals Ego damage to the target.  If a destructible object is within 50 feet of you, deals additional Ego damage based on the object's mass.  Secondary targets within 15 feet suffer 54.5% as much damage.  All affected targets are Disoriented.  %Disorient%<br/><br />+ Mass 2 or less:  Knocks down the primary target.<br />+ Mass 3 or more:  Knocks back the primary target and stuns all targets briefly<br />+ Mass 7 or more:  Instantly kills Henchmen and Villain rank enemies.");
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
@@ -3908,12 +3910,9 @@ dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructo
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(5, dataPowerAlias['CC'].name, dataPowerAlias['CC'].desc, 3, null, dataPowerAlias['CC'].tip));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(6, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Lance Rain', '<div class="Sprite Telekinesis_TelekineticLance"></div>&nbsp;Lance Rain', 4, 15, pow++, 3, 'Telekinesis, 100 foot Ranged 15 foot Sphere AoE Damage<br /><br />Requires 5 powers from Telekinesis or 6 non-Energy Building powers from any framework.<br /><br />TAP<br />+ Single target Ego damage.<br /><br />CHARGE<br />+ Increases the damage and Energy cost of the Tap action.<br />+ This power strikes all targets in a 15 foot radius around your primary targets, and each of the following effects is duplicated on each target in range.<br />+ When fully charged, this power consumes all of your stacks of Ego Leech, causing an eruption of Telekinetic Energy that deals additional damage to your target and AoE splash damage in a 10 foot radius around your target.<br />+ When consuming Ego Leech, this power grants you the Ego Infusion Buff. The length of the Buff is increased for each stack consumed. Ego Infusion grants you stacks of Ego Leech over time.' + Aesica.HCEngine.powerUnlocksFrom(UNLOCK_ONSLAUGHT, 10000, "Villain Tokens"));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
+dataPower[dataPower.length] = new Power(4, 15, 3, "Lance Rain", 0.83, 1.17, 0, 1.17, 136, 20, "Targets foe (5 max)/100 feet/25 foot Sphere", "Ranged AoE Damage", "Deals Ego damage to all targets within 25 feet of the primary target.<br /><br />This power consumes all stacks of Ego Leech, dealing additional Ego damage for each stack it consumes.<br /><br />In addition, it grants you a stack of Ego Infusion for 2 seconds for each stack of Ego Leech consumed.  Ego Infusion grants you a stack of Ego Leech every 2 seconds." + Aesica.HCEngine.powerUnlocksFrom(UNLOCK_ONSLAUGHT, 10000, "Villain Tokens"));
+dataPower[dataPower.length-1].insertAdvantage("Egomaniacal", 2, null, "This power also Knocks Down targets, then Roots them in place shortly after.");
+dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
 dataPower[dataPower.length] = new Power(4, 15, 4, "Mind Link", 0.5, 8, 0.5, 0, [30,23], 60, "Targets non-object foe (7 max)/50 foot Sphere", "Ultimate/AoE Damage/Triggered Damage", "This telepathic link allows you to share pain amongst the enemies around you by forging a psychic bond that forces them to feel the pain of others.<br /><br />MAINTAIN<br />+ A portion of any damage dealt to you or nearby foes while you maintain this power is immediately dealt as Ego damage to all targets in range, up to a maximum of your Ego x 4.<br />+ Damage from this effect causes very little threat.<br />- This effect only occurs once every half second.<br />Increasing the rank of this power increases the maximum damage dealt.<br />+ At Rank 2, this power deals a maximum of Ego x 5 damage.<br />+ At Rank 3, this power deals a maximum of Ego x 6 damage.", Power.TYPE_NORMAL, true);
 dataPower[dataPower.length-1].insertAdvantage("Aggression Inhibitor", 2, null, "All damage you take while maintaining this power is reduced by 20%.");
@@ -3923,12 +3922,12 @@ dataPower[dataPower.length] = new Power(4, 15, 4, "Mental Impact", 0.67, 1.83, 0
 dataPower[dataPower.length-1].insertAdvantage("Leave a Mark", 1, null, "%UltimateChallenge%");
 dataPowerAlias["Mental Impact"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(4, 15, 4, "Ego Blade Pandemonium", 1, 8, 1, 0, [31,20], 60, "Affects foe (10 max)/10 foot Sphere", "Ultimate/Melee AoE Damage", "Deals Ego damage to targets every 1 sec.  Your chance to critically hit with this power is increased by 5% per stack of Ego Leech." + Aesica.HCEngine.powerUnlocksFrom("Alien Invader Lockbox or " + UNLOCK_COLLECTOR, 1, UNLOCK_PURPLE_FOIL), Power.TYPE_NORMAL, true);
+dataPower[dataPower.length] = new Power(4, 15, 4, "Ego Blade Pandemonium", 1, 8, 1, 0, [29,19], 60, "Affects foe (10 max)/10 foot Sphere", "Ultimate/Melee AoE Damage", "Deals Ego damage to targets every 1 sec.  While this power cannot critically hit, your chance to critically hit with other Telekinesis abilities is increased by 2.8% per stack of Ego Leech." + Aesica.HCEngine.powerUnlocksFrom("Alien Invader Lockbox or " + UNLOCK_COLLECTOR, 1, UNLOCK_PURPLE_FOIL), Power.TYPE_NORMAL, true);
 dataPower[dataPower.length-1].insertAdvantage("Leave a Mark", 1, null, "%UltimateChallenge%");
 dataPower[dataPower.length-1].insertAdvantage("Buzzsaw", 1, null, "Snares your targets, reducing their movement speed by 100% for 16 sec.");
 dataPowerAlias["Ego Blade Pandemonium"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(4, 15, 4, "Master of the Mind", 1, 0, 0, 0, 0, 150, "Targets Self", "Active Ultimate", "Applies Break Free damage to any Holds, Roots, or Disables affecting you and applies the following effects for 15 seconds:<br /><br />+ 125% increased resistance to Hold and Knock effects.<br />+ 125% increased resistance to all damage.<br />+ Increased critical strike chance for each stack of Ego Leech.<br />+ 1 stack of Ego Leech every sec." + dataPowerAlias["AUCD"].tip, Power.TYPE_NORMAL, true);
+dataPower[dataPower.length] = new Power(4, 15, 4, "Master of the Mind", 1, 0, 0, 0, 0, 150, "Targets Self", "Active Ultimate", "Applies a large amount of Break Free damage to any Holds, Roots, or Disables affecting you and applies the following effects for 15 seconds:<br /><br />+ 208% increased resistance to Hold and Knock effects.<br />+ 125% increased resistance to all damage.<br />+ Flight and +33 Flight Speed<br />+ Increased critical strike chance for each stack of Ego Leech.<br />+ 1 stack of Ego Leech every sec." + dataPowerAlias["AUCD"].tip, Power.TYPE_NORMAL, true);
 dataPowerAlias["Master of the Mind"] = new PowerAlias(dataPower[dataPower.length-1]);
 
 //------------------------------------------------------------------------------
@@ -4696,6 +4695,11 @@ dataPowerAlias["Endbringers Grasp"] = new PowerAlias(dataPower[dataPower.length-
 dataPower[dataPower.length] = new Power(6, 20, 4, "Crashing Incantation", 0.67, 1.83, 0, 1.83, 138, 90, "Targets foe (10 max)/50 feet/20 foot Sphere", "Ultimate/Ranged AoE Damage/Corruption/Curse", "+ Deals Magic damage to targets within a 20 foot radius.<br />+ Applies Jinx to the target, reducing their movement by 15% for 8 seconds.  When the effect expires, affected foes are Knocked Down.<br />+ Jinx is a type of Curse.<br />+ Applies Overpower to affected targets. %Overpower" + Aesica.HCEngine.powerUnlocksFrom("Arcane Lockbox or " + UNLOCK_COLLECTOR, 1, UNLOCK_PURPLE_FOIL), Power.TYPE_NORMAL, true);
 dataPowerAlias["Crashing Incantation"] = new PowerAlias(dataPower[dataPower.length-1]);
 
+dataPower[dataPower.length] = new Power(6, 20, 4, "Feral Rage", 0, 0, 0, 0, 0, 150, "Targets Self", "Active Ultimate", "Applies a large amount of Break-Free damage to Holds, Roots, and Disables affecting you as well as the following for 15 sec:<br /><br/>+ Grants 200% Resistance to Hold and Knock effects.<br />+ Increases your Bestial Supernatural base attack damage by a small amount for each stack of Enraged! on you.<br />+ Attacking targets heals you for a small amount for each stack of Bleed on the target.  This can only occur once every 0.3 sec.<br />+ Sets your Running Speed to 79.<br />- Upon expiring, all form stacks on you are removed.<br />- %AUCD%" + Aesica.HCEngine.powerUnlocksFrom("Punk Lockbox"), Power.TYPE_NORMAL, true);
+dataPower[dataPower.length-1].insertAdvantage("I Need a Nap", 2, null, "When this power expires, does the following:<br /><br />+ Wipes your threat from nearby targets.<br />+ Placates targets, preventing them from attacking you.<br />+ Ends all Bleed effects on you.<br />+ Places you in Stealth for 3 sec.<br />- Puts you to Sleep for 3 sec.  This effect does not break when you take damage.<br />- Sets your other Threat Wipe abilities on a 30 sec cooldown.");
+dataPower[dataPower.length-1].insertAdvantage("Intimidation", 1, null, "Applies threat over time to targets you hit with a melee attack.  The amount of threat scales with the number of Enraged! stacks on you.<br /><br />+ This effect stacks with Challenge!<br />- Cannot be stacked more than once per target per activation of this power.<br />- Cannot be refreshed.");
+dataPowerAlias["Feral Rage"] = new PowerAlias(dataPower[dataPower.length-1]);
+
 //------------------------------------------------------------------------------
 // Power Framework: Darkness
 //------------------------------------------------------------------------------
@@ -4708,18 +4712,21 @@ dataPower[dataPower.length] = new Power(6, 21, -1, "Shadow Bolt", [0.5,0.35,0.35
 dataPower[dataPower.length-1].insertAdvantage("Despondency", 2, null, "Each hit has a 20% chance to apply Fear instead of just the first hit, as well as a chance to apply Despondency.  %Despondency%");
 dataPower[dataPower.length-1].insertStockAdvantages("AM");
 
-dataPower[dataPower.length] = new Power(6, 21, 0, "Shadow Blast", 0.5, 1.5, 0, 0, [19,53], 0, "Targets foe/100 feet", "Ranged Damage/Fear/Blast", "Deals Dimensional damage.<br /><br />Applies Devoid to the target. %Devoid%<br /><br />Has a 25-100% chance to apply Fear to the target. %Fear%");
-dataPower[dataPower.length-1].insertAdvantage("Psychotic Break", 2, null, "Full charge vs Feared target pushes them into full on psychosis, Stunning the target and dealing additional Dimensional Damage over Time.");
+dataPower[dataPower.length] = new Power(6, 21, 0, "Shadow Blast", 0.5, 1.5, 0, 0, [19,53], 0, "Targets foe/100 feet", "Ranged Damage/Fear/Blast", "Deals Dimensional damage and has a 25-100% chance to apply Fear to the target. %Fear%");
+dataPower[dataPower.length-1].insertAdvantage("Psychotic Break", 2, null, "Full charge vs Feared target pushes them into full on psychosis, Stunning the target and applying a stack of Bleed.  %Bleed%  This effect can only be applied once every 5 seconds per target.");
+dataPower[dataPower.length-1].insertAdvantage("Devoid", 2, null, "Fully charging this power now applies Devoid to the target.  %Devoid%");
+dataPower[dataPower.length-1].insertAdvantage("Back to Darkness", 2, null, "Charging this power at least halfway consumes your Shadows pets within 25 feet of the target, healing you for each one consumed.");
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CC/CS");
 
 dataPower[dataPower.length] = new Power(6, 21, 1, "Dark Tether", 0.83, 1.17, 0, 0, [24,32], 10, "Targets foe/50 feet", "Ranged Damage/Knock To/Fear", "Deals Dimensional damage and knocks the target to you.  Has a 46-100% chance (based on charge time) to apply Fear to the target. %Fear%");
-dataPower[dataPower.length-1].insertAdvantage("Work Up", 2, null, dataPowerAlias["SP"].tip);
+dataPower[dataPower.length-1].insertAdvantage("Work Up", 2, null, "%StimPack%");
 dataPower[dataPower.length-1].insertAdvantage("Devoid", 2, null, "On a full charge, applies Devoid to the target. %Devoid%");
 dataPower[dataPower.length-1].insertStockAdvantages("NG/AM/CS");
 
-dataPower[dataPower.length] = new Power(6, 21, 1, "Shadow Embrace", 0.67, 0, 5, 0, [16,16], 0, "Targets foe (5 max)/50 feet/45 degree Cone", "Ranged AoE Damage/Fear", "Deals Dimensional damage to foes.<br /><br />Has a 20% chance per tick to apply Fear to targets. %Fear%");
+dataPower[dataPower.length] = new Power(6, 21, 1, "Shadow Embrace", 0.67, 0, 5, 0, [23,14], 0, "Targets foe (5 max)/50 feet/45 degree Cone", "Ranged AoE Damage/Fear", "Deals Dimensional damage to foes.<br /><br />Has a 20% chance per tick to apply Fear to targets. %Fear%");
 dataPower[dataPower.length-1].insertAdvantage("Dark Displacement", 2, null, "25% chance per tick to Knock Down your targets.");
 dataPower[dataPower.length-1].insertAdvantage("Fatal Allure", 1, null, "Feared targets have a 33% chance per tick to be Knocked To you or potentially over your head.");
+dataPower[dataPower.length-1].insertAdvantage("Draining Shadows", 2, null, "Heals you for a small amount for each target hit.");
 dataPower[dataPower.length-1].insertStockAdvantages("NG/AM/CS");
 
 dataPower[dataPower.length] = new Power(6, 21, 1, "Grasping Shadows", 0.83, 2.17, 0, 2.17, 79, 15, "Targets foe (5 max)/50 feet/15 foot Sphere", "Ranged AoE Hold/Fear", "Paralyzes targets for 12 seconds.<br /><br />Also applies Fear to affected targets. %Fear%");
@@ -4730,8 +4737,11 @@ dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
 dataPower[dataPower.length] = new Power(6, 21, 1, "Shadow Shroud", 0, 0, 0, 0, 0, 90, "Targets Self", "Active Offense/Energy Form", "Grants a bonus to all damage for 12 seconds<br /><br />While active, you gain energy when you receive damage.  This can only occur once every 3 seconds.<br /><br />Applies Break Free damage to any Roots, Holds, or Disables affecting you. <br /><br />%AOCD%");
 dataPower[dataPower.length-1].insertAdvantage("Terrifying Visage", 2, null, "While active, has a 50% chance to apply Fear to foes that attack you.  %Fear%  Has a 10% chance to apply Psychotic Break if the foe is already feared.  %PsychoticBreak% ");
+dataPower[dataPower.length-1].insertAdvantage("Night Vision", 2, null, "Applies Detect to you, increasing your Stealth Sight by +22%, Perception by +150%, and Minimap Radius by +75 for 15 sec.  Detect is an Enchantment.");
 
 dataPower[dataPower.length] = new Power(6, 21, 1, "Shadow Form", 0, 0, 0, 0, 0, 0, "Passive (Offensive)", "Slotted Offensive Passive/Energy Form", "+ Increases your Paranormal damage.<br />+ Increases your Dimensional damage resistance.<br />+ Increases your Paranormal damage resistance by a lesser amount.<br />+ Increases your Aggression Stealth and Perception Stealth.<br />+ Reduces your threat slightly.<br />+ When you attack a foe, you have a chance to recover a small percentage of your health.  This can only happen once every 3 seconds.<br />+ Recovers Energy when you take Dimensional damage.");
+
+dataPower[dataPower.length] = new Power(6, 21, 1, "Shadow Manifestation", 1, 2.5, 0, 2.5, 20, 0, "Form (Presence)", "Buff/Form/Daunting", "Gives you a stacking buff that increases your ranged damage, as well as your melee damage to a lesser degree.<br /><br />+ You gain a stack each time you apply a Mental State, such as Ego Leech, Fear, Stress, and Dependency.<br />+ Each time you gain a stack, existing stacks are refreshed and you gain energy.<br />+ Stacks up to 8 times, lasts 20 seconds, and can only gain 1 stack every 4 seconds.<br />- Increases energy costs by 10%.", Power.TYPE_FORM);
 
 dataPower[dataPower.length] = dataPowerAlias["Compassion"].replicate(6, 21);
 dataRequireGroupPower[dataPower.length-1] = 'mystic';
@@ -4743,15 +4753,23 @@ dataPower[dataPower.length] = new Power(6, 21, 1, "Void Shift", 0.5, 0, 0, 0, 19
 dataPower[dataPower.length-1].insertAdvantage("Emerging Nightmares", 2, null, "Applies Fear to your target and other foes within 10 feet.  %Fear%");
 dataPower[dataPower.length-1].insertStockAdvantages("NG/AM/CC/CS");
 
-dataPower[dataPower.length] = new Power(6, 21, 1, "Spirit Reverberation", 0, 0, 0, 0, 0, 0, "Energy Unlock", "Innate Passive/Constitution/Recovery", "+ Generates energy every time you attack a Feared target with Dimensional damage.<br />+ This effect can only occur once every 3 seconds.<br />+ The energy gained scales with your Constitution, and to a lesser degree, your Recovery.", Power.TYPE_ENERGY_UNLOCK);
+dataPower[dataPower.length] = new Power(6, 21, 1, "Spirit Reverberation", 0, 0, 0, 0, 0, 0, "Energy Unlock", "Innate Passive/Recovery/Endurance", "+ Grants you energy every 3 seconds for 6 seconds every time you attack a Feared target with Dimensional damage.<br />+ The energy gained scales with your Recovery, and to a lesser degree, your Endurance.", Power.TYPE_ENERGY_UNLOCK);
 dataEnergyUnlockPower[dataPower.length-1] = true;
 
 dataPower[dataPower.length] = new Power(6, 21, 2, "Lifedrain", 0.5, 4, 0.5, 0, [24,19], 0, "Targets foe/50 feet", "Ranged Damage/Self Heal", "Deals Dimensional damage to the target and heals you every 0.5 seconds.");
 dataPower[dataPower.length-1].insertAdvantage("Vampiric Sympathy", 2, null, "The heal component of your Lifedrain becomes an AoE (15 foot radius, max of 5 targets) centered on you that heals nearby friends for half as much as it heals you. When using Lifedrain on a Feared target, the AoE heals for as much as it heals you.");
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
-dataPower[dataPower.length] = new Power(6, 21, 2, "Soul Vortex", 0.67, 0, 0, 0, 31, 15, "Targets foe/50 feet", "Ranged AoE Damage/Snare", "Creates a Rift near your target, dealing Dimensional damage over time and slowly pulling them toward the centered.  Affected foes have a 15/25/35% chance to be affected by Fear each tick, based on rank. %Fear%");
-dataPower[dataPower.length-1].insertAdvantage("Soul Drain", 2, null, "Soul Vortex now applies and refreshes Dependency on affected foes after the vortex expires. " + dataPowerAlias["Dependency"].tip);
+dataPower[dataPower.length] = new Power(6, 21, 2, "Soul Vortex", 0.67, 0, 0, 0, 43, 10, "Targets foe/50 feet", "Ranged AoE Damage/Heal/Rune/Enchantment", "Creates a Rift near your target, dealing Dimensional damage over time to targets within 15 feet of it.  Targets within 20 feet are pulled toward the Soul Vortex.<br /><br />After this power expires, it leaves a Healing Rune behind.  %HealingRune%");
+dataPower[dataPower.length-1].insertAdvantage("Soul Drain", 2, null, "Soul Vortex now applies and refreshes Dependency on affected foes after the vortex expires.  %Dependency%");
+dataPower[dataPower.length-1].insertAdvantage("Fear Machine", 2, null, "Soul Vortex has a 15% chance to apply Fear with each tick.  %Fear%");
+dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
+
+dataPower[dataPower.length] = new Power(6, 21, 2, "Dimensional Collapse", 0.67, 0, 0, 0, 40, 12, "Targets foe (5 max)/50 feet/10 foot Sphere", "Ranged AoE Damage/DoT/Knock", "Deals Dimensional damage every sec for 16 sec to targets.  Affected targetsa are Knocked Down.");
+dataPower[dataPower.length-1].insertAdvantage("Envelope in Darkness", 2, null, "Targets are Rooted for 8 seconds.");
+dataPower[dataPower.length-1].insertAdvantage("Glimpse of the Abyss", 2, null, "Applies Fear to targets initially and has a 20% chance every sec to reapply the Fear effect.  %Fear%");
+dataPower[dataPower.length-1].insertAdvantage("Gravitational Collapse", 2, null, "Instead of foes being Knocked Down, they are Knocked Away.");
+dataPower[dataPower.length-1].insertAdvantage("Lingering Darkness", 2, null, "Refreshes your Devoid debuff by 12 seconds.  After the initial hit, has a 20% chance to refresh Devoid by an additional 2 seconds.");
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
 dataPower[dataPower.length] = new Power(6, 21, 2, "Dark Transfusion", 0, 0, 0, 0, 0, 20, "Targets Self", "Self Energy Gain/Self Damage", "Lose 400 health points in exchange for a large initial energy boost that scales with the maximum size of your energy pool as well as your Recovery, as well as the following effects that last for 15 seconds:<br /><br />+ Sets your energy equilibrium to the maximum.<br />+ Increases your energy regeneration.<br />- You lose 75 health every second.<br />- Reduces the effectiveness of healing effects used on you.  Healing from Life Drain and percent-of-max-health effects are not affected by this reduction.<br /><br />Life Drain effects include:  Life Drain, Mind Drain, Life Essence, Dependency (Soul Vortex, Mental Leech), Devouring Darkness (Summon Shadows), Consumption (Grasping Shadows), Devour Essence, Siphoning Strikes (Ego Weaponry), Back to the Darkness (Ebon Ruin), Void Feast (Shade Storm), etc");
@@ -4760,14 +4778,16 @@ dataPower[dataPower.length-1].insertStockAdvantages("AM");
 
 dataPower[dataPower.length] = new Power(6, 21, 2, "Void Horror", 0.87, 2, 0, 2, 35, 0, "Targets Self", "Controllable Pet", "Summons a Void Horror to fight for you.<br /><br />" + Aesica.HCEngine.petTip("Void Horror", "Can use Void Ravage and Feed on Fear to deal Dimensional damage to foes.  Feed on Fear deals additional damage to Feared targets.  It can also lunge at targets, dealing Dimensional damage and temporarily canceling travel powers.", "Void Ravage now also deals additional damage to Feared targets.", "The damage over time dealt by your Void Horror's Feed on Fear now also heals it.", "Void Eruption is an ability you can activate to deal Dimensional damage to and repel foes within 15 feet of your Void Horror.  Has a 30 second cooldown."));
 
-dataPower[dataPower.length] = new Power(6, 21, 3, "Ebon Ruin", 0.67, 1.83, 0, 0, [29,73], 0, "Targets foe/100 feet", "Ranged Damage/DoT", "Deals Dimensional damage to the target.  On a full charge, applies and refreshes Despair, a damage over time effect that stacks up to 3 times.");
-dataPower[dataPower.length-1].insertAdvantage("Nyctophobia", 1, null, "Increases the damage of Ebon Ruin by 15% against Feared targets.");
+dataPower[dataPower.length] = new Power(6, 21, 3, "Ebon Ruin", 0.67, 1.83, 0, 0, [42,114], 0, "Targets foe/100 feet", "Ranged Damage/Snare", "Deals Dimensional damage to the target.  On a full charge, Snares the target for 13 seconds, reducing their movement speed by 100%");
+dataPower[dataPower.length-1].insertAdvantage("Nyctophobia", 2, null, "Increases the damage of Ebon Ruin by 30% against Feared targets.");
 dataPower[dataPower.length-1].insertAdvantage("Paranormal Paranoia", 2, null, "Ebon Ruin now has a 30-100% chance to apply Fear to the target, based on charge time. %Fear%");
-dataPower[dataPower.length-1].insertAdvantage("Back to Darkness", 2, null, "Ebon Ruin consumes all of your Shadows pets in a 25 foot radius, healing you for each one consumed.");
+dataPower[dataPower.length-1].insertAdvantage("Darkness Feast", 1, null, "Using this power double the effectiveness of Shadow Form's healing effect.");
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
-dataPower[dataPower.length] = new Power(6, 21, 3, "Ebon Rift", 0.5, 0, 6, 0, 31, 15, "Targets foe (5 max)/50 feet/15 foot Sphere", "Ranged AoE Damage/Snare/Fear", "Deals Dimensional Damage every 0.5 sec to all targets.  Foes within 20 feet are pulled toward the center of the rift.  Has a 10% chance to apply Fear to affected targets. %Fear%<br /><br />The longer you maintain this power, the longer the rift will linger afterward.");
+dataPower[dataPower.length] = new Power(6, 21, 3, "Ebon Rift", 0.5, 0, 6, 0, [44,22], 15, "Targets foe (5 max)/50 feet/15 foot Sphere", "Ranged AoE Damage/Snare/Fear", "Deals Dimensional Damage every 0.5 sec to all targets.  Foes within 20 feet have their movement speed reduced by 100% and are pulled toward the center of the rift.  Has a 10% chance to apply Fear to affected targets. %Fear%<br /><br />The longer you maintain this power, the longer the rift will linger afterward.");
 dataPower[dataPower.length-1].insertAdvantage("Vengeful Shadows", 2, null, "Targets that get too close to the Rift will take massive Dimensional damage and be Knocked Back. Targets that are immune to Knock Back will instead take some additional damage if they are too close.");
+dataPower[dataPower.length-1].insertAdvantage("Event Horizon", 2, null, "This power now has a 10% chance per tick to apply Bane to targets.  %Bane%");
+dataPower[dataPower.length-1].insertAdvantage("Hellfire", 2, null, "Maintaining this power at least halfway createa a Pyre Patch at the target location.  %PyrePatch%");
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
 dataPower[dataPower.length] = new Power(6, 21, 3, "Shade Storm", 0.5, 0, 5, 0, [27,19], 0, "Targets foe (5 max)/50 feet/15 foot Sphere", "Ranged AoE Damage/Fear/Knockdown", "Deals Dimensional Damage every 0.5 sec to all targets.  Has a 10% chance to apply Fear to targets and a 10% chance to Knock Down targets already affected by Fear. %Fear%" + Aesica.HCEngine.powerUnlocksFrom(UNLOCK_RECOGNITION, "350/175", "SCR/GCR"));
@@ -4784,12 +4804,16 @@ dataPower[dataPower.length-1].insertAdvantage("Envelope In Shadows", 2, null, "u
 dataPower[dataPower.length-1].insertAdvantage("Consume Fear", 2, null, "On a full charge, Shadow Eruption consumes all of your Fear effects on affected targets.  Each stack consumed will deal additional Shadow damage.");
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
+dataPower[dataPower.length] = new Power(6, 21, 3, "Madness Aura", 1, 0, 10, 0, [60,20], 30, "Affects foe (1 max)/25 foot Sphere", "Pick Up and Throw/Fear", "Has a 20% chance every sec to apply Fear to targets within 25 feet of you.  %Fear%<br /><br />Has an 85% chance every sec to throw an object at a target within 25 feet of you.  This object deals Dimensional damage based on the mass of the object and hits targets within 5 feet of the primary target.  Affected targets are Knocked Down.<br /><br />Has a 15% chance per sec to cause an object to explode, dealing Dimensional damage based on the mass of the object to targets within 25 feet of the object.  This effect also Knocks Down and applies Devoid to targets.  %Devoid%");
+dataPower[dataPower.length-1].insertAdvantage("Chaos! Chaos!", 2, null, "On a full charge, Shadow Eruption consumes all of your Fear effects on affected targets.  Each stack consumed will deal additional Shadow damage.");
+
 dataPower[dataPower.length] = new Power(6, 21, 3, "Summon Shadows", 0.67, 1, 0, 1, 41, 20, "Targets Self", "Uncontrolled Pet", "Summons 3 Shadows to attack your foes.  These Shadows attack your foes, dealing Dimensional damage.");
-dataPower[dataPower.length-1].insertAdvantage("Devouring Darkness", 2, null, "Your Shadows heal you for 20% of the damage they deal with each attack.  This healing counts as a Life Drain effect.");
+dataPower[dataPower.length-1].insertAdvantage("Devouring Darkness", 2, null, "Instead of applying Fear, this ability now applies Bane to targets.  %Bane%");
 
 dataPower[dataPower.length] = dataPowerAlias["Planar Fracture"].replicate(6, 21);
 dataPower[dataPower.length] = dataPowerAlias["Endbringers Grasp"].replicate(6, 21);
 dataPower[dataPower.length] = dataPowerAlias["Crashing Incantation"].replicate(6, 21);
+dataPower[dataPower.length] = dataPowerAlias["Feral Rage"].replicate(6, 21);
 
 //------------------------------------------------------------------------------
 // Power Group: Sorcery
@@ -4925,13 +4949,13 @@ dataPower[dataPower.length-1].insertStockAdvantages("NG");
 
 dataPower[dataPower.length] = new Power(6, 22, 2, "Magician's Dust", 1, 0, 0, 0, 44, 90, "Targets foe (10 max)/50 feet/45 degree Cone", "Threat Wipe/Stealth", "%TWAoE%");
 
-dataPower[dataPower.length] = new Power(6, 22, 2, "Circle of Arcane Power", 0.67, 0.83, 0, 0.83, 0, 0, "Targets Self", "Circle/Enchantment/Self Energy Buff", "Places a Circle of Arcane Power at your current location. While standing in it, you gain Energy every second, have -100% Energy Decay, and count as having an Energy Form.<br /><br />Standing outside the circle for more than a few seconds causes it to despawn.<br /><br />Energy cost is equal to 50% of your Equilibrium.");
+dataPower[dataPower.length] = new Power(6, 22, 2, "Circle of Arcane Power", 0.67, 0.83, 0, 0.83, 70, 0, "Targets Self", "Circle/Enchantment/Self Energy Buff", "Places a Circle of Arcane Power at your current location. While standing in it, you gain Energy every second, have -100% Energy Decay, and count as having an Energy Form.<br /><br />Standing outside the circle for more than a few seconds causes it to despawn.");
 
-dataPower[dataPower.length] = new Power(6, 22, 2, "Circle of Ebon Wrath", 0.67, 1.5, 0, 1.5, 0, 0, "Targets Self", "Circle/Enchantment/Self Damage Buff", "Places a Circle of Ebon Wrath at your current location. While standing in it, you gain +20% all damage strength, -12% Threat Generation, and Healing effects on you are reduced by 83%.  Foes that attack you or come near your circle are affected by Fear. %Fear%<br /><br />Standing outside the circle for more than a few seconds causes it to despawn.<br /><br />Energy cost is equal to 50% of your Equilibrium.");
+dataPower[dataPower.length] = new Power(6, 22, 2, "Circle of Ebon Wrath", 0.67, 1.5, 0, 1.5, 70, 0, "Targets Self", "Circle/Enchantment/Self Damage Buff", "Places a Circle of Ebon Wrath at your current location. While standing in it, you gain +20% all damage strength, -12% Threat Generation, and Healing effects on you are reduced by 83%.  Foes that attack you or come near your circle are affected by Fear. %Fear%<br /><br />Standing outside the circle for more than a few seconds causes it to despawn.");
 
-dataPower[dataPower.length] = new Power(6, 22, 2, "Circle of Primal Dominion", 0.67, 1.5, 0, 1.5, 0, 0, "Targets Self", "Circle/Enchantment/Self Defense Buff", "Places a Circle of Primal Dominion at your current location. While standing in it, you gain +333% resistance to Knocks, +11% resistance to all damage, recover a small amount of Health every second, and -42% resistance to Hold effects.  Charaters in the Tank role also gain +12% to Threat Generation.<br /><br />Standing outside the circle for more than a few seconds causes it to despawn.<br /><br />Energy cost is equal to 50% of your Equilibrium.");
+dataPower[dataPower.length] = new Power(6, 22, 2, "Circle of Primal Dominion", 0.67, 1.5, 0, 1.5, 70, 0, "Targets Self", "Circle/Enchantment/Self Defense Buff", "Places a Circle of Primal Dominion at your current location. While standing in it, you gain +333% resistance to Knocks, +11% resistance to all damage, recover a small amount of Health every second, and -42% resistance to Hold effects.  Charaters in the Tank role also gain +12% to Threat Generation.<br /><br />Standing outside the circle for more than a few seconds causes it to despawn.");
 
-dataPower[dataPower.length] = new Power(6, 22, 2, "Circle of Radiant Glory", 0.67, 1.5, 0, 1.5, 0, 0, "Targets Self", "Circle/Resurrect Self", "Places a Circle of Radiant Glory at your current location. While standing in it, you are able to resurrect with 70% Health if defeated.  This puts the power on a 2 minute cooldown.<br /><br />Once summoned, you can tap this power again to move the circle to your current location.  Doing so heals up to 5 targets at its current location as well 5 targets at its new location for a moderate amount.  This effect has a 6 second cooldown.<br /><br />Standing outside the circle for more than a few seconds causes it to despawn.<br /><br />Energy cost is equal to 50% of your Equilibrium.");
+dataPower[dataPower.length] = new Power(6, 22, 2, "Circle of Radiant Glory", 0.67, 1.5, 0, 1.5, 70, 0, "Targets Self", "Circle/Resurrect Self", "Places a Circle of Radiant Glory at your current location. While standing in it, you are able to resurrect with 70% Health if defeated.  This puts the power on a 2 minute cooldown.<br /><br />Once summoned, you can tap this power again to move the circle to your current location.  Doing so heals up to 5 targets at its current location as well 5 targets at its new location for a moderate amount.  This effect has a 6 second cooldown.<br /><br />Standing outside the circle for more than a few seconds causes it to despawn.");
 
 dataPower[dataPower.length] = new Power(6, 22, 2, "March of the Dead", 0.67, 1, 0, 1, 41, 20, "Targets Self", "Uncontrolled Pet", "Summons 3 Walking Dead to attack your foes for a duration of at least 20 seconds, modified by your Inteliigence.  Using this power decreases your Equilibrium for a short period of time.");
 dataPower[dataPower.length-1].insertAdvantage("Forced March", 2, null, "Increases the duration your zombies are summoned for.");
@@ -4969,6 +4993,7 @@ dataPower[dataPower.length-1].insertAdvantage("Ephemeral Endowment", 2, null, "A
 dataPower[dataPower.length] = dataPowerAlias["Planar Fracture"].replicate(6, 22);
 dataPower[dataPower.length] = dataPowerAlias["Endbringers Grasp"].replicate(6, 22);
 dataPower[dataPower.length] = dataPowerAlias["Crashing Incantation"].replicate(6, 22);
+dataPower[dataPower.length] = dataPowerAlias["Feral Rage"].replicate(6, 22);
 
 //------------------------------------------------------------------------------
 // Power Group: Supernatural
@@ -5200,6 +5225,7 @@ dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructo
 dataPower[dataPower.length] = dataPowerAlias["Planar Fracture"].replicate(6, 23);
 dataPower[dataPower.length] = dataPowerAlias["Endbringers Grasp"].replicate(6, 23);
 dataPower[dataPower.length] = dataPowerAlias["Crashing Incantation"].replicate(6, 23);
+dataPower[dataPower.length] = dataPowerAlias["Feral Rage"].replicate(6, 23);
 
 //------------------------------------------------------------------------------
 // Power Framework: Infernal Supernatural
@@ -5415,6 +5441,7 @@ dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructo
 dataPower[dataPower.length] = dataPowerAlias["Planar Fracture"].replicate(6, 24);
 dataPower[dataPower.length] = dataPowerAlias["Endbringers Grasp"].replicate(6, 24);
 dataPower[dataPower.length] = dataPowerAlias["Crashing Incantation"].replicate(6, 24);
+dataPower[dataPower.length] = dataPowerAlias["Feral Rage"].replicate(6, 24);
 
 //==============================================================================
 // Specializations (set with their specialization trees)

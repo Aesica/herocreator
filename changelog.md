@@ -1,4 +1,9 @@
 ## Changelog for HeroCreator
+**v3.29.31** - 12/22/2018 - Aesica
+ - Added new powers:  Shadow Manifestation, Dimensional Collapse, Madness Aura, and Feral Rage
+ - Updated existing powers and relevant advantages
+ - Other minor things
+
 **v3.27.30** - 12/22/2018 - Aesica
  - Added the permanent snowball devices
  - Fixed a bug where Mystic's ultimates were unintentionally flagged as Tier 1 powers

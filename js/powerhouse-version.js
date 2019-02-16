@@ -1384,6 +1384,43 @@ dataVersionUpdate[dataVersionUpdate.length] = new VersionUpdate(
         case 'specialization': return value['specialization'];
         }
 	});
+
+// version 30 => 31 (Darkness + Doggy Ultimate)
+dataVersionUpdate[dataVersionUpdate.length] = new VersionUpdate(
+    dataVersionUpdate.length, 12,
+    function(thing, value) {
+        var codeNum1 = (value['code1'] == undefined) ? 0 : urlCodeToNum(value['code1']); // framework
+        var codeNum2 = (value['code2'] == undefined) ? 0 : urlCodeToNum(value['code2']); // power
+        switch (thing) {
+        case 'data': return value['data'];
+        case 'pos': return value['pos'];
+        case 'i': return value['i'];
+        case 'inc': return value['inc'];
+        case 'code1': return value['code1'];
+        case 'code2': return value['code2'];
+        case 'code3': return value['code3'];
+        case 'code4': return value['code4'];
+        case 'archetype': return value['archetype'];
+        case 'superStat': return value['superStat'];
+        case 'innateTalent': return value['innateTalent'];
+        case 'talent': return value['talent'];
+        case 'travelPower': return value['travelPower'];
+        case 'framework': return value['framework'];
+        case 'power':
+			var power = value['power'];
+			if (codeNum1 == 21)
+			{
+				if (codeNum2 >= 7) power++; // added Shadow Manifest.
+				if (codeNum2 >= 13) power++; // added Dim. Collapse
+				if (codeNum2 >= 19) power++; // added Maddness Aura
+			}
+			if (codeNum1 == 23 && codeNum2 >= 23) power++; // add doggy ult.
+            return power;		
+		case 'mask': return value['mask']
+        case 'specializationTree': return value['specializationTree'];
+        case 'specialization': return value['specialization'];
+        }
+	});
 	
 //==============================================================================
 // Get Methods
