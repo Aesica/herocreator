@@ -1,12 +1,12 @@
 ## Changelog for HeroCreator
-**v3.30.32** - 12/22/2018 - Aesica
+**v3.30.32** - 3/30/2019 - Aesica
  - Added new powers:  Power Conversion
  - Added Foxbatcon devices
  - Added new travel powers:  Inky Jump, Corrosive Jump, Energy Step
  - Updated the laser sword set to use the modern data system
  - Added a fix to hopefully do away with the issue some people have with icons appearing mangled after spritesheet updates
 
-**v3.29.31** - 12/22/2018 - Aesica
+**v3.29.31** - 2/15/2019 - Aesica
  - Added new powers:  Shadow Manifestation, Dimensional Collapse, Madness Aura, and Feral Rage
  - Updated existing powers and relevant advantages
  - Other minor things
