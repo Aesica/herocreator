@@ -1413,6 +1413,12 @@ dataTravelPower[dataTravelPower.length-1].insertAdvantage(dataPowerAlias["Energy
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, null, "Bubble Flight", null, null, null, ["Aquatic Lockbox"]);
 
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_JUMP, null, "Inky Jump", null, null, null, ["Corrosive Lockbox"]);
+
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_JUMP, null, "Corrosive Jump", null, null, null, ["Corrosive Lockbox"]);
+
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TELEPORT, null, "Energy Step", null, null, null, ["Punk Lockbox"]);
+
 
 //==============================================================================
 // Power Sets
@@ -2964,124 +2970,70 @@ dataRequireGroup['technology'].push(10);
 
 var pow = 0;
 
-dataPowerAlias['Download'] = PowerAlias.legacyConstructor('Download', 'Download', 'Download', 'Applies Download to you, reducing the cost of all Technology powers by 20% for 8 seconds.');
-dataPowerAlias['Plasma Burn'] = PowerAlias.legacyConstructor('Plasma Burn', 'Plasma Burn', 'Plasma Burn', '+ Plasma Burn is a type of Radiation that deals Particle damage every second for 16 seconds.');
-dataPowerAlias['Burn Bright'] = PowerAlias.legacyConstructor('Burn Bright', 'Burn Bright', 'Burn Bright', 'Adds 10 seconds to the duration of your Plasma Burn stacks.  This cannot increase their duration above the initial value.');
-dataPowerAlias['Radiate'] = PowerAlias.legacyConstructor('Radiate', 'Radiate', 'Radiate', '+ Has a 25% chance to apply a stack of Plasma Burn to the target every 2 seconds for 10 seconds.' + dataPowerAlias['Plasma Burn'].tip);
+dataPower[dataPower.length] = new Power(2, 10, -1, "Laser Edge", [0.47,0.47,0.47], 0, 0, 0, 0, 0, "Targets foe/10 feet", "Energy Builder/Melee Damage/Plasma Burn", "Deals Particle damage to the target and generates energy.  The first hit has a 20% chance to apply Plasma Burn to the target.  %PlasmaBurn%", Power.TYPE_ENERGY_BUILDER, false, true);
+dataPower[dataPower.length-1].insertAdvantage("It Burns", 2, null, "All Laser Edge attacks now have a chance to apply Plasma Burn instead of just the opening attack.");
+dataPower[dataPower.length-1].insertStockAdvantages("AM");
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Laser Edge', '<div class="Sprite LaserSword_LaserEdge"></div>&nbsp;Laser Edge', 2, 10, pow++, -1, 'Laser Sword, Energy Builder, 10 foot Melee Single Target Damage<br /><br />Laser Edge uses your laser sword to rapidly slice apart your enemies.  The first hit has a chance to apply Plasma Burn.' + dataPowerAlias['Download'].name, dataPowerAlias['Download'].desc, 2, null, dataPowerAlias['Plasma Burn'].tip);
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2EB'].name, dataPowerAlias['R2EB'].desc, 2, null, dataPowerAlias['R2EB'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3EB'].name, dataPowerAlias['R3EB'].desc, 2, 1, dataPowerAlias['R3EB'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'It Burns', 'It Burns', 2, null, 'All Laser Edge attacks now have a chance to apply Plasma Burn instead of just the opening attack.'));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
+dataPower[dataPower.length] = new Power(2, 10, 0, "Lightspeed Strike", [0.3,0.4,0.67], 0, 0, 0, [18,16,14], 0, "Targets foe (5 max)/10 feet/120-120-30 degree Cone", "Melee Damage/Combo/Plasma Burn", "Deals Particle damage to the target and has a 15/15/50% chance (based on combo hit) to apply a stack of Plasma Burn to the target.  This chance is doubled if you are affected by Unity.  %PlasmaBurn%");
+dataPower[dataPower.length-1].insertAdvantage("Particle Acceleration", 2, null, "+ Finishing the Lightspeed Strike combo applies Disintegrate.<br />+Disintegrate increases the Particle and Energy damage affected foes take for a short while.<br />+ Disintegrate is a type of Radiation");
+dataPower[dataPower.length-1].insertAdvantage("Legacy Code", 2, null, "Finishing the Lightspeed Strike combo Knocks Down your foes.");
+dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Lightspeed Strike', '<div class="Sprite LaserSword_LightspeedStrike"></div>&nbsp;Lightspeed Strike', 2, 10, pow++, 0, 'Power Armor, 10 foot Frontal Arc Damage (Combo)<br /><br />Deals Particle damage to foes within a 120/120/30 degree arc with a 15/15/50% chance to apply Plasma Burn.<br />' + dataPowerAlias['Plasma Burn'].tip);
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'Particle Acceleration', 'Particle Acceleration', 2, null, '+ Finishing the Lightspeed Strike combo applies Disintegrate.<br />+Disintegrate increases the Particle and Energy damage affected foes take for a short while.<br />+ Disintegrate is a type of Radiation'));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, 'Legacy Code', 'Legacy Code', 2, null, 'Finishing the Lightspeed Strike combo Knocks Down your foes.'));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(5, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(6, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
+dataPower[dataPower.length] = new Power(2, 10, 1, "Glance", 0.5, 0, 0, 0, 18, 0, "Targets foe/10 feet", "Melee Damage/Stun", "Deals single target Particle damage and briefly Stuns the target.");
+dataPower[dataPower.length-1].insertAdvantage("Trauma", 2, null, "%Trauma%");
+dataPower[dataPower.length-1].insertAdvantage("Download", 2, null, "%Download%");
+dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Glance', '<div class="Sprite LaserSword_Glance"></div>&nbsp;Glance', 2, 10, pow++, 1, 'Laser Sword, 10 foot Melee Single Target Damage and Stun<br /><br />Requires 1 power from Laser Sword or 2 non-Energy Building powers from any framework.<br /><br />Deals single target Particle damage and briefly Stuns the target.');
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, dataPowerAlias['Trauma'].name, dataPowerAlias['Trauma'].desc, 2, null, dataPowerAlias['Trauma'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, dataPowerAlias['Download'].name, dataPowerAlias['Download'].desc, 2, null, dataPowerAlias['Download'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(5, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(6, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
+dataPower[dataPower.length] = new Power(2, 10, 1, "Lightwave Slash", 0.67, 0.83, 0, 0, [41,62], 0, "Affects Foe (5 max)/10 foot Sphere", "Melee AoE Damage/Knock Down", "Deals particle damage to all targets within 10 feet of you.  On a full charge, affected targets Knocked Down.");
+dataPower[dataPower.length-1].insertAdvantage("Light Mend", 2, null, "Adds 10 seconds to the duration of your Disintegrate effect.  This cannot increase its duration above the initial value.");
+dataPower[dataPower.length-1].insertAdvantage("Download", 2, null, "%Download%");
+dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Lightwave Slash', '<div class="Sprite LaserSword_LightwaveSlash"></div>&nbsp;Lightwave Slash', 2, 10, pow++, 1, 'Laser Sword, 10 foot Sphere PBAoE Damage<br /><br />Requires 1 power from Laser Sword or 2 non-Energy Building powers from any framework.<br /><br />Deals particle damage to all targets within 10 feet of you.  On a full charge, affected targets Knocked Down.');
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'Light Mend', 'Light Mend', 2, null, 'Adds 10 seconds to the duration of your Disintegrate effect.  This cannot increase its duration above the initial value.'));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, dataPowerAlias['Burn Bright'].name, dataPowerAlias['Burn Bright'].desc, 2, null, dataPowerAlias['Burn Bright'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(5, dataPowerAlias['Download'].name, dataPowerAlias['Download'].desc, 2, null, dataPowerAlias['Download'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(6, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(7, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
+dataPower[dataPower.length] = new Power(2, 10, 1, "Cybernetic Tether", 0.83, 1.17, 0, 0, [31,41], 10, "Targets foe/25 feet", "Melee Damage/Knock To/Plasma Burn", "Deals Particle damage and knocks your target to you.  Has a 46-100% (based on charge) chance to apply Plasma Burn to the target.");
+dataPower[dataPower.length-1].insertAdvantage("Recharge", 2, null, "%StimPack%");
+dataPower[dataPower.length-1].insertAdvantage("Burn Bright", 2, null, "Fully charging this power adds 10 seconds to the duration of your Plasma Burn stacks.  This cannot increase their duration above the initial value.");
+dataPower[dataPower.length-1].insertAdvantage("Raediate", 2, null, "This power applies Radiate to the target. %Radiate%");
+dataPower[dataPower.length-1].insertAdvantage("Download", 2, null, "This power applies Download to you.  %Download%");
+dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Cybernetic Tether', '<div class="Sprite LaserSword_CyberneticTether"></div>&nbsp;Cybernetic Tether', 2, 10, pow++, 1, 'Laser Sword, Melee Damage - Knock To - Plasma Burn<br /><br />Requires 1 power from Laser Sword or 2 non-Energy Building powers from any framework.<br /><br />Deals Particle damage and knocks your target to you.  Has a 46-100% (based on charge) chance to apply Plasma Burn to the target.' + dataPowerAlias['Download'].name, dataPowerAlias['Download'].desc, 2, null, dataPowerAlias['Plasma Burn'].tip);
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'Recharge', 'Recharge', 2, null, dataPowerAlias['SP'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, dataPowerAlias['Burn Bright'].name, dataPowerAlias['Burn Bright'].desc, 2, null, dataPowerAlias['Burn Bright'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(5, dataPowerAlias['Radiate'].name, dataPowerAlias['Radiate'].desc, 2, null, dataPowerAlias['Radiate'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(6, dataPowerAlias['Download'].name, dataPowerAlias['Download'].desc, 2, null, dataPowerAlias['Download'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(7, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(8, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
+dataPower[dataPower.length] = new Power(2, 10, 1, "Lightspeed Dash", 0.67, 0, 0, 0, 13, 3, "Targets foe/60 foot Lunge", "Lunge/Snare", "Lunges to the target, dealing Particle damage and Snaring them for 13 seconds.  If the target is further than 20 feet away, they are also Rooted for 17 seconds.");
+dataPower[dataPower.length-1].insertAdvantage("Download", 2, null, "This power applies Download to you.  %Download%");
+dataPower[dataPower.length-1].insertStockAdvantages("NG/AM/CC/CS");
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Lightspeed Dash', '<div class="Sprite LaserSword_LightspeedDash"></div>&nbsp;Lightspeed Dash', 2, 10, pow++, 1, 'Laser Sword, 60 foot Lunge, Snare, and Root<br /><br />Requires 1 power from Laser Sword or 2 non-Energy Building powers from any framework.<br /><br />Lunges to the target, dealing Particle damage and Snaring them for 13 seconds.  If the target is further than 20 feet away, they are also Rooted for 17 seconds.');
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, dataPowerAlias['Download'].name, dataPowerAlias['Download'].desc, 2, null, dataPowerAlias['Download'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, dataPowerAlias['NG'].name, dataPowerAlias['NG'].desc, 2, null, dataPowerAlias['NG'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(5, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(6, dataPowerAlias['CC'].name, dataPowerAlias['CC'].desc, 3, null, dataPowerAlias['CC'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(7, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
+dataPower[dataPower.length] = new Power(2, 10, 1, "Quantum Stabilizer", 0, 0, 0, 0, 0, 0, "Offensive Passive", "Slotted Offensive Passive", "+ Increases your Energy Damage strength, scaling with your Super Stats.<br />+ Increases your resistance to All damage by a small amount and your resistance to Particle damage by a larger amount, scaling with your Super Stats.<br />+ You gain energy over 3 seconds when you take Energy damage, scaling with your Recovery.<br />+ Increases your Knock resistance slightly, scaling with Super Stats.");
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Quantum Stabilizer', '<div class="Sprite LaserSword_QuantumStabilizer"></div>&nbsp;Quantum Stabilizer', 2, 10, pow++, 1, 'Laser Sword, Offensive Passive<br /><br />Requires 1 power from Laser Sword or 2 non-Energy Building powers from any framework.<br /><br />+ Increases your Energy Damage strength, scaling with your Super Stats.<br />+ Increases your resistance to All damage by a small amount and your resistance to Particle damage by a larger amount, scaling with your Super Stats.<br />+ You gain energy over 3 seconds when you take Energy damage, scaling with your Recovery.<br />+ Increases your Knock resistance slightly, scaling with Super Stats.');
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Particle Accelerator', '<div class="Sprite LaserSword_ParticleAccelerator"></div>&nbsp;Particle Accelerator', 2, 10, pow++, 1, 'Laser Sword, Form (Intelligence)<br /><br />Requires 1 power from Laser Sword or 2 non-Energy Building powers from any framework.<br /><br />Gives you a stacking buff that increases your melee damage, as well as your ranged damage to a lesser degree.<br /><br />+ You gain a stack each time you apply, refresh, or consume a Radiation effect.<br />+ Radiation effects include Plasma Burn, Disintegrate, Burn Through, and Overheat.<br />+ Each time you gain a stack, existing stacks are refreshed and you gain energy.<br />+ Stacks up to 8 times, lasts 20 seconds, and can only gain 1 stack every 4 seconds.<br />- Increases energy costs by 10%.');
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['FR2'].name, dataPowerAlias['FR2'].desc, 2, null, dataPowerAlias['FR2'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['FR3'].name, dataPowerAlias['FR3'].desc, 2, 1, dataPowerAlias['FR3'].tip));
+dataPower[dataPower.length] = new Power(2, 10, 1, "Particle Accelerator", 1, 2.5, 0, 2.5, 20, 0, "Form (Intelligence)", "Buff/Form/Unity", "Gives you a stacking buff that increases your melee damage, as well as your ranged damage to a lesser degree.<br /><br />+ You gain a stack each time you apply, refresh, or consume a Radiation effect.<br />+ Radiation effects include Plasma Burn, Disintegrate, Burn Through, and Overheat.<br />+ Each time you gain a stack, existing stacks are refreshed and you gain energy.<br />+ Stacks up to 8 times, lasts 20 seconds, and can only gain 1 stack every 4 seconds.<br />- Increases energy costs by 10%.");
 
 dataPower[dataPower.length] = dataPowerAlias["Concentration"].replicate(2, 10);
 dataRequireGroupPower[dataPower.length-1] = 'technology';
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Laser Deflection', '<div class="Sprite LaserSword_LaserDeflection"></div>&nbsp;Laser Deflection', 2, 10, pow++, 1, 'Laser Sword, Block<br /><br />Requires 1 power from Laser Sword or 2 non-Energy Building powers from any framework.<br /><br />While blocking, grants 250% resistance to all damage, increases your resistance to Holds and Knocks, and reduces your movement speed. <br /><br />Features:<br />+ For 2 seconds after you begin blocking, you return a portion of one incoming attack to the attacker.  This effect can only activate once every 5 seconds.');
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'Data Conversion', 'Data Conversion', 3, null, "While Laser Deflection is slotted, you gain +33% resistance to all damage and +33% Knock Resistance for 2 seconds every time you make a melee attack, however your melee attacks deal 10% less damage."));
+dataPower[dataPower.length] = new Power(2, 10, 1, "Laser Deflection", 1, 0, 0, 0, 0, 0, "Targets Self", "Block", "While blocking, grants 250% resistance to all damage, increases your resistance to Holds and Knocks, and reduces your movement speed. <br /><br />Features:<br />");
+dataPower[dataPower.length-1].insertAdvantage("Data Conversion", 3, null, "While Laser Deflection is slotted, you gain +33% resistance to all damage and +33% Knock Resistance for 2 seconds every time you make a melee attack, however your melee attacks deal 10% less damage.");
 
 dataPower[dataPower.length] = new Power(2, 10, 1, "Unified Theory", 0, 0, 0, 0, 0, 0, "Energy Unlock", "Innate Passive/Endurance/Recovery", "+ Generates Energy every 3 seconds for 6 seconds whenever you apply a Radiation effect.  This effect does not stack, but can be refreshed.<br />+ Radiation effects include Plasma Burn, Burn Through, overheat, and Disintegrate.<br />+ scales with you Endurance and, to a lesser degree, your Recovery.", Power.TYPE_ENERGY_UNLOCK);
 dataEnergyUnlockPower[dataPower.length-1] = true;
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Plasma Cutter', '<div class="Sprite LaserSword_PlasmaCutter"></div>&nbsp;Plasma Cutter', 2, 10, pow++, 2, "Laser Sword, 10 foot Melee Single Target Damage<br /><br />Requires 3 powers from Laser Sword or 4 non-Energy Building powers from any framework.<br /><br />Deals Particle damage to the target and consumes all of their Plasma Burn stacks.  After 6 seconds, applies Overheat which deals Particle Damage in a 10 foot radius.  Overheat's damage is increased by the number of stacks consumed.  during this time, you cannot apply stacks of Plasma Burn.");
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'Encryption', 'Encryption', 2, null, 'Fully charging this power Roots the target for 13 seconds.'));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, dataPowerAlias['Download'].name, dataPowerAlias['Download'].desc, 2, null, dataPowerAlias['Download'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(5, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(6, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
+dataPower[dataPower.length] = new Power(2, 10, 2, "Plasma Cutter", 0.67, 0.83, 0, 0, [29,42], 6, "Targets foe/10 feet", "Melee Damage/Plasma Burn", "Deals Particle damage to the target and consumes all of their Plasma Burn stacks.  After 6 seconds, applies Overheat which deals Particle Damage in a 10 foot radius.  Overheat's damage is increased by the number of stacks consumed.  during this time, you cannot apply stacks of Plasma Burn.");
+dataPower[dataPower.length-1].insertAdvantage("Encryption", 2, null, "Fully charging this power Roots the target for 13 seconds.");
+dataPower[dataPower.length-1].insertAdvantage("Download", 2, null, "Applies Download to you.  %Download%");
+dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Particle Smash', '<div class="Sprite LaserSword_ParticleSmash"></div>&nbsp;Particle Smash', 2, 10, pow++, 2, 'Laser Sword, 25 foot Melee 15 foot Sphere AoE Damage<br /><br />Requires 3 powers from Laser Sword or 4 non-Energy Building powers from any framework.<br /><br />Deals Particle damage to the target and nearby foes.  Targets affected by Plasma Burn are affected by Disintegrate, reducing their resistance to Particle damage by -12% and resistance to Energy damage by -6%, Lasting 16 seconds.<br /><br />Consumes all stacks of Plasma Burn, dealing additional Particle damage for every stack consumed.');
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, dataPowerAlias['Light Everlasting'].name, dataPowerAlias['Light Everlasting'].desc, 2, null, dataPowerAlias['Light Everlasting'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, 'Null Value', 'Null value', 2, null, 'Particle Smash now Stuns your main target and Knocks Down secondary targets.'));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(5, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(6, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
+dataPower[dataPower.length] = new Power(2, 10, 2, "Particle Smash", 0.67, 0, 0, 0, 65, 15, "Targets foe (5 max)/25 feet/15 foot Sphere", "Melee AoE Damage/Plasma Burn", "Deals Particle damage to the target and nearby foes.  If the targets are affected by Plasma Burn, consumes all stacks of Plasma Burn to deal additional Particle damage for every stack consumed as well as applying Disintegrate.  %Disintegrate%");
+dataPower[dataPower.length-1].insertAdvantage("Light Everlasting", 2, null, "Applies Light Everlasting to allies near the primary target.  %LightEverlasting%");
+dataPower[dataPower.length-1].insertAdvantage("Null Value", 2, null, "Particle Smash now Stuns your main target and Knocks Down secondary targets.");
+dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Particle Wave', '<div class="Sprite LaserSword_ParticleWave"></div>&nbsp;Particle Wave', 2, 10, pow++, 2, "Laser Sword, 50 foot Ranged 60 degree Cone AoE Knock To - Plasma Burn<br /><br />Requires 3 powers from Laser Sword or 4 non-Energy Building powers from any framework.<br /><br />Deals Particle damage and knocks all affected targets toward you and applies a stack of Plasma Burn if they aren't already affected by it.<br />" + dataPowerAlias['Plasma Burn'].tip);
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'Illuminate', 'Illuminate', 2, null, dataPowerAlias['Illuminated'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, 'Bad Footing', 'Bad Footing', 2, null, 'Disorients your targets. %Disorient%'));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(5, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(6, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
+dataPower[dataPower.length] = new Power(2, 10, 2, "Particle Wave", 0.83, 0, 0, 0, 35, 10, "Targets foe (5 max)/50 feet/60 foot Cone", "Ranged AoE Damaage/Knock To/Plasma Burn", "Deals Particle damage and knocks all affected targets toward you and applies a stack of Plasma Burn if they aren't already affected by it.  %PlasmaBurn%");
+dataPower[dataPower.length-1].insertAdvantage("Illuminate", 2, null, "Illuminates your targets.  %Illuminated%");
+dataPower[dataPower.length-1].insertAdvantage("Bad Footing", 2, null, "Disorients your targets. %Disorient%");
+dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Luminescent Slash', '<div class="Sprite LaserSword_LuminescentSlash"></div>&nbsp;Luminescent Slash', 2, 10, pow++, 3, 'Laser Sword, Melee Single Target Damage<br /><br />Requires 5 powers from Laser Sword or 6 non-Energy Building powers from any framework.<br /><br />Deals Particle damage to your target.  On a full charge, your target is Knocked Down.');
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'End of the Line', 'End of the Line', 2, null, '+ If your energy is above 90%, Luminescent Slash deals 35% additional damage.<br />+ If your energy is above 70%, Luminescent Slash deals 30% additional damage.<br />+ These bonuses do not stack with each other.<br />+ Fully charging this power refreshes your Download effect.'));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, dataPowerAlias['Radiate'].name, dataPowerAlias['Radiate'].desc, 2, null, dataPowerAlias['Radiate'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(5, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(6, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
+dataPower[dataPower.length] = new Power(2, 10, 2, "Power Conversion", 0, 0, 0, 0, 0, 20, "Targets Self", "Self Energy Gain/Self Debuff", "Upon activation, gain a large amount of energy.  This energy scales with your maximum energy and your Recovery.  It also applies the following effects to you for 15 sec:<br /><br/>+ Energy Equilibrium is set to 100%<br />+ Increases your energy regeneration.<br />- Your base damage and healing are reduced by -5%");
+
+dataPower[dataPower.length] = new Power(2, 10, 3, "Luminescent Slash", 0.5, 0.5, 0, 0, [37,56], 0, "Targets foe/10 feet", "Melee Damage/Snare", "Deals Particle damage and Snares your target for 3.3 sec.");
+dataPower[dataPower.length-1].insertAdvantage("Radiate", 2, null, "Applies Radiate to the target.  %Radiate%");
+dataPower[dataPower.length-1].insertAdvantage("End of the Line", 2, null, "+ If your energy is above 90%, Luminescent Slash deals 35% additional damage.<br />+ If your energy is above 70%, Luminescent Slash deals 30% additional damage.<br />+ These bonuses do not stack with each other.<br />+ Fully charging this power refreshes your Download effect.");
+dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
 dataPower[dataPower.length] = dataPowerAlias["Implosion Engine"].replicate(2, 10);
 dataPower[dataPower.length] = dataPowerAlias["Mechanical Monstrosity"].replicate(2, 10);
@@ -4772,7 +4724,7 @@ dataPower[dataPower.length-1].insertAdvantage("Gravitational Collapse", 2, null,
 dataPower[dataPower.length-1].insertAdvantage("Lingering Darkness", 2, null, "Refreshes your Devoid debuff by 12 seconds.  After the initial hit, has a 20% chance to refresh Devoid by an additional 2 seconds.");
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
-dataPower[dataPower.length] = new Power(6, 21, 2, "Dark Transfusion", 0, 0, 0, 0, 0, 20, "Targets Self", "Self Energy Gain/Self Damage", "Lose 400 health points in exchange for a large initial energy boost that scales with the maximum size of your energy pool as well as your Recovery, as well as the following effects that last for 15 seconds:<br /><br />+ Sets your energy equilibrium to the maximum.<br />+ Increases your energy regeneration.<br />- You lose 75 health every second.<br />- Reduces the effectiveness of healing effects used on you.  Healing from Life Drain and percent-of-max-health effects are not affected by this reduction.<br /><br />Life Drain effects include:  Life Drain, Mind Drain, Life Essence, Dependency (Soul Vortex, Mental Leech), Devouring Darkness (Summon Shadows), Consumption (Grasping Shadows), Devour Essence, Siphoning Strikes (Ego Weaponry), Back to the Darkness (Ebon Ruin), Void Feast (Shade Storm), etc");
+dataPower[dataPower.length] = new Power(6, 21, 2, "Dark Transfusion", 0, 0, 0, 0, 0, 20, "Targets Self", "Self Energy Gain/Self Damage", "Lose ~6-9% health in exchange for a large initial energy boost that scales with the maximum size of your energy pool as well as your Recovery, as well as the following effects that last for 15 seconds:<br /><br />+ Sets your energy equilibrium to the maximum.<br />+ Increases your energy regeneration.<br />- You lose -74 health every second.<br />- Reduces the effectiveness of healing effects used on you.  Healing from Life Drain and percent-of-max-health effects are not affected by this reduction.<br /><br />Life Drain effects include:  Life Drain, Mind Drain, Life Essence, Dependency (Soul Vortex, Mental Leech), Devouring Darkness (Summon Shadows), Consumption (Grasping Shadows), Devour Essence, Siphoning Strikes (Ego Weaponry), Back to the Darkness (Ebon Ruin), Void Feast (Shade Storm), etc");
 dataPower[dataPower.length-1].insertAdvantage("Blood Sacrifice", 2, null, "Activating Dark Transfusion with the Blood Sacrifice advantage increases the damage of all of your attacks, up to a specific amount of total damage (approximately equal to a Shadow Blast at your level).");
 dataPower[dataPower.length-1].insertStockAdvantages("AM");
 

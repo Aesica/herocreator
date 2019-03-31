@@ -29,7 +29,7 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 				for (i = 0; i < iLength; i++)
 				{
 					oAsset = new Image();
-					oAsset.src = Preloader.assetURLs[i];
+					oAsset.src = Preloader.assetURLs[i] + "?v=" + app.version + "." + HCData.version;
 					Preloader.assets[i] = oAsset;
 					console.log((i + 1) + "/" + iLength + ": " + Preloader.assetURLs[i]);
 					writeMessage("Loading assets: " + (i + 1) + "/" + iLength + ": " + Preloader.assetURLs[i]);
