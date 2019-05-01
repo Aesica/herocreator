@@ -4125,7 +4125,7 @@ dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructo
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(7, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
 
 dataPower[dataPower.length] = new Power(5, 17, 1, "Enrage", 1, 2.5, 0, 2.5, 20, 0, "Form (Strength)", "Buff/Form/Enraged!", "Gives you a stacking buff that increases your melee damage, as well as your ranged damage to a lesser degree.<br /><br />+ You gain a stack each time you Knock an enemy.<br />+ Each time you gain a stack, existing stacks are refreshed and you gain energy.<br />+ Stacks up to 8 times, lasts 20 seconds, and can only gain 1 stack every 4 seconds.<br />- Increases energy costs by 10%.", Power.TYPE_NORMAL, true);
-dataPower[dataPower.length-1].insertAdvantage("Endorphin Rush", 2, null, "Activating Enrage will heal you over time. The duration of this heal is based on the number of stacks of Defiant on you. The amount healed is based on your Constitution.");
+dataPower[dataPower.length-1].insertAdvantage("Endorphin Rush", 2, null, "Activating Enrage will heal you over time. The duration of this heal is based on the number of stacks of Enraged! on you. The amount healed is based on your Constitution.");
 dataPower[dataPower.length-1].advantageList.push(dataPowerAlias["Giant Growth"].replicate());
 dataPowerAlias["Enrage"] = new PowerAlias(dataPower[dataPower.length-1]);
 dataRequireGroupPower[dataPower.length-1] = 'brick';
@@ -4652,6 +4652,10 @@ dataPower[dataPower.length-1].insertAdvantage("I Need a Nap", 2, null, "When thi
 dataPower[dataPower.length-1].insertAdvantage("Intimidation", 1, null, "Applies threat over time to targets you hit with a melee attack.  The amount of threat scales with the number of Enraged! stacks on you.<br /><br />+ This effect stacks with Challenge!<br />- Cannot be stacked more than once per target per activation of this power.<br />- Cannot be refreshed.");
 dataPowerAlias["Feral Rage"] = new PowerAlias(dataPower[dataPower.length-1]);
 
+dataPower[dataPower.length] = new Power(6, 20, 4, "Transcendence", 1, 0.83, 0, 0.83, 119, 3, "Affects non-destructible foe (10 max)/30 foot Sphere", "Ultimate", "Heals or revives up to 10 allies for +17% Health, or +27% Health if they are affected by Illumination.<br /><br />Creates a Transcendence Rune at your location, which heals up to 10 nearby allies for a small amount every sec for 10 sec.  If they are affected by Illumination, this healing is increased by 50%.<br /><br />Fallen Allies will be revived if standing in this rune.  This can only occur once every 5 sec and can only revive one ally at a time.<br /><br />Anyone revived by this ability cannot be revived by it again for 90 sec." + Aesica.HCEngine.powerUnlocksFrom("Scion Lockbox"), Power.TYPE_NORMAL, true);
+dataPowerAlias["Transcendence"] = new PowerAlias(dataPower[dataPower.length-1]);
+
+
 //------------------------------------------------------------------------------
 // Power Framework: Darkness
 //------------------------------------------------------------------------------
@@ -4717,7 +4721,7 @@ dataPower[dataPower.length-1].insertAdvantage("Soul Drain", 2, null, "Soul Vorte
 dataPower[dataPower.length-1].insertAdvantage("Fear Machine", 2, null, "Soul Vortex has a 15% chance to apply Fear with each tick.  %Fear%");
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
-dataPower[dataPower.length] = new Power(6, 21, 2, "Dimensional Collapse", 0.67, 0, 0, 0, 40, 12, "Targets foe (5 max)/50 feet/10 foot Sphere", "Ranged AoE Damage/DoT/Knock", "Deals Dimensional damage every sec for 16 sec to targets.  Affected targetsa are Knocked Down.");
+dataPower[dataPower.length] = new Power(6, 21, 2, "Dimensional Collapse", 0.67, 0, 0, 0, 40, 12, "Targets foe (5 max)/50 feet/10 foot Sphere", "Ranged AoE Damage/DoT/Knock", "Deals Dimensional damage every sec for 16 sec to targets.  Affected targets are Knocked Down.");
 dataPower[dataPower.length-1].insertAdvantage("Envelope in Darkness", 2, null, "Targets are Rooted for 8 seconds.");
 dataPower[dataPower.length-1].insertAdvantage("Glimpse of the Abyss", 2, null, "Applies Fear to targets initially and has a 20% chance every sec to reapply the Fear effect.  %Fear%");
 dataPower[dataPower.length-1].insertAdvantage("Gravitational Collapse", 2, null, "Instead of foes being Knocked Down, they are Knocked Away.");
@@ -4766,6 +4770,7 @@ dataPower[dataPower.length] = dataPowerAlias["Planar Fracture"].replicate(6, 21)
 dataPower[dataPower.length] = dataPowerAlias["Endbringers Grasp"].replicate(6, 21);
 dataPower[dataPower.length] = dataPowerAlias["Crashing Incantation"].replicate(6, 21);
 dataPower[dataPower.length] = dataPowerAlias["Feral Rage"].replicate(6, 21);
+dataPower[dataPower.length] = dataPowerAlias["Transcendence"].replicate(6, 21);
 
 //------------------------------------------------------------------------------
 // Power Group: Sorcery
@@ -4946,6 +4951,7 @@ dataPower[dataPower.length] = dataPowerAlias["Planar Fracture"].replicate(6, 22)
 dataPower[dataPower.length] = dataPowerAlias["Endbringers Grasp"].replicate(6, 22);
 dataPower[dataPower.length] = dataPowerAlias["Crashing Incantation"].replicate(6, 22);
 dataPower[dataPower.length] = dataPowerAlias["Feral Rage"].replicate(6, 22);
+dataPower[dataPower.length] = dataPowerAlias["Transcendence"].replicate(6, 22);
 
 //------------------------------------------------------------------------------
 // Power Group: Supernatural
@@ -5178,6 +5184,7 @@ dataPower[dataPower.length] = dataPowerAlias["Planar Fracture"].replicate(6, 23)
 dataPower[dataPower.length] = dataPowerAlias["Endbringers Grasp"].replicate(6, 23);
 dataPower[dataPower.length] = dataPowerAlias["Crashing Incantation"].replicate(6, 23);
 dataPower[dataPower.length] = dataPowerAlias["Feral Rage"].replicate(6, 23);
+dataPower[dataPower.length] = dataPowerAlias["Transcendence"].replicate(6, 23);
 
 //------------------------------------------------------------------------------
 // Power Framework: Infernal Supernatural
@@ -5394,6 +5401,7 @@ dataPower[dataPower.length] = dataPowerAlias["Planar Fracture"].replicate(6, 24)
 dataPower[dataPower.length] = dataPowerAlias["Endbringers Grasp"].replicate(6, 24);
 dataPower[dataPower.length] = dataPowerAlias["Crashing Incantation"].replicate(6, 24);
 dataPower[dataPower.length] = dataPowerAlias["Feral Rage"].replicate(6, 24);
+dataPower[dataPower.length] = dataPowerAlias["Transcendence"].replicate(6, 24);
 
 //==============================================================================
 // Specializations (set with their specialization trees)

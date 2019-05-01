@@ -83,7 +83,7 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 			{
 				mItem2.addEventListener("click", (function(){ selectSuperStat(i + 1); }));
 			})(i);
-			sDesc = (i > 0) ? "Secondary Super Stat " + i : "Primary Super Stat";
+			sDesc = (i > 0) ? app.system.editor.default.superStat[1] + " " + i : app.system.editor.default.superStat[0];
 			mItem2.appendChild(getDescNode("blank", sDesc, false, true));
 			mTr = createTableRow(mItem1, mItem2);
 			mTable.appendChild(mTr);
@@ -107,7 +107,7 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 			{
 				mItem2.addEventListener("click", (function(){ selectInnateTalent(i + 1); }));
 			})(i);
-			sDesc = "Innate Talent";
+			sDesc = app.system.editor.default.innateTalent;
 			mItem2.appendChild(getDescNode("blank", sDesc, false, true));
 			mTr = createTableRow(mItem1, mItem2);
 			mTable.appendChild(mTr);
@@ -131,7 +131,7 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 			{
 				mItem2.addEventListener("click", (function(){ selectTalent(i + 1); }));
 			})(i);
-			sDesc = "Talent " + (i + 1);
+			sDesc = app.system.editor.default.talent + " " + (i + 1);
 			mItem2.appendChild(getDescNode("blank", sDesc, false, true));
 			mTr = createTableRow(mItem1, mItem2);
 			mTable.appendChild(mTr);
@@ -160,7 +160,7 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 				mItem2.addEventListener("click", (function(){ selectTravelPower(i + 1); }));
 				mItem3.addEventListener("click", (function(){ selectTravelPowerAdvantage(i + 1); }));
 			})(i);
-			sDesc = "Travel Power " + (i + 1);
+			sDesc = app.system.editor.default.travelPower + " " + (i + 1);
 			mItem2.appendChild(getDescNode("blank", sDesc, false, true));
 			mTr = createTableRow(mItem1, [mItem2, mItem3]);
 			mTable.appendChild(mTr);
@@ -190,7 +190,7 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 				mItem2.addEventListener("click", selectDevice);
 				mItem3.addEventListener("click", selectDevicePowerPreview);
 			})(i);
-			sDesc = "Device " + (i + 1);
+			sDesc = app.system.editor.default.device + " " + (i + 1);
 			mItem2.appendChild(getDescNode("blank", sDesc, false, true));
 			mTr = createTableRow(mItem1, [mItem2, mItem3]);
 			mTable.appendChild(mTr);
@@ -233,7 +233,7 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 				mItem2.addEventListener("click", (function(){ selectPower(i + 1); }));
 				mItem3.addEventListener("click", (function(){ selectPowerAdvantage(i + 1); }));
 			})(i);
-			sDesc = "Power " + (i + 1);
+			sDesc = app.system.editor.default.power + " " + (i + 1);
 			mItem2.appendChild(getDescNode("blank", sDesc, false, true));
 			mTr = createTableRow(mItem1, [mItem2, mItem3]);
 			mTr.id = "rowPower" + (i + 1);
@@ -243,7 +243,7 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 
 		// specializations
 		iLength = 4;
-		aListEnumeration = ["Stat Tree", "Role Tree", "Role Tree", "Mastery"];
+		aListEnumeration = app.system.editor.default.specialization;
 		mSection = document.getElementById("sectionSpecializations");
 		for (i = 0; i < iLength; i++)
 		{
@@ -287,7 +287,7 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 
 		// build note
 		mSection = document.getElementById("sectionBuildNote");
-		mItem1 = Aesica.HCEngine.createButton("Additional Notes", "buildNoteButton", "button", selectBuildNote);
+		mItem1 = Aesica.HCEngine.createButton(app.system.editor.default.notes, "buildNoteButton", "button", selectBuildNote);
 		mItem2 = document.createElement("span");
 		mItem2.id = "buildNote";
 		mItem2.className = "buttonText";
@@ -402,7 +402,7 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 		mCanvas.height = iHeight;
 		mCanvas.className = "icon";
 		mCanvas.getContext("2d").drawImage($$.assets[0], oSpriteData.x, oSpriteData.y, oSpriteData.w, oSpriteData.h, 0, 0, iWidth, iHeight);
-		mText.innerHTML = name;
+		if (name) mText.innerHTML = name;
 		mReturn.appendChild(mCanvas);
 		mReturn.appendChild(mText);
 		if (inLine) mReturn.style.display = "inline-block";
@@ -716,7 +716,7 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 			oReturn = getCookie(sKey);
 		}
 		// show failure message if cookie fallback isn't allowed and local storage isn't supported
-		// beware, ca nbe spammy if invoked frequently
+		// beware, can be spammy if invoked frequently
 		else if (sFailureMessage != "")
 		{
 			alert(sFailureMessage);
@@ -922,7 +922,7 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 					setOnmouseoverPopupL1(mNode, "Overwrite the data in this slot with the current data.");
 					mTd.appendChild(mNode);
 				})(i);
-				mNode = createButton(((oSave.name == "") ? "(No Name)" : oSave.name), "", "saveLoadButton", null);
+				mNode = createButton((i + 1) + ": " + (oSave.name == "" ? "(No Name)" : oSave.name), "", "saveLoadButton", null);
 				mNode.setAttribute("href", app.system.siteUrl + aSaveData[i].url);
 				setOnmouseoverPopupL1(mNode, aSaveData[i].desc);
 				mTd.appendChild(mNode);

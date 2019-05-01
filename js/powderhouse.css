@@ -15,11 +15,11 @@ html {
     margin: 0;
     overflow-y: scroll;    /* force scroll bar to appear to prevent jumping */
     padding: 0;
-	background-color: #111;                /* dark gray */
+	background-color: #fac;                /* dark gray */
 }
 
 body {
-	color: #ccc;                          /* purple */
+	color: #80a;                          /* purple */
     font-family: Lexia, Verdana, Arial, sans-serif;
     font-size: 100%;
     margin-left: auto;
@@ -65,7 +65,7 @@ table.settingsTable {
 
 .menu {
 	background-color: #222;
-	background-image: linear-gradient(#333, #111);
+	background-image: linear-gradient(#caf, #a8d);
     border: 1px solid #444;
     border-radius: 10px;
 	box-shadow: 3px 3px 4px #000;
@@ -76,7 +76,7 @@ table.settingsTable {
 }
 
 a, a:link, a:visited {
-	color: #8af;							/* light blue */
+	color: #84c;							/* light blue */
     /* color: #CE6C10;                    */ /* dark orange */
     cursor: pointer;
     font-weight: bold;
@@ -95,9 +95,9 @@ a:hover, a:active {
 }
 
 .popup {
-	background-color: #000;					/* black */
+	background-color: #a8d;					/* black */
     /* background-color: #FEF5C0;         */ /* light yellow */
-	color: #bbb;							/* light gray* /
+	color: #80a;							/* light gray* /
     /* color: #000000;                    */ /* black */
     border: 1px solid #000000;
     /* font-family: Verdana, Arial, sans-serif; */
@@ -236,21 +236,21 @@ table {
 }
 
 #saveDataTable tr:nth-child(even){
-	background-color: #333;
+	background-color: #fac;
 }
 
 #saveDataTable tr:nth-child(odd){
-	background-color: #222;
+	background-color: #fce;
 }
 
 #saveDataTable tr:last-child  td {
-	background-color: #222;
+	background-color: #fac;
 	padding-top: 1rem;
 	font-weight: bold;
 }
 
 #saveDataTable tr:first-child  td {
-	background-color: #222;
+	background-color: #fac;
 	padding-bottom: 1rem;
 	font-weight: bold;
 }
@@ -264,7 +264,7 @@ table {
 }
 
 #saveDataTable tr:hover {
-	background-color: #555;
+	background-color: #fff;
 }
 
 #saveDataNew {
@@ -295,7 +295,7 @@ table {
 
 .saveReplaceTable td {
 	vertical-align: top;
-	background-color: #333;
+	background-color: #caf;
 	padding: 0.2rem;
 }
 
@@ -304,8 +304,8 @@ table {
 }
 
 .saveReplaceTable tr td:last-child {
-	background-color: #282828;
-	color: #aaa;
+	background-color: #a8d;
+	color: #806;
 }
 
 input {
@@ -313,9 +313,9 @@ input {
 }
 
 input, textarea {
-	background-color: #000;
+	background-color: #caf;
 	border-radius: 10px;
-	color: #fac;
+	color: #80a;
 	border: 1px solid #888;
 	padding-left: 5px;
 	padding-right: 5px;
@@ -348,7 +348,7 @@ textarea {
 }
 
 .pageSection {
-	background-color: #222;          /* dark gray, slightly brighter than background */
+	background-color: #caf;          /* dark gray, slightly brighter than background */
     border: 1px solid #888;
     margin: 1rem 0 0 0;
 	padding: 0.3rem;
@@ -362,7 +362,7 @@ textarea {
 
 
 .selection {
-	background-color: #222;          /* dark gray, slightly brighter than background */
+	background-color: #caf;          /* dark gray, slightly brighter than background */
     /* background-color: #0D3E7F;        */  /* dark blue */
     border: 1px solid #000000;
     margin: 1rem 0 0 0;
@@ -382,12 +382,11 @@ textarea {
 #selectionWindowHeaderStrip {
     padding: 0.1rem;
     border-radius: 10px 10px 0px 0px;
-	background-color: #555;
+	background-color: #caf;
 }
 
 #selectionWindowHeader {
-	text-shadow: 1px 1px 0px #000, -1px 1px 0px #000, -1px -1px 0px #000, 1px -1px 0px #000;
-    color: #eee;
+    color: #80a;
     margin-left: 0.3rem;
     margin-right: 1.5rem;
 }
@@ -396,7 +395,7 @@ textarea {
     padding-top: 0.1rem;
     padding-bottom: 0.1rem;
     padding-left: 1rem;
-    background-color: #222;
+    background-color: #a8d;
     border-bottom: 1px solid #888;
     border-top: 1px solid #888;
 }
@@ -406,7 +405,7 @@ textarea {
 }
 
 .closeButton {
-	color: #f00;
+	color: #806;
 	float: right;
 	margin-top: -0.1rem;
     margin-right: 0.2rem;

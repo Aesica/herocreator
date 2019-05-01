@@ -1,4 +1,11 @@
 ## Changelog for HeroCreator
+**v3.32.32** - 4/30/2019 - Aesica
+ - Added power:  Transcendence
+ - Added icons for Transcendence and Power Conversion
+ - Fixed a minor glitch where "null" was showing up beside some icons in Edge
+ - Added enumeration to the saved build list
+ - Fixed other minor typos and glitches
+
 **v3.30.32** - 3/30/2019 - Aesica
  - Added new powers:  Power Conversion
  - Added Foxbatcon devices

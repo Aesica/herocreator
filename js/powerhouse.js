@@ -13,8 +13,8 @@
 // system config data
 const app = 
 {
-	"version":3.30,
-	"releaseDate":"3/3/2019",
+	"version":3.32,
+	"releaseDate":"4/1/2019",
 	"system":
 	{
 		"siteName":"HeroCreator",
@@ -34,7 +34,8 @@ const app =
 		"columnCount":{"power":2, "travelPower":3},
 		"archetypeRowSize":7,
 		"specPointMax":10,
-		"analytics":{"pref":"Preference", "set":"Set", "build":"Build"} // maintained, but no longer relevant
+		"analytics":{"pref":"Preference", "set":"Set", "build":"Build"}, // maintained, but no longer relevant
+		"editor":{"default":{"superStat":["Primary Super Stat", "Secondary Super Stat"], "innateTalent":"Innate Talent", "talent":"Talent", "travelPower":"Travel Power", "device":"Device", "power":"Power", "specialization":["Stat Tree", "Role Tree 1", "Role Tree 2", "Mastery"], "notes":"Additional Notes"}},
 	}
 }
 
@@ -811,11 +812,11 @@ function getSuperStatDefault(num)
 	var sReturn;
 	if (num == 1)
 	{
-		sReturn = Aesica.HCEngine.getDescNode("blank", "Primary Super Stat");
+		sReturn = Aesica.HCEngine.getDescNode("blank", app.system.editor.default.superStat[0]);
 	}
 	else
 	{
-		sReturn = Aesica.HCEngine.getDescNode("blank", "Secondary Super Stat " + (num - 1));
+		sReturn = Aesica.HCEngine.getDescNode("blank", app.system.editor.default.superStat[1] + " " + (num - 1));
 	}
 	return sReturn;
 }
@@ -929,7 +930,7 @@ window['setInnateTalent'] = setInnateTalent;
 function getInnateTalentDefault(num)
 {
 	//return '<span><div class="Sprite blank"></div>&nbsp;Innate Talent</span>';
-	return Aesica.HCEngine.getDescNode("blank", "Innate Talent");
+	return Aesica.HCEngine.getDescNode("blank", app.system.editor.default.innateTalent);
 }
 window['getInnateTalentDefault'] = getInnateTalentDefault;
 
@@ -1047,7 +1048,7 @@ window['setTalent'] = setTalent;
 
 function getTalentDefault(num)
 {
-	return Aesica.HCEngine.getDescNode("blank", "Talent " + num);
+	return Aesica.HCEngine.getDescNode("blank", app.system.editor.default.talent + " " + num);
 }
 window['getTalentDefault'] = getTalentDefault;
 
@@ -1216,7 +1217,7 @@ window['setTravelPower'] = setTravelPower;
 
 function getTravelPowerDefault(num)
 {
-	return Aesica.HCEngine.getDescNode("blank", "Travel Power " + num, false, true);
+	return Aesica.HCEngine.getDescNode("blank", app.system.editor.default.travelPower + " " + num, false, true);
 }
 window['getTravelPowerDefault'] = getTravelPowerDefault;
 
@@ -1442,7 +1443,7 @@ window['setPower'] = setPower;
 
 function getPowerDefault(num)
 {
-	return Aesica.HCEngine.getDescNode("blank", "Power " + num, false, true);
+	return Aesica.HCEngine.getDescNode("blank", app.system.editor.default.power + " " + num, false, true);
 }
 window['getPowerDefault'] = getPowerDefault;
 
@@ -1728,7 +1729,7 @@ function setDevice(e, iDeviceID=null)
 	}
 	else
 	{
-		Aesica.HCEngine.setNodeContents(mDevice, Aesica.HCEngine.getDescNode("blank", "Device " + selectedNum, false, true));
+		Aesica.HCEngine.setNodeContents(mDevice, Aesica.HCEngine.getDescNode("blank", app.system.editor.default.device + " " + selectedNum, false, true));
 		mDevice.className = "button";
 		setOnmouseoverPopupL1(mDevice, null);
 		mDevicePowers.style.display = "none";
@@ -2394,14 +2395,14 @@ function setupSpecializations()
 			{
 				header.setAttribute('class', 'disabledButton');
 				//header.innerHTML = '<span><div class="Sprite blank"></div>&nbsp;Stat Tree <span class="spec">(0/10)</span></span>';
-				header.innerHTML = '<span>Stat Tree <span class="spec">(0/10)</span></span>';
+				header.innerHTML = "<span>" + app.system.editor.default.specialization[i - 1] + " <span class='spec'>(0/10)</span></span>";
 			}
 			else
 			{
 				header.setAttribute('class', 'button');
 				header.setAttribute('onclick', 'selectSpecialization(' + i + ')');
 				//header.innerHTML = '<span><div class="Sprite blank"></div>&nbsp;' + specializationTree.desc + ' Tree <span class="spec">(' + totalPoints + '/10)</span></span>';
-				header.innerHTML = '<span>' + specializationTree.name + ' Tree <span class="spec">(' + totalPoints + '/10)</span></span>';
+				header.innerHTML = "<span>" + specializationTree.name + " Tree <span class='spec'>(" + totalPoints + "/10)</span></span>";
 			}
 			break;
 		case 2:
@@ -2409,25 +2410,25 @@ function setupSpecializations()
 			if (specializationTree.id == 0)
 			{
 				//header.innerHTML = '<span><div class="Sprite blank"></div>&nbsp;Role Tree <span class="spec">(' + totalPoints + '/10)</span></span>';
-				header.innerHTML = '<span>Role Tree <span class="spec">(' + totalPoints + '/10)</span></span>';
+				header.innerHTML = "<span>" + app.system.editor.default.specialization[i - 1] + " <span class='spec'>(" + totalPoints + "/10)</span></span>";
 			}
 			else
 			{
-				header.innerHTML = '<span>' + specializationTree.name + ' Tree <span class="spec">(' + totalPoints + '/10)</span></span>';
+				header.innerHTML = "<span>" + specializationTree.name + " Tree <span class='spec'>(" + totalPoints + "/10)</span></span>";
 			}
 			break;
 		case 4:
 			if (specializationTree.id == 0)
 			{
 				//header.innerHTML = '<span><div class="Sprite blank"></div>&nbsp;Mastery <span class="spec">(0/1)</span></span>';
-				header.innerHTML = '<span>Mastery <span class="spec">(0/1)</span></span>';
+				header.innerHTML = "<span>" + app.system.editor.default.specialization[i - 1] + " <span class='spec'>(0/1)</span></span>";
 				setOnmouseoverPopupL1(header, null);
 			}
 			else
 			{
 				// var specialization = specializationList[8];
 				// header.innerHTML = '<span>' + specialization.desc + ' <span class="spec">(1/1)</span></span>';
-				header.innerHTML = '<span>' + specializationTree.name + ' Mastery <span class="spec">(1/1)</span></span>';
+				header.innerHTML = "<span>" + specializationTree.name + " Mastery <span class='spec'>(1/1)</span></span>";
 				setOnmouseoverPopupL1(header, specializationTree.specializationList[8].tip);
 			}
 			break;
@@ -3461,6 +3462,7 @@ function setTitle()
 	//if (PH.namee == "") title = siteName;
 	var title = app.system.siteName + (PH.name != "" ? ": " + PH.name : "");
 	if (document.title != title) document.title = title;
+	document.getElementById("titleImage").src = app.system.siteLogo + "?v=" + app.version;
 }
 window['setTitle'] = setTitle;
 
