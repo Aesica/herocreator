@@ -585,7 +585,7 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 
 	function urlSafeBtoa(sData)
 	{
-		var sReturn = btoa(sData);
+		var sReturn = btoa(sanitize(sData));
 		var rxPlus = /\+/g; // convert to -
 		var rxSlash = /\//g; // convert to _
 		var rxEqual = /\=/g; // convert to ~
@@ -832,6 +832,10 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 		mTextArea.focus();
 	}
 	$$.setupImport = setupImport;
+	function sanitize(value)
+	{
+		return value.replace(/[^\x20-\x7E]+/g, "");
+	}
 	function setupExport()
 	{
 		resetDialogBox();
@@ -842,7 +846,7 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 		var aData = LoadBuildArray();
 		mTextArea.setAttribute("class", "importExport");
 		mTextArea.readOnly = true;
-		mTextArea.innerHTML = btoa(JSON.stringify(aData));
+		mTextArea.innerHTML = btoa(sanitize(JSON.stringify(aData)));
 		mInfo.innerHTML = "This gibberish can be used to back up and restore your saved character data.<br /><ul><li>Press Ctrl-C to copy this data to the clipboard</li><li>Create a new text file</li><li>Press Ctrl-V to paste it into the new text file and save it</li></ul>";
 		addItemToDialogBoxMenu(mTextArea);
 		addItemToDialogBox(mInfo);

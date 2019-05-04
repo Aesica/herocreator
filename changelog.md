@@ -1,4 +1,7 @@
 ## Changelog for HeroCreator
+**v3.33.32** - 5/4/2019 - Aesica
+ - Patched an obscure issue where certain unicode characters were causing the data export to fail.  Any non-essential characters are now stripped out before encoding
+
 **v3.32.32** - 4/30/2019 - Aesica
  - Added power:  Transcendence
  - Added icons for Transcendence and Power Conversion

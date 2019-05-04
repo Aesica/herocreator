@@ -80,8 +80,12 @@ Aesica.dataHarness = Aesica.dataHarness || {};
 	{
 		static tip(archetype)
 		{
-			var sReturn = archetype.overview + "<br /><br />" + archetype.concepts + "<br /><br />" + archetype.extra + "<br /><br />How to unlock: ";
+			var sReturn = "";
+			if (archetype.overview) sReturn += archetype.overview + "<br /><br />";
+			if (archetype.concepts) sReturn += archetype.concepts + "<br /><br />";
+			if (archetype.extra) sReturn += archetype.extra + "<br /><br />";
 			var i, iLength;
+			sReturn += "How to unlock: ";
 			if (Array.isArray(archetype.unlockType))
 			{
 				iLength = archetype.unlockType.length;
