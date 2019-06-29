@@ -13,8 +13,8 @@
 // system config data
 const app = 
 {
-	"version":3.32,
-	"releaseDate":"4/1/2019",
+	"version":3.34,
+	"releaseDate":"7/28/2019",
 	"system":
 	{
 		"siteName":"HeroCreator",
@@ -3801,7 +3801,7 @@ function getExportString(forumTypeNum)
 			result.push("<b><u><a href='" + PH.buildLink + "'>" + buildName + " - " + PH.archetype.name + "</a></u></b> <i>(" + PH.role.name + ")</i>"  + forumNewline(forumTypeNum));
 			break;
 		case 3:
-			result.push("[b][u][url=" + PH.buildLink + "]" + PH.name + "[/url][/u][/b] [i]" + PH.role.name + "[/i]" + forumNewline(forumTypeNum));
+			result.push("[b][u][url=" + PH.buildLink + "]" + buildName + " - " + PH.archetype.name + "[/url][/u][/b] [i](" + PH.role.name + ")[/i]" + forumNewline(forumTypeNum));
 			break;
 		case 4:
 			result.push("__**" + buildName + " - " + PH.archetype.name + "**__ *(" + PH.role.name +")*" + forumNewline(forumTypeNum) + forumNewline(forumTypeNum));
