@@ -33,6 +33,11 @@ body {
     margin-top: 0.5rem;
 }
 
+.mediaButton {
+	height: 35px;
+	float: right;
+}
+
 #titleMessage {
 	font-size: 85%;
 	margin-bottom: 0.3rem;

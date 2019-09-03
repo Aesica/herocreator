@@ -288,7 +288,7 @@ Aesica.dataHarness = Aesica.dataHarness || {};
 				if (innateTalent.stats.pre > 5) sReturn += "Pre: " + innateTalent.stats.pre + ", ";
 				if (innateTalent.stats.rec > 5) sReturn += "Rec: " + innateTalent.stats.rec + ", ";
 				if (innateTalent.stats.end > 5) sReturn += "End: " + innateTalent.stats.end + ", ";
-				if (sReturn != "") sReturn = sReturn.substr(0, sReturn.length - 2);
+				if (sReturn.length > 2) sReturn = sReturn.substr(0, sReturn.length - 2);
 			}
 			return sReturn;
 		}

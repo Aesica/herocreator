@@ -13,8 +13,8 @@
 // system config data
 const app = 
 {
-	"version":3.34,
-	"releaseDate":"7/28/2019",
+	"version":3.4,
+	"releaseDate":"9/2/2019",
 	"system":
 	{
 		"siteName":"HeroCreator",
@@ -716,7 +716,7 @@ function setupSuperStats()
 		iColumn = Math.floor((i - 1) / (iLength - 1) * 2);
 		(function(i)
 		{
-			mCurrent = Aesica.HCEngine.createButton(Aesica.HCEngine.getDescNode("Stat_" + HCData.superStat[i].name, HCData.superStat[i].name), "selectSuperStat" + i, null, (function(){ selectConfirmation((function(){ setSuperStat(i); }), HCData.superStat[i].name, Aesica.dataHarness.SuperStat.tip(HCData.superStat[i])); })); // xxx
+			mCurrent = Aesica.HCEngine.createButton(Aesica.HCEngine.getDescNode("Stat_" + HCData.superStat[i].name, HCData.superStat[i].name), "selectSuperStat" + i, null, (function(){ selectConfirmation((function(){ setSuperStat(i); }), HCData.superStat[i].name, Aesica.dataHarness.SuperStat.tip(HCData.superStat[i])); }));
 			mCurrent.setAttribute("style", "display: block;");
 		})(i);
 		setOnmouseoverPopupL1(mCurrent, Aesica.dataHarness.SuperStat.tip(HCData.superStat[i]));
@@ -3567,7 +3567,7 @@ function buildLink(submit)
 
 	var i, iLength = PH.device.length;
 	params.push(Aesica.dataHarness.ArchetypeGroup.code(PH.role));
-	for (i = 1; i < iLength; i++)// xxxx
+	for (i = 1; i < iLength; i++)
 	{
 		params.push(Aesica.dataHarness.Device.code(PH.device[i]));
 	}
@@ -4409,6 +4409,9 @@ function showAlertMessage()
 // start
 function start()
 {
+	// Patreon button link tooltip
+	setOnmouseoverPopupL1(document.getElementById("patreonButton"), "This is basically just a tip jar you can use if you feel like it.  I maintain this thing because I find it fun (usually!) and will never require payments in order to continue hosting, updating, or maintaining it. :)");
+
 	// setup preferences
 	setupPrefs();
 
