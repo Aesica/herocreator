@@ -1,4 +1,9 @@
 ## Changelog for HeroCreator
+**v3.4.33** - 9/2/2019 - Aesica
+- Added and updated the heap of Might powers, as well as new Brick shared powers.
+- Fixed a bunch of minor mistakes (missing advantages, missing text, etc)
+- I know that's only a few lines in this update, but they involved a lot of stuff.
+
 **v3.33.32** - 5/4/2019 - Aesica
  - Patched an obscure issue where certain unicode characters were causing the data export to fail.  Any non-essential characters are now stripped out before encoding
 
