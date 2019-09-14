@@ -4328,6 +4328,7 @@ dataRequireGroupPower[dataPower.length-1] = 'brick';
 dataPower[dataPower.length] = new Power(5, 19, 2, "Impressive Physique", 1, 8, 1, 0, [58,38], 6, "Affects friend (5 max)/20 foot Sphere", "Heal", "Affected targets are Healed for 279 Health Points every 1 sec.  Absorbs up to 1540 damage dealt to you.  This effect is reapplied every 1 sec.");
 dataPower[dataPower.length-1].insertAdvantage("Stand Your Ground", 2, null, "While maintaining this power, your Knock resistance is increased by 200%.");
 dataPower[dataPower.length-1].insertAdvantage("Absolutely Stunning", 2, null, "Has a 30% chance every 1 sec to Stun foes for 2 sec.");
+dataPower[dataPower.length-1].insertAdvantage("Vainglorious", 1, null, "The longer you maintain this power, the shorter its cooldown will be.  Fully maintaining will reset the cooldown completely.");
 
 dataPower[dataPower.length] = dataPowerAlias["Endorphin Rush"].replicate(5, 19);
 dataRequireGroupPower[dataPower.length-1] = 'brick';
