@@ -13,8 +13,8 @@
 // system config data
 const app = 
 {
-	"version":3.41,
-	"releaseDate":"9/13/2019",
+	"version":3.42,
+	"releaseDate":"12/5/2019",
 	"system":
 	{
 		"siteName":"HeroCreator",
@@ -863,7 +863,7 @@ function setupInnateTalents()
 	{
 		(function(i)
 		{
-			mCurrent = Aesica.HCEngine.createButton(Aesica.HCEngine.getDescNode("Innate_Talent", HCData.innateTalent[i].name + ((Aesica.dataHarness.InnateTalent.extra(HCData.innateTalent[i]) != null) ? " <span class='selectSpec'>(" + highlightSuperStats(Aesica.dataHarness.InnateTalent.extra(dataInnateTalent[i])) + ")</span>" : "")), "selectInnateTalent" + i, null, (function(){ selectConfirmation((function(){ setInnateTalent(i); }), HCData.innateTalent[i].name, Aesica.dataHarness.InnateTalent.tip(HCData.innateTalent[i])); }));
+			mCurrent = Aesica.HCEngine.createButton(Aesica.HCEngine.getDescNode("Innate_Talent", HCData.innateTalent[i].name + ((Aesica.dataHarness.InnateTalent.extra(HCData.innateTalent[i]) != null) ? " <span class='selectSpec'>(" + highlightSuperStats(Aesica.dataHarness.InnateTalent.extra(HCData.innateTalent[i])) + ")</span>" : "")), "selectInnateTalent" + i, null, (function(){ selectConfirmation((function(){ setInnateTalent(i); }), HCData.innateTalent[i].name, Aesica.dataHarness.InnateTalent.tip(HCData.innateTalent[i])); }));
 		})(i);
 
 		setOnmouseoverPopupL1(mCurrent, Aesica.dataHarness.InnateTalent.tip(HCData.innateTalent[i]));

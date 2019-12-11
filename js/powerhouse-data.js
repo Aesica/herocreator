@@ -1671,7 +1671,7 @@ dataPowerAlias["Energy Storm"] = new PowerAlias(dataPower[dataPower.length-1]);
 dataPower[dataPower.length] = new Power(1, 1, 4, "Gravity Driver", 0.5, 2.5, 0, 2.5, 142, 60, "Targets foe (10 max)/80 feet/40 foot Sphere", "Ranged AoE Damage/Damage Resistance Debuff", "Gravity Driver causes a mass of force to form, and brings it crashing down on your foes with nuclear levels of destructive power.<br /><br />CHARGE<br />+ Deals Crushing damage to targets caught in the blast radius as well as knocking nearby foes prone.<br />+ Foes further than 20 feet from the impact point take half damage and are not knocked prone." + Aesica.HCEngine.powerUnlocksFrom("Ravenswood Lockbox or " + UNLOCK_COLLECTOR, 1, UNLOCK_PURPLE_FOIL), Power.TYPE_NORMAL, true);
 dataPowerAlias["Gravity Driver"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(1, 1, 4, "Fractal Aegis", 0.5, 0, 0, 0, 40, 60, "Affects foe (8 max)/20 foot Sphere", "AoE Damage/Knock/Defense Buff", "Forces ice spikes to erupt beneath your opponents, then coalesces the icy bits around you for additional protection.<br /><br />CHARGE<br />+ Damage and Knockup surrounding targets.<br />+ Gain a Defense Buff based on number of targets hit." + Aesica.HCEngine.powerUnlocksFrom("Frozen Lockbox or " + UNLOCK_COLLECTOR, 1, UNLOCK_PURPLE_FOIL), Power.TYPE_NORMAL, true);
+dataPower[dataPower.length] = new Power(1, 1, 4, "Fractal Aegis", 0.5, 0, 0, 0, 60, 60, "Affects foe (10 max)/25 foot Sphere", "AoE Damage/Knock/Defense Buff", "Deals 145 Cold damage to nearby targets and they are Knocked Up.<br /><br />For each target hit, your resistance to damage and Knock effects is increased for 20 sec.  This bonus is based on the target's rank:<br />+ Henchman, Villain: +10%<br />+ Master Villain, Super Villain, Enforcer: +20%<br />+ Legendary, Cosmic: +30%" + Aesica.HCEngine.powerUnlocksFrom("Frozen Lockbox or " + UNLOCK_COLLECTOR, 1, UNLOCK_PURPLE_FOIL), Power.TYPE_NORMAL, true);
 dataPower[dataPower.length-1].insertAdvantage("Chilling Reminder", 1, null, "%UltimateChallenge%");
 dataPowerAlias["Fractal Aegis"] = new PowerAlias(dataPower[dataPower.length-1]);
 
@@ -1885,7 +1885,7 @@ dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Contain
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'Grinding Halt', 'Grinding Halt', 2, null, 'Causes your Containment Field power to remove Travel Powers from affected targets.'));
+dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, dataPowerAlias['NG'].name, dataPowerAlias['NG'].desc, 2, null, dataPowerAlias['NG'].tip));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(5, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
 
@@ -3088,7 +3088,7 @@ dataPowerAlias["Steadfast"] = new PowerAlias(dataPower[dataPower.length-1]);
 dataEnergyUnlockPower[dataPower.length-1] = true;
 dataRequireGroupPower[dataPower.length-1] = "martial arts";
 
-dataPower[dataPower.length] = new Power(3, 11, 1, "Relentless", 0, 0, 0, 0, 0, 0, "Energy Unlock", "Innate Passive/Recovery/Endurance", "+ Generates energy every time you land a critical hit against a target you have Wounded.<br />+ Some Wound effects are Bleed, Shredded, Open Wound, and Deep Wound.<br />+ This effect can only occur once every 3 seconds.<br />+ The energy gained scales with your Recovery, and to a lesser degree, your Endurance.", Power.TYPE_ENERGY_UNLOCK, true);
+dataPower[dataPower.length] = new Power(3, 11, 1, "Relentless", 0, 0, 0, 0, 0, 0, "Energy Unlock", "Innate Passive/Recovery/Endurance", "+ Generates energy every time you land a critical hit against a target you have Wounded.<br />+ Some Wound effects are Bleed, Shredded, Open Wound, Deep Wound, and Swallowtail Cut.<br />+ This effect can only occur once every 3 seconds.<br />+ The energy gained scales with your Recovery, and to a lesser degree, your Endurance.", Power.TYPE_ENERGY_UNLOCK, true);
 dataPowerAlias["Relentless"] = new PowerAlias(dataPower[dataPower.length-1]);
 dataEnergyUnlockPower[dataPower.length-1] = true;
 dataRequireGroupPower[dataPower.length-1] = "martial arts";
@@ -3299,7 +3299,7 @@ dataRequireGroupPower[dataPower.length-1] = "martial arts";
 dataPower[dataPower.length] = dataPowerAlias["Smoke Bomb"].replicate(3, 13);
 dataRequireGroupPower[dataPower.length-1] = "martial arts";
 
-dataPower[dataPower.length] = new Power(3, 13, 1, "Form of the Swordsman", 1, 2.5, 0, 2.5, 20, 0, "Form (Dexterity)", "Buff/Form/Focus", "Gives you a stacking buff that increases your melee damage, as well as your ranged damage to a lesser degree.<br /><br />+ You gain a stack each time you apply, refresh, or consume a Bleed effect.<br />+ Each time you gain a stack, existing stacks are refreshed and you gain energy.<br />+ Stacks up to 8 times, lasts 20 seconds, and can only gain 1 stack every 4 seconds.<br />- Increases energy costs by 10%.", Power.TYPE_FORM, true);
+dataPower[dataPower.length] = new Power(3, 13, 1, "Form of the Swordsman", 1, 2.5, 0, 2.5, 20, 0, "Form (Dexterity)", "Buff/Form/Focus", "Gives you a stacking buff that increases your melee damage, as well as your ranged damage to a lesser degree.<br /><br />+ You gain a stack each time you apply, refresh, or consume a Bleed effect.<br />+ Each time you gain a stack, existing stacks are refreshed and you gain energy.<br />+ Stacks up to 8 times, lasts 20 seconds, and can only gain 1 stack every 4 seconds.<br />- Increases energy costs by 10%.");
 
 dataPower[dataPower.length] = dataPowerAlias["Lightning Reflexes"].replicate(3, 13);
 dataRequireGroupPower[dataPower.length-1] = "martial arts";
@@ -3989,7 +3989,7 @@ dataPower[dataPower.length] = new Power(5, 17, 1, "Defiance", 0, 0, 0, 0, 0, 0, 
 dataPowerAlias["Defiance"] = new PowerAlias(dataPower[dataPower.length-1]);
 dataRequireGroupPower[dataPower.length-1] = "brick";
 
-dataPower[dataPower.length] = new Power(5, 17, 1, "Unstoppable", 0, 0, 0, 0, 0, 0, "Passive (Offense)", "Slotted Offensive Passive", "+ Increases your Melee and Bleed damage by 29%, scaling with your Super Stats.<br />+ Increases other damage by 8.8%, scaling with your Super Stats.<br />+ Increases your Knock resistance by 0%, scaling with your Super Stats.<br />+ Absorbs 0 damage per hit, scaling with your Super Stats.<br />+ Generates 0.58% energy each time you are Knocked, scaling with Recovery.", Power.TYPE_NORMAL, true);
+dataPower[dataPower.length] = new Power(5, 17, 1, "Unstoppable", 0, 0, 0, 0, 0, 0, "Passive (Offense)", "Slotted Offensive Passive", "+ Increases your Melee and Bleed damage by 29%, scaling with your Super Stats.<br />+ Increases other damage by 8.8%, scaling with your Super Stats.<br />+ Increases your Knock and Hold resistance by 0%, scaling with your Super Stats.<br />+ Absorbs 0 damage per hit, scaling with your Super Stats.<br />+ Generates 0.58% energy each time you are Knocked, scaling with Recovery.", Power.TYPE_NORMAL, true);
 dataPowerAlias["Unstoppable"] = new PowerAlias(dataPower[dataPower.length-1]);
 dataRequireGroupPower[dataPower.length-1] = "brick";
 
@@ -4005,7 +4005,7 @@ dataPower[dataPower.length-1].advantageList.push(dataPowerAlias["Giant Growth"].
 dataPowerAlias["Enrage"] = new PowerAlias(dataPower[dataPower.length-1]);
 dataRequireGroupPower[dataPower.length-1] = "brick";
 
-dataPower[dataPower.length] = new Power(5, 17, 1, "Pulverizer", 0, 0, 0, 0, 0, 0, "Energy Unlock", "Innate Passive/Recovery/Endurance", "+ Generates 5.2 energy every 3 seconds over 9 seconds every time you attempt to Knock a foe.<br />+ This effect stacks up to 3 times.<br />+ Existing stacks are refreshed by 9 seconds if you already have 3 stacks active.<br />+ The energy gained scales with your Recovery, and to a lesser degree, your Endurance.", Power.TYPE_ENERGY_UNLOCK);
+dataPower[dataPower.length] = new Power(5, 17, 1, "Pulverizer", 0, 0, 0, 0, 0, 0, "Energy Unlock", "Innate Passive/Recovery/Endurance", "+ Generates 5.2 energy every 3 seconds over 9 seconds every time you attempt to Knock a foe.<br />+ This effect stacks up to 3 times.<br />+ Existing stacks are refreshed by 9 seconds if you already have 3 stacks active.<br />+ The energy gained scales with your Recovery, and to a lesser degree, your Endurance.", Power.TYPE_ENERGY_UNLOCK, true);
 dataEnergyUnlockPower[dataPower.length-1] = true;
 dataRequireGroupPower[dataPower.length-1] = "brick";
 dataPowerAlias["Pulverizer"] = new PowerAlias(dataPower[dataPower.length-1]);
@@ -4024,14 +4024,16 @@ dataPower[dataPower.length-1].insertAdvantage("Bend the Earth", 2, null, "Target
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
 dataPower[dataPower.length] = new Power(5, 17, 2, "Aggressor", 0, 0, 0, 0, 0, 90, "Targets Self", "Active Offense", "Increases all damage by 42/60/80% and grants a +35/42/50 bonus to Strength and Constitution for 15 sec.<br /><br />Applies 1860 Break Free damage to any Holds, Roots, and Disables affecting you. <br /><br />%AOCD%", Power.TYPE_NORMAL, true);
+dataPower[dataPower.length-1].insertAdvantage("Destructive Force", 2, null, "Your damaging attacks have a 25% chance to Stun targets while this power is active.");
 dataPowerAlias["Aggressor"] = new PowerAlias(dataPower[dataPower.length-1]);
 dataRequireGroupPower[dataPower.length-1] = "brick";
 
-dataPower[dataPower.length] = new Power(5, 17, 2, "Indestructible", 0, 0, 0, 0, 0, 90, "Targets Self", "Active Defense", "Increases your Damage Resistance by 125% and reduces incoming damage by a flat 83 damage.  %ADCD%");
+dataPower[dataPower.length] = new Power(5, 17, 2, "Indestructible", 0, 0, 0, 0, 0, 90, "Targets Self", "Active Defense", "Increases your Damage Resistance by 125% and reduces incoming damage by a flat 83 damage.  %ADCD%", Power.TYPE_NORMAL, true);
+dataPower[dataPower.length-1].insertAdvantage("Unchained", 2, null, "Applies 5358 Break Free damage to any Holds, Roots, or Disables affecting you and adds one stack of Knock and Hold resistance.");
 dataRequireGroupPower[dataPower.length-1] = 'brick';
 dataPowerAlias["Indestructible"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(5, 17, 2, "Endorphin Rush", 0, 0, 0, 0, 15, 15, "Targets Self", "Self Heal Over Time", "For the next 15 sec, dealing or receiving direct damage heals you for 70 Health Points every 2 sec over 6 sec.<br /><br />%SHOTCD%");
+dataPower[dataPower.length] = new Power(5, 17, 2, "Endorphin Rush", 0, 0, 0, 0, 15, 15, "Targets Self", "Self Heal Over Time", "For the next 15 sec, dealing or receiving direct damage heals you for 70 Health Points every 2 sec over 6 sec.<br /><br />%SHOTCD%", Power.TYPE_NORMAL, true);
 dataPower[dataPower.length-1].insertAdvantage("Can't Stop Me", 2, null, "Taking damage applies a stack of Charged Up.  %ChargedUp%");
 dataRequireGroupPower[dataPower.length-1] = "brick";
 dataPowerAlias["Endorphin Rush"] = new PowerAlias(dataPower[dataPower.length-1]);
@@ -4054,11 +4056,12 @@ dataPower[dataPower.length] = new Power(5, 17, 3, "Brimstone", 0.83, 1.17, 0, 0,
 dataPower[dataPower.length-1].insertAdvantage("Aftershock", 2, null, "Fully charing Brimstone now creates a Pyre Patch. %PyrePatch%");
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
-dataPower[dataPower.length] = new Power(5, 17, 4, "Unleashed Rage", 1, 0, 0, 0, 112, 60, "Affects foe (10 max)/15 foot Sphere", "Ultimate/Melee AoE Damage/Knock Down/Fear", "Unleashed Rage lets forth a deafening shout, terrifying and damaging nearby foes.<br /><br />CLICK<br />+ Deals Sonic damage to nearby targets.<br />+ The damage dealt by this power is considered melee damage for effects such as the Brawler Role. Note that the damage is not modified by Strength, however.<br />+ Knocks Down affected targets.<br />+ Applies Fear to affected targets. %Fear%<br />+ Deals additional damage for each stack of Enrage you have.", Power.TYPE_NORMAL, true);
+dataPower[dataPower.length] = new Power(5, 17, 4, "Unleashed Rage", 1, 0, 0, 0, 112, 60, "Affects foe (10 max)/15 foot Sphere", "Ultimate/Melee AoE Damage/Knock Down/Fear", "Deals 354 Crushing damage to targets.  This damage is increased for every stack of Enrage you have.  Additionally, targets are Knocked Down and Disoriented.  %Disorient%", Power.TYPE_NORMAL, true);
 dataPower[dataPower.length-1].insertAdvantage("Commanding Presence", 1, null, "%UltimateChallenge%");
+dataPower[dataPower.length-1].insertAdvantage("Deafening Voice", 1, null, "This power now deals Sonic damage instead of Crushing");
 dataPowerAlias["Unleashed Rage"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(5, 17, 4, "Power Chord", 0.5, 3, 0.5, 0, [21,22], 60, "Affects non-destructible foe (10 max)/25 foot Sphere", "Melee AoE Damage/Knock Back/Disorient", "Deals 123 Sonic damage every 0.5 sec.  Damage increases for every stack of Enrage on you.<br /><br />When you stop maintaining this power, it deals 324 Sonic damage and affected targets are Knocked Back 37 feet and Disoriented.  %Disorient%");
+dataPower[dataPower.length] = new Power(5, 17, 4, "Power Chord", 0.5, 3, 0.5, 0, [21,22], 60, "Affects non-destructible foe (10 max)/25 foot Sphere", "Melee AoE Damage/Knock Back/Disorient", "Deals 123 Sonic damage every 0.5 sec.  Damage increases for every stack of Enrage on you.<br /><br />When you stop maintaining this power, it deals 324 Sonic damage and affected targets are Knocked Back 37 feet and Disoriented.  %Disorient%", Power.TYPE_NORMAL, true);
 dataPower[dataPower.length-1].insertAdvantage("Rock Concert", 2, null, "Power Chord no longer gives you the Rocking Out buff.  Instead, Power Chord now applied Exhilarate to nearby allies.  Exhilarate increases their charge speed by a small amount and can stack up to 10 times.  It also gives them energy.");
 dataPower[dataPower.length-1].insertAdvantage("Guitar Solo", 1, null, "This power now deals ranged damage and scales with your Concentration stacks.");
 dataPowerAlias["Power Chord"] = new PowerAlias(dataPower[dataPower.length-1]);
@@ -4066,8 +4069,13 @@ dataPowerAlias["Power Chord"] = new PowerAlias(dataPower[dataPower.length-1]);
 dataPower[dataPower.length] = new Power(5, 17, 4, "Catastrophic Pummeling", 0.5, 5, 0.5, 0, [40,15], 60, "Targets foe/10 feet", "Ultimate/Melee Damage", "Deals Crushing damage twice every 0.5 seconds and Roots the target for 5.3 seconds.<br /><br />After maintaining this power for 2 seconds, you become immune to most forms of Control effects and gain 200% resistance to all Knock effects until you stop maintaining this power.<br /><br />If this power is fully maintained:<br /><br />Deals Crushing damage to your primary target and half that amount in Crushing damage to secondary targets within 20 feet.<br /><br />Applies Overpower and Knocks targets upward. %Overpower%" + Aesica.HCEngine.powerUnlocksFrom("Blockbuster Lockbox"), Power.TYPE_NORMAL, true);
 dataPowerAlias["Catastrophic Pummeling"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(5, 17, 4, "Final Punch", 0.67, 2.33, 0, 2.33, 107, 60, "Targets foe (10 max)/5 foot Sphere", "Melee Damage/Knock Back/Ultimate", "Deals 896 Crushing damage to your primary target.  This damage scales based on the number of Enrage stacks on you.  Affected targets are Knocked Back 69 feet.<br /><br />Consumes all of your form stacks when used.");
+dataPower[dataPower.length] = new Power(5, 17, 4, "Final Punch", 0.67, 2.33, 0, 2.33, 107, 60, "Targets foe (10 max)/5 foot Sphere", "Melee Damage/Knock Back/Ultimate", "Deals 896 Crushing damage to your primary target.  This damage scales based on the number of Enrage stacks on you.  Affected targets are Knocked Back 69 feet.<br /><br />Consumes all of your form stacks when used.", Power.TYPE_NORMAL, true);
 dataPowerAlias["Final Punch"] = new PowerAlias(dataPower[dataPower.length-1]);
+
+dataPower[dataPower.length] = new Power(5, 17, 4, "Earthquake", 0.67, 0.83, 0, 0.83, 111, 60, "Targets non-destructible foe/50 feet", "Ranged AoE Damage/Ultimate", "Creates <i>an</i> Earthquake at your location for 12 seconds.  This Earthquake deals 224 Crushing damage every sec for 12 sec to targets in a 15 foot radius, or 149 Crushing damage to targets further than 15 feet.  Hits a maximum of 10 targets.<br /><br />Affected targets are also Knocked Up every 2 sec.  Foes affected by Stagger have their movement speed reduced by 120%.<br /><br />Increases the resistance bonus of Stone Shroud by 10% if you are standing in the effect radius of this power.", Power.TYPE_NORMAL, true);
+dataPower[dataPower.length-1].insertAdvantage("Molten Core", 2, null, "NYI");
+dataPower[dataPower.length-1].insertStockAdvantages("NG");
+dataPowerAlias["Earthquake"] = new PowerAlias(dataPower[dataPower.length-1]);
 
 //------------------------------------------------------------------------------
 // Power Framework: Earth
@@ -4212,6 +4220,7 @@ dataPower[dataPower.length] = dataPowerAlias["Unleashed Rage"].replicate(5, 18);
 dataPower[dataPower.length] = dataPowerAlias["Power Chord"].replicate(5, 18);
 dataPower[dataPower.length] = dataPowerAlias["Catastrophic Pummeling"].replicate(5, 18);
 dataPower[dataPower.length] = dataPowerAlias["Final Punch"].replicate(5, 18);
+dataPower[dataPower.length] = dataPowerAlias["Earthquake"].replicate(5, 18);
 
 //------------------------------------------------------------------------------
 // Power Framework: Might
@@ -4285,7 +4294,7 @@ dataEnergyUnlockPower[dataPower.length-1] = true;
 dataRequireGroupPower[dataPower.length-1] = "brick";
 
 dataPower[dataPower.length] = new Power(5, 19, 1, "Retaliation", 1, 0, 0, 0, 0, 0, "Targets Self", "Block", "While blocking, grants 250% resistance to all damage, increases your resistance to Holds and Knocks, and reduces your movement speed.<br /><br />Features:<br />+ Damage taken applies or refreshes Retaliation, which increases the damage of your next attack by 83% and lasts 5 sec.");
-dataPower[dataPower.length-1].insertAdvantage("Punitive Pummeling", 2, null, "Attacks against you have a chance of reflecting their energy outwards. Every incoming attack that you block with Guard has a 100% change of Knocking Back all nearby enemies. This effect can occur at most once every 10 seconds.");
+dataPower[dataPower.length-1].insertAdvantage("Punitive Pummeling", 2, null, "Attacks against you have a chance of reflecting their energy outwards. Every incoming attack that you block has a 100% chance of Knocking Back all nearby enemies. This effect can occur at most once every 10 seconds.");
 dataPower[dataPower.length-1].insertAdvantage("Indomitable", 3, null, "Taking damage while blocking 5% Resistance to all damage, Resistance to Hold, and Resistance to Knock for 5 sec.  This amount increases the lower your health gets, up to a maximum of 120%");
 
 dataPower[dataPower.length] = new Power(5, 19, 1, "Mighty Leap", 0.5, 0, 0, 0, 19, 3, "Targets foe/60 foot lunge", "Lunge/Snare/Stun", "Lunges to the target, dealing Crushing damage and Snaring them for 13 sec.  If used from more than 20 feet away, the target is also Stunned for 1.7 sec.");
@@ -4333,7 +4342,7 @@ dataPower[dataPower.length-1].insertAdvantage("Vainglorious", 1, null, "The long
 dataPower[dataPower.length] = dataPowerAlias["Endorphin Rush"].replicate(5, 19);
 dataRequireGroupPower[dataPower.length-1] = 'brick';
 
-dataPower[dataPower.length] = new Power(5, 19, 2, "Call To Battle", 0.83, 0, 0, 0, 21, 30, "Affects non-destructible foe (5 max)/25 foot Sphere", "Reckless/Disorient", "Applies Disorient to targets.  %Disorient<br /><br />Applies and refreshes Reckless on you and nearby allies.  %Reckless%");
+dataPower[dataPower.length] = new Power(5, 19, 2, "Call To Battle", 0.83, 0, 0, 0, 21, 30, "Affects non-destructible foe (5 max)/25 foot Sphere", "Reckless/Disorient", "Applies Disorient to targets.  %Disorient%<br /><br />Applies and refreshes Reckless on you and nearby allies.  %Reckless%");
 dataPower[dataPower.length-1].insertAdvantage("Intimidating Force", 2, null, "This power now Knocks Down targets.");
 dataPower[dataPower.length-1].insertAdvantage("Work Up", 2, null, "%StimPack%");
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
@@ -4343,7 +4352,7 @@ dataPower[dataPower.length-1].insertAdvantage("Reckless Strikes", 2, null, "Incr
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
 dataPower[dataPower.length] = new Power(5, 19, 3, "Havoc Stomp", 0.83, 1, 0, 0, [48,76], 6, "Affects foe (5 max)/10 foot Sphere", "Melee AoE Damage/Knock", "Deals 340-743 Crushing damage to targets.  If charged less than 90%, each target is Knocked Up 17 feet.  If charged at least 90%, each target is Knocked Back 17 feet.");
-dataPower[dataPower.length-1].insertAdvantage("Cry Havoc", 2, null, "Increases the power's base damage by 30% if you are affected by Reckless.");
+dataPower[dataPower.length-1].insertAdvantage("Cry Havoc", 2, null, "Applies Fear to targets.  %Fear%");
 dataPower[dataPower.length-1].insertAdvantage("Major Impact", 2, null, "Instead of knocking targets away, targets within 20 feet are Knocked To you instead.");
 dataPower[dataPower.length-1].insertAdvantage("Reckless Endangerment", 2, null, "Fully charging this power applies and refreshes Reckless on you.  %Recklsss%");
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
@@ -4362,6 +4371,7 @@ dataPower[dataPower.length] = dataPowerAlias["Unleashed Rage"].replicate(5, 19);
 dataPower[dataPower.length] = dataPowerAlias["Power Chord"].replicate(5, 19);
 dataPower[dataPower.length] = dataPowerAlias["Catastrophic Pummeling"].replicate(5, 19);
 dataPower[dataPower.length] = dataPowerAlias["Final Punch"].replicate(5, 19);
+dataPower[dataPower.length] = dataPowerAlias["Earthquake"].replicate(5, 19);
 
 //------------------------------------------------------------------------------
 // Power Set: Mystic
@@ -4538,7 +4548,11 @@ dataPower[dataPower.length-1].insertAdvantage("Night Vision", 2, null, "Applies 
 
 dataPower[dataPower.length] = new Power(6, 21, 1, "Shadow Form", 0, 0, 0, 0, 0, 0, "Passive (Offensive)", "Slotted Offensive Passive/Energy Form", "+ Increases your Paranormal damage.<br />+ Increases your Dimensional damage resistance.<br />+ Increases your Paranormal damage resistance by a lesser amount.<br />+ Increases your Aggression Stealth and Perception Stealth.<br />+ Reduces your threat slightly.<br />+ When you attack a foe, you have a chance to recover a small percentage of your health.  This can only happen once every 3 seconds.<br />+ Recovers Energy when you take Dimensional damage.");
 
+dataPower[dataPower.length] = new Power(6, 21, 1, "Harbinger", 0, 0, 0, 0, 0, 0, "Passive (Support)", "Slotted Support Passive/Energy Form", "+ Increases your damage, as well as your healing by a lesser amount.<br />+ Absorbs damage, scaling with your super stats.<br />+ When you use a Life Drain ability, your damage is increased.  Your healing is also increased by a lesser amount.  This effect stacks up to 10 times, lasts 12 sec, and a stack can only be applied once every 0.5 sec.  Each time a stack is applied, existing stacks are refreshed.<br />+ Recovers Energy when you take Dimensional damage.");
+
 dataPower[dataPower.length] = new Power(6, 21, 1, "Shadow Manifestation", 1, 2.5, 0, 2.5, 20, 0, "Form (Presence)", "Buff/Form/Daunting", "Gives you a stacking buff that increases your ranged damage, as well as your melee damage to a lesser degree.<br /><br />+ You gain a stack each time you apply a Mental State, such as Ego Leech, Fear, Stress, and Dependency.<br />+ Each time you gain a stack, existing stacks are refreshed and you gain energy.<br />+ Stacks up to 8 times, lasts 20 seconds, and can only gain 1 stack every 4 seconds.<br />- Increases energy costs by 10%.", Power.TYPE_FORM);
+
+dataPower[dataPower.length] = new Power(6, 21, 1, "Fear Consumption", 1, 2.5, 0, 2.5, 20, 0, "Form (Presence)", "Buff/Form/Empathy", "Gives you a stacking buff that increases your healing, as well as your damage to a lesser degree.<br /><br />+ You gain a stack each time you apply a Mental State, such as Ego Leech, Fear, Stress, and Dependency.<br />+ Each time you gain a stack, existing stacks are refreshed and you gain energy.<br />+ Stacks up to 8 times, lasts 20 seconds, and can only gain 1 stack every 4 seconds.<br />- Increases energy costs by 10%.", Power.TYPE_FORM);
 
 dataPower[dataPower.length] = dataPowerAlias["Compassion"].replicate(6, 21);
 dataRequireGroupPower[dataPower.length-1] = 'mystic';
@@ -4575,6 +4589,9 @@ dataPower[dataPower.length-1].insertStockAdvantages("AM");
 
 dataPower[dataPower.length] = new Power(6, 21, 2, "Void Horror", 0.87, 2, 0, 2, 35, 0, "Targets Self", "Controllable Pet", "Summons a Void Horror to fight for you.<br /><br />" + Aesica.HCEngine.petTip("Void Horror", "Can use Void Ravage and Feed on Fear to deal Dimensional damage to foes.  Feed on Fear deals additional damage to Feared targets.  It can also lunge at targets, dealing Dimensional damage and temporarily canceling travel powers.", "Void Ravage now also deals additional damage to Feared targets.", "The damage over time dealt by your Void Horror's Feed on Fear now also heals it.", "Void Eruption is an ability you can activate to deal Dimensional damage to and repel foes within 15 feet of your Void Horror.  Has a 30 second cooldown."));
 
+dataPower[dataPower.length] = new Power(6, 21, 2, "Dark Pact", 0.83, 2, 0, 2, 30, 0, "Affects dead ally/25 foot Sphere", "Revive", "Revives a nearby ally, bringing them back to life with 33/66/100% Health, based on rank.");
+dataPower[dataPower.length-1].insertAdvantage("More Souls!", 2, null, "This power now revives up to 4 nearby allies within 50 feet.  The healing received is divided among the number of allies revived at a time.");
+
 dataPower[dataPower.length] = new Power(6, 21, 3, "Ebon Ruin", 0.67, 1.83, 0, 0, [42,114], 0, "Targets foe/100 feet", "Ranged Damage/Snare", "Deals Dimensional damage to the target.  On a full charge, Snares the target for 13 seconds, reducing their movement speed by 100%");
 dataPower[dataPower.length-1].insertAdvantage("Nyctophobia", 2, null, "Increases the damage of Ebon Ruin by 30% against Feared targets.");
 dataPower[dataPower.length-1].insertAdvantage("Paranormal Paranoia", 2, null, "Ebon Ruin now has a 30-100% chance to apply Fear to the target, based on charge time. %Fear%");
@@ -4585,6 +4602,7 @@ dataPower[dataPower.length] = new Power(6, 21, 3, "Ebon Rift", 0.5, 0, 6, 0, [44
 dataPower[dataPower.length-1].insertAdvantage("Vengeful Shadows", 2, null, "Targets that get too close to the Rift will take massive Dimensional damage and be Knocked Back. Targets that are immune to Knock Back will instead take some additional damage if they are too close.");
 dataPower[dataPower.length-1].insertAdvantage("Event Horizon", 2, null, "This power now has a 10% chance per tick to apply Bane to targets.  %Bane%");
 dataPower[dataPower.length-1].insertAdvantage("Hellfire", 2, null, "Maintaining this power at least halfway createa a Pyre Patch at the target location.  %PyrePatch%");
+dataPower[dataPower.length-1].insertAdvantage("Endless Void", 2, null, "When the rift is summoned, allies near it will be healed.  This heal is considered a Life Drain effect.");
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
 dataPower[dataPower.length] = new Power(6, 21, 3, "Shade Storm", 0.5, 0, 5, 0, [27,19], 0, "Targets foe (5 max)/50 feet/15 foot Sphere", "Ranged AoE Damage/Fear/Knockdown", "Deals Dimensional Damage every 0.5 sec to all targets.  Has a 10% chance to apply Fear to targets and a 10% chance to Knock Down targets already affected by Fear. %Fear%" + Aesica.HCEngine.powerUnlocksFrom(UNLOCK_RECOGNITION, "350/175", "SCR/GCR"));
@@ -4602,7 +4620,7 @@ dataPower[dataPower.length-1].insertAdvantage("Consume Fear", 2, null, "On a ful
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
 dataPower[dataPower.length] = new Power(6, 21, 3, "Madness Aura", 1, 0, 10, 0, [60,20], 30, "Affects foe (1 max)/25 foot Sphere", "Pick Up and Throw/Fear", "Has a 20% chance every sec to apply Fear to targets within 25 feet of you.  %Fear%<br /><br />Has an 85% chance every sec to throw an object at a target within 25 feet of you.  This object deals Dimensional damage based on the mass of the object and hits targets within 5 feet of the primary target.  Affected targets are Knocked Down.<br /><br />Has a 15% chance per sec to cause an object to explode, dealing Dimensional damage based on the mass of the object to targets within 25 feet of the object.  This effect also Knocks Down and applies Devoid to targets.  %Devoid%");
-dataPower[dataPower.length-1].insertAdvantage("Chaos! Chaos!", 2, null, "On a full charge, Shadow Eruption consumes all of your Fear effects on affected targets.  Each stack consumed will deal additional Shadow damage.");
+dataPower[dataPower.length-1].insertAdvantage("Chaos! Chaos!", 2, null, "Instead of applying Fear, this power now has a chance to randomly apply many different debuffs to affected targets.");
 
 dataPower[dataPower.length] = new Power(6, 21, 3, "Summon Shadows", 0.67, 1, 0, 1, 41, 20, "Targets Self", "Uncontrolled Pet", "Summons 3 Shadows to attack your foes.  These Shadows attack your foes, dealing Dimensional damage.");
 dataPower[dataPower.length-1].insertAdvantage("Devouring Darkness", 2, null, "Instead of applying Fear, this ability now applies Bane to targets.  %Bane%");
@@ -4978,7 +4996,6 @@ dataRequireGroupPower[dataPower.length-1] = 'supernatural';
 dataPower[dataPower.length] = new Power(6, 23, 2, "Resurgence", 0, 0, 0, 0, 0, 90, "Targets Self", "Active Defense/Self Heal/Increased Health", "Heals you for 50/75/100% of your Maximum Health, increases your Maximum Health by 833/1000/1200, and increases your Regeneration by 5/10/15% for 15 seconds.<br /><br />Also causes Regeneration to heal for more if using it.<br /><br />%ADCD%");
 dataPower[dataPower.length-1].insertAdvantage("Unchained", 2, null, "Applies 5358 Break Free damage to any Holds, Roots, or Disables affecting you and adds one stack of Knock and Hold resistance.");
 dataPower[dataPower.length-1].iconOverride = "Supernatural_Resurgence";
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, dataPowerAlias['Evanescent Emergence'].name, dataPowerAlias['Evanescent Emergence'].desc, 2, null, dataPowerAlias['Evanescent Emergence'].tip));
 dataPowerAlias["Resurgence"] = new PowerAlias(dataPower[dataPower.length-1]);
 dataRequireGroupPower[dataPower.length-1] = 'supernatural';
 
