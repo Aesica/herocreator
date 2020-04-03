@@ -12,14 +12,20 @@
 	<title>HeroCreator</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="js/powerhouse.css?v=3.4" />
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Expires" content="0">
+	<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="js/bsod.css?v=2.1" />
+	<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="js/powerhouse.css?v=3.43" />
+	<link rel="stylesheet" type="text/css" charset="utf-8" media="none" href="js/hc-powderhouse.css?v=3.43" id="themePowderhouse" class="altTheme" />
+	<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="js/hc-light.css?v=3.43" id="themeLight" class="altTheme" />
 	<script type="text/javascript" src="js/spritesheet.js?v=3.42"></script>
-	<script type="text/javascript" src="js/hc-extender.js?v=3.42"></script>
-	<script type="text/javascript" src="js/powerhouse-data.js?v=34"></script>
-	<script type="text/javascript" src="js/hc-data.js?v=34"></script>
+	<script type="text/javascript" src="js/hc-extender.js?v=3.43"></script>
+	<script type="text/javascript" src="js/powerhouse-data.js?v=35"></script>
+	<script type="text/javascript" src="js/hc-data.js?v=35"></script>
 	<script type="text/javascript" src="js/hc-data-harness.js?v=3.42"></script>
-	<script type="text/javascript" src="js/powerhouse-version.js?v=34a"></script>
-	<script type="text/javascript" src="js/powerhouse.js?v=3.42"></script>
+	<script type="text/javascript" src="js/powerhouse-version.js?v=35"></script>
+	<script type="text/javascript" src="js/powerhouse.js?v=3.43normal"></script>
 </head>
 <body>
 	<div id="body" class="main">
@@ -184,6 +190,12 @@
 							<a id="cancelFont" class="selectedButton" onclick="Aesica.HCEngine.cancelFont()">Font:</a>&nbsp; <input id="editFont" type="text" size="40" value="" />
 						</form>
 					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a id="setTheme" class="button" onclick="//selectPrefTheme();">Theme: <span id="prefThemeValue" class="buttonText">NYI</span></a><br />
+					<span class="note">Select from a list of themes and skins.</span>
 				</td>
 			</tr>
 			<tr>
@@ -478,8 +490,10 @@
 					<li><a onclick="Aesica.HCEngine.debugOutputFromInput(btoa)">btoa(value:String);</a></li>
 					<li><a onclick="Aesica.HCEngine.debugOutputFromInput(atob)">atob(base64:String);</a></li>
 					<li><a onclick="Aesica.HCEngine.debugOutput(Aesica.HCEngine.exportArchetypes())">Export Archetypes (temp)</a></li>
-					<li><a onclick="Aesica.HCEngine.debugOutput(Aesica.HCEngine.exportPowers())">Export Powers and Advantages (temp)</a></li>
-					<li><a onclick="Aesica.HCEngine.debugOutput(Aesica.HCEngine.exportTPowers())">Export Travel Powers and Advantages (temp)</a></li>
+					<li><a onclick="Aesica.HCEngine.debugOutput(Aesica.HCEngine.exportPowers())">Export Powers (hc-data)</a></li>
+					<li><a onclick="Aesica.HCEngine.debugOutput(Aesica.HCEngine.exportPowers(true))">Export Powers Advantages (hc-data)</a></li>
+					<li><a onclick="Aesica.HCEngine.debugOutput(Aesica.HCEngine.exportTPowers())">Export Travel Powers (hc-data)</a></li>
+					<li><a onclick="Aesica.HCEngine.debugOutput(Aesica.HCEngine.exportTPowers(true))">Export Travel Power Advantages (hc-data)</a></li>
 				</ul>
 			</div>
 			<div class="pageSection">

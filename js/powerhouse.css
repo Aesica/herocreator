@@ -352,6 +352,7 @@ textarea {
 	margin-left: 1rem;
 }
 
+
 .pageSection {
 	background-color: #222;          /* dark gray, slightly brighter than background */
     border: 1px solid #888;
@@ -538,6 +539,18 @@ a.selectedButton:visited, a.selectedButton:hover, a.selectedButton:active {
     /* color: #F78132;                    */ /* light orange */
     font-weight: bold;
     text-decoration: none;
+}
+
+.loaderButton {
+	color: #8af;						/* light blue */
+    font-weight: bold;
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.loaderButton:hover {
+	color: #fff;						/* light blue */
 }
 
 .takenButton {

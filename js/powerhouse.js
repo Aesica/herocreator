@@ -13,8 +13,8 @@
 // system config data
 const app = 
 {
-	"version":3.42,
-	"releaseDate":"12/5/2019",
+	"version":3.43,
+	"releaseDate":"3/27/2020",
 	"system":
 	{
 		"siteName":"HeroCreator",
@@ -36,6 +36,12 @@ const app =
 		"specPointMax":10,
 		"analytics":{"pref":"Preference", "set":"Set", "build":"Build"}, // maintained, but no longer relevant
 		"editor":{"default":{"superStat":["Primary Super Stat", "Secondary Super Stat"], "innateTalent":"Innate Talent", "talent":"Talent", "travelPower":"Travel Power", "device":"Device", "power":"Power", "specialization":["Stat Tree", "Role Tree 1", "Role Tree 2", "Mastery"], "notes":"Additional Notes"}},
+		"themes":
+		{
+			"themeDark":{"name":"Dark Theme (Default)"},
+			"themeLight":{"name":"Light Theme"},
+			"themePowderhouse":{"name":"Powderhouse"},
+		}
 	}
 }
 
@@ -3927,6 +3933,23 @@ function forumExport()
 window['forumExport'] = forumExport;
 
 // preferences
+function setPrefTheme(theme)
+{
+	var themeLinkList = document.getElementsByClassName("altTheme");
+	for (let item of themeLinkList) item.media = "none";
+	var selectedTheme = document.getElementById(theme);
+	if (selectedTheme) selectedTheme.media = "all";
+	prefs.theme = theme;
+	console.log(theme);
+	console.log(selectedTheme);
+	saveSettings();
+}
+
+function selectPrefTheme()
+{
+
+}
+
 function setPrefFontFamily(fontFamily)
 {
 	prefs.fontFamily = fontFamily;
@@ -4337,6 +4360,7 @@ function setupPrefs()
 	}
 	if (!loadedPrefs) prefs = app.system.defaultSettings;
 	else prefs = loadedPrefs;
+	setPrefTheme(prefs.theme);
 	saveSettings();
 	updateSettingsDisplay();
 
@@ -4476,8 +4500,82 @@ function start()
 	// all ready! <3
 	Aesica.HCEngine.writeMessage("Ready", true);
 
+	// happy april 1st!
+	var today = new Date();
+	if (today.getMonth() === 3 && today.getDate() === 1)
+	{
+		if (today.getFullYear() === 2020) setTimeout(play2020April1Joke, Math.floor(Math.random() * 20 + 5) * 1000);
+	}
 }
 window['start'] = start;
+
+var bsod = {};
+function play2020April1Joke()
+{
+	selectClear();
+	var bs = document.createElement("div");
+	bs.id = "bsod";
+	var bsc = document.createElement("div");
+	bsc.id = "bosdContents";
+	bsc.innerHTML = `
+	<p style='font-size: 500%'><a class='bsodLink' onclick='bsodCleanup();'>:(</a></p>
+	<p>This website has run into a problem and needs to restart.  We're just collecting some error info, and then we'll restart it for you.</p>
+	<p><span id='bsodCounter'>0</span>% complete</p>
+	<table id='bsodTable'><tr><td><img id='qrFoxbat' src='img/foxbat-qr-code.png' /></td>
+	<td>
+	<div class='smallText'>For more information about this issue and possible fixes, tough luck!</div><br />
+	<div id='bsodTaunt' class='smallText'>If you call a support person, they're going to laugh at you</div>
+	<div class='smallText'>Click the frowny face to restart now if you're a boring-ass party pooper fuddy-duddy</div>
+	</td></tr></table>
+	`;
+	bs.appendChild(bsc);
+	document.getElementsByTagName("body")[0].appendChild(bs);
+	bsod.screen = bs;
+	bsod.timer = setInterval(bsodFramehandler, 3000);
+	bsod.counter = 0;
+	bsod.timerDisplay = document.getElementById("bsodCounter");
+	bsod.tauntDisplay = document.getElementById("bsodTaunt");
+	bsod.taunts = 
+	[
+		"Attempting to steal your gigahertz...",
+		"Furry porn has been detected, calling the cops",
+		"*Notices your hard drive*  OwO what's this?",
+		"Deleting random files, please wait...",
+		"I hope you weren't too attached to what you were working on!",
+		"Does Dr. Destroyer like to destroy things, or does he just hate doctors?",
+		"Would you like to listen to Sapphire's greatest hits while you wait?",
+		"When I first heard about Lemuria, I thought the inhabitants were lemurs",
+		"You are now breathing manually",
+		"Why do I waste my time making these every year?",
+		"I'd probably have wittier stuff here if I hadn't made this at like 12am in the morning",
+		"Don't you hate it when you go to wipe and your finger pokes through the TP?",
+		"Please consider supporting HeroCreator sometime!  Maintaining it takes a lot more work than I wish it did",
+		"Heroes of Earth, welcome to the blue screen of death!",
+	];
+}
+
+function bsodFramehandler()
+{
+	bsod.counter += Math.floor(Math.random() * 15);
+	if (bsod.counter > 150) bsodCleanup();
+	else
+	{
+		bsod.timerDisplay.innerHTML = Math.min(bsod.counter, 100);
+		if (Math.random() < 0.5)
+		{
+			let tIndex = Math.floor(Math.random() * bsod.taunts.length);
+			let taunt = bsod.taunts.length ? bsod.taunts[tIndex] : "Oops, that's the end of the not-so-witty quips list!  Guess I sould've added more";
+			bsod.taunts.splice(tIndex, 1);
+			bsod.tauntDisplay.innerHTML = taunt;
+		}
+	}
+}
+
+function bsodCleanup()
+{
+	clearInterval(bsod.timer);
+	bsod.screen.style.display = "none";
+}
 
 window.addEventListener("load", start);
 

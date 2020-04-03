@@ -1419,6 +1419,26 @@ dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_JUMP, nul
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TELEPORT, null, "Energy Step", null, null, null, ["Punk Lockbox"]);
 
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE_GOLD, 'Electric Hover Disk', null, 'Somewhat less maneuverable than standard Flight.', 'Grants +20 Flight Speed while active.  Outside of combat, you build up speed over time.  After 4 seconds, you gain +17 Flight Speed.  After 10 seconds, you gain an additional +21 Flight Speed.<br /><br />While active, you suffer a -11% penalty to Power Cost Discount and your Energy Building strength is reduced by 15%.', null, null, null, ["Scion Lockbox"]);
+
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, null, "Overseer Flight", null, null, null, ["Questionite Store (Limited)"]);
+
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, null, "Regal Flight", null, null, null, ["Questionite Store (Limited)"]);
+
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, null, "Radiant Phoenix Flight", null, null, null, ["C-Store (Limited)"]);
+
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, null, "Shadow Phoenix Flight", null, null, null, ["C-Store (Limited)"]);
+
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, null, "Power Skating", "TravelPower_MachSpeed", null, null, null, ["Secret Identity Lockbox"]);
+
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_ATHLETICS, null, "Electric Slide", null, null, null, ["Scion Lockbox"]);
+dataTravelPower[dataTravelPower.length-1].insertAdvantage(dataPowerAlias["Energy Rush"].name, 2, dataPowerAlias["Energy Rush"].tip);
+
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TELEPORT, TP_UNLOCK_QSTORE, "Cold Front");
+
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TELEPORT, TP_UNLOCK_QSTORE, "Frost Bite");
+
+
 
 //==============================================================================
 // Power Sets
@@ -2000,6 +2020,11 @@ dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructo
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'Vortex', 'Vortex', 2, null, 'Causes the main target of your Whirlwind to become the focus of a vortex, pulling other nearby foes toward that target.'));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
 
+dataPower[dataPower.length] = new Power(1, 4, 2, "Torrent", 0.67, 1.83, 0, 0, [30,83], 0, "Affects non-destructible foe (5 max)/25 foot Sphere", "Ranged AoE Damage/Knock/Chill", "Deals 196-696 Cold damage and has a 13-50% chance (based on charge time) to Knock Down targets.  Also has a 13-50% chance (based on charge time) to apply Chill.  %Chill%");
+dataPower[dataPower.length-1].insertAdvantage("Oasis", 2, null, "On a full charge, creates a Healing Rune beneath you.  %HealingRune%");
+dataPower[dataPower.length-1].insertAdvantage("Scalding Water", 1, null, "Instead of Chill, this power now applies Clinging Flames.  %ClingingFlames%");
+dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
+
 dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Dust Devil', '<div class="Sprite Wind_DustDevil"></div>&nbsp;Dust Devil', 1, 4, pow++, 2, 'Wind, 100 foot Ranged 10 foot Sphere AoE Damage<br /><br />Requires 3 powers from Wind or 4 non-Energy Building powers from any framework.<br /><br />You conjure up a Dust Devil to fight your foe. It will chase them down, and deal damage to other nearby enemies as well.');
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
@@ -2300,6 +2325,10 @@ dataPower[dataPower.length] = new Power(2, 6, 4, "Showdown", 0.5, 5, 0.5, 0, [56
 dataPower[dataPower.length-1].insertAdvantage("You Clean, We'll Sweep", 1, null, "%UltimateChallenge%");
 dataPowerAlias["Showdown"] = new PowerAlias(dataPower[dataPower.length-1]);
 
+dataPower[dataPower.length] = new Power(2, 6, 4, "Arrow Assault", 0.67, 0.83, 0, 0.83, 125, 60, "100 feet/25 foot Sphere", "Ranged AoE Damage", "Deals 275 Piercing damage and all targets are Knocked Down.  After 1 sec, deals 533 Fire damage and all targets are Stunned for 4.2 sec.");
+dataPower[dataPower.length-1].insertAdvantage("Just Blow It Up", 3, null, "This power now applies Overpower instead of Knock Down and Stun.");
+dataPowerAlias["Arrow Assault"] = new PowerAlias(dataPower[dataPower.length-1]);
+
 //------------------------------------------------------------------------------
 // Power Framework: Gadgeteering
 //------------------------------------------------------------------------------
@@ -2514,6 +2543,7 @@ dataPower[dataPower.length] = dataPowerAlias["Mechanical Monstrosity"].replicate
 dataPower[dataPower.length] = dataPowerAlias["Fire All Weapons"].replicate(2, 7);
 dataPower[dataPower.length] = dataPowerAlias["Meltdown"].replicate(2, 7);
 dataPower[dataPower.length] = dataPowerAlias["Showdown"].replicate(2, 7);
+dataPower[dataPower.length] = dataPowerAlias["Arrow Assault"].replicate(2, 7);
 
 //------------------------------------------------------------------------------
 // Power Framework: Munitions
@@ -2667,6 +2697,7 @@ dataPower[dataPower.length] = dataPowerAlias["Mechanical Monstrosity"].replicate
 dataPower[dataPower.length] = dataPowerAlias["Fire All Weapons"].replicate(2, 8);
 dataPower[dataPower.length] = dataPowerAlias["Meltdown"].replicate(2, 8);
 dataPower[dataPower.length] = dataPowerAlias["Showdown"].replicate(2, 8);
+dataPower[dataPower.length] = dataPowerAlias["Arrow Assault"].replicate(2, 8);
 
 //------------------------------------------------------------------------------
 // Power Framework: Power Armor
@@ -2856,6 +2887,7 @@ dataPower[dataPower.length] = dataPowerAlias["Mechanical Monstrosity"].replicate
 dataPower[dataPower.length] = dataPowerAlias["Fire All Weapons"].replicate(2, 9);
 dataPower[dataPower.length] = dataPowerAlias["Meltdown"].replicate(2, 9);
 dataPower[dataPower.length] = dataPowerAlias["Showdown"].replicate(2, 9);
+dataPower[dataPower.length] = dataPowerAlias["Arrow Assault"].replicate(2, 9);
 
 //------------------------------------------------------------------------------
 // Power Framework: Laser Sword
@@ -2936,6 +2968,7 @@ dataPower[dataPower.length] = dataPowerAlias["Mechanical Monstrosity"].replicate
 dataPower[dataPower.length] = dataPowerAlias["Fire All Weapons"].replicate(2, 10);
 dataPower[dataPower.length] = dataPowerAlias["Meltdown"].replicate(2, 10);
 dataPower[dataPower.length] = dataPowerAlias["Showdown"].replicate(2, 10);
+dataPower[dataPower.length] = dataPowerAlias["Arrow Assault"].replicate(2, 10);
 
 //------------------------------------------------------------------------------
 // Power Set: Martial Arts

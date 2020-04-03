@@ -1,0 +1,309 @@
+/*
+ * hc-light.css
+ *
+ * HeroCreator Stylesheet - Light Theme
+ *
+ * Author:  Aesica
+ * http://aesica.net/co
+ */
+
+
+html {
+	background-color: #ddd;
+}
+
+
+.titleMessageReady {
+	color: #080;
+}
+
+.titleMessageWorking {
+	color: #f00;
+}
+
+table.settingsTable tr {
+	border-bottom: 1px solid #eee;
+}
+
+.menu {
+	background-color: #bbb;
+	background-image: linear-gradient(#ccc, #aaa);
+    border: 1px solid #444;
+}
+
+a, a:link, a:visited {
+	color: #00f;
+}
+a:hover, a:active {
+	color: #a60;
+}
+
+.popup {
+	background-color: #fff;
+	color: #222;
+    border: 1px solid #888;
+	border-color: #888;
+}
+
+.checkBox input:checked + span {
+	color: #080;
+	visibility: visible;
+}
+
+.radioButton input:checked + span {
+	color: #088;
+	visibility: visible;
+}
+
+#saveDataTable tr:nth-child(even){
+	background-color: #aaa;
+}
+
+#saveDataTable tr:nth-child(odd){
+	background-color: #ccc;
+}
+
+#saveDataTable tr:last-child  td {
+	background-color: #ccc;
+}
+
+#saveDataTable tr:first-child  td {
+	background-color: #ccc;
+}
+
+#saveDataTable tr:hover {
+	background-color: #eee;
+}
+
+
+.saveDeleteButton {
+	color: #f00;
+}
+
+.saveReplaceButton {
+	color: #0f0;
+	text-shadow: none;
+}
+
+.saveReplaceTable td {
+	vertical-align: top;
+	background-color: #aaa;
+	padding: 0.2rem;
+}
+
+.saveReplaceTable tr:first-child {
+	border-bottom: 1px solid #aaa;
+}
+
+.saveReplaceTable tr td:last-child {
+	background-color: #ccc;
+	color: #000;
+}
+
+input, textarea {
+	background-color: #fff;
+	color: #000;
+	border: 1px solid #888;
+}
+
+.pageSection {
+	color: #444;
+	background-color: #ccc;
+    border: 1px solid #888;
+}
+
+
+.selection {
+	background-color: #eee;
+    border: 1px solid #000000;
+	border-color: #888;
+}
+
+#selectionWindowHeaderStrip {
+	background-color: #bbb;
+}
+
+#selectionWindowHeader {
+	text-shadow: none;
+	color: #000;
+	font-weight: bold;
+}
+
+#selectionWindowMenu {
+    background-color: #eee;
+    border-bottom: 1px solid #888;
+    border-top: 1px solid #888;
+}
+
+.closeButton {
+	color: #f00;
+}
+
+.frameworkSelected{
+    border: 1px solid #555;
+    background-color: #aaa;
+}
+
+.selectionNormal {
+	border: 2px solid #f00;                 /* dark gray (background color) */
+    /* border: 2px solid #0D3E7F;         */ /* dark blue (background color) */
+}
+
+.selectionHighlighted {
+	border: 2px solid #080;
+}
+
+
+.rarityCommon {
+	color: #888;
+}
+
+.rarityUncommon {
+	color: #2c2;
+}
+
+.rarityRare {
+	color: #44f;
+}
+
+.rarityEpic {
+	color: #a4f;
+}
+
+.rarityLegendary {
+	color :#c71;
+}
+
+.selectedButton, a.selectedButton, a.selectedButton:link,
+a.selectedButton:visited, a.selectedButton:hover, a.selectedButton:active {
+	color: #0a0;
+}
+
+.loaderButton {
+	color: #00a;
+}
+
+.loaderButton:hover {
+	color: #a60;
+}
+
+.takenButton {
+	color: #88f;
+}
+
+.disabledButton, a.disabledButton, a.disabledButton:link,
+a.disabledButton:visited, a.disabledButton:hover, a.disabledButton:active,
+.disabledButton div, a.disabledButton div, a.disabledButton:link div,
+a.disabledButton:visited div, a.disabledButton:hover div, a.disabledButton:active div {
+	color: #aaa;
+	filter: grayscale(100%);
+}
+
+.buttonNote {
+	color: #f0f;					/* ??? */
+}
+a.buttonNote, a.buttonNote:link, a.buttonNote:visited {
+	color: #44f;
+}
+a.buttonNote:hover, a.buttonNote:active {
+	color: #88f;
+}
+.selectedButtonNote, a.selectedButtonNote, a.selectedButtonNote:link,
+a.selectedButtonNote:visited, a.selectedButtonNote:hover, a.selectedButtonNote:active {
+	color: #afa;
+}
+
+.buttonText {
+	color: #448;
+}
+
+.note {
+	color: #555;
+}
+.disabledNote {
+    color: #f00;
+}
+
+.spec {
+	color: #555;
+}
+.disabledSpec {
+    color: #555;
+}
+
+.selectSpec {
+	color: #888;
+}
+
+.specHighlight {
+	color: #000;
+	background-color: #ffa;
+	border: 1px solid #000;
+}
+
+.advantageRowSelected td:first-child {
+	color: #080;
+}
+.specialization {
+	color: #333;
+}
+
+
+.becomeDeviceTip td:nth-child(2) {
+	color: #08f;
+}
+
+.becomeDeviceTipStats td:nth-child(1) {
+	color: #a60;
+	font-weight: bold;
+	padding-right: 1rem;
+}
+
+.becomeDeviceTipStats td:nth-child(2) {
+	color: #000;
+	font-weight: normal;
+}
+
+.greenText {
+	color: #0f0;
+}
+
+.redText {
+	color: #f00;
+}
+
+.link {
+	color: #fac;
+}
+
+.linkRef {
+	color: #fac;
+}
+
+.invisible a {
+    color: #0D3E5F;                     /* ??? */
+}
+
+.forumLink {
+	color: #f00;						/* ??? */
+}
+.deviceName {
+	font-weight: bold;
+	color: #840;
+}
+.deviceStats {
+	color: #080;
+}
+.btcop {
+	color: #f00;
+}
+.btcoe {
+	color: #00f;
+}
+.btaop {
+	color: #a60;
+}
+.btaoe {
+	color: #080;
+}
+

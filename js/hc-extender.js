@@ -757,12 +757,12 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 			// master tools
 			mDiv = document.createElement("div");
 			mDiv.setAttribute("class", "pageSection");
-			mButton = createButton("Backup", "", "dataButton", setupExport);
+			mButton = createButton("Backup", "", "dataButton", saveExportData);
 			setOnmouseoverPopupL1(mButton, "Allows you to create backups of your saved data as a single chunk of text.  This text can then be pasted into a text file and saved on your computer.<br /><br /><b>Making periodic backups is highly recommended.</b>");
 			mDiv.appendChild(mButton);
-			mButton = createButton("Restore", "", "dataButton", setupImport);
-			setOnmouseoverPopupL1(mButton, "Allows you to import backup data.<br /><br /><b>This operation will overwrite all existing saved data!</b>");
-			mDiv.appendChild(mButton);
+			mButton = new FileLoader("Restore", "loaderButton", "text/plain", setImportData);
+			setOnmouseoverPopupL1(mButton.button, "Allows you to import backup data.<br /><br /><b>This operation will overwrite all existing saved data!</b>");
+			mDiv.appendChild(mButton.button);
 			mButton = createButton("Delete", "", "dataButton", setupDelete);
 			setOnmouseoverPopupL1(mButton, "This will delete data from each of the slots you have selected.");
 			mDiv.appendChild(mButton);
@@ -792,15 +792,14 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 	}
 	$$.getCheckedSlots = getCheckedSlots;
 
-	function importData()
+	function importData(data)
 	{
 		var aData;
-		var mImportField = document.getElementById("importTextArea");
 		if (localStorageSupported())
 		{
 			try
 			{
-				aData = JSON.parse(atob(mImportField.value));
+				aData = JSON.parse(atob(data));
 				if (aData)
 				{
 					SaveBuildArray(aData);
@@ -816,45 +815,83 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 	}
 	$$.importData = importData;
 
-	function setupImport()
-	{
-		resetDialogBox();
-		setDialogBoxHeader("Restore");
-		var mButton = createButton("Yes, replace my existing saved data with this", "", "selectConfirmButton", importData);
-		var mTextArea = document.createElement("textarea");
-		mTextArea.setAttribute("id", "importTextArea");
-		mTextArea.setAttribute("class", "importExport");
-		mTextArea.setAttribute("placeholder", "Paste backup data into this window, then click the button below to continue.  Note that this will overwrite ALL currently saved data!");
-		setOnmouseoverPopupL1(mButton, "<b>**WARNING**</b><br /><br />This operation will overwite ALL of the existing data!");
-		addItemToDialogBoxMenu(mTextArea);
-		addItemToDialogBox(mButton);
-		showPositionSection("selectionWindow", true);
-		mTextArea.focus();
-	}
-	$$.setupImport = setupImport;
 	function sanitize(value)
 	{
 		return value.replace(/[^\x20-\x7E]+/g, "");
 	}
-	function setupExport()
+
+	function setImportData(e)
 	{
-		resetDialogBox();
-		setDialogBoxHeader("Backup");
-		
-		var mTextArea = document.createElement("textarea");
-		var mInfo = document.createElement("div");
-		var aData = LoadBuildArray();
-		mTextArea.setAttribute("class", "importExport");
-		mTextArea.readOnly = true;
-		mTextArea.innerHTML = btoa(sanitize(JSON.stringify(aData)));
-		mInfo.innerHTML = "This gibberish can be used to back up and restore your saved character data.<br /><ul><li>Press Ctrl-C to copy this data to the clipboard</li><li>Create a new text file</li><li>Press Ctrl-V to paste it into the new text file and save it</li></ul>";
-		addItemToDialogBoxMenu(mTextArea);
-		addItemToDialogBox(mInfo);
-		showPositionSection("selectionWindow", true);	
-		mTextArea.focus();
-		mTextArea.select();
+		importData(e);
 	}
-	$$.setupExport = setupExport;
+
+	function FileLoader(buttonContents, buttonClass, mimeType="", fCallback=null)
+	{
+		this.button = document.createElement("div");
+		this.button.className = "fileLoader";
+		this.button.classList.add(buttonClass);
+		this.reader = new FileReader();
+		this.callback = fCallback;
+		this.result = null;
+		var mLoaderButton = document.createElement("input");
+		mLoaderButton.type = "file";
+		mLoaderButton.id = "fileLoader" + FileLoader.indexer++;
+		mLoaderButton.name = mLoaderButton.id;
+		mLoaderButton.accept = mimeType;
+		mLoaderButton.style = "width: 0.1px; height: 0.1px; opacity: 0; position: absolute;";
+		var mStyledButton = document.createElement("label");
+		mStyledButton.setAttribute("for", mLoaderButton.id);
+		if (buttonContents instanceof HTMLElement) mStyledButton.appendChild(buttonContents);
+		else mStyledButton.innerHTML = buttonContents || "⚠ Load " + mimeType + " File";
+		this.button.appendChild(mLoaderButton);
+		this.button.appendChild(mStyledButton);
+		(function(reader, result, mimeType)
+		{
+			reader.addEventListener("load", function(e)
+			{
+				if (mimeType.includes("image"))
+				{
+					result = new Image();
+					result.src = e.target.result;
+				}
+				else
+				{
+					result = e.target.result;
+				}
+				fCallback(result);
+			});
+			mLoaderButton.addEventListener("change", function(e)
+			{
+				var mTarget = e.target;
+				if (this.accept.includes("image")) reader.readAsDataURL(mTarget.files[0]);
+				else if (this.accept.includes("text")) reader.readAsText(mTarget.files[0]);
+				else reader.readAsBinaryString(mTarget.files[0]);
+			});
+		})(this.reader, this.result, mimeType);
+	}
+	FileLoader.indexer = 0;
+	$$.FileLoader = FileLoader;
+
+	function FileSaver(fileName, data, type)
+	{
+		var file = new Blob([data], {"type":type});
+		var saver = document.createElement("a");
+		saver.href = URL.createObjectURL(file);
+		saver.download = fileName;
+		document.body.appendChild(saver);
+		saver.click();
+		setTimeout(function()
+		{
+			document.body.removeChild(saver);
+			window.URL.revokeObjectURL(saver.href);  
+		}, 0);
+	}
+	$$.FileSaver = FileSaver;
+
+	function saveExportData()
+	{
+		$$.FileSaver("hc-export-" + new Date().getTime() + ".txt", btoa(sanitize(JSON.stringify(LoadBuildArray()))), "text/plain");
+	}
 
 	function setupDelete()
 	{
@@ -1480,7 +1517,7 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 	}
 	$$.exportArchetypes = exportArchetypes;
 
-	function exportPowers()
+	function exportPowers(adv=false)
 	{
 		Aesica.exportCounter = {};
 		Aesica.powerList = [];
@@ -1494,11 +1531,9 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 		{
 			oPower = dataPower[i];
 			aOldAdvantageList = oPower.advantageList;
-			oPower.advantageList = [];
 			jLength = aOldAdvantageList.length;
 			for (j = 0; j < jLength; j++)
 			{
-				oPower.advantageList[j] = aOldAdvantageList[j].name;
 				if (Aesica.dupeCounter[aOldAdvantageList[j].name])
 				{
 					Aesica.dupeCounter[aOldAdvantageList[j].name]++;
@@ -1521,17 +1556,13 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 			if (Aesica.dupeCounter[sKey] > 1) sKey + ": " + Aesica.dupeCounter[sKey] + "\n";
 		}
 		sReturn += "Done.\n\nResults to be stored in HCData.power and HCData.advantage.\n"
-		sReturn += "Dumping powers:\n";
-		sReturn += Aesica.powerList.join(",\n");
-		sReturn += "Done.\n";
-		sReturn += "Dumping advantages:\n";
-		sReturn += Aesica.advantageList.join(",\n");
-		sReturn += "Done.\n";
+		sReturn += adv ? "Dumping power advantages:\n\n" : "Dumping powers:\n\n";
+		sReturn += adv ? Aesica.advantageList.join(",\n") : Aesica.powerList.join(",\n");
 		return sReturn;
 	}
 	$$.exportPowers = exportPowers;
 
-	function exportTPowers()
+	function exportTPowers(adv=false)
 	{
 		Aesica.exportCounter = {};
 		Aesica.powerList = [];
@@ -1540,16 +1571,14 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 		var i, iLength = dataTravelPower.length;
 		var j, jLength, oAdvantageBlob = {};
 		var oPower, aOldAdvantageList;
-		var sReturn = "Processing " + iLength + " powers...\n";
+		var sReturn = "Processing " + iLength + " travel powers...\n";
 		for (i = 0; i < iLength; i++)
 		{
 			oPower = dataTravelPower[i];
 			aOldAdvantageList = oPower.advantageList;
-			oPower.advantageList = [];
 			jLength = aOldAdvantageList.length;
 			for (j = 0; j < jLength; j++)
 			{
-				oPower.advantageList[j] = aOldAdvantageList[j].name;
 				if (Aesica.dupeCounter[aOldAdvantageList[j].name])
 				{
 					Aesica.dupeCounter[aOldAdvantageList[j].name]++;
@@ -1571,11 +1600,9 @@ Aesica.HCEngine = Aesica.HCEngine || {};
 			sKey = Object.keys(Aesica.dupeCounter)[i];
 			if (Aesica.dupeCounter[sKey] > 1) sKey + ": " + Aesica.dupeCounter[sKey] + "\n";
 		}
-		sReturn += "Done.\n\nDumping tp advantages:\n";
-		sReturn += Aesica.advantageList.join(",\n");
-		sReturn += "Done.\n\n";
-		sReturn += "Dumping tpowers:\n";
-		sReturn += Aesica.powerList.join(",\n");
+		sReturn += "Done.\n\nResults to be stored in HCData.power and HCData.advantage.\n"
+		sReturn += adv ? "Dumping travel power advantages:\n\n" : "Dumping travel powers:\n\n";
+		sReturn += adv ? Aesica.advantageList.join(",\n") : Aesica.powerList.join(",\n");
 		return sReturn;
 	}
 	$$.exportTPowers = exportTPowers;
