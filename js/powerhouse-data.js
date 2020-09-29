@@ -1431,12 +1431,16 @@ dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, n
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, null, "Power Skating", "TravelPower_MachSpeed", null, null, null, ["Secret Identity Lockbox"]);
 
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, null, "Swift Skating", "TravelPower_MachSpeed", null, null, null, ["C-Store (Limited)"]);
+
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_ATHLETICS, null, "Electric Slide", null, null, null, ["Scion Lockbox"]);
 dataTravelPower[dataTravelPower.length-1].insertAdvantage(dataPowerAlias["Energy Rush"].name, 2, dataPowerAlias["Energy Rush"].tip);
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TELEPORT, TP_UNLOCK_QSTORE, "Cold Front");
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TELEPORT, TP_UNLOCK_QSTORE, "Frost Bite");
+
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TELEPORT, null, "Retrowave", null, null, null, ["Vigilante Lockbox"]);
 
 
 
@@ -2025,6 +2029,10 @@ dataPower[dataPower.length-1].insertAdvantage("Oasis", 2, null, "On a full charg
 dataPower[dataPower.length-1].insertAdvantage("Scalding Water", 1, null, "Instead of Chill, this power now applies Clinging Flames.  %ClingingFlames%");
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
+dataPower[dataPower.length] = new Power(1, 4, 2, "Veil of Mist", 0.67, 0, 0, 0, 42, 15, "Targets Self", "Perception Debuff", "Creates a Smoke Cloud.  %SmokeCloud%<br /><br />%SCCD%");
+dataPower[dataPower.length-1].insertAdvantage("Fade Away", 2, null, "Changes this power into a threat wipe ability.  %TWAoE%");
+dataPower[dataPower.length-1].insertAdvantage("Chilled Air", 2, null, "Has a 10% chance every second to apply Chill.  %Chill%");
+
 dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Dust Devil', '<div class="Sprite Wind_DustDevil"></div>&nbsp;Dust Devil', 1, 4, pow++, 2, 'Wind, 100 foot Ranged 10 foot Sphere AoE Damage<br /><br />Requires 3 powers from Wind or 4 non-Energy Building powers from any framework.<br /><br />You conjure up a Dust Devil to fight your foe. It will chase them down, and deal damage to other nearby enemies as well.');
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
@@ -2312,7 +2320,7 @@ dataPower[dataPower.length] = new Power(2, 6, 4, "Implosion Engine", 1, 0, 0, 0,
 dataPower[dataPower.length-1].insertAdvantage("Inverse Polarization Field", 2, null, "Just before self-destructing, the polarity of the gravitational field created by Implosion Engine will reverse, sending all affected enemies flying.");
 dataPowerAlias["Implosion Engine"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(2, 6, 4, "Mechanical Monstrosity", 0.67, 1, 0, 1, 66, 60, "Targets Self", "Ultimate/Uncontrolled Pet", "Summons a Mechanical Spider.<br /><br />+ Deals heavy Slashing, Electrical, and Poison damage.<br />+ Attacks have increased threat.<br />+ Can apply Debilitating Poison to foes." + Aesica.HCEngine.powerUnlocksFrom("Spider Lockbox or " + UNLOCK_COLLECTOR, 1, UNLOCK_PURPLE_FOIL), Power.TYPE_NORMAL, true);
+dataPower[dataPower.length] = new Power(2, 6, 4, "Mechanical Monstrosity", 0.67, 1, 0, 1, 66, 60, "Targets Self", "Ultimate/Uncontrolled Pet", "Summons a Mechanical Spider.<br /><br />+ Deals heavy Slashing, Electrical, and Poison damage.<br />+ Attacks have increased threat.<br />+ Can apply Debilitating Poison to foes.  %DebilitatingPoison%" + Aesica.HCEngine.powerUnlocksFrom("Spider Lockbox or " + UNLOCK_COLLECTOR, 1, UNLOCK_PURPLE_FOIL), Power.TYPE_NORMAL, true);
 dataPowerAlias["Mechanical Monstrosity"] = new PowerAlias(dataPower[dataPower.length-1]);
 
 dataPower[dataPower.length] = new Power(2, 6, 4, "Fire All Weapons", 0.5, 5, 0.5, 0, [68,49], 60, "Targets foe (10 max)/50 feet/120 degree Cone", "Ultimate", "Hand Slot - Shoulder Slot - Chest Slot<br /><br />Deals Particle damage to all targets.", Power.TYPE_NORMAL, true);
@@ -2328,6 +2336,10 @@ dataPowerAlias["Showdown"] = new PowerAlias(dataPower[dataPower.length-1]);
 dataPower[dataPower.length] = new Power(2, 6, 4, "Arrow Assault", 0.67, 0.83, 0, 0.83, 125, 60, "100 feet/25 foot Sphere", "Ranged AoE Damage", "Deals 275 Piercing damage and all targets are Knocked Down.  After 1 sec, deals 533 Fire damage and all targets are Stunned for 4.2 sec.");
 dataPower[dataPower.length-1].insertAdvantage("Just Blow It Up", 3, null, "This power now applies Overpower instead of Knock Down and Stun.");
 dataPowerAlias["Arrow Assault"] = new PowerAlias(dataPower[dataPower.length-1]);
+
+dataPower[dataPower.length] = new Power(2, 0, 4, "Bullet Barrage", 0.3, 1.2, 0.3, 0, [55,37], 60, "Affects foe (10 max)/50 foot Sphere", "Ranged AoE Damage", "Deals 174 Piercing damage every 0.3 sec to all targets within 30 feet of you.  Deals 87 Piercing damage to foes further than 30 feet.<br /><br />Increases your Dodge and Avoidance by 25% (50% if affected by Focus) while this power is maintained.  You also gain immunity to most Control effects and 200% Knock resistance while this power is maintained.");
+dataPower[dataPower.length-1].insertAdvantage("Let The Dust Settle", 2, null, "Creates a Dust Cloud that lowers the perception of foes.");
+dataPowerAlias["Bullet Barrage"] = new PowerAlias(dataPower[dataPower.length-1]);
 
 //------------------------------------------------------------------------------
 // Power Framework: Gadgeteering
@@ -2544,6 +2556,7 @@ dataPower[dataPower.length] = dataPowerAlias["Fire All Weapons"].replicate(2, 7)
 dataPower[dataPower.length] = dataPowerAlias["Meltdown"].replicate(2, 7);
 dataPower[dataPower.length] = dataPowerAlias["Showdown"].replicate(2, 7);
 dataPower[dataPower.length] = dataPowerAlias["Arrow Assault"].replicate(2, 7);
+dataPower[dataPower.length] = dataPowerAlias["Bullet Barrage"].replicate(2, 7);
 
 //------------------------------------------------------------------------------
 // Power Framework: Munitions
@@ -2698,6 +2711,7 @@ dataPower[dataPower.length] = dataPowerAlias["Fire All Weapons"].replicate(2, 8)
 dataPower[dataPower.length] = dataPowerAlias["Meltdown"].replicate(2, 8);
 dataPower[dataPower.length] = dataPowerAlias["Showdown"].replicate(2, 8);
 dataPower[dataPower.length] = dataPowerAlias["Arrow Assault"].replicate(2, 8);
+dataPower[dataPower.length] = dataPowerAlias["Bullet Barrage"].replicate(2, 8);
 
 //------------------------------------------------------------------------------
 // Power Framework: Power Armor
@@ -2888,6 +2902,7 @@ dataPower[dataPower.length] = dataPowerAlias["Fire All Weapons"].replicate(2, 9)
 dataPower[dataPower.length] = dataPowerAlias["Meltdown"].replicate(2, 9);
 dataPower[dataPower.length] = dataPowerAlias["Showdown"].replicate(2, 9);
 dataPower[dataPower.length] = dataPowerAlias["Arrow Assault"].replicate(2, 9);
+dataPower[dataPower.length] = dataPowerAlias["Bullet Barrage"].replicate(2, 9);
 
 //------------------------------------------------------------------------------
 // Power Framework: Laser Sword
@@ -2956,6 +2971,9 @@ dataPower[dataPower.length-1].insertAdvantage("Illuminate", 2, null, "Illuminate
 dataPower[dataPower.length-1].insertAdvantage("Bad Footing", 2, null, "Disorients your targets. %Disorient%");
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
+dataPower[dataPower.length] = new Power(2, 10, 2, "Bad Sector", 1, 0, 0, 0, 11, 15, "Targets Self", "Root/Plasma Burn/Rune", "Creates a Bad Sector at your location for 10 sec.  Foes within 10 feet are Rooted for 6.7 sec.  Has a 20% chance every sec to apply Plasma Burn to targets.  %PlasmaBurn%");
+dataPower[dataPower.length-1].insertAdvantage("Analyze Weakness", 3, null, "Absorbs damage, scaling up over time, as long as you remain within the Bad Sector.");
+
 dataPower[dataPower.length] = new Power(2, 10, 2, "Power Conversion", 0, 0, 0, 0, 0, 20, "Targets Self", "Self Energy Gain/Self Debuff", "Upon activation, gain a large amount of energy.  This energy scales with your maximum energy and your Recovery.  It also applies the following effects to you for 15 sec:<br /><br/>+ Energy Equilibrium is set to 100%<br />+ Increases your energy regeneration.<br />- Your base damage and healing are reduced by -5%");
 
 dataPower[dataPower.length] = new Power(2, 10, 3, "Luminescent Slash", 0.5, 0.5, 0, 0, [37,56], 0, "Targets foe/10 feet", "Melee Damage/Snare", "Deals Particle damage and Snares your target for 3.3 sec.");
@@ -2969,6 +2987,7 @@ dataPower[dataPower.length] = dataPowerAlias["Fire All Weapons"].replicate(2, 10
 dataPower[dataPower.length] = dataPowerAlias["Meltdown"].replicate(2, 10);
 dataPower[dataPower.length] = dataPowerAlias["Showdown"].replicate(2, 10);
 dataPower[dataPower.length] = dataPowerAlias["Arrow Assault"].replicate(2, 10);
+dataPower[dataPower.length] = dataPowerAlias["Bullet Barrage"].replicate(2, 10);
 
 //------------------------------------------------------------------------------
 // Power Set: Martial Arts
@@ -3026,7 +3045,7 @@ dataPower[dataPower.length] = new Power(3, 11, -1, "Rain of Steel", [0.47,0.47,0
 dataPower[dataPower.length-1].insertAdvantage("Grinning Ghost", 2, null, "Each attack gains a 10% chance to apply Focus.<br />+ If using a Martial Arts form, you gain an additional stack of Focus.<br />+ If not using a Martial Arts form, you can only gain a stack of Focus if not already affected by it.");
 dataPower[dataPower.length-1].insertStockAdvantages("AM");
 
-dataPower[dataPower.length] = new Power(3, 11, 0, "Blade Tempest", [0.67,0.67,0.83], 0, 0, 0, [25,22,20], 0, "Targets Foe/10 feet/200 degree Cone", "Melee AoE Damage/Combo/Debuff", "Deals Slashing damage to all targets.  The final hit of the combo also applies Shredded. " + dataPowerAlias["Shredded"].tip);
+dataPower[dataPower.length] = new Power(3, 11, 0, "Blade Tempest", [0.67,0.67,0.83], 0, 0, 0, [25,22,20], 0, "Targets Foe/10 feet/200-200-200 degree Cone", "Melee AoE Damage/Combo/Debuff", "Deals Slashing damage to all targets.  The final hit of the combo also applies Shredded. " + dataPowerAlias["Shredded"].tip);
 dataPower[dataPower.length-1].insertAdvantage("Crashing Crescendo", 2, null, "Each hit with Blade Tempest gives you a +2.5% chance to Critically Hit. This bonus resets upon scoring a successful Critical Hit.");
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CC/CS");
 
@@ -3086,7 +3105,7 @@ dataPower[dataPower.length-1].insertAdvantage("Rage of the Beast", 2, null, "If 
 dataPowerAlias["Intensity"] = new PowerAlias(dataPower[dataPower.length-1]);
 dataRequireGroupPower[dataPower.length-1] = "martial arts";
 
-dataPower[dataPower.length] = new Power(3, 11, 1, "Night Warrior", 0, 0, 0, 0, 0, 0, "Passive (Offense)", "Slotted Offensive Passive", "+ Increases your damage from all sources.<br />+ Bypasses a portion of enemy damage resistance.<br />+ Increases power Charge Speed, Dodge, and Avoidance.<br />+ Unlocks the Sneak power which allows you to move around in stealth.  Some powers deal additional damage when used from Stealth.", Power.TYPE_NORMAL, true);
+dataPower[dataPower.length] = new Power(3, 11, 1, "Night Warrior", 0, 0, 0, 0, 0, 0, "Passive (Offense)", "Slotted Offensive Passive", "+ Increases your damage from all sources.<br />+ Bypasses a portion of enemy damage resistance.<br />+ Increases power Charge Speed, Dodge, and Avoidance.<br />+ Unlocks the Sneak power which allows you to move around in stealth.  Some powers deal additional damage when used from Stealth.<br />+ Unlocks the Shadow Strike power, which deals massive damage if used from stealth, or mild damage of used outside stealth.  This power cannot critically hit and has a 45 sec cooldown.", Power.TYPE_NORMAL, true);
 dataPower[dataPower.length-1].insertAdvantage("Silent Running", 1, null, "Increases your movement speed while sneaking.");
 dataPowerAlias["Night Warrior"] = new PowerAlias(dataPower[dataPower.length-1]);
 dataRequireGroupPower[dataPower.length-1] = "martial arts";
@@ -3115,6 +3134,12 @@ dataRequireGroupPower[dataPower.length-1] = "martial arts";
 
 dataPower[dataPower.length] = new Power(3, 11, 1, "Strike Down", 0.67, 0, 0, 0, 13, 3, "Targets foe/60 foot lunge", "Lunge/Snare/Knock Down", "Lunges to the target, dealing Slashing damage and Snaring them for 13 seconds.  If the target is further than 20 feet away, they are also Knocked Down if they aren't already under a control effect.");
 dataPower[dataPower.length-1].insertStockAdvantages("NG/AM/CC/CS");
+
+dataPower[dataPower.length] = new Power(3, 11, 1, "Laughing Zephyr", 0.67, 0, 0, 0, 11, 20, "Targets foe/100 feet/40 foot Lunge", "Reverse Lunge/Self Buff", "You lunge away from your target and gain 2/3/5 stacks of Charged Up.  %ChargedUp%");
+dataPower[dataPower.length-1].insertAdvantage("Slight of Mind", 2, null, "Changes Laughing Zephyr into a Threat Wipe ability, increasing its cooldown to 45 seconds.  %TWST%");
+dataPower[dataPower.length-1].insertAdvantage("Stim Pack", 2, null, "%StimPack%");
+dataPowerAlias["Laughing Zephyr"] = new PowerAlias(dataPower[dataPower.length-1]);
+dataRequireGroupPower[dataPower.length-1] = "martial arts";
 
 dataPower[dataPower.length] = new Power(3, 11, 1, "Steadfast", 0, 0, 0, 0, 0, 0, "Energy Unlock", "Innate Passive/Dexterity/Recovery", "+ Generates energy every time you land a critical hit with a non-energy-building Martial Arts power.<br />+ This effect can only occur once every 3 seconds.<br />+ The energy gained scales with your Dexterity, and to a lesser degree, your Recovery.", Power.TYPE_ENERGY_UNLOCK, true);
 dataPowerAlias["Steadfast"] = new PowerAlias(dataPower[dataPower.length-1]);
@@ -3198,7 +3223,7 @@ dataPower[dataPower.length] = new Power(3, 12, -1, "Hawk's Talons", [0.44, 0.47,
 dataPower[dataPower.length-1].insertAdvantage("Peerless Predation", 2, null, "Each attack gains a 10% chance to apply Focus.<br />+ If using a Martial Arts form, you gain an additional stack of Focus.<br />+ If not using a Martial Arts form, you can only gain a stack of Focus if not already affected by it.");
 dataPower[dataPower.length-1].insertStockAdvantages("AM");
 
-dataPower[dataPower.length] = new Power(3, 12, 0, "Viper's Fangs", [0.4,0.4,0.7], 0, 0, 0, [23,26,20], 0, "Targets foe (5 max)/10 feet/220 degree Cone", "Melee Damage/Debuff/Combo", "Deals Slashing damage to the target.  The final atttack also applies Shredded. " + dataPowerAlias["Shredded"].tip);
+dataPower[dataPower.length] = new Power(3, 12, 0, "Viper's Fangs", [0.4,0.4,0.7], 0, 0, 0, [23,26,20], 0, "Targets foe (5 max)/10 feet/220-220-220 degree Cone", "Melee Damage/Debuff/Combo", "Deals Slashing damage to the target.  The final atttack also applies Shredded. " + dataPowerAlias["Shredded"].tip);
 dataPower[dataPower.length-1].insertAdvantage("Spitting Cobra", 2, null, "Grants each attack with Viper's Fangs a chance to apply Deadly Poison. %DeadlyPoison%");
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CC/CS");
 
@@ -3245,6 +3270,9 @@ dataPower[dataPower.length] = dataPowerAlias["Thunderbolt Lunge"].replicate(3, 1
 dataRequireGroupPower[dataPower.length-1] = "martial arts";
 
 dataPower[dataPower.length] = dataPowerAlias["Smoke Bomb Lunge"].replicate(3, 12);
+dataRequireGroupPower[dataPower.length-1] = "martial arts";
+
+dataPower[dataPower.length] = dataPowerAlias["Laughing Zephyr"].replicate(3, 12);
 dataRequireGroupPower[dataPower.length-1] = "martial arts";
 
 dataPower[dataPower.length] = dataPowerAlias["Steadfast"].replicate(3, 12);
@@ -3365,9 +3393,8 @@ dataPower[dataPower.length-1].insertStockAdvantages("NG/AM/CC/CS");
 dataPower[dataPower.length] = dataPowerAlias["Smoke Bomb Lunge"].replicate(3, 13);
 dataRequireGroupPower[dataPower.length-1] = "martial arts";
 
-dataPower[dataPower.length] = new Power(3, 13, 1, "Laughing Zephyr", 0.67, 0, 0, 0, 11, 20, "Targets foe/100 feet/40 foot Lunge", "Reverse Lunge/Self Buff", "You lunge away from your target and gain 2/3/5 stacks of Charged Up.  %ChargedUp%");
-dataPower[dataPower.length-1].insertAdvantage("Slight of Mind", 2, null, "Changes Laughing Zephyr into a Threat Wipe ability, increasing its cooldown to 45 seconds.  %TWST%");
-dataPower[dataPower.length-1].insertAdvantage("Stim Pack", 2, null, "%StimPack%");
+dataPower[dataPower.length] = dataPowerAlias["Laughing Zephyr"].replicate(3, 13);
+dataRequireGroupPower[dataPower.length-1] = "martial arts";
 
 dataPower[dataPower.length] = dataPowerAlias["Steadfast"].replicate(3, 13);
 dataEnergyUnlockPower[dataPower.length-1] = true;
@@ -3494,6 +3521,9 @@ dataPower[dataPower.length] = dataPowerAlias["Thunderbolt Lunge"].replicate(3, 1
 dataRequireGroupPower[dataPower.length-1] = "martial arts";
 
 dataPower[dataPower.length] = dataPowerAlias["Smoke Bomb Lunge"].replicate(3, 14);
+dataRequireGroupPower[dataPower.length-1] = "martial arts";
+
+dataPower[dataPower.length] = dataPowerAlias["Laughing Zephyr"].replicate(3, 14);
 dataRequireGroupPower[dataPower.length-1] = "martial arts";
 
 dataPower[dataPower.length] = new Power(3, 14, 1, "Chi Manipulation", 0, 0, 0, 0, 0, 0, "Energy Unlock", "Innate Passive/Recovery/Endurance", "+ Generates energy every time you apply a Chi Energy effect.<br />+ Some Chi Energy effects are Chi Flame, Lithe, Rush, Nimble Movement, and Bountiful Chi Resurgence.<br />+ This effect can only occur once every 3 seconds.<br />+ The energy gained scales with your Recovery, and to a lesser degree, your Endurance.", Power.TYPE_ENERGY_UNLOCK);
@@ -4005,7 +4035,7 @@ dataPower[dataPower.length] = new Power(5, 17, -1, "Bludgeon", 0.5, 0, 0, 0, 0, 
 dataPower[dataPower.length-1].insertAdvantage("Until Morale Improves", 2, null, "All attacks of this combo gain a 15% chance to Disorient the primary target.");
 dataPower[dataPower.length-1].insertStockAdvantages("AM");
 
-dataPower[dataPower.length] = new Power(5, 17, 0, "Cleave", [0.83,0.83,1], 0, 0, 0, [30,27,24], 0, "Targets foe (5 max)/10 feet/360 degree Cone", "Melee AoE Damage/Combo", "Deals Crushing damage and has a 25/50/100% chance to apply Clinging Flames as well as a 30/40/50% chance to Knock Down targets, based on combo hit.  The last hit also deals an equal amount of Fire damage to targets.<br /><br />The chance to Knock Down targets is doubled if they are Disoriented.<br /><br />%ClingingFlames%");
+dataPower[dataPower.length] = new Power(5, 17, 0, "Cleave", [0.83,0.83,1], 0, 0, 0, [30,27,24], 0, "Targets foe (5 max)/10 feet/360-360-50 degree Cone", "Melee AoE Damage/Combo", "Deals Crushing damage and has a 25/50/100% chance to apply Clinging Flames as well as a 30/40/50% chance to Knock Down targets, based on combo hit.  The last hit also deals an equal amount of Fire damage to targets.<br /><br />The chance to Knock Down targets is doubled if they are Disoriented.<br /><br />%ClingingFlames%");
 dataPower[dataPower.length-1].insertAdvantage("Defensive Stance", 2, null, "If using the Defiance passive, each hit refreshes your Defiant stacks.");
 dataPower[dataPower.length-1].insertAdvantage("Rampant", 2, null, "Cleave now applies Reckless to you.  %Reckless%");
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CC/CS");
@@ -4267,12 +4297,12 @@ dataPower[dataPower.length] = new Power(5, 19, -1, "Clobber", [0.48,0.36], 0, 0,
 dataPower[dataPower.length-1].insertAdvantage("It's That Time", 2, null, "All hits have a 15% chance to apply Disorient instead of just the first.");
 dataPower[dataPower.length-1].insertStockAdvantages("AM");
 
-dataPower[dataPower.length] = new Power(5, 19, 0, "Beatdown", [0.5,0.5,0.67], 0, 0, 0, [23,21,19], 0, "Targets foe (5 max)/10 feet/180 degree Cone", "Melee Damage/Knock/Combo", "Deals 179/206/323 Crushing damage to all targets.  The last hit knocks down all targets, or if the primary target is affected by a Hold effect or Hold resistance, the primary target is Knocked Up instead.");
+dataPower[dataPower.length] = new Power(5, 19, 0, "Beatdown", [0.5,0.5,0.67], 0, 0, 0, [23,21,19], 0, "Targets foe (5 max)/10 feet/180-180-180 degree Cone", "Melee Damage/Knock/Combo", "Deals 179/206/323 Crushing damage to all targets.  The last hit knocks down all targets, or if the primary target is affected by a Hold effect or Hold resistance, the primary target is Knocked Up instead.");
 dataPower[dataPower.length-1].insertAdvantage("Blindside Blow", 2, null, "The final combo hit refreshes Demolish on the target by 12 sec and also applies Blindside to you.  %Blindside%");
 dataPower[dataPower.length-1].insertAdvantage("Reckless Endangerment", 2, null, "The final combo hit applies Reckless to you.  %Reckless%");
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CC/CS");
 
-dataPower[dataPower.length] = new Power(5, 19, 0, "Defensive Combo", [0.4,0.4,0.7], 0, 0, 0, [18,16,15], 0, "Targets foe (5 max)/10 feet/180 degree Cone", "Melee Damage/Shield/Combo", "Deals 130/149/307 Crushing damage to targets and applies a damage absorption shield to you.  This shield lasts for 3 seconds, can stack, and is applied to incoming damage after Resistance is factored in.");
+dataPower[dataPower.length] = new Power(5, 19, 0, "Defensive Combo", [0.4,0.4,0.7], 0, 0, 0, [18,16,15], 0, "Targets foe (5 max)/10 feet/180-180-180 degree Cone", "Melee Damage/Shield/Combo", "Deals 130/149/307 Crushing damage to targets and applies a damage absorption shield to you.  This shield lasts for 3 seconds, can stack, and is applied to incoming damage after Resistance is factored in.");
 dataPower[dataPower.length-1].insertAdvantage("Surge of Strength", 2, null, "Refreshes stacks of Defiant if you have the Defiance passive active.");
 dataPower[dataPower.length-1].insertAdvantage("Take a Beating", 2, null, "Has a scaling chance to apply Disorient with every hit.  %Disorient%");
 dataPower[dataPower.length-1].insertAdvantage("Pummel", 1, null, "The final combo hit has a 50% chance to Knock Down targets.  If affected by Enrage, this chance is increased to 100% on the primary target.  If the primary target is affected by a Hold or Hold Resistance, they are Knocked Up instead.");
@@ -4539,6 +4569,9 @@ dataPowerAlias["Feral Rage"] = new PowerAlias(dataPower[dataPower.length-1]);
 dataPower[dataPower.length] = new Power(6, 20, 4, "Transcendence", 1, 0.83, 0, 0.83, 119, 180, "Affects non-destructible foe (10 max)/30 foot Sphere", "Ultimate", "Heals or revives up to 10 allies for +17% Health, or +27% Health if they are affected by Illumination.<br /><br />Creates a Transcendence Rune at your location, which heals up to 10 nearby allies for a small amount every sec for 10 sec.  If they are affected by Illumination, this healing is increased by 50%.<br /><br />Fallen Allies will be revived if standing in this rune.  This can only occur once every 5 sec and can only revive one ally at a time.<br /><br />Anyone revived by this ability cannot be revived by it again for 90 sec." + Aesica.HCEngine.powerUnlocksFrom("Scion Lockbox"), Power.TYPE_NORMAL, true);
 dataPowerAlias["Transcendence"] = new PowerAlias(dataPower[dataPower.length-1]);
 
+dataPower[dataPower.length] = new Power(6, 20, 4, "Corrosive Pit", 1, 0, 0, 0, 112, 60, "Targets foe (10 max)/50 feet/60 degree Cone", "Ranged AoE Damage/Poison", "Deals 232 Toxic damage to all targets and creates a Corrosive Pit under your primary target for 16 seconds.  Every second, Corrosive Pit does the following to affected targets, up to 10 max:<br /><br />+ Deals 116 Toxic damage.<br />+ Has a 15% chance to apply Deadly Poison.  %DeadlyPoison%<br />+ Inflicts Noxious Poison on targets affected by Deadly Poison.  %NoxiousPoison%<br />+ Snares targets, reducing their movement by 100% for 3.3 sec.");
+dataPower[dataPower.length-1].insertAdvantage("Toxicity", 2, null, "This power applies Debilitating Poison on the initial hit.  %DebilitatingPoison%");
+dataPowerAlias["Corrosive Pit"] = new PowerAlias(dataPower[dataPower.length-1]);
 
 //------------------------------------------------------------------------------
 // Power Framework: Darkness
@@ -4625,6 +4658,10 @@ dataPower[dataPower.length] = new Power(6, 21, 2, "Void Horror", 0.87, 2, 0, 2, 
 dataPower[dataPower.length] = new Power(6, 21, 2, "Dark Pact", 0.83, 2, 0, 2, 30, 0, "Affects dead ally/25 foot Sphere", "Revive", "Revives a nearby ally, bringing them back to life with 33/66/100% Health, based on rank.");
 dataPower[dataPower.length-1].insertAdvantage("More Souls!", 2, null, "This power now revives up to 4 nearby allies within 50 feet.  The healing received is divided among the number of allies revived at a time.");
 
+dataPower[dataPower.length] = new Power(6, 21, 2, "Veil of Darkness", 0.67, 0, 0, 0, 42, 15, "Targets Self", "Perception Debuff", "Creates a Smoke Cloud.  %SmokeCloud%<br /><br />%SCCD%");
+dataPower[dataPower.length-1].insertAdvantage("Fade Into Darkness", 2, null, "Changes this power into a threat wipe ability.  %TWAoE%");
+dataPower[dataPower.length-1].insertAdvantage("Dark Presence", 2, null, "Has a 10% chance every sec to apply Fear.  %Fear%");
+
 dataPower[dataPower.length] = new Power(6, 21, 3, "Ebon Ruin", 0.67, 1.83, 0, 0, [42,114], 0, "Targets foe/100 feet", "Ranged Damage/Snare", "Deals Dimensional damage to the target.  On a full charge, Snares the target for 13 seconds, reducing their movement speed by 100%");
 dataPower[dataPower.length-1].insertAdvantage("Nyctophobia", 2, null, "Increases the damage of Ebon Ruin by 30% against Feared targets.");
 dataPower[dataPower.length-1].insertAdvantage("Paranormal Paranoia", 2, null, "Ebon Ruin now has a 30-100% chance to apply Fear to the target, based on charge time. %Fear%");
@@ -4663,6 +4700,7 @@ dataPower[dataPower.length] = dataPowerAlias["Endbringers Grasp"].replicate(6, 2
 dataPower[dataPower.length] = dataPowerAlias["Crashing Incantation"].replicate(6, 21);
 dataPower[dataPower.length] = dataPowerAlias["Feral Rage"].replicate(6, 21);
 dataPower[dataPower.length] = dataPowerAlias["Transcendence"].replicate(6, 21);
+dataPower[dataPower.length] = dataPowerAlias["Corrosive Pit"].replicate(6, 21);
 
 //------------------------------------------------------------------------------
 // Power Group: Sorcery
@@ -4847,6 +4885,7 @@ dataPower[dataPower.length] = dataPowerAlias["Endbringers Grasp"].replicate(6, 2
 dataPower[dataPower.length] = dataPowerAlias["Crashing Incantation"].replicate(6, 22);
 dataPower[dataPower.length] = dataPowerAlias["Feral Rage"].replicate(6, 22);
 dataPower[dataPower.length] = dataPowerAlias["Transcendence"].replicate(6, 22);
+dataPower[dataPower.length] = dataPowerAlias["Corrosive Pit"].replicate(6, 22);
 
 //------------------------------------------------------------------------------
 // Power Group: Supernatural
@@ -5057,6 +5096,11 @@ dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructo
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
 
+dataPower[dataPower.length] = new Power(6, 23, 2, "Tear Down", 1, 0, 0, 0, 60, 15, "Targets foe/25 foot Lunge", "Lunge/Bleed/Knock Down", "");
+dataPower[dataPower.length-1].insertAdvantage("Thrill of the Hunt", 2, null, "For 10 sec after Lunging, dealing direct damage applies a stack of Charged Up to you.  %ChargedUp%");
+dataPower[dataPower.length-1].insertAdvantage("Work Up", 2, null, "%StimPack%");
+dataPower[dataPower.length-1].insertStockAdvantages("AM/CC/CS");
+
 dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Massacre', '<div class="Sprite Supernatural_Massacre"></div>&nbsp;Massacre', 6, 23, pow++, 3, 'Bestial Supernatural, 10 foot Melee Single Target Damage and Knock Down<br /><br />Requires 5 powers from Bestial Supernatural or 6 non-Energy Building powers from any framework.<br /><br />You assault your foe with a powerful slash.');
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
@@ -5080,6 +5124,7 @@ dataPower[dataPower.length] = dataPowerAlias["Endbringers Grasp"].replicate(6, 2
 dataPower[dataPower.length] = dataPowerAlias["Crashing Incantation"].replicate(6, 23);
 dataPower[dataPower.length] = dataPowerAlias["Feral Rage"].replicate(6, 23);
 dataPower[dataPower.length] = dataPowerAlias["Transcendence"].replicate(6, 23);
+dataPower[dataPower.length] = dataPowerAlias["Corrosive Pit"].replicate(6, 23);
 
 //------------------------------------------------------------------------------
 // Power Framework: Infernal Supernatural
@@ -5101,7 +5146,7 @@ dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Lash', 
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'Decay', 'Decay', 2, null, 'Finishing the combo applies Debilitating Poison to the target, increasing all Elemental damage they receive by a small amount and all Toxic damage by an additional amount.'));
+dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'Decay', 'Decay', 2, null, 'Finishing the combo applies Debilitating Poison to the target.  %DebilitatingPoison%'));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(5, dataPowerAlias['CC'].name, dataPowerAlias['CC'].desc, 3, null, dataPowerAlias['CC'].tip));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(6, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
@@ -5156,7 +5201,7 @@ dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructo
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'Redemption Denied', 'Redemption Denied', 2, null, 'On a full charge, Condemn now Paralyzes your primary target and Stuns any other affected targets.'));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, 'Corrupting Force', 'Corrupting Force', 2, null, 'On a full charge, Condemn applies Debilitating Poison to the target, reducing their Toxic resistance by 12% and all Elemental resistance by 8% for 16 seconds.'));
+dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, 'Corrupting Force', 'Corrupting Force', 2, null, 'On a full charge, Condemn applies Debilitating Poison to the target.  %DebilitatingPoison%'));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(5, 'Dark Rune', 'Dark Rune', 2, null, "+ On a full charge, creates a Healing Rune at the primary target's location. " + dataPowerAlias["Healing Rune"].tip));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(6, dataPowerAlias['NG'].name, dataPowerAlias['NG'].desc, 2, null, dataPowerAlias['NG'].tip));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(7, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
@@ -5215,7 +5260,7 @@ dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructo
 dataPower[dataPower.length] = new Power(6, 24, 2, "Death's Embrace", 0.83, 2, 0, 2, 30, 0, "Affects dead ally/25 foot Sphere", "Revive", "Revives a nearby ally, bringing them back to life with 33/66/100% Health, based on rank.");
 dataPower[dataPower.length-1].insertAdvantage("Pact", 2, null, "This power now revives up to 4 nearby allies within 50 feet.  The healing received is divided among the number of allies revived at a time.");
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, "Will-o'-the-Wisp", '<div class="Sprite Supernatural_WillOTheWisp"></div>&nbsp;Will-o-the-Wisp', 6, 24, pow++, 2, "Infernal Supernatural, 100 feet, 10 foot Sphere Poison and Debuff<br /><br />Requires 3 powers from Infernal Supernatural or 4 non-Energy Building powers from any framework.<br /><br />+ Applies Debilitating Poison to your primary target.<br />+ Debilitating Poison is a type of Poison and Curse.<br />+ Applies Deadly Poison to nearby secondary targets. %DeadlyPoison%");
+dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, "Will-o'-the-Wisp", '<div class="Sprite Supernatural_WillOTheWisp"></div>&nbsp;Will-o-the-Wisp', 6, 24, pow++, 2, "Infernal Supernatural, 100 feet, 10 foot Sphere Poison and Debuff<br /><br />Requires 3 powers from Infernal Supernatural or 4 non-Energy Building powers from any framework.<br /><br />+ Applies Debilitating Poison to your primary target.  %DebilitatingPoison%<br />+ Applies Deadly Poison to nearby secondary targets. %DeadlyPoison%");
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
@@ -5297,6 +5342,7 @@ dataPower[dataPower.length] = dataPowerAlias["Endbringers Grasp"].replicate(6, 2
 dataPower[dataPower.length] = dataPowerAlias["Crashing Incantation"].replicate(6, 24);
 dataPower[dataPower.length] = dataPowerAlias["Feral Rage"].replicate(6, 24);
 dataPower[dataPower.length] = dataPowerAlias["Transcendence"].replicate(6, 24);
+dataPower[dataPower.length] = dataPowerAlias["Corrosive Pit"].replicate(6, 24);
 
 //==============================================================================
 // Specializations (set with their specialization trees)

@@ -13,7 +13,7 @@
 // system config data
 const app = 
 {
-	"version":3.43,
+	"version":3.44,
 	"releaseDate":"3/27/2020",
 	"system":
 	{
@@ -4434,7 +4434,8 @@ function showAlertMessage()
 function start()
 {
 	// Patreon button link tooltip
-	setOnmouseoverPopupL1(document.getElementById("patreonButton"), "This is basically just a tip jar you can use if you feel like it.  I maintain this thing because I find it fun (usually!) and will never require payments in order to continue hosting, updating, or maintaining it. :)");
+	// Nobody actually used it... :(
+	// setOnmouseoverPopupL1(document.getElementById("patreonButton"), "This is basically just a tip jar you can use if you feel like it.  I maintain this thing because I find it fun (usually!) and will never require payments in order to continue hosting, updating, or maintaining it. :)");
 
 	// setup preferences
 	setupPrefs();

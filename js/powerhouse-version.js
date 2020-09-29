@@ -31,6 +31,41 @@ VersionUpdate = function(id, version, funct) {
     }
 }
 
+// Everything about this update system is cursed.  Gonna make my life easier from 36 onwards...
+function pIndex(setName)
+{
+	setName = String(setName).toLowerCase();
+	const ps =
+	{
+		"electricity":1,
+		"fire":2,
+		"force":3,
+		"wind":4,
+		"ice":5,
+		"archery":6,
+		"gadgeteering":7,
+		"munitions":8,
+		"power armor":9,
+		"laser sword":10,
+		"dual blades":11,
+		"fighting claws":12,
+		"single blade":13,
+		"unarmed":14,
+		"telekinesis":15,
+		"telepathy":16,
+		"heavy weapons":17,
+		"earth":18,
+		"might":19,
+		"celstial":20,
+		"darkness":21,
+		"arcane sorcery":22,
+		"bestial":23,
+		"infernal":24,
+	};
+	let result = ps[setName];
+	if (!result && debug) console.log("Warning: Invalid setname [" + setName +"]");
+	return result;
+};
 // version update data
 // function must handle the following values for 'thing': data, pos, i, inc, code1, code2, code3, code4, archetype, superStat, innateTalent, talent, travelPower, framework, power, mask, specializationTree, specialization
 // valid values: type, pos, i, inc, code1, code2, code3, code4, archetype, superStat, innateTalent, talent, travelPower, framework, power, mask, specializationTree, specialization
@@ -1563,6 +1598,44 @@ dataVersionUpdate[dataVersionUpdate.length] = new VersionUpdate(
         case 'specializationTree': return value['specializationTree'];
         case 'specialization': return value['specialization'];
         }
+	});
+
+// version 35 => 36 wind and dark fart clouds, bad sector, useless ma lunge-away,
+// doggy mini-lunge, guns and barf ultimates
+dataVersionUpdate[dataVersionUpdate.length] = new VersionUpdate(
+	dataVersionUpdate.length, 12,
+	function(thing, value) {
+		var codeNum1 = (value['code1'] == undefined) ? 0 : urlCodeToNum(value['code1']); // framework
+		var codeNum2 = (value['code2'] == undefined) ? 0 : urlCodeToNum(value['code2']); // power
+		switch (thing) {
+		case 'data': return value['data'];
+		case 'pos': return value['pos'];
+		case 'i': return value['i'];
+		case 'inc': return value['inc'];
+		case 'code1': return value['code1'];
+		case 'code2': return value['code2'];
+		case 'code3': return value['code3'];
+		case 'code4': return value['code4'];
+		case 'archetype': return value['archetype'];
+		case 'superStat': return value['superStat'];
+		case 'innateTalent': return value['innateTalent'];
+		case 'talent': return value['talent'];
+		case 'travelPower': return value['travelPower'];
+		case 'framework': return value['framework'];
+		case 'power':
+			var power = value['power'];
+			if (codeNum1 == pIndex("Wind") && codeNum2 >= 10) power++; // veil of mist
+			if (codeNum1 == pIndex("Laser Sword") && codeNum2 >= 14) power++; // bad sector
+			if (codeNum1 == pIndex("Dual Blades") && codeNum2 >= 18) power++; // laughing zephyr (db)
+			if (codeNum1 == pIndex("Fighting Claws") && codeNum2 >= 17) power++; // laughing zephyr (fc)
+			if (codeNum1 == pIndex("Unarmed") && codeNum2 >= 20) power++; // laughing zephyr (u)
+			if (codeNum1 == pIndex("Darkness") && codeNum2 >= 20) power++; // veil of edge
+			if (codeNum1 == pIndex("Bestial") && codeNum2 >= 25) power++; // doggy lunge
+			return power;		
+		case 'mask': return value['mask']
+		case 'specializationTree': return value['specializationTree'];
+		case 'specialization': return value['specialization'];
+		}
 	});
 
 //==============================================================================
