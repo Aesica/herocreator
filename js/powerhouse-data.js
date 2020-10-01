@@ -2337,7 +2337,7 @@ dataPower[dataPower.length] = new Power(2, 6, 4, "Arrow Assault", 0.67, 0.83, 0,
 dataPower[dataPower.length-1].insertAdvantage("Just Blow It Up", 3, null, "This power now applies Overpower instead of Knock Down and Stun.");
 dataPowerAlias["Arrow Assault"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(2, 0, 4, "Bullet Barrage", 0.3, 1.2, 0.3, 0, [55,37], 60, "Affects foe (10 max)/50 foot Sphere", "Ranged AoE Damage", "Deals 174 Piercing damage every 0.3 sec to all targets within 30 feet of you.  Deals 87 Piercing damage to foes further than 30 feet.<br /><br />Increases your Dodge and Avoidance by 25% (50% if affected by Focus) while this power is maintained.  You also gain immunity to most Control effects and 200% Knock resistance while this power is maintained.");
+dataPower[dataPower.length] = new Power(2, 6, 4, "Bullet Barrage", 0.3, 1.2, 0.3, 0, [55,37], 60, "Affects foe (10 max)/50 foot Sphere", "Ranged AoE Damage", "Deals 174 Piercing damage every 0.3 sec to all targets within 30 feet of you.  Deals 87 Piercing damage to foes further than 30 feet.<br /><br />Increases your Dodge and Avoidance by 25% (50% if affected by Focus) while this power is maintained.  You also gain immunity to most Control effects and 200% Knock resistance while this power is maintained.");
 dataPower[dataPower.length-1].insertAdvantage("Let The Dust Settle", 2, null, "Creates a Dust Cloud that lowers the perception of foes.");
 dataPowerAlias["Bullet Barrage"] = new PowerAlias(dataPower[dataPower.length-1]);
 
