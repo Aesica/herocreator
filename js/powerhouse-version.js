@@ -1638,6 +1638,49 @@ dataVersionUpdate[dataVersionUpdate.length] = new VersionUpdate(
 		}
 	});
 
+// version 36 => 37 archery update + relentless pursuit
+dataVersionUpdate[dataVersionUpdate.length] = new VersionUpdate(
+	dataVersionUpdate.length, 12,
+	function(thing, value) {
+		var codeNum1 = (value['code1'] == undefined) ? 0 : urlCodeToNum(value['code1']); // framework
+		var codeNum2 = (value['code2'] == undefined) ? 0 : urlCodeToNum(value['code2']); // power
+		switch (thing) {
+		case 'data': return value['data'];
+		case 'pos': return value['pos'];
+		case 'i': return value['i'];
+		case 'inc': return value['inc'];
+		case 'code1': return value['code1'];
+		case 'code2': return value['code2'];
+		case 'code3': return value['code3'];
+		case 'code4': return value['code4'];
+		case 'archetype': return value['archetype'];
+		case 'superStat': return value['superStat'];
+		case 'innateTalent': return value['innateTalent'];
+		case 'talent': return value['talent'];
+		case 'travelPower': return value['travelPower'];
+		case 'framework': return value['framework'];
+		case 'power':
+			var power = value['power'];
+			if (codeNum1 == pIndex("Archery"))
+			{
+				if (codeNum2 == 8) power = 2; // snap shot t1 -> t0
+				else
+				{
+					if (codeNum2 >= 2) power += 3; // snap shot, desperate shot, medical arrow
+					if (codeNum2 >= 5) power++; // precision
+					if (codeNum2 >= 8) power--; // snap shot t1 -> t0
+					if (codeNum2 >= 11) power++; // caltrops
+					if (codeNum2 >= 12) power += 2; // fair game, rapid shot
+				}
+			}
+			else if (codeNum1 == pIndex("Single Blade") && codeNum2 == 31) power++; // relentless pursuit
+			return power;		
+		case 'mask': return value['mask']
+		case 'specializationTree': return value['specializationTree'];
+		case 'specialization': return value['specialization'];
+		}
+	});	
+
 //==============================================================================
 // Get Methods
 //==============================================================================

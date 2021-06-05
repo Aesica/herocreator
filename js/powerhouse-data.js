@@ -1234,7 +1234,7 @@ dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, T
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE_GOLD, 'Earth Flight');
 
-dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, TP_UNLOCK_CSTORE_GOLD, 'Lightspeed');
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, TP_UNLOCK_CSTORE_GOLD, 'Light Speed');
 dataTravelPower[dataTravelPower.length-1].insertAdvantage(dataPowerAlias['Impact'].name, 2, dataPowerAlias['Impact'].tip);
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, TP_UNLOCK_CSTORE, 'Rainbow Flight');
@@ -1442,6 +1442,10 @@ dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TELEPORT,
 
 dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_TELEPORT, null, "Retrowave", null, null, null, ["Vigilante Lockbox"]);
 
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_FLIGHT, null, "Broomstick Flight", null, null, null, ["Bloodmoon event unlock"]);
+
+dataTravelPower[dataTravelPower.length] = new TravelPower(TRAVEL_POWER_SPEED, TP_UNLOCK_CSTORE, "Scorching Speed");
+dataTravelPower[dataTravelPower.length-1].insertAdvantage("Blazing Impact", 2, dataPowerAlias["Impact"].tip);
 
 
 //==============================================================================
@@ -2214,107 +2218,90 @@ dataRequireGroup['technology'].push(6);
 
 var pow = 0;
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Strafe', '<div class="Sprite Archery_Strafe"></div>&nbsp;Strafe', 2, 6, pow++, -1, 'Archery, Energy Builder, 50 foot Ranged Single Target Damage<br /><br />Strafe fires off a series of arrows at your target.');
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2EB'].name, dataPowerAlias['R2EB'].desc, 2, null, dataPowerAlias['R2EB'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3EB'].name, dataPowerAlias['R3EB'].desc, 2, 1, dataPowerAlias['R3EB'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'Aversion', 'Aversion', 2, null, 'Scoring a Critical Hit with Strafe grants you Aversion, adding 20% of your intellect to your Dodge and Avoidance rating for 10 seconds. This can occur at most once every 20 seconds.'));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
+dataPower[dataPower.length] = new Power(2, 6, -1, "Strafe", 0.5, 0, 0, 0, 0, 0, "Targets foe/50 feet", "Energy Builder/Ranged Damage", "Deals 57 Piercing damage and generates 14% Energy with the first shot.<br /><br />Deals 81 Piercing damage and generates 20% Energy with each subsequent shot.", Power.TYPE_ENERGY_BUILDER, false, true);
+dataPower[dataPower.length-1].insertAdvantage("Aversion", 2, null, "Grants you +1 Dodge and +1 Avoidance rating for 12 sec.");
+dataPower[dataPower.length-1].insertStockAdvantages("AM");
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Straight Shot', '<div class="Sprite Archery_StraightShot"></div>&nbsp;Straight Shot', 2, 6, pow++, 0, 'Archery, 100 foot Ranged Single Target Damage (Blast)<br /><br />You fire a single arrow with deadly precision.');
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'Split the Arrow', 'Split the Arrow', 2, null, 'Your pinpoint accuracy allows you to target the exact location you strike with this arrow, increasing the damage resistance reduction your target suffers, and causing it to affect your next 4 non-energy building direct damage Archery attacks.'));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(5, dataPowerAlias['CC'].name, dataPowerAlias['CC'].desc, 3, null, dataPowerAlias['CC'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(6, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
+dataPower[dataPower.length] = new Power(2, 6, 0, "Straight Shot", 0.67, 1.33, 0, 0, [23,50], 0, "Targets foe/100 feet", "Ranged Damage/Blast/Root", "Deals 180-511 Piercing Damage and has a 35-100% chance (based on charge time) to Root your target for 13 sec.");
+dataPower[dataPower.length-1].insertAdvantage("Split the Arrow", 2, null, "Fully charging this power applies Armor Piercing to the target. %ArmorPiercing%");
+dataPower[dataPower.length-1].insertAdvantage("USB Arrow", 1, null, "This power now applies Download to you.  %Download%");
+dataPower[dataPower.length-1].insertAdvantage("Dizzying Impact", 2, null, "Has a 35-100% chance (based on charge time) to apply Disorient to your target.  %Disorient%");
+dataPower[dataPower.length-1].insertStockAdvantages("AM/CC/CS");
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Taser Arrow', '<div class="Sprite Archery_TaserArrow"></div>&nbsp;Taser Arrow', 2, 6, pow++, 1, 'Archery, 100 foot Ranged Single Target Damage and Hold<br /><br />Requires 1 power from Archery or 2 non-Energy Building powers from any framework.<br /><br />Taser Arrow fits your arrow with an electrically charged tip delivering a powerful jolt when it strikes your target.');
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'Aftershock', 'Aftershock', 2, null, 'Causes your target to lose Energy and suffer additional Electrical Damage over Time.'));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
+dataPower[dataPower.length] = new Power(2, 6, 0, "Snap Shot", [0.5,0.67,0.83], 0, 0, 0, [10,9.2,8.2], 0, "Targets foe/100 feet", "Ranged Damage/Combo", "Deals 104/161/234 Piercing Damage (based on combo hit) to the target, with 25% additional damage dealt if the target is below 25% health.  The third hit applies Disorient.  %Disorient%");
+dataPower[dataPower.length-1].insertAdvantage("Finish Him", 2, null, "Fishing the combo applies Finisher to you.  Finisher increase the damage of your archery powers by 15% against targets below 25% health and lasts 8 seconds.");
+dataPower[dataPower.length-1].insertAdvantage("Floating Lotus Blossom", 2, null, "Finishing this combo causes your Archery powers to apply Quick Maneuvering to you for the next 10 seconds.  %QuickManeuvering%");
+dataPower[dataPower.length-1].insertAdvantage("Frail Armor", 2, null, "Refreshes your Armor Piercing debuff by up to 15 seconds.");
+dataPower[dataPower.length-1].insertStockAdvantages("AM/CC/CS");
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Sonic Arrow', '<div class="Sprite Archery_SonicArrow"></div>&nbsp;Sonic Arrow', 2, 6, pow++, 1, 'Archery, 100 foot Ranged 10 foot Sphere AoE Damage and Stun<br /><br />Requires 1 power from Archery or 2 non-Energy Building powers from any framework.<br /><br />Sonic Arrow fires a specialized arrow at your target emitting a concentrated blast of noise when it strikes the target.');
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'Deadly Dissonance', 'Deadly Dissonance', 2, null, 'Increases the Sonic AoE damage dealt by Sonic Arrow by 50% and will now Stun all targets on a full charge instead of just the selected target.'));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(5, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(6, dataPowerAlias['NG'].name, dataPowerAlias['NG'].desc, 2, null, dataPowerAlias['NG'].tip));
+dataPower[dataPower.length] = new Power(2, 6, 1, "Desperate Shot", 1.67, 0, 0, 0, 46, 10, "Targets foe/100 feet", "Ranged Damage", "Deals 504 Piercing Damage to the target.  Deals 100% increased damage on a critical hit.  When used with less than 50% Health, deals double damage and Stuns the target for 1.7 sec.");
+dataPower[dataPower.length-1].insertAdvantage("Stim Pack", 2, null, "%StimPack%");
+dataPower[dataPower.length-1].insertStockAdvantages("NG/AM/CC");
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Quarry', '<div class="Sprite Archery_Quarry"></div>&nbsp;Quarry', 2, 6, pow++, 1, 'Archery, Slotted Offensive Passive<br /><br />Requires 1 power from Archery or 2 non-Energy Building powers from any framework.<br /><br />Nothing escapes your notice and once you target something, running it down is only a matter of time.');
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'Fair Game', 'Fair Game', 2, null, 'When the target of your Quarry dies, you gain a small amount of Health. The amount of Health you gain scales with your Constitution.'));
+dataPower[dataPower.length] = new Power(2, 6, 1, "Medical Arrow", 1, 0, 0, 0, 26, 10, "Targets foe/100 feet", "Ranged Damage/Heal/Rune/Enhancement", "Deals 174 Piercing damage to the target and creates a Healing Rune at their location.  %HealingRune%");
+dataPower[dataPower.length-1].insertAdvantage("Dizzying Impact", 2, null, "Applies Disorient to the target.  %Disorient%");
+dataPower[dataPower.length-1].insertAdvantage("Illuminate", 2, null, "+ Applies Illumination to allies near the target.  %Illumination%<br />+ Applies Illuminated to the target.  %Illuminated%");
+dataPower[dataPower.length-1].insertAdvantage("USB Arrow", 1, null, "This power applies Download to you.  %Download%");
+dataPower[dataPower.length-1].insertStockAdvantages("AM");
 
-//dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, dataPowerAlias['Concentration'].name, dataPowerAlias['Concentration'].desc, 2, 6, pow++, 1, dataPowerAlias['Concentration'].tip);
+dataPower[dataPower.length] = new Power(2, 6, 1, "Taser Arrow", 0.5, 2, 0, 2, 54, 0, "Targets foe/100 feet", "Ranged Damage/Paralyze", "Deals 149 Piercing Damage, 448 Electrical Damage, and Paralyzes the target for 12 sec.");
+dataPower[dataPower.length-1].insertAdvantage("Aftershock", 2, null, "Applies Superconductor to your target.  %Superconductor%");
+dataPower[dataPower.length-1].insertAdvantage("Electric Field", 2, null, "On full charge, summons a Static Field for 10 sec.  Standing in the Static Field grants up to 5 allies +6.7 Energy every sec and depletes the Energy of foes by -6.7 every sec.");
+dataPower[dataPower.length-1].insertStockAdvantages("AM");
+
+dataPower[dataPower.length] = new Power(2, 6, 1, "Sonic Arrow", 0.67, 1.83, 0, 0, [19,51], 10, "Targets foe (5 max)/100 feet/10 foot Sphere", "Ranged AoE Damage/Stun/Paralyze", "Deals 69-247 Piercing Damage to the main target and 69-247 Sonic Damage to all targets, based on charge time.<br /><br />When not fully charged, Stuns affected targets for 1.7 sec.<br /><br />When fully charged, applies Paralyze to affected targets for 12 sec.");
+dataPower[dataPower.length-1].insertAdvantage("Deadly Dissonance", 2, null, "Applies Deafening to your primary target when partially charged, or to all targets when fully charged.  %Deafening%");
+dataPower[dataPower.length-1].insertAdvantage("Dizzying Impact", 2, null, "Has a 27-100% chance (based on charge time) to apply Disorient to affected targets.  %Disorient%");
+dataPower[dataPower.length-1].insertStockAdvantages("NG/AM/CS");
+
+dataPower[dataPower.length] = new Power(2, 6, 1, "Quarry", 0, 0, 0, 0, 0, 0, "Passive (Offense)", "Slotted Offensive Passive", "+ Increases your Physical damage.<br />+ Increases your Non-Physical damage by a lesser amount.<br />+ Increases your Dodge Chance by a small amount.<br />+ When using non-energy-builder attacks, you gain a stack of Audacity.  Audacity increases your Avoidance, Intelligence, and Ego by a small amount and can stack up to 3 times.");
+
+dataPower[dataPower.length] = new Power(2, 6, 1, "Precision", 1, 2.5, 0, 2.5, 20, 0, "Form (Intelligence)", "Buff/Form/Analyze", "Gives you a stacking buff that increases your ranged damage, as well as your melee damage to a lesser degree.<br /><br />+ You gain a stack each time you deal a Critical Hit with an Archery power.<br />+ Each time you gain a stack, existing stacks are refreshed and you gain energy.<br />+ Stacks up to 8 times, lasts 20 seconds, and can only gain 1 stack every 4 seconds.<br />- Increases energy costs by 10%.", Power.TYPE_FORM);
+
 dataPower[dataPower.length] = new Power(2, 6, 1, "Concentration", 1, 2.5, 0, 2.5, 20, 0, "Form (Intelligence or Ego)", "Buff/Form/Concentration", "Gives you a stacking buff that increases your ranged damage, as well as your melee damage to a lesser degree.<br /><br />+ You gain a stack each time you maintain or charge a ranged power at least halfway, or when you hit a target at least 25 feet away.<br />+ Each time you gain a stack, existing stacks are refreshed and you gain energy.<br />+ Stacks up to 8 times, lasts 20 seconds, and can only gain 1 stack every 4 seconds.<br />- Increases energy costs by 10%.", Power.TYPE_FORM, true);
 dataPowerAlias["Concentration"] = new PowerAlias(dataPower[dataPower.length-1]);
 dataRequireGroupPower[dataPower.length-1] = 'technology';
-//dataReplacePower[dataPower.length-1] = DATAREPLACEPOWER_CONCENTRATION;
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Evasive Maneuvers', '<div class="Sprite Archery_EvasiveManeuvers"></div>&nbsp;Evasive Maneuvers', 2, 6, pow++, 1, 'Archery, Self Buff<br /><br />Requires 1 power from Archery or 2 non-Energy Building powers from any framework.<br /><br />Evasive Maneuvers causes you to lunge backwards to put distance between you and your foe.');
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'Sleight of Mind', 'Sleight of Mind', 2, null, 'Evasive Maneuvers has a 50% chance to wipe all threat from you and places you in Stealth for 3 seconds.'));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, dataPowerAlias['SP'].name, dataPowerAlias['SP'].desc, 2, null, dataPowerAlias['SP'].tip));
+dataPower[dataPower.length] = new Power(2, 6, 1, "Evasive Maneuvers", 0.67, 0, 0, 0, 9.7, 18, "Targets foe/100 feet/40 foot lunge", "Reverse Lunge/Self Buff", "You lunge away from the target and gain Evasive Maneuvers, increasing your Dodge Chance for 6 sec.");
+dataPower[dataPower.length-1].insertAdvantage("Slight of Mind", 2, null, "Changes this power into a threat wipe, increasing the cooldown to 45 sec, wipes all threat from your Primary Target, and places you in stealth  briefly.  This effect can only occur once every 30 seconds.");
+dataPower[dataPower.length-1].insertAdvantage("Stim Pack", 2, null, "%StimPack%");
 
-dataPower[dataPower.length] = new Power(2, 6, 1, "Hunter's Instinct", 0, 0, 0, 0, 0, 0, "Energy Unlock", "Innate Passive/Ego/Recovery", "+ Generates energy every time you deal damage with a non-energy-building Archery power.<br />+ This effect can only occur once every 3 seconds.<br />+ The energy gained scales with your Ego, and to a lesser degree, your Recovery.", Power.TYPE_ENERGY_UNLOCK);
+dataPower[dataPower.length] = new Power(2, 6, 1, "Hunter's Instinct", 0, 0, 0, 0, 0, 0, "Energy Unlock", "Innate Passive/Ego/Recovery", "+ Generates energy every 3 seconds over 6 seconds each time you deal a critical hit with a damag-dealing Archery power.<br />+ The energy gained scales with your Intelligence, and to a lesser degree, your Recovery.", Power.TYPE_ENERGY_UNLOCK);
 dataEnergyUnlockPower[dataPower.length-1] = true;
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Snap Shot', '<div class="Sprite Archery_SnapShot"></div>&nbsp;Snap Shot', 2, 6, pow++, 2, 'Archery, 100 foot Ranged Single Target Damage<br /><br />Requires 3 powers from Archery or 4 non-Energy Building powers from any framework.<br /><br />A quick shot designed to take advantage of any opening your target gives you.');
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'Finish Him', 'Finish Him', 2, null, 'Your ability to finish off a weakened foe is increased, and Snap Shot now has an additional 35% damage bonus on targets below 25% Health.'));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(5, dataPowerAlias['CC'].name, dataPowerAlias['CC'].desc, 3, null, dataPowerAlias['CC'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(6, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
+dataPower[dataPower.length] = new Power(2, 6, 2, "Storm of Arrows", 1, 5, 1, 0, [37,27], 0, "Targets foe (7 max)/100 feet/15 foot Sphere", "Ranged AoE Damage", "");
+dataPower[dataPower.length-1].insertAdvantage("Achilles' Heel", 2, null, "Targets are Rooted for 13 sec, and the duration of your Roots on the target are increased by 0.83 sec every hit.");
+dataPower[dataPower.length-1].insertAdvantage("Break Formation", 2, null, "Each hit has a 15% chance to apply Disorient to targets, or 100% when fully maintained.  %Disorient%");
+dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Storm of Arrows', '<div class="Sprite Archery_StormOfArrows"></div>&nbsp;Storm of Arrows', 2, 6, pow++, 2, 'Archery, 100 foot Ranged 15 foot Sphere AoE Damage<br /><br />Requires 3 powers from Archery or 4 non-Energy Building powers from any framework.<br /><br />Storm of Arrows fires a continuous volley of arrows at your target, striking them and any other targets around them.');
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, "Achilles' Heel", "Achilles' Heel", 2, null, "Storm of Arrows pins all enemies in the area under attack to the ground, Rooting them in place and repairing the duration of your Roots on the target."));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(5, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
+dataPower[dataPower.length] = new Power(2, 6, 2, "Torrent of Arrows", 0.67, 1.83, 0, 0, [55,134], 0, "Targets foe (5 max)/100 feet/30 degree Cone", "Ranged AoE Damage/Knock", "Deals 196-696 Piercing Damage and has a 34-100% chance (based on charge time) to Knock Down targets.");
+dataPower[dataPower.length-1].insertAdvantage("Relentless Recurve", 2, null, "Knocks back affected targets instead of knocking them down.");
+dataPower[dataPower.length-1].insertAdvantage("Overwhelming Force", 2, null, "Fully charging this power applies Armor Piercing to your primary target as well as any secondary targets affected by Disorient.  %ArmorPiercing%");
+dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Torrent of Arrows', '<div class="Sprite Archery_TorrentOfArrows"></div>&nbsp;Torrent of Arrows', 2, 6, pow++, 2, 'Archery, 100 foot Ranged 30 degree Cone AoE Damage<br /><br />Requires 3 powers from Archery or 4 non-Energy Building powers from any framework.<br /><br />Torrent of Arrows uses your archery skills to fire off multiple arrows in a cone in front of you in a single shot.');
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'Relentless Recurve', 'Relentless Recurve', 2, null, 'Torrent of Arrows Knocks Back all opponents hit by it.'));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(5, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
+dataPower[dataPower.length] = new Power(2, 6, 2, "Caltrops", 0.67, 0, 0, 0, 27, 10, "Targets self", "Ranged AoE Damage/Snare", "Create a patch of Caltrops in front of you, dealing 45 Piercing Damage every sec for 16 sec to each target within the area of effect. Affected targets are also Snared, reducing their movement speed by 100% for 3.3 sec.");
+dataPower[dataPower.length-1].insertAdvantage("Spikes", 2, null, "Caltrops now has a 5% chance to inflict Bleed on affected targets.  %Bleed%");
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Focused Shot', '<div class="Sprite Archery_FocusedShot"></div>&nbsp;Focused Shot', 2, 6, pow++, 3, 'Archery, 120 foot Ranged 3 foot Cylinder AoE Damage<br /><br />Requires 5 powers from Archery or 6 non-Energy Building powers from any framework.<br /><br />Focused Shot allows you to carefully aim your next shot and land your attack precisely where you intend.');
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'Ballista Bolt', 'Ballista Bolt', 2, null, 'Focused Shot will pierce through enemies hitting any additional enemies in line with your initial target.'));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
+dataPower[dataPower.length] = new Power(2, 6, 3, "Focused Shot", 1, 3, 0, 3, 72, 0, "Targets foe/120 feet", "Ranged Damage", "Deals 1170 Piercing Damage to the target.  Fully charging this power applies Total Focus to you, reducing this power's charge time by 15% for 10 seconds.  Stacks up to 3 times.  Taking any damage will interrupt this power and remove all stacks of Total Focus.");
+dataPower[dataPower.length-1].insertAdvantage("Ballista Bolt", 2, null, "This power now hits up to 3 targets in a 3 foot cylinder.");
+dataPower[dataPower.length-1].insertStockAdvantages("AM");
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Explosive Arrow', '<div class="Sprite Archery_ExplosiveArrow"></div>&nbsp;Explosive Arrow', 2, 6, pow++, 3, 'Archery, 100 foot Ranged 10 foot Sphere AoE Damage<br /><br />Requires 5 powers from Archery or 6 non-Energy Building powers from any framework.<br /><br />Explosive Arrow fits one of your arrows with an explosive tip, causing the arrow to explode when it strikes your target. ');
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, "Where's the Kaboom?", "Where's the Kaboom?", 2, null, "Explosive Arrow deals an initial amount of Piercing damage and delays the explosive effect for several seconds."));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(5, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
+dataPower[dataPower.length] = new Power(2, 6, 2, "Fair Game", 0, 0, 0, 0, 19, 15, "Targets self", "Self Heal Over Time", "For the next 15 seconds, defeating a foe heals you for 59 Health Points every 2 sec over 6 sec, stacking up to 5 times.  %SHOTCD%");
+dataPower[dataPower.length-1].insertAdvantage("Lithe", 2, null, "Defeating a foe gives you +12% Dodge Chance for 12 sec.");
 
-dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, 'Gas Arrow', '<div class="Sprite Archery_GasArrow"></div>&nbsp;Gas Arrow', 2, 6, pow++, 3, 'Archery, 100 foot Ranged 15 foot Sphere AoE Damage<br /><br />Requires 5 powers from Archery or 6 non-Energy Building powers from any framework.<br /><br />You launch an arrow filled with a dangerous mixture of toxins.');
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(0, null, null, null, null, null));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(1, dataPowerAlias['R2'].name, dataPowerAlias['R2'].desc, 2, null, dataPowerAlias['R2'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'Noxious Fumes', 'Noxious Fumes', 2, null, 'You focus the chemical mixture of your Gas Arrow to overwhelm the senses of your targets. This causes them to be Snared while inside the cloud, and they also have a 10% chance every second they are in the cloud to become Stunned for a short time.'));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(5, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
+dataPower[dataPower.length] = new Power(2, 6, 3, "Rapid Shots", 0.5, 5, 0.5, 0, [28,20], 0, "Targets foe/100 feet", "Ranged Damage/Snare", "Deals 174 Piercing Damage to the target every 0.5 sec.  Has a 15% chance, or 100% chance when fully maintained, to Snare the target, reducing their movement speed by 100% for 13 sec.");
+dataPower[dataPower.length-1].insertAdvantage("Concentrated Shots", 2, null, "Increases the base damage of this power by 25%, but you can no l no longer move while maintaining it.");
+dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
+
+dataPower[dataPower.length] = new Power(2, 6, 3, "Explosive Arrow", 0.67, 1.83, 0, 0, [45,106], 0, "Targets foe (5 max)/100 feet/10 foot Sphere", "Ranged AoE Damage", "Deals 180-638 Fire Damage and has a 27-100% chance (based on charge time) to Knock Up affected targets.");
+dataPower[dataPower.length-1].insertAdvantage("Where's the Kaboom?", 2, null, "This power now deals 45-160 Piercing Damage to the target, then 135-514 Fire Damage to all nearby targets after a 3.5 sec delay.");
+dataPower[dataPower.length-1].insertAdvantage("Scorched Ground", 2, null, "Creates a Pyre Patch at the target's location.  %PyrePatch%");
+dataPower[dataPower.length-1].insertAdvantage("Concussive Force", 1, null, "The Fire damage portion of this ability is now dealt as Crushing damage.");
+dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
+
+dataPower[dataPower.length] = new Power(2, 6, 3, "Gas Arrow", 0.67, 0, 0, 0, 49, 15, "Targets foe (5 max)/100 feet/15 foot Sphere", "Ranged AoE Damage/DoT/Perception Debuff", "Creates a Gas Cloud at the target's location for 12 sec.  Deals 82 Toxic Damage every sec to affected foes and reduces their Perception by 200%.  %SCCD%");
+dataPower[dataPower.length-1].insertAdvantage("Noxious Fumes", 2, null, "Has a 10% (25% if Disoriented) chance every sec to Stun affected targets.");
+dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
 dataPower[dataPower.length] = new Power(2, 6, 4, "Implosion Engine", 1, 0, 0, 0, 102, 60, "Targets foe/100 feet", "Ultimate/Ranged AoE Damage/Reverse Repel/Snare", "You throw an Implosion Engine, a device that generates a massive gravitational vortex in a very small area, sucking in nearby matter, and dealing significant Dimensional damage.<br /><br />CLICK<br />+ Create and throw an Implosion Engine at your target, dealing Crushing damage from the massive gravity waves, pulling them toward the Engine.<br />- This power is incapable of getting a Critical Hit.", Power.TYPE_NORMAL, true);
 dataPower[dataPower.length-1].insertAdvantage("Inverse Polarization Field", 2, null, "Just before self-destructing, the polarity of the gravitational field created by Implosion Engine will reverse, sending all affected enemies flying.");
@@ -2333,11 +2320,11 @@ dataPower[dataPower.length] = new Power(2, 6, 4, "Showdown", 0.5, 5, 0.5, 0, [56
 dataPower[dataPower.length-1].insertAdvantage("You Clean, We'll Sweep", 1, null, "%UltimateChallenge%");
 dataPowerAlias["Showdown"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(2, 6, 4, "Arrow Assault", 0.67, 0.83, 0, 0.83, 125, 60, "100 feet/25 foot Sphere", "Ranged AoE Damage", "Deals 275 Piercing damage and all targets are Knocked Down.  After 1 sec, deals 533 Fire damage and all targets are Stunned for 4.2 sec.");
+dataPower[dataPower.length] = new Power(2, 6, 4, "Arrow Assault", 0.67, 0.83, 0, 0.83, 125, 60, "100 feet/25 foot Sphere", "Ranged AoE Damage", "Deals 275 Piercing damage and all targets are Knocked Down.  After 1 sec, deals 533 Fire damage and all targets are Stunned for 4.2 sec.", Power.TYPE_NORMAL, true);
 dataPower[dataPower.length-1].insertAdvantage("Just Blow It Up", 3, null, "This power now applies Overpower instead of Knock Down and Stun.");
 dataPowerAlias["Arrow Assault"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(2, 6, 4, "Bullet Barrage", 0.3, 1.2, 0.3, 0, [55,37], 60, "Affects foe (10 max)/50 foot Sphere", "Ranged AoE Damage", "Deals 174 Piercing damage every 0.3 sec to all targets within 30 feet of you.  Deals 87 Piercing damage to foes further than 30 feet.<br /><br />Increases your Dodge and Avoidance by 25% (50% if affected by Focus) while this power is maintained.  You also gain immunity to most Control effects and 200% Knock resistance while this power is maintained.");
+dataPower[dataPower.length] = new Power(2, 6, 4, "Bullet Barrage", 0.3, 1.2, 0.3, 0, [55,37], 60, "Affects foe (10 max)/50 foot Sphere", "Ranged AoE Damage", "Deals 174 Piercing damage every 0.3 sec to all targets within 30 feet of you.  Deals 87 Piercing damage to foes further than 30 feet.<br /><br />Increases your Dodge and Avoidance by 25% (50% if affected by Focus) while this power is maintained.  You also gain immunity to most Control effects and 200% Knock resistance while this power is maintained.", Power.TYPE_NORMAL, true);
 dataPower[dataPower.length-1].insertAdvantage("Let The Dust Settle", 2, null, "Creates a Dust Cloud that lowers the perception of foes.");
 dataPowerAlias["Bullet Barrage"] = new PowerAlias(dataPower[dataPower.length-1]);
 
@@ -3433,6 +3420,11 @@ dataPower[dataPower.length] = new Power(3, 13, 3, "Reaper's Embrace", 0.83, 0.67
 dataPower[dataPower.length-1].insertAdvantage("No Mercy", 2, null, "Instead of consuming just Bleeds, this power now consumes all Wound effects.  Bleeding, Shredded, Open Wound, Swallowtail Cut, and Deep Wound are all considered Wounds.  For each Wound consumed, deals Slashing damage initially, followed by 2 subsequent hits over 4 seconds for 50% of the original hit's damage.  This damage over time cannot be Dodged and cannot be refreshed or reapplied while active.");
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
+dataPower[dataPower.length] = new Power(3, 13, 3, "Relentless Pursuit", 0.5, 4, 0.5, 0, [34,22], 0, "Targets foe/15 foot Lunge", "Melee Damage/Lunge/Root", "Lunge to your target and deal 249 Slashing Damage every 0.5 sec.  This power will continue to do damage if the target remains within a 10 foot range.  While maintained, the target is rooted for 4.7 sec.");
+dataPower[dataPower.length-1].insertAdvantage("Single Minded", 2, null, "Increases this power's damage by 10% for 10 seconds each time this power is fully maintained.  Stacks up to 3 times, and at 3 stacks, fully maintaining this power refreshes all existing stacks.");
+dataPower[dataPower.length-1].insertAdvantage("Open Wound", 2, null, "Inflicts Open Wound on the target. %OpenWound%");
+dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
+
 dataPower[dataPower.length] = dataPowerAlias["Shuriken Storm"].replicate(3, 13);
 dataRequireGroupPower[dataPower.length-1] = "martial arts";
 
@@ -4117,6 +4109,8 @@ dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
 dataPower[dataPower.length] = new Power(5, 17, 3, "Brimstone", 0.83, 1.17, 0, 0, 43, 0, "Affects foe (5 max)/10 foot Sphere", "Melee AoE Damage/Knock Down/Disorient", "Deals Crushing and Fire damage to affected targets, they are Knocked Down, and have a 50% chance to be affected by Disorient.  %Disorient%");
 dataPower[dataPower.length-1].insertAdvantage("Aftershock", 2, null, "Fully charing Brimstone now creates a Pyre Patch. %PyrePatch%");
+dataPower[dataPower.length-1].insertAdvantage("Thundering Roar", 2, null, "Has a 21-50% chance (based on charge time) to Stun all targets for 1.7 sec.  This chance is guaranteed if the target is affecteed by Clinging Flames.  Removes all Clinging Flames from affected foes and replaces them with Negative Ions.");
+dataPower[dataPower.length-1].insertAdvantage("Lightning Rod", 2, null, "Foes affected by Negative Ions are Knocked To you.  Also grants you Aegis.  %Aegis%");
 dataPower[dataPower.length-1].insertStockAdvantages("AM/CS");
 
 dataPower[dataPower.length] = new Power(5, 17, 4, "Unleashed Rage", 1, 0, 0, 0, 112, 60, "Affects foe (10 max)/15 foot Sphere", "Ultimate/Melee AoE Damage/Knock Down/Fear", "Deals 354 Crushing damage to targets.  This damage is increased for every stack of Enrage you have.  Additionally, targets are Knocked Down and Disoriented.  %Disorient%", Power.TYPE_NORMAL, true);
@@ -4135,8 +4129,8 @@ dataPowerAlias["Catastrophic Pummeling"] = new PowerAlias(dataPower[dataPower.le
 dataPower[dataPower.length] = new Power(5, 17, 4, "Final Punch", 0.67, 2.33, 0, 2.33, 107, 60, "Targets foe (10 max)/5 foot Sphere", "Melee Damage/Knock Back/Ultimate", "Deals 896 Crushing damage to your primary target.  This damage scales based on the number of Enrage stacks on you.  Affected targets are Knocked Back 69 feet.<br /><br />Consumes all of your form stacks when used.", Power.TYPE_NORMAL, true);
 dataPowerAlias["Final Punch"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(5, 17, 4, "Earthquake", 0.67, 0.83, 0, 0.83, 111, 60, "Targets non-destructible foe/50 feet", "Ranged AoE Damage/Ultimate", "Creates <i>an</i> Earthquake at your location for 12 seconds.  This Earthquake deals 224 Crushing damage every sec for 12 sec to targets in a 15 foot radius, or 149 Crushing damage to targets further than 15 feet.  Hits a maximum of 10 targets.<br /><br />Affected targets are also Knocked Up every 2 sec.  Foes affected by Stagger have their movement speed reduced by 120%.<br /><br />Increases the resistance bonus of Stone Shroud by 10% if you are standing in the effect radius of this power.", Power.TYPE_NORMAL, true);
-dataPower[dataPower.length-1].insertAdvantage("Molten Core", 2, null, "NYI");
+dataPower[dataPower.length] = new Power(5, 17, 4, "Earthquake", 0.67, 0.83, 0, 0.83, 111, 60, "Targets non-destructible foe/50 feet", "Ranged AoE Damage/Ultimate", "Creates <i>an</i> Earthquake at your location for 12 seconds.  This Earthquake deals 210 Crushing damage every sec for 12 sec to targets in a 15 foot radius, or 140 Crushing damage to targets further than 15 feet.  Hits a maximum of 10 targets.<br /><br />Affected targets are also Knocked Up every 2 sec.  Foes affected by Stagger have their movement speed reduced by 120%.<br /><br />Increases the resistance bonus of Stone Shroud by 10% if you are standing in the effect radius of this power.", Power.TYPE_NORMAL, true);
+dataPower[dataPower.length-1].insertAdvantage("Molten Core", 2, null, "Remove the Crushing Damage portion and greatly increases the Fire Damage portion of your Fissure while Earthquake is active.");
 dataPower[dataPower.length-1].insertStockAdvantages("NG");
 dataPowerAlias["Earthquake"] = new PowerAlias(dataPower[dataPower.length-1]);
 
@@ -4569,7 +4563,7 @@ dataPowerAlias["Feral Rage"] = new PowerAlias(dataPower[dataPower.length-1]);
 dataPower[dataPower.length] = new Power(6, 20, 4, "Transcendence", 1, 0.83, 0, 0.83, 119, 180, "Affects non-destructible foe (10 max)/30 foot Sphere", "Ultimate", "Heals or revives up to 10 allies for +17% Health, or +27% Health if they are affected by Illumination.<br /><br />Creates a Transcendence Rune at your location, which heals up to 10 nearby allies for a small amount every sec for 10 sec.  If they are affected by Illumination, this healing is increased by 50%.<br /><br />Fallen Allies will be revived if standing in this rune.  This can only occur once every 5 sec and can only revive one ally at a time.<br /><br />Anyone revived by this ability cannot be revived by it again for 90 sec." + Aesica.HCEngine.powerUnlocksFrom("Scion Lockbox"), Power.TYPE_NORMAL, true);
 dataPowerAlias["Transcendence"] = new PowerAlias(dataPower[dataPower.length-1]);
 
-dataPower[dataPower.length] = new Power(6, 20, 4, "Corrosive Pit", 1, 0, 0, 0, 112, 60, "Targets foe (10 max)/50 feet/60 degree Cone", "Ranged AoE Damage/Poison", "Deals 232 Toxic damage to all targets and creates a Corrosive Pit under your primary target for 16 seconds.  Every second, Corrosive Pit does the following to affected targets, up to 10 max:<br /><br />+ Deals 116 Toxic damage.<br />+ Has a 15% chance to apply Deadly Poison.  %DeadlyPoison%<br />+ Inflicts Noxious Poison on targets affected by Deadly Poison.  %NoxiousPoison%<br />+ Snares targets, reducing their movement by 100% for 3.3 sec.");
+dataPower[dataPower.length] = new Power(6, 20, 4, "Corrosive Pit", 1, 0, 0, 0, 112, 60, "Targets foe (10 max)/50 feet/60 degree Cone", "Ranged AoE Damage/Poison", "Deals 232 Toxic damage to all targets and creates a Corrosive Pit under your primary target for 16 seconds.  Every second, Corrosive Pit does the following to affected targets, up to 10 max:<br /><br />+ Deals 116 Toxic damage.<br />+ Has a 15% chance to apply Deadly Poison.  %DeadlyPoison%<br />+ Inflicts Noxious Poison on targets affected by Deadly Poison.  %NoxiousPoison%<br />+ Snares targets, reducing their movement by 100% for 3.3 sec.", Power.TYPE_NORMAL, true);
 dataPower[dataPower.length-1].insertAdvantage("Toxicity", 2, null, "This power applies Debilitating Poison on the initial hit.  %DebilitatingPoison%");
 dataPowerAlias["Corrosive Pit"] = new PowerAlias(dataPower[dataPower.length-1]);
 
@@ -4974,9 +4968,10 @@ dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructo
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(2, dataPowerAlias['R3'].name, dataPowerAlias['R3'].desc, 2, 1, dataPowerAlias['R3'].tip));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(3, 'Fear Sense', 'Fear Sense', 2, null, 'Give Frenzy a 25% chance to apply Furious. %Furious%'));
 dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(4, 'Poison Tipped Claws', 'Poison Tipped Claws', 2, null, 'Each attack with Frenzy has a 10/10/25% chance (based on combo hit) to apply Deadly Poison to the target.  This chance is doubled if you are Enraged. %DeadlyPoison%'));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(5, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(6, dataPowerAlias['CC'].name, dataPowerAlias['CC'].desc, 3, null, dataPowerAlias['CC'].tip));
-dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(7, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
+dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(5, 'Blood in the Water', 'Blood in the Water', 2, null, 'Removes 1 Bleed from your target and heals you for each stack removed.'));
+dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(6, dataPowerAlias['AM'].name, dataPowerAlias['AM'].desc, 1, null, dataPowerAlias['AM'].tip));
+dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(7, dataPowerAlias['CC'].name, dataPowerAlias['CC'].desc, 3, null, dataPowerAlias['CC'].tip));
+dataPower[dataPower.length-1].advantageList.push(PowerAdvantage.legacyConstructor(8, dataPowerAlias['CS'].name, dataPowerAlias['CS'].desc, 1, null, dataPowerAlias['CS'].tip));
 
 dataPower[dataPower.length] = Power.legacyConstructor(dataPower.length, dataPowerAlias['Venomous Breath'].name, dataPowerAlias['Venomous Breath'].desc, 6, 23, pow++, 1, dataPowerAlias['Venomous Breath'].tip);
 dataPower[dataPower.length-1].iconOverride = "Supernatural_VenomousBreath";
